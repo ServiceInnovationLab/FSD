@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <Route path="/" exact component={Index} />
+          <Route path="/" component={Index} />
         </Fragment>
       </Router>
     );
