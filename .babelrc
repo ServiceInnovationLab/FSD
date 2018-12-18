@@ -1,0 +1,30 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    "@babel/preset-env",
+    [
+      "env",
+      {
+        "targets": {
+          "browserslist": [
+            ">0.2%",
+            "not dead",
+            "not ie <= 11",
+            "not op_mini all"
+          ],
+          "uglify": true
+        },
+        "useBuiltIns": true
+      }
+    ],
+    "react"
+  ],
+  "env": {
+    "test": {
+      "presets": [["env"], "react"],
+      "plugins": [
+        "@babel/plugin-transform-modules-commonjs"
+      ]
+    }
+  }
+}

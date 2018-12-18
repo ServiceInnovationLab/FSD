@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-import './App.css';
-import ServiceCategories from './components/ServiceCategories'
-import Header from './components/Header'
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Index from './pages/index';
+
+import './assets/scss/style.scss';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header>
-          <Header />
-        </header>
-        <main>
-          <ServiceCategories />
-        </main>
-      </div>
+      <Router>
+        <Fragment>
+          <Route path="/" exact component={Index} />
+        </Fragment>
+      </Router>
     );
   }
 }
