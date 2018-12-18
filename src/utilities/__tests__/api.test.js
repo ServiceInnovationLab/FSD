@@ -18,6 +18,12 @@ describe('api.js', () => {
         loadResults(searchVars);
       }).not.toThrow();
     });
+
+    it('throws error without params', () => {
+      expect(() => {
+        loadResults();
+      }).toThrow();
+    });
   });
 
   describe('loadService', () => {
