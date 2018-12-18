@@ -1,0 +1,19 @@
+linters:
+  BemDepth:
+    enabled: true
+  ChainedClasses:
+    enabled: true
+  PropertySortOrder:
+    enabled: false
+  PropertyUnits:
+    global: ['em', 'rem', '%', 'fr', 'vh', 'vw']
+    properties:
+      line-height: []
+      margin: ['em', 'rem']
+      font-size: ['em', 'rem']
+  SelectorFormat:
+    convention: hyphenated_BEM
+    ignored_types: id
+  NestingDepth:
+    enabled: true
+    max_depth: 4
