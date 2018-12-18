@@ -10,10 +10,10 @@ export default class Index extends Component {
   };
 
   componentDidMount = () => {
-    this.loadFilters();
+    this.doLoadFilters();
   };
 
-  loadFilters = () => {
+  doLoadFilters = () => {
     loadFilters().then(filters => {
       this.setState({ filters });
     });

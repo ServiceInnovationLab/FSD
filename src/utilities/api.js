@@ -29,7 +29,7 @@ const loadResults = searchVars => {
     return axios
       .get(requestBuilder(searchVars))
       .then(response => {
-        if (addressObj.length === 2 && searchVars.addressLatLng !== undefined) {
+        if (addressObj.length === 2 && addressLatLng !== undefined) {
           return findNearMe(
             response.data.result.records,
             addressLatLng,
