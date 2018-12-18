@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/ServiceInnovationLab/FamilyServiceDirectorySearchinator.svg?branch=master)](https://travis-ci.org/ServiceInnovationLab/FamilyServiceDirectorySearchinator)
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/FamilyServiceDirectorySearchinator.png?columns=all)](https://waffle.io/ServiceInnovationLab/FamilyServiceDirectorySearchinator?utm_source=badge)
+[![Build Status](https://travis-ci.org/ServiceInnovationLab/fsd-spike.svg?branch=master)](https://travis-ci.org/ServiceInnovationLab/fsd-spike)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/fsd-spike.png?columns=all)](https://waffle.io/ServiceInnovationLab/fsd-spike?utm_source=badge)
 
-This runs [on github pages](https://serviceinnovationlab.github.io/FamilyServiceDirectorySearchinator/)
+This runs [Netlify](https://serviceinnovationlab.github.io/fsd-spike/)
 
 ## Deployment
 
