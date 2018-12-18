@@ -10,15 +10,17 @@ export default class Index extends Component {
   };
 
   componentDidMount = () => {
-    const test = loadFilters();
+    this.loadFilters();
+  };
 
-    test.then(filters => {
+  loadFilters = () => {
+    loadFilters().then(filters => {
       this.setState({ filters });
     });
   };
 
   render() {
-    const { filters} = this.state;
+    const { filters } = this.state;
 
     return (
       <section>
