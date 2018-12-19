@@ -3,7 +3,7 @@ import axios from 'axios';
 import { findNearMe } from './geography';
 import { RESOURCE_ID, API_PATH, STATICFIELDS, requestBuilder } from './url';
 
-const loadFilters = () => {
+const loadCategories = () => {
   const sql = encodeURI(
     `SELECT "LEVEL_1_CATEGORY" as name, COUNT(*) as num FROM "${RESOURCE_ID}" GROUP BY name ORDER BY name`
   );
@@ -60,4 +60,4 @@ const loadService = serviceId => {
     });
 };
 
-export { loadFilters, loadResults, loadService };
+export { loadCategories, loadResults, loadService };

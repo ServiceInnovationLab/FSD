@@ -1,9 +1,9 @@
 const dataPoint = {
-  PHYSICAL_ADDRESS: '',
+  PHYSICAL_ADDRESS: '123 Street Rd.',
   NEARME: true,
   DISTANCE: 0,
-  LATITUDE: 1,
-  LONGITUDE: 1
+  LATITUDE: -41.0,
+  LONGITUDE: 174.0
 };
 
 export default dataPoint;

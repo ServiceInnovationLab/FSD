@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ServiceCategories from '../components/ServiceCategories';
 import Header from '../components/Header';
 
-import { loadFilters } from '../utilities/api';
+import { loadCategories } from '../utilities/api';
 
 export default class Index extends Component {
   state = {
@@ -14,7 +14,7 @@ export default class Index extends Component {
   };
 
   doLoadFilters = () => {
-    loadFilters().then(filters => {
+    loadCategories().then(filters => {
       this.setState({ filters });
     });
   };
