@@ -1,28 +1,35 @@
+// Modules
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { CategoryContext, CategoryProvider } from './contexts/category-context';
-import Index from './pages/index';
-
+// Styles
 import './assets/scss/style.scss';
+
+// Contexts
+import { CategoryContext, CategoryProvider } from './contexts/category-context';
+
+// Pages
+import Index from './pages/index';
 
 class App extends Component {
   render() {
     return (
-      <CategoryProvider>
-        <CategoryContext.Consumer>
-          {categoryContext => (
-            <Router>
-              <Route
-                path="/"
-                render={props => (
-                  <Index categoryContext={categoryContext} {...props} />
-                )}
-              />
-            </Router>
-          )}
-        </CategoryContext.Consumer>
-      </CategoryProvider>
+      <Router>
+        <CategoryProvider>
+          <CategoryContext.Consumer>
+            {categoryContext => (
+              <div className="app__root">
+                <Route
+                  path="/"
+                  render={props => (
+                    <Index categoryContext={categoryContext} {...props} />
+                  )}
+                />
+              </div>
+            )}
+          </CategoryContext.Consumer>
+        </CategoryProvider>
+      </Router>
     );
   }
 }

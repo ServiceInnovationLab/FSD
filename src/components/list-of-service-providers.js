@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class ListOfServiceProviders extends Component {
+  static propTypes = {
+    serviceProviders: PropTypes.array
+  };
 
   render() {
     const { serviceProviders } = this.props;
@@ -10,7 +13,7 @@ export default class ListOfServiceProviders extends Component {
       <div>
         {serviceProviders.map((provider, key) => (
           <h2
-            key={key}
+            key={`provider_${key}`}
             // onClick={() => setCategory(category.name)}
             // className={selectedCategory === category.name ? 'selected' : ''}
           >
@@ -20,9 +23,4 @@ export default class ListOfServiceProviders extends Component {
       </div>
     );
   }
-
 }
-
-ListOfServiceProviders.propTypes = {
-  serviceProviders: PropTypes.object
-};

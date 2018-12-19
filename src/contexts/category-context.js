@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { loadCategories } from '../utilities/api';
 
@@ -8,6 +9,13 @@ class CategoryProvider extends Component {
   state = {
     categories: [],
     selectedCategory: ''
+  };
+
+  static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]).isRequired
   };
 
   componentDidMount = () => {

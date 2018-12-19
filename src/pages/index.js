@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import ServiceCategories from '../components/ServiceCategories';
-// import ListOfServiceProviders from '../components/ServiceCategories';
-import Header from '../components/Header';
-
-// import { loadCategories } from '../utilities/api';
+import ServiceCategories from '../components/service-categories';
+// import ListOfServiceProviders from '../components/list-of-service-providers';
+import Header from '../components/header';
 
 export default class Index extends Component {
   state = {
     serviceProviders: []
+  };
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    categoryContext: PropTypes.object.isRequired
   };
 
   doSetCategory = categoryName => {
