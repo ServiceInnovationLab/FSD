@@ -24,31 +24,27 @@ const loadCategories = () => {
 const loadResults = search => {
   const searchVars = search ? queryString.parse(search) : null
 
-  if (!searchVars) return []
+  if (!searchVars) return [];
 
-  const { addressLatLng, category, keyword, radius } = searchVars;
+  const { addressLatLng, radius } = searchVars;
   const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
 
-  if (!category && !keyword && (!addressLatLng || !addressLatLng.latitude)) {
-    return [];
-  } else {
-    return axios
-      .get(requestBuilder(searchVars))
-      .then(response => {
-        if (addressObj.length === 2 && addressLatLng !== undefined) {
-          return findNearMe(
-            response.data.result.records,
-            addressLatLng,
-            radius > 50000 ? 100000 : radius
-          );
-        } else {
-          return response.data.result.records;
-        }
-      })
-      .catch(error => {
-        return { error };
-      });
-  }
+  return axios
+    .get(requestBuilder(searchVars))
+    .then(response => {
+      if (addressObj.length === 2 && addressLatLng !== undefined) {
+        return findNearMe(
+          response.data.result.records,
+          addressLatLng,
+          radius > 50000 ? 100000 : radius
+        );
+      } else {
+        return response.data.result.records;
+      }
+    })
+    .catch(error => {
+      return { error };
+    });
 };
 
 const loadService = serviceId => {
