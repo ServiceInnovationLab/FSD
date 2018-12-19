@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+import queryString from './query-string'
 import { findNearMe } from './geography';
 import { RESOURCE_ID, API_PATH, STATICFIELDS, requestBuilder } from './url';
 
-const loadFilters = () => {
+
+const loadCategories = () => {
   const sql = encodeURI(
     `SELECT "LEVEL_1_CATEGORY" as name, COUNT(*) as num FROM "${RESOURCE_ID}" GROUP BY name ORDER BY name`
   );
@@ -19,7 +21,11 @@ const loadFilters = () => {
     });
 };
 
-const loadResults = searchVars => {
+const loadResults = search => {
+  const searchVars = search ? queryString.parse(search) : null
+
+  if (!searchVars) return []
+
   const { addressLatLng, category, keyword, radius } = searchVars;
   const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
 
@@ -60,4 +66,4 @@ const loadService = serviceId => {
     });
 };
 
-export { loadFilters, loadResults, loadService };
+export { loadCategories, loadResults, loadService };

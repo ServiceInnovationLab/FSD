@@ -1,0 +1,17 @@
+a {
+  color: $link-color;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+
+  &:focus, &:hover, &:active {
+    color: darken($link-color, 10%);
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+
+  &:visited {
+    color: $link-color;
+  }
+}
