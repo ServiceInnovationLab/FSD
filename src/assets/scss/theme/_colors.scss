@@ -1,2 +1,33 @@
+// Base colors
 $black: #000;
 $white: #fff;
+
+// Color palate
+$red: #ff3e3e;
+$orange: #e79531;
+$yellow: #ffe13d;
+$green: #13793d;
+$blue: #3067c0;
+$purple: #d822ec;
+
+// Theme colors
+$primary-color: $blue;
+$secondary-color: $green;
+
+// Area colors
+$header-bg: darken($white, 5%);
+$footer-bg: #151829;
+$body-bg: $white;
+
+// Font colors
+$body-color: #111;
+$heading-color: #151829;
+$link-color: darken($blue, 5%);
+$dark-bg-color: #f8fafb;
+
+// Context colors
+$negative-color: darken($red, 10%);
+$warning-color: $orange;
+$positive-color: lighten($blue, 10%);
+$ignore-color: #869ca8;
+$disabled-color: rgba($black, .25);
