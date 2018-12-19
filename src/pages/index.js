@@ -1,48 +1,33 @@
 import React, { Component } from 'react';
 
 import ServiceCategories from '../components/ServiceCategories';
-import ListOfServiceProviders from '../components/ServiceCategories';
+// import ListOfServiceProviders from '../components/ServiceCategories';
 import Header from '../components/Header';
-
-import { loadCategories } from '../utilities/api';
 
 export default class Index extends Component {
   state = {
-    categories: [],
-    selectedCategory: '',
     serviceProviders: []
   };
 
-  componentDidMount = () => {
-    this.doLoadCategories();
-  };
+  doSetCategory = categoryName => {
+    const {
+      history: { push, location },
+      categoryContext: { setCategory }
+    } = this.props;
 
-  setCategory = (categoryName) => {
-    const { push, location } = this.props.history
-    push(`${location.pathname}?category=${categoryName}`)
-    this.setState({selectedCategory: categoryName})
-  }
-
-  doLoadCategories = () => {
-    loadCategories().then(categories => {
-      this.setState({ categories });
-    });
+    setCategory(categoryName);
+    push(`${location.pathname}?category=${categoryName}`);
   };
 
   render() {
-    const { categories, selectedCategory, serviceProviders } = this.state;
+    // const { serviceProviders } = this.state;
+
     return (
       <section>
         <Header />
         <main role="main">
-          <ServiceCategories
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setCategory={this.setCategory}
-          />
-          <ListOfServiceProviders
-            serviceProviders={serviceProviders}
-          />
+          <ServiceCategories doSetCategory={this.doSetCategory} />
+          {/* <ListOfServiceProviders serviceProviders={serviceProviders} /> */}
         </main>
       </section>
     );

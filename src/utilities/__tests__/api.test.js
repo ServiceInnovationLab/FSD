@@ -1,12 +1,12 @@
-import { loadFilters, loadResults, loadService } from '../api';
+import { loadCategories, loadResults, loadService } from '../api';
 import searchVars from '../../__mocks__/searchVars';
 
 describe('api.js', () => {
-  describe('loadFilters', () => {
+  describe('loadCategories', () => {
     it('is defined correctly', () => {
-      expect(loadFilters).toBeDefined();
+      expect(loadCategories).toBeDefined();
       expect(() => {
-        loadFilters();
+        loadCategories();
       }).not.toThrow();
     });
   });

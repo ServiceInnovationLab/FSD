@@ -1,29 +1,47 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { CategoryContext } from '../contexts/category-context';
+
 export default class ServiceCategories extends Component {
+  static propTypes = {
+    doSetCategory: PropTypes.func.isRequired
+  };
 
   render() {
-    const { categories, selectedCategory, setCategory } = this.props;
+    const { doSetCategory } = this.props;
+
     return (
-      <div>
-        {categories && categories.map((category, key) => (
-          <button
-            onClick={() => setCategory(category.name)}
-            className={selectedCategory === category.name ? 'selected' : ''}
-            key={key}
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
+      <CategoryContext.Consumer>
+        {categoryContext => {
+          const { categories, selectedCategory } = categoryContext;
+
+          return (
+            <section className="category__container">
+              {categories &&
+                categories.map((category, index) => {
+                  let classList = [ 'category__button' ];
+
+                  if (selectedCategory === category.name)
+                    classList.push('selected');
+
+                  return (
+                    <button
+                      onClick={e => {
+                        e.preventDefault();
+                        doSetCategory(category.name);
+                      }}
+                      className={classList.join(' ')}
+                      key={`category_${index}`}
+                    >
+                      {category.name}
+                    </button>
+                  );
+                })}
+            </section>
+          );
+        }}
+      </CategoryContext.Consumer>
     );
   }
-
 }
-
-ServiceCategories.propTypes = {
-  categories: PropTypes.array,
-  setCategory: PropTypes.func,
-  selectedCategory: PropTypes.string
-};
