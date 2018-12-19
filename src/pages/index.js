@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import ServiceCategories from '../components/ServiceCategories';
-import Header from '../components/Header';
-import MapContainer from '../containers/MapContainer';
-
 import ServiceCategories from '../components/service-categories';
-import ListOfServiceProviders from '../components/list-of-service-providers';
 import Header from '../components/header';
+import MapContainer from '../containers/map-container';
+
+import ListOfServiceProviders from '../components/list-of-service-providers';
 
 import { loadResults } from '../utilities/api';
 
@@ -34,6 +32,7 @@ export default class Index extends Component {
         <main role="main">
           <ServiceCategories doSetCategory={this.doSetCategory} />
           <ListOfServiceProviders serviceProviders={serviceProviders} history={history}/>
+          <MapContainer id='map' style={{height: '50vh'}} />
         </main>
       </section>
     );
