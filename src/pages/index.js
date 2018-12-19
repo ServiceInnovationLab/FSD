@@ -4,7 +4,7 @@ import ServiceCategories from '../components/ServiceCategories';
 // import ListOfServiceProviders from '../components/ServiceCategories';
 import Header from '../components/Header';
 
-import { loadCategories } from '../utilities/api';
+// import { loadCategories } from '../utilities/api';
 
 export default class Index extends Component {
   state = {
