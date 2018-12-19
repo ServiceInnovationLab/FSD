@@ -20,7 +20,7 @@ export default class Index extends Component {
   };
 
   render() {
-    const { serviceProviders } = this.state;
+    // const { serviceProviders } = this.state;
 
     return (
       <section>
