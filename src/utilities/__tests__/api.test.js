@@ -59,19 +59,12 @@ describe('api.js', () => {
       }).not.toThrow();
     });
 
-    it('throws error without params', () => {
-      expect(() => {
-        loadResults();
-      }).toThrow();
+    it('returns an empty array when given no search parameters', () => {
+      expect(loadResults()).toMatchObject([]);
     });
 
     it('returns an empty array when given invalid search parameters', () => {
-      let searchVarsClone = { ...searchVars };
-      searchVarsClone.category = null;
-      searchVarsClone.keyword = null;
-      searchVarsClone.addressLatLng = null;
-
-      expect(loadResults(searchVarsClone)).toMatchObject([]);
+      expect(loadResults(searchVars)).toMatchObject([]);
     });
 
     describe('fetch behavior', () => {

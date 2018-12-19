@@ -1,5 +1,6 @@
 export default {
   parse: function parse(queryString) {
+    console.log(queryString);
     let query = {};
     let pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
     for (let i = 0; i < pairs.length; i++) {
