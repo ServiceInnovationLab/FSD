@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import ServiceCategories from '../components/Service-Categories';
-import ListOfServiceProviders from '../components/List-Of-Service-Providers';
-import Header from '../components/Header';
+import ServiceCategories from '../components/service-categories';
+import ListOfServiceProviders from '../components/list-of-service-providers';
+import Header from '../components/header';
 
 import { loadResults } from '../utilities/api';
 
