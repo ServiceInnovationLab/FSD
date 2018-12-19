@@ -11,13 +11,11 @@ const requestBuilder = searchVars => {
   const { keyword, category, addressLatLng } = searchVars;
   const query = keyword && keyword.length > 2 ? `&q=${keyword}` : '';
   const categoryFilters = filters(category);
-  let url = encodeURI(
-    `${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}${query}&distinct=true${categoryFilters}`
+  const limit = addressLatLng.latitude ? '&limit=5000' : '';
+
+  return encodeURI(
+    `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}${query}${categoryFilters}${limit}`
   );
-
-  if (addressLatLng.latitude) url += '&limit=5000';
-
-  return url;
 };
 
 export { RESOURCE_ID, API_PATH, filters, STATICFIELDS, requestBuilder };
