@@ -18,6 +18,10 @@ export default class ServiceCategories extends Component {
 
           return (
             <section className="category__container">
+              <header className="category__header">
+                <h3>Choose a category:</h3>
+              </header>
+
               {categories &&
                 categories.map((category, index) => {
                   let classList = [ 'category__button' ];
