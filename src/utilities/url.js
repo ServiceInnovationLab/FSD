@@ -8,7 +8,7 @@ const STATICFIELDS =
   'FSD_ID,PROVIDER_CLASSIFICATION,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,PROVIDER_WEBSITE_1';
 
 const requestBuilder = searchVars => {
-  const { keyword, category, addressLatLng } = searchVars;
+  const { keyword, category, addressLatLng = {} } = searchVars;
   const query = keyword && keyword.length > 2 ? `&q=${keyword}` : '';
   const categoryFilters = categories(category);
   const limit = addressLatLng.latitude ? '&limit=5000' : '';
