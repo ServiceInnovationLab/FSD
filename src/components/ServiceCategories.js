@@ -5,10 +5,9 @@ export default class ServiceCategories extends Component {
 
   render() {
     const { categories, selectedCategory, setCategory } = this.props;
-
     return (
       <div>
-        {categories.map((category, key) => (
+        {categories && categories.map((category, key) => (
           <button
             onClick={() => setCategory(category.name)}
             className={selectedCategory === category.name ? 'selected' : ''}

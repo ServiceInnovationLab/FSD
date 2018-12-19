@@ -30,7 +30,7 @@ export default class Index extends Component {
   };
 
   render() {
-    const { categories, selectedCategory } = this.state;
+    const { categories, selectedCategory, serviceProviders } = this.state;
     return (
       <section>
         <Header />
@@ -42,7 +42,7 @@ export default class Index extends Component {
           />
           <ListOfServiceProviders
             serviceProviders={serviceProviders}
-          >
+          />
         </main>
       </section>
     );
