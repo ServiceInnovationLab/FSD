@@ -1,7 +1,7 @@
 const RESOURCE_ID = process.env.REACT_APP_API_RESOURCE_ID;
 const API_PATH = process.env.REACT_APP_API_PATH;
 
-const filters = category =>
+const categories = category =>
   category ? `&filters={"LEVEL_1_CATEGORY":"${category}"}` : '';
 
 const STATICFIELDS =
@@ -10,7 +10,7 @@ const STATICFIELDS =
 const requestBuilder = searchVars => {
   const { keyword, category, addressLatLng } = searchVars;
   const query = keyword && keyword.length > 2 ? `&q=${keyword}` : '';
-  const categoryFilters = filters(category);
+  const categoryFilters = categories(category);
   const limit = addressLatLng.latitude ? '&limit=5000' : '';
 
   return encodeURI(
@@ -18,4 +18,4 @@ const requestBuilder = searchVars => {
   );
 };
 
-export { RESOURCE_ID, API_PATH, filters, STATICFIELDS, requestBuilder };
+export { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder };
