@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ServiceCategories from '../components/ServiceCategories';
 import Header from '../components/Header';
+import MapContainer from '../containers/MapContainer';
 
 import { loadFilters } from '../utilities/api';
 
@@ -27,6 +28,7 @@ export default class Index extends Component {
         <Header />
         <main role="main">
           <ServiceCategories filters={filters} />
+          <MapContainer />
         </main>
       </section>
     );

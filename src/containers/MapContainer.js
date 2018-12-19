@@ -21,6 +21,6 @@ export default class MapContainer extends React.Component {
           </Popup>
         </Marker>
       </Map>
-    )
+    );
   }
 }
