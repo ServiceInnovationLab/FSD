@@ -2,8 +2,8 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header>
-      <h1> Find Whānau Support - Mobile Site </h1>
+    <header className='app__header'>
+      <h1>Find Whānau Support - Mobile Site</h1>
       <div>
         <p>
           If you are using a mobile device and are looking for family support

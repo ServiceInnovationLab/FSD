@@ -1,7 +1,14 @@
 // Configurations
 @import './colors';
 @import './typeface';
+@import './breakpoints';
+@import './mixins';
 
 // Styles
 @import './reset';
 @import './body';
+@import './main';
+@import './header';
+@import './footer';
+
+@import './h';
