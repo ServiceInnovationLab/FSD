@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-const ServiceCategories = () => (
-  <h1> I will be the list of service providers </h1>
-);
+export default class ServiceCategories extends Component {
 
-export default ServiceCategories;
+  render() {
+    const { categories, selectedCategory, setCategory } = this.props;
+
+    return (
+      <div>
+        {categories.map((category, key) => (
+          <button
+            onClick={() => setCategory(category.name)}
+            className={selectedCategory === category.name ? 'selected' : ''}
+            key={key}
+          >
+            {category.name}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+}
+
+ServiceCategories.propTypes = {
+  categories: PropTypes.array,
+  setCategory: PropTypes.func,
+  selectedCategory: PropTypes.string
+};

@@ -1,32 +1,48 @@
 import React, { Component } from 'react';
+
 import ServiceCategories from '../components/ServiceCategories';
+import ListOfServiceProviders from '../components/ServiceCategories';
 import Header from '../components/Header';
 
-import { loadFilters } from '../utilities/api';
+import { loadCategories } from '../utilities/api';
 
 export default class Index extends Component {
   state = {
-    filters: []
+    categories: [],
+    selectedCategory: '',
+    serviceProviders: []
   };
 
   componentDidMount = () => {
-    this.doLoadFilters();
+    this.doLoadCategories();
   };
 
-  doLoadFilters = () => {
-    loadFilters().then(filters => {
-      this.setState({ filters });
+  setCategory = (categoryName) => {
+    const { push, location } = this.props.history
+    push(`${location.pathname}?category=${categoryName}`)
+    this.setState({selectedCategory: categoryName})
+  }
+
+  doLoadCategories = () => {
+    loadCategories().then(categories => {
+      this.setState({ categories });
     });
   };
 
   render() {
-    const { filters } = this.state;
-
+    const { categories, selectedCategory } = this.state;
     return (
       <section>
         <Header />
         <main role="main">
-          <ServiceCategories filters={filters} />
+          <ServiceCategories
+            categories={categories}
+            selectedCategory={selectedCategory}
+            setCategory={this.setCategory}
+          />
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
+          >
         </main>
       </section>
     );
