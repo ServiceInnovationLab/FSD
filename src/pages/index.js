@@ -44,14 +44,7 @@ export default class Index extends Component {
         <main role="main">
           <SearchContainer>
             <ServiceCategories doSetCategory={this.doSetCategory} />
-            { serviceProviders[0]
-            ? <button onClick={() => this.toggleShowMap() }> {
-              showMap
-              ? 'Show List'
-              : 'Show Map'
-            } </button>
-            : null
-          }
+            {showToggleButton(serviceProviders, showMap, this.toggleShowMap)}
           </SearchContainer>
           { showMap
             ? <MapContainer
@@ -66,4 +59,16 @@ export default class Index extends Component {
       </section>
     );
   }
+}
+
+function showListOrMapText (showMap) {
+  return showMap
+  ? 'Show List'
+  : 'Show Map'
+}
+
+function showToggleButton (serviceProviders, showMap, toggleShowMap) {
+  return serviceProviders && serviceProviders[0]
+  ? <button onClick={() => toggleShowMap() }> {showListOrMapText(showMap)}</button>
+  : null
 }
