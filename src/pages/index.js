@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
+import SearchContainer from '../containers/search-container';
 import ServiceCategories from '../components/service-categories';
-import ListOfServiceProviders from '../components/list-of-service-providers';
+import ListOfServiceProviders from '../containers/list-of-service-providers';
 import Header from '../components/header';
 
 import { loadResults } from '../utilities/api';
@@ -9,7 +10,7 @@ import { loadResults } from '../utilities/api';
 export default class Index extends Component {
   state = {
     serviceProviders: []
-  }
+  };
 
   doSetCategory = categoryName => {
     const {
@@ -18,7 +19,9 @@ export default class Index extends Component {
     } = this.props;
     setCategory(categoryName);
     push(`${location.pathname}?category=${categoryName}`);
-    loadResults(location.search).then(res => this.setState({serviceProviders: res}))
+    loadResults(location.search).then(res =>
+      this.setState({ serviceProviders: res })
+    );
   };
 
   render() {
@@ -29,8 +32,13 @@ export default class Index extends Component {
       <section>
         <Header />
         <main role="main">
-          <ServiceCategories doSetCategory={this.doSetCategory} />
-          <ListOfServiceProviders serviceProviders={serviceProviders} history={history}/>
+          <SearchContainer>
+            <ServiceCategories doSetCategory={this.doSetCategory} />
+          </SearchContainer>
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
+            history={history}
+          />
         </main>
       </section>
     );
