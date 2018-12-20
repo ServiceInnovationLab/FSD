@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 export default class Service extends Component {
   static propTypes = {
-    fsdId: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ])
-      .isRequired,
     serviceName: PropTypes.string,
     targetAudiences: PropTypes.string,
     deliveryMethods: PropTypes.string,
@@ -15,9 +13,7 @@ export default class Service extends Component {
   };
 
   render() {
-    // const { id } = this.props.match.params;
     const {
-      fsdId,
       serviceName,
       targetAudiences,
       deliveryMethods,

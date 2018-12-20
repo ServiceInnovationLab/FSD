@@ -124,7 +124,6 @@ export default class Service extends Component {
                 hideMoreDetails={true}
               />
               <ServiceDetails
-                fsdId={id}
                 serviceName={serviceName}
                 targetAudiences={targetAudiences}
                 deliveryMethods={deliveryMethods}
