@@ -18,7 +18,7 @@ class App extends Component {
       <CategoryProvider>
         <CategoryContext.Consumer>
           {categoryContext => (
-            <Router>
+            <Router basename="/fsd-spike">
               <Fragment>
                 <Route
                   exact
