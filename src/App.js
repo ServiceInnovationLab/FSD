@@ -1,10 +1,19 @@
-import React, { Component } from 'react';
+// Modules
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { CategoryContext, CategoryProvider } from './contexts/category-context';
-import Index from './pages/index';
-
+// Styles
 import './assets/scss/style.scss';
+
+// Contexts
+import { CategoryContext, CategoryProvider } from './contexts/category-context';
+
+// Utilities
+import { GH_PAGES_SUFFIX } from './utilities/url';
+
+// Pages
+import Index from './pages/index';
+import Service from './pages/service';
 
 class App extends Component {
   render() {
@@ -12,13 +21,22 @@ class App extends Component {
       <CategoryProvider>
         <CategoryContext.Consumer>
           {categoryContext => (
-            <Router>
-              <Route
-                path="/"
-                render={props => (
-                  <Index categoryContext={categoryContext} {...props} />
-                )}
-              />
+            <Router basename={GH_PAGES_SUFFIX}>
+              <Fragment>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <Index categoryContext={categoryContext} {...props} />
+                  )}
+                />
+                <Route
+                  path="/service/:id"
+                  render={props => (
+                    <Service categoryContext={categoryContext} {...props} />
+                  )}
+                />
+              </Fragment>
             </Router>
           )}
         </CategoryContext.Consumer>

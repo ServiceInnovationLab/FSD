@@ -2,6 +2,7 @@ a {
   color: $link-color;
   background-color: transparent;
   text-decoration: none;
+  border-bottom: 1px solid rgba($black, .25);
 
   &:focus, &:hover, &:active {
     color: darken($link-color, 10%);

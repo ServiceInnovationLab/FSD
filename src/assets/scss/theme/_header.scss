@@ -1,4 +1,10 @@
 .app__header {
-  padding: 1rem;
   background-color: $header-bg;
+
+  .container {
+    width: 100%;
+    max-width: 80rem;
+    padding: 1rem;
+    margin: 0 auto;
+  }
 }

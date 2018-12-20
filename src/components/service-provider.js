@@ -24,7 +24,8 @@ export default class ServiceProviders extends Component {
     name: PropTypes.string.isRequired,
     website: PropTypes.string,
     email: PropTypes.string,
-    phoneNumber: PropTypes.string
+    phoneNumber: PropTypes.string,
+    hideMoreDetails: PropTypes.bool
   };
 
   render() {
@@ -37,16 +38,15 @@ export default class ServiceProviders extends Component {
       name,
       website,
       email,
-      phoneNumber
+      phoneNumber,
+      hideMoreDetails
     } = this.props;
 
     return (
       <section className="service">
         <header className="service__header">
           <h2 className="service__name">
-            <Link to={`/service/${fsdId}`}>
-              {name}
-            </Link>
+            <Link to={`/service/${fsdId}`}>{name}</Link>
           </h2>
           {email && (
             <div className="icon-prefix__container">
@@ -127,9 +127,11 @@ export default class ServiceProviders extends Component {
             )}
           </address>
 
-          <Link className="button" to={`/service/${fsdId}`}>
-            More details
-          </Link>
+          {hideMoreDetails || (
+            <Link className="button" to={`/service/${fsdId}`}>
+              More details
+            </Link>
+          )}
         </footer>
       </section>
     );

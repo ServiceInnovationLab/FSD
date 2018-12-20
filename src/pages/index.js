@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import queryString from 'query-string';
 
+import Page from '../containers/page';
 import SearchContainer from '../containers/search-container';
 import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
-import Header from '../components/header';
-import MapContainer from '../containers/map-container'
+import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
 
 export default class Index extends Component {
@@ -14,7 +14,7 @@ export default class Index extends Component {
     showMap: false
   };
 
-  toggleShowMap = () => this.setState({showMap: !this.state.showMap})
+  toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
 
   doSetCategory = categoryName => {
     const { categoryContext: { setCategory } } = this.props;
@@ -43,15 +43,18 @@ export default class Index extends Component {
     push(`${location.pathname}?${newSearchQuery}`);
   }
 
-  showExtraFormButtons () {
+  showExtraFormButtons() {
     const { serviceProviders, showMap } = this.state;
 
-    return serviceProviders && serviceProviders[0]
-    ? <Fragment>
-      <button onClick={() => this.toggleShowMap() }> {showListOrMapText(showMap)}</button>
-      <button onClick={() => this.doResetSearch()}> Reset Form</button>
-    </Fragment>
-    : null
+    return serviceProviders && serviceProviders[0] ? (
+      <Fragment>
+        <button onClick={() => this.toggleShowMap()}>
+          {' '}
+          {showListOrMapText(showMap)}
+        </button>
+        <button onClick={() => this.doResetSearch()}> Reset Form</button>
+      </Fragment>
+    ) : null;
   }
 
   render() {
@@ -59,30 +62,24 @@ export default class Index extends Component {
     const { history } = this.props;
 
     return (
-      <section>
-        <Header />
-        <main role="main">
-          <SearchContainer>
-            <ServiceCategories doSetCategory={this.doSetCategory} />
-            {this.showExtraFormButtons()}
-          </SearchContainer>
-          { showMap
-            ? <MapContainer
-              serviceProviders={serviceProviders}
-            />
-            : <ListOfServiceProviders
-              serviceProviders={serviceProviders}
-              history={history}
-            />
-          }
-        </main>
-      </section>
+      <Page>
+        <SearchContainer>
+          <ServiceCategories doSetCategory={this.doSetCategory} />
+          {this.showExtraFormButtons()}
+        </SearchContainer>
+        {showMap ? (
+          <MapContainer serviceProviders={serviceProviders} />
+        ) : (
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
+            history={history}
+          />
+        )}
+      </Page>
     );
   }
 }
 
-function showListOrMapText (showMap) {
-  return showMap
-  ? 'Show List'
-  : 'Show Map'
+function showListOrMapText(showMap) {
+  return showMap ? 'Show List' : 'Show Map';
 }

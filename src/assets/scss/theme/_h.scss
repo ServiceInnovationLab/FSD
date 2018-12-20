@@ -1,8 +1,7 @@
 h1, h2, h3, h4, h5, h6 {
   color: $heading-color;
   line-height: 1.4;
-  margin: 0.5em 0 1em;
-
+  margin: .5em 0 1em;
   font: {
     family: $heading-font;
     weight: $default-font-weight;
@@ -10,7 +9,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2em;
+  font: {
+    size: 2em;
+    weight: bold;
+  };
 }
 
 h2 {

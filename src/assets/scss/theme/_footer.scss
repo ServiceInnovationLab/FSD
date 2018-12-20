@@ -1,5 +1,20 @@
 .app__footer {
-  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   color: $dark-bg-color;
   background-color: $footer-bg;
+
+  .container {
+    width: 100%;
+    max-width: 80rem;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  .footer__logo {
+    max-width: 100%;
+    width: 240px;
+    height: auto;
+  }
 }
