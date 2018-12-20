@@ -55,6 +55,7 @@ export default class Index extends Component {
               history={history}
             />
           }
+          </SearchContainer>
         </main>
       </section>
     );
