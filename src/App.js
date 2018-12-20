@@ -1,10 +1,16 @@
+// Modules
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { CategoryContext, CategoryProvider } from './contexts/category-context';
-import Index from './pages/index';
-
+// Styles
 import './assets/scss/style.scss';
+
+// Contexts
+import { CategoryContext, CategoryProvider } from './contexts/category-context';
+
+// Pages
+import Index from './pages/index';
+import Service from './pages/service';
 
 class App extends Component {
   render() {
@@ -17,6 +23,12 @@ class App extends Component {
                 path="/"
                 render={props => (
                   <Index categoryContext={categoryContext} {...props} />
+                )}
+              />
+              <Route
+                path="/service/:id"
+                render={props => (
+                  <Service categoryContext={categoryContext} {...props} />
                 )}
               />
             </Router>
