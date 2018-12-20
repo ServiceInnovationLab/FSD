@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import queryString from './query-string'
 import { findNearMe } from './geography';
 import { RESOURCE_ID, API_PATH, STATICFIELDS, requestBuilder } from './url';
 
@@ -21,30 +20,31 @@ const loadCategories = () => {
     });
 };
 
-const loadResults = search => {
-  const searchVars = search ? queryString.parse(search) : null
-
-  if (!searchVars) return [];
-
-  const { addressLatLng, radius } = searchVars;
+const loadResults = searchVars => {
+  console.log(searchVars)
+  const { addressLatLng, category, keyword, radius } = searchVars;
   const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
 
-  return axios
-    .get(requestBuilder(searchVars))
-    .then(response => {
-      if (addressObj.length === 2 && addressLatLng !== undefined) {
-        return findNearMe(
-          response.data.result.records,
-          addressLatLng,
-          radius > 50000 ? 100000 : radius
-        );
-      } else {
-        return response.data.result.records;
-      }
-    })
-    .catch(error => {
-      return { error };
-    });
+  if (!category && !keyword && (!addressLatLng || !addressLatLng.latitude)) {
+    return [];
+  } else {
+    return axios
+      .get(requestBuilder(searchVars))
+      .then(response => {
+        if (addressObj.length === 2 && addressLatLng !== undefined) {
+          return findNearMe(
+            response.data.result.records,
+            addressLatLng,
+            radius > 50000 ? 100000 : radius
+          );
+        } else {
+          return response.data.result.records;
+        }
+      })
+      .catch(error => {
+        return { error };
+      });
+  }
 };
 
 const loadService = serviceId => {
