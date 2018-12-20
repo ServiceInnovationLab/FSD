@@ -21,7 +21,6 @@ const loadCategories = () => {
 };
 
 const loadResults = searchVars => {
-  console.log(searchVars)
   const { addressLatLng, category, keyword, radius } = searchVars;
   const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
 
