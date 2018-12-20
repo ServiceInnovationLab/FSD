@@ -37,7 +37,7 @@ export default class Index extends Component {
   render() {
     const { serviceProviders, showMap } = this.state;
     const { history } = this.props;
-    console.log(showMap);
+
     return (
       <section>
         <Header />
@@ -55,7 +55,6 @@ export default class Index extends Component {
               history={history}
             />
           }
-          </SearchContainer>
         </main>
       </section>
     );

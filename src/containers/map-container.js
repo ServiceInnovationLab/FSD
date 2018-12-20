@@ -23,7 +23,7 @@ class MapResults extends Component {
         />
 
         { serviceProviders.map((record, i) =>
-          <ServiceMapMarker key={'marker'+i} record={record} />
+          <ServiceMapMarker key={`marker-${i}`} record={record} />
         )};
 
       </Map>
