@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 import Page from '../containers/page';
 import ServiceProvider from '../components/service-provider';
@@ -83,7 +85,13 @@ export default class Service extends Component {
     return (
       <Page>
         <header>
-          <Link to="/">Go back</Link>
+          <Link className="icon-prefix__container button" to="/">
+            <div className="icon-prefix__icon">
+              <Icon icon={faChevronLeft} />
+            </div>
+            <span className="icon-prefix__label">Go back</span>
+          </Link>
+
           {!loading && (
             <Fragment>
               <ServiceProvider
