@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
 
+import SearchContainer from '../containers/search-container';
 import ServiceCategories from '../components/service-categories';
-import ListOfServiceProviders from '../components/list-of-service-providers';
+import ListOfServiceProviders from '../containers/list-of-service-providers';
 import Header from '../components/header';
 
 import { loadResults } from '../utilities/api';
-import queryString from '../utilities/query-string'
+import queryString from '../utilities/query-string';
 
 export default class Index extends Component {
   state = {
     serviceProviders: []
-  }
-
-  doSetCategory = categoryName => {
-    const {
-      categoryContext: { setCategory }
-    } = this.props;
-    setCategory(categoryName);
-    this.doLoadResults(categoryName)
   };
 
-  doLoadResults (categoryName) {
-    const {
-      history: { push, location },
-    } = this.props;
+  doSetCategory = categoryName => {
+    const { categoryContext: { setCategory } } = this.props;
+    setCategory(categoryName);
+    this.doLoadResults(categoryName);
+  };
 
-    const searchVars = queryString.parse(location.search)
-    const newSearchVars = Object.assign(searchVars, {category: categoryName})
+  doLoadResults(categoryName) {
+    const { history: { push, location } } = this.props;
 
-    loadResults(newSearchVars).then(res => this.setState({serviceProviders: res}))
-    push(`${location.pathname}?category=${categoryName}`)
+    const searchVars = queryString.parse(location.search);
+    const newSearchVars = Object.assign(searchVars, { category: categoryName });
+
+    loadResults(newSearchVars).then(res =>
+      this.setState({ serviceProviders: res })
+    );
+    push(`${location.pathname}?category=${categoryName}`);
   }
 
   render() {
@@ -40,8 +39,13 @@ export default class Index extends Component {
       <section>
         <Header />
         <main role="main">
-          <ServiceCategories doSetCategory={this.doSetCategory} />
-          <ListOfServiceProviders serviceProviders={serviceProviders} history={history}/>
+          <SearchContainer>
+            <ServiceCategories doSetCategory={this.doSetCategory} />
+          </SearchContainer>
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
+            history={history}
+          />
         </main>
       </section>
     );
