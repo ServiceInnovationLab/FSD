@@ -6,6 +6,7 @@ import ListOfServiceProviders from '../containers/list-of-service-providers';
 import Header from '../components/header';
 
 import { loadResults } from '../utilities/api';
+import queryString from '../utilities/query-string';
 
 export default class Index extends Component {
   state = {
@@ -13,16 +14,22 @@ export default class Index extends Component {
   };
 
   doSetCategory = categoryName => {
-    const {
-      history: { push, location },
-      categoryContext: { setCategory }
-    } = this.props;
+    const { categoryContext: { setCategory } } = this.props;
     setCategory(categoryName);
-    push(`${location.pathname}?category=${categoryName}`);
-    loadResults(location.search).then(res =>
+    this.doLoadResults(categoryName);
+  };
+
+  doLoadResults(categoryName) {
+    const { history: { push, location } } = this.props;
+
+    const searchVars = queryString.parse(location.search);
+    const newSearchVars = Object.assign(searchVars, { category: categoryName });
+
+    loadResults(newSearchVars).then(res =>
       this.setState({ serviceProviders: res })
     );
-  };
+    push(`${location.pathname}?category=${categoryName}`);
+  }
 
   render() {
     const { serviceProviders } = this.state;
