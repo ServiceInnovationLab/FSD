@@ -43,7 +43,11 @@ export default class ServiceProviders extends Component {
     return (
       <section className="service">
         <header className="service__header">
-          <h2>{name}</h2>
+          <h2 className="service__name">
+            <Link to={`/service/${fsdId}`}>
+              {name}
+            </Link>
+          </h2>
           {email && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">

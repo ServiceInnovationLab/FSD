@@ -8,13 +8,16 @@
 
   &__container {
     border: .125rem solid rgba($black, .1);
-    border-radius: 1rem;
     padding: 1rem;
   }
 
   &__header,
   &__address {
     margin-bottom: 1rem;
+  }
+
+  &__name {
+    color: $primary-color;
   }
 
   &__purpose {
