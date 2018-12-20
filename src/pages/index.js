@@ -1,16 +1,7 @@
-import React, { Component } from 'react';
-import ServiceCategories from '../components/service-categories';
-import Header from '../components/header';
-import MapContainer from '../containers/map-container';
 
-import ListOfServiceProviders from '../components/list-of-service-providers';
 
-import { loadResults } from '../utilities/api';
-
-export default class Index extends Component {
-  state = {
-    serviceProviders: []
-  }
+import SearchContainer from '../containers/search-container';
+import ListOfServiceProviders from '../containers/list-of-service-providers';
 
   doSetCategory = categoryName => {
     const {

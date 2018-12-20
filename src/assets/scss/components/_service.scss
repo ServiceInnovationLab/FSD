@@ -1,0 +1,28 @@
+.service {
+  padding: 1rem 0;
+  border-bottom: .125rem solid rgba($black, .1);
+
+  &:last-of-type {
+    border: 0;
+  }
+
+  &__container {
+    border: .125rem solid rgba($black, .1);
+    padding: 1rem;
+  }
+
+  &__header,
+  &__address {
+    margin-bottom: 1rem;
+  }
+
+  &__name {
+    color: $primary-color;
+  }
+
+  &__purpose {
+    margin: 0 0 1rem;
+    padding: .5rem .5rem .5rem 1rem;
+    border-left: .125rem solid $secondary-color;
+  }
+}

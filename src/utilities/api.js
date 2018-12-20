@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import queryString from './query-string'
 import { findNearMe } from './geography';
 import { RESOURCE_ID, API_PATH, STATICFIELDS, requestBuilder } from './url';
 
@@ -21,11 +20,7 @@ const loadCategories = () => {
     });
 };
 
-const loadResults = search => {
-  const searchVars = search ? queryString.parse(search) : null
-
-  if (!searchVars) return []
-
+const loadResults = searchVars => {
   const { addressLatLng, category, keyword, radius } = searchVars;
   const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
 
