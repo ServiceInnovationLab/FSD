@@ -59,14 +59,21 @@ describe('api.js', () => {
       }).not.toThrow();
     });
 
-    it('returns an empty array when given no search parameters', () => {
-      expect(loadResults()).toMatchObject([]);
+    it('throws error without params', () => {
+      expect(() => {
+        loadResults();
+      }).toThrow();
     });
 
     it('returns an empty array when given invalid search parameters', () => {
-      expect(loadResults(searchVars)).toMatchObject([]);
-    });
+       let searchVarsClone = { ...searchVars };
+       searchVarsClone.category = null;
+       searchVarsClone.keyword = null;
+       searchVarsClone.addressLatLng = null;
 
+      expect(loadResults(searchVarsClone)).toMatchObject([]);
+    });
+    
     describe('fetch behavior', () => {
       const invalidUrl = encodeURI(
         `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`
