@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import footerLogo from '../assets/img/footer-logo-govt.png';
+
 export default class Footer extends Component {
   render() {
     return (
@@ -21,16 +23,14 @@ export default class Footer extends Component {
               familyservices.govt.nz/directory
             </a>
           </p>
-          <div className="footer-icons">
+          <div>
             <a
               href="https://www.govt.nz"
               className="ga-track-logo-footer-aog footer-hm-link"
             >
               <img
-                src="footer-logo-govt.png"
-                srcSet="footer-logo-govt@2x.png 2x,footer-logo-govt.png 1x"
-                width="240"
-                height="46"
+                className="footer__logo"
+                src={footerLogo}
                 alt="New Zealand Government"
               />
             </a>

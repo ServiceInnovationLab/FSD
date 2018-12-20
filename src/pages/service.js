@@ -6,6 +6,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Page from '../containers/page';
 import ServiceProvider from '../components/service-provider';
 import ServiceDetails from '../components/service-details';
+import MapContainer from '../containers/map-container';
 
 import { loadService } from '../utilities/api';
 
@@ -27,6 +28,9 @@ export default class Service extends Component {
     costType: '',
     costDescription: '',
     serviceDetail: '',
+
+    latitude: '',
+    longitude: '',
 
     loading: true
   };
@@ -54,7 +58,10 @@ export default class Service extends Component {
         serviceReferrals: provider.SERVICE_REFERRALS,
         costType: provider.COST_TYPE,
         costDescription: provider.COST_DESCRIPTION,
-        serviceDetail: provider.SERVICE_DETAIL
+        serviceDetail: provider.SERVICE_DETAIL,
+
+        latitude: provider.LATITUDE,
+        longitude: provider.LONGITUDE
       });
     });
   };
@@ -79,13 +86,23 @@ export default class Service extends Component {
       serviceReferrals,
       costType,
       costDescription,
-      serviceDetail
+      serviceDetail,
+
+      latitude,
+      longitude
     } = this.state;
 
+    const mapPoint = [
+      {
+        LATITUDE: latitude,
+        LONGITUDE: longitude
+      }
+    ];
+
     return (
-      <Page>
+      <Page className="service__page">
         <header>
-          <Link className="icon-prefix__container button" to="/">
+          <Link className="icon-prefix__container button back-button" to="/">
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
@@ -116,6 +133,7 @@ export default class Service extends Component {
                 costDescription={costDescription}
                 serviceDetail={serviceDetail}
               />
+              <MapContainer serviceProviders={mapPoint} />
             </Fragment>
           )}
         </header>
