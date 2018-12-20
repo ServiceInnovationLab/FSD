@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
+import Page from '../containers/page';
 import SearchContainer from '../containers/search-container';
 import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
-import Header from '../components/header';
 
 import { loadResults } from '../utilities/api';
 import queryString from '../utilities/query-string';
@@ -36,18 +36,15 @@ export default class Index extends Component {
     const { history } = this.props;
 
     return (
-      <section>
-        <Header />
-        <main role="main">
-          <SearchContainer>
-            <ServiceCategories doSetCategory={this.doSetCategory} />
-          </SearchContainer>
-          <ListOfServiceProviders
-            serviceProviders={serviceProviders}
-            history={history}
-          />
-        </main>
-      </section>
+      <Page>
+        <SearchContainer>
+          <ServiceCategories doSetCategory={this.doSetCategory} />
+        </SearchContainer>
+        <ListOfServiceProviders
+          serviceProviders={serviceProviders}
+          history={history}
+        />
+      </Page>
     );
   }
 }

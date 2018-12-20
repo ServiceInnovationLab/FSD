@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import Header from '../components/header';
+import Page from '../containers/page';
 
 export default class Service extends Component {
   render() {
     return (
-      <section>
-        <Header />
-        <main role="main">
-        </main>
-      </section>
+      <Page>
+        <header>
+          <Link to="/">Go back</Link>
+        </header>
+      </Page>
     );
   }
 }

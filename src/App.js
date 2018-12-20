@@ -1,5 +1,5 @@
 // Modules
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // Styles
@@ -19,18 +19,21 @@ class App extends Component {
         <CategoryContext.Consumer>
           {categoryContext => (
             <Router>
-              <Route
-                path="/"
-                render={props => (
-                  <Index categoryContext={categoryContext} {...props} />
-                )}
-              />
-              <Route
-                path="/service/:id"
-                render={props => (
-                  <Service categoryContext={categoryContext} {...props} />
-                )}
-              />
+              <Fragment>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <Index categoryContext={categoryContext} {...props} />
+                  )}
+                />
+                <Route
+                  path="/service/:id"
+                  render={props => (
+                    <Service categoryContext={categoryContext} {...props} />
+                  )}
+                />
+              </Fragment>
             </Router>
           )}
         </CategoryContext.Consumer>
