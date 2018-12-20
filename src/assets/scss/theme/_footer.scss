@@ -1,4 +1,7 @@
 .app__footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   padding: 1rem;
   color: $dark-bg-color;
   background-color: $footer-bg;
