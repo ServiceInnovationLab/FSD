@@ -8,6 +8,9 @@ import './assets/scss/style.scss';
 // Contexts
 import { CategoryContext, CategoryProvider } from './contexts/category-context';
 
+// Utilities
+import { GH_PAGES_SUFFIX } from './utilities/url';
+
 // Pages
 import Index from './pages/index';
 import Service from './pages/service';
@@ -18,7 +21,7 @@ class App extends Component {
       <CategoryProvider>
         <CategoryContext.Consumer>
           {categoryContext => (
-            <Router basename="/fsd-spike">
+            <Router basename={GH_PAGES_SUFFIX}>
               <Fragment>
                 <Route
                   exact

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { findNearMe } from './geography';
-import { RESOURCE_ID, API_PATH, STATICFIELDS, requestBuilder, SERVICE_FIELDS } from './url';
+import { RESOURCE_ID, API_PATH, requestBuilder, SERVICE_FIELDS } from './url';
 
 
 const loadCategories = () => {

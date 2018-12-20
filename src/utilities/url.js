@@ -1,5 +1,6 @@
 const RESOURCE_ID = process.env.REACT_APP_API_RESOURCE_ID;
 const API_PATH = process.env.REACT_APP_API_PATH;
+const GH_PAGES_SUFFIX = process.env.REACT_APP_GH_PAGES_SUFFIX;
 
 const categories = category =>
   category ? `&filters={"LEVEL_1_CATEGORY":"${category}"}` : '';
@@ -27,5 +28,6 @@ export {
   categories,
   STATICFIELDS,
   requestBuilder,
-  SERVICE_FIELDS
+  SERVICE_FIELDS,
+  GH_PAGES_SUFFIX
 };
