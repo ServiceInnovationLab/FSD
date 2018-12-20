@@ -18,15 +18,17 @@ export default class Index extends Component {
 
   doSetCategory = categoryName => {
     const { categoryContext: { setCategory } } = this.props;
+
     setCategory(categoryName);
     this.doLoadResults({category: categoryName});
   };
   doResetSearch = () => {
     const { history: { push, location } } = this.props;
     const { categoryContext: { setCategory } } = this.props;
+
     push(`${location.pathname}`);
     setCategory()
-    this.setState({serviceProviders: []})
+    this.setState({showMap: false, serviceProviders: []})
   }
 
   doLoadResults(newQuery) {
