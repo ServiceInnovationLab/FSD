@@ -13,7 +13,9 @@ class MapResults extends Component {
     const { serviceProviders } = this.props
 
     // roughly the centre of aotearoa
-    let center = (serviceProviders.length !== 1) ? {lat:-41.0,lng: 174.0} : {lat: serviceProviders[0].LATITUDE*1,lng:  serviceProviders[0].LONGITUDE*1};
+    const center = (serviceProviders.length !== 1)
+      ? {lat:-41.0,lng: 174.0}
+      : {lat: Number(serviceProviders[0].LATITUDE), lng: Number(serviceProviders[0].LONGITUDE)};
 
     return (
       <Map center={center} zoom={ serviceProviders.length !== 1 ? 5 : 12}>
