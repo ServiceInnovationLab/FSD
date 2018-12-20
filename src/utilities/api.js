@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { findNearMe } from './geography';
-import { RESOURCE_ID, API_PATH, STATICFIELDS, requestBuilder } from './url';
+import { RESOURCE_ID, API_PATH, requestBuilder, SERVICE_FIELDS } from './url';
 
 
 const loadCategories = () => {
@@ -48,7 +48,7 @@ const loadResults = searchVars => {
 
 const loadService = serviceId => {
   const url = encodeURI(
-    `${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${serviceId}&distinct=true`
+    `${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${SERVICE_FIELDS}&q=${serviceId}&distinct=true`
   );
 
   return axios
