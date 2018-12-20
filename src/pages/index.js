@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import SearchContainer from '../containers/search-container';
 import ServiceCategories from '../components/service-categories';
@@ -21,7 +21,13 @@ export default class Index extends Component {
     setCategory(categoryName);
     this.doLoadResults(categoryName);
   };
-
+  doResetSearch = () => {
+    const { history: { push, location } } = this.props;
+    const { categoryContext: { setCategory } } = this.props;
+    push(`${location.pathname}`);
+    setCategory()
+    this.setState({serviceProviders: []})
+  }
   doLoadResults(categoryName) {
     const { history: { push, location } } = this.props;
 
@@ -34,6 +40,17 @@ export default class Index extends Component {
     push(`${location.pathname}?category=${categoryName}`);
   }
 
+  showExtraFormButtons () {
+    const { serviceProviders, showMap } = this.state;
+
+    return serviceProviders && serviceProviders[0]
+    ? <Fragment>
+    <button onClick={() => this.toggleShowMap() }> {showListOrMapText(showMap)}</button>
+    <button onClick={() => this.doResetSearch()}> Reset Form</button>
+  </Fragment>
+  : null
+  }
+
   render() {
     const { serviceProviders, showMap } = this.state;
     const { history } = this.props;
@@ -44,7 +61,7 @@ export default class Index extends Component {
         <main role="main">
           <SearchContainer>
             <ServiceCategories doSetCategory={this.doSetCategory} />
-            {showToggleButton(serviceProviders, showMap, this.toggleShowMap)}
+            {this.showExtraFormButtons()}
           </SearchContainer>
           { showMap
             ? <MapContainer
@@ -65,10 +82,4 @@ function showListOrMapText (showMap) {
   return showMap
   ? 'Show List'
   : 'Show Map'
-}
-
-function showToggleButton (serviceProviders, showMap, toggleShowMap) {
-  return serviceProviders && serviceProviders[0]
-  ? <button onClick={() => toggleShowMap() }> {showListOrMapText(showMap)}</button>
-  : null
 }
