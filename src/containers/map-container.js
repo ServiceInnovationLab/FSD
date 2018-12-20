@@ -1,26 +1,33 @@
-import React from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { Component } from 'react';
+import ServiceMapMarker from '../components/service-map-marker';
+import {  Map, TileLayer } from 'react-leaflet';
 
-export default class MapContainer extends React.Component {
+class MapResults extends Component {
 
-  state = {
-    position: [51.505, -0.09],
-    zoom: 13
-  };
+  checkLatLng() {
+    return Object.keys(this.props.LatLng ? this.props.LatLng : {none: 'none'});
+  }
+
 
   render() {
+    const { serviceProviders } = this.props
+
+    // roughly the centre of aotearoa
+    let center = (serviceProviders.length !== 1) ? {lat:-41.0,lng: 174.0} : {lat: serviceProviders[0].LATITUDE*1,lng:  serviceProviders[0].LONGITUDE*1};
+
     return (
-      <Map center={this.state.position} zoom={this.state.zoom}>
+      <Map center={center} zoom={ serviceProviders.length !== 1 ? 5 : 12}>
         <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
-        <Marker position={this.state.position}>
-          <Popup>
-            Popup for the map
-          </Popup>
-        </Marker>
+
+        { serviceProviders.map((record, i) =>
+          <ServiceMapMarker key={'marker'+i} record={record} />
+        )};
+
       </Map>
     );
   }
 }
+export default MapResults;
