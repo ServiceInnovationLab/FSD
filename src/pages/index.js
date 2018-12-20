@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import queryString from 'query-string';
 
 import SearchContainer from '../containers/search-container';
 import ServiceCategories from '../components/service-categories';
@@ -6,7 +7,6 @@ import ListOfServiceProviders from '../containers/list-of-service-providers';
 import Header from '../components/header';
 import MapContainer from '../containers/map-container'
 import { loadResults } from '../utilities/api';
-import queryString from '../utilities/query-string';
 
 export default class Index extends Component {
   state = {
@@ -19,7 +19,7 @@ export default class Index extends Component {
   doSetCategory = categoryName => {
     const { categoryContext: { setCategory } } = this.props;
     setCategory(categoryName);
-    this.doLoadResults(categoryName);
+    this.doLoadResults({category: categoryName});
   };
   doResetSearch = () => {
     const { history: { push, location } } = this.props;
@@ -28,16 +28,19 @@ export default class Index extends Component {
     setCategory()
     this.setState({serviceProviders: []})
   }
-  doLoadResults(categoryName) {
+
+  doLoadResults(newQuery) {
     const { history: { push, location } } = this.props;
 
     const searchVars = queryString.parse(location.search);
-    const newSearchVars = Object.assign(searchVars, { category: categoryName });
+    const newSearchVars = Object.assign({}, searchVars, newQuery);
+    const newSearchQuery = queryString.stringify(newSearchVars);
 
     loadResults(newSearchVars).then(res =>
       this.setState({ serviceProviders: res })
     );
-    push(`${location.pathname}?category=${categoryName}`);
+
+    push(`${location.pathname}?${newSearchQuery}`);
   }
 
   showExtraFormButtons () {
@@ -45,10 +48,10 @@ export default class Index extends Component {
 
     return serviceProviders && serviceProviders[0]
     ? <Fragment>
-    <button onClick={() => this.toggleShowMap() }> {showListOrMapText(showMap)}</button>
-    <button onClick={() => this.doResetSearch()}> Reset Form</button>
-  </Fragment>
-  : null
+      <button onClick={() => this.toggleShowMap() }> {showListOrMapText(showMap)}</button>
+      <button onClick={() => this.doResetSearch()}> Reset Form</button>
+    </Fragment>
+    : null
   }
 
   render() {
