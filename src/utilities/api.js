@@ -16,7 +16,8 @@ const loadCategories = () => {
       return response.data.result.records;
     })
     .catch(error => {
-      return { error };
+      console.error(error)
+      return []
     });
 };
 
@@ -41,7 +42,8 @@ const loadResults = searchVars => {
         }
       })
       .catch(error => {
-        return { error };
+        console.error(error)
+        return [];
       });
   }
 };
@@ -57,7 +59,8 @@ const loadService = serviceId => {
       return response.data.result.records;
     })
     .catch(error => {
-      return { error };
+      console.error(error)
+      return [];
     });
 };
 

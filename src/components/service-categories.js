@@ -15,7 +15,6 @@ export default class ServiceCategories extends Component {
       <CategoryContext.Consumer>
         {categoryContext => {
           const { categories, selectedCategory } = categoryContext;
-
           return (
             <section className="category__container">
               <header className="category__header">

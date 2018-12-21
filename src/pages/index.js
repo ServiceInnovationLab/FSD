@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import queryString from 'query-string';
 
 import Page from '../containers/page';
@@ -7,11 +7,13 @@ import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
+import SearchForm from '../components/search-form'
 
 export default class Index extends Component {
   state = {
     serviceProviders: [],
-    showMap: false
+    showMap: false,
+    showExtraButtons: false
   };
 
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
@@ -22,10 +24,11 @@ export default class Index extends Component {
     setCategory(categoryName);
     this.doLoadResults({category: categoryName});
   };
-  doResetSearch = () => {
+  doResetSearch = (form) => {
     const { history: { push, location } } = this.props;
     const { categoryContext: { setCategory } } = this.props;
 
+    form.reset()
     push(`${location.pathname}`);
     setCategory()
     this.setState({showMap: false, serviceProviders: []})
@@ -45,17 +48,14 @@ export default class Index extends Component {
     push(`${location.pathname}?${newSearchQuery}`);
   }
 
-  showExtraFormButtons() {
-    const { serviceProviders, showMap } = this.state;
+  showToggleMapButton(showExtraButtons) {
+    const { showMap } = this.state;
 
-    return serviceProviders && serviceProviders[0] ? (
-      <Fragment>
+    return showExtraButtons ? (
         <button onClick={() => this.toggleShowMap()}>
           {' '}
           {showListOrMapText(showMap)}
         </button>
-        <button onClick={() => this.doResetSearch()}> Reset Form</button>
-      </Fragment>
     ) : null;
   }
 
@@ -63,11 +63,18 @@ export default class Index extends Component {
     const { serviceProviders, showMap } = this.state;
     const { history } = this.props;
 
+    const showExtraButtons = Boolean(serviceProviders && serviceProviders[0])
+
     return (
       <Page>
         <SearchContainer>
           <ServiceCategories doSetCategory={this.doSetCategory} />
-          {this.showExtraFormButtons()}
+          <SearchForm
+            doLoadResults={this.doLoadResults.bind(this)}
+            doResetSearch={this.doResetSearch}
+            showExtraButtons={showExtraButtons}
+          />
+          {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
