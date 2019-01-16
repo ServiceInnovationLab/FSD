@@ -100,7 +100,7 @@ export default class ServiceProviders extends Component {
                   <Icon icon={faMapMarkerAlt} />
                 </div>
                 <div className="icon-prefix__label">
-                  {address} - <a href={`https://www.openstreetmap.org/search?query=${address}`}>Directions</a>
+                  {address} - <a href={`https://www.google.com/maps/place/${address}`}>Directions</a>
                 </div>
               </div>
             )}
