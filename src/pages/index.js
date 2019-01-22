@@ -13,9 +13,18 @@ export default class Index extends Component {
   state = {
     serviceProviders: [],
     showMap: false,
-    showExtraButtons: false
+    showExtraButtons: false,
+    autoSuggestValue: ''
   };
+  componentDidMount () {
+    this.doLoadResults()
+  }
 
+  autoSuggestOnChange (newValue) {
+    this.setState({
+      autoSuggestValue: newValue
+    });
+  };
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
 
   doSetCategory = categoryName => {
@@ -31,7 +40,7 @@ export default class Index extends Component {
     form.reset()
     push(`${location.pathname}`);
     setCategory()
-    this.setState({showMap: false, serviceProviders: []})
+    this.setState({showMap: false, serviceProviders: [], autoSuggestValue: ''})
   }
 
   doLoadResults(newQuery) {
@@ -60,7 +69,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { serviceProviders, showMap } = this.state;
+    const { serviceProviders, showMap, autoSuggestValue } = this.state;
     const { history } = this.props;
 
     const showExtraButtons = Boolean(serviceProviders && serviceProviders[0])
@@ -72,6 +81,8 @@ export default class Index extends Component {
           <SearchForm
             doLoadResults={this.doLoadResults.bind(this)}
             doResetSearch={this.doResetSearch}
+            autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
+            autoSuggestValue={autoSuggestValue}
             showExtraButtons={showExtraButtons}
           />
           {this.showToggleMapButton(showExtraButtons)}

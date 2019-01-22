@@ -22,19 +22,18 @@ const loadCategories = () => {
 };
 
 const loadResults = searchVars => {
-  const { addressLatLng, category, keyword, radius } = searchVars;
-  const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
+  const { latitude, longitude, category, keyword, radius = 50000 } = searchVars;
 
-  if (!category && !keyword && (!addressLatLng || !addressLatLng.latitude)) {
-    return [];
+  if (!category && !keyword && (!latitude || !longitude)) {
+    return []
   } else {
     return axios
       .get(requestBuilder(searchVars))
       .then(response => {
-        if (addressObj.length === 2 && addressLatLng !== undefined) {
+        if (latitude !== undefined) {
           return findNearMe(
             response.data.result.records,
-            addressLatLng,
+            {latitude, longitude},
             radius > 50000 ? 100000 : radius
           );
         } else {
