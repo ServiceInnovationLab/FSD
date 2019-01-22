@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
+import AutoSuggest from '../containers/auto-suggest'
 
 export default class SearchForm extends Component {
   static propTypes = {
@@ -9,8 +10,8 @@ export default class SearchForm extends Component {
   };
 
   render() {
-    const { doLoadResults, doResetSearch, showExtraButtons } = this.props
-
+    const { doLoadResults, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
+    
     return (
       <Form
         onSubmit={doLoadResults}
@@ -25,12 +26,10 @@ export default class SearchForm extends Component {
               />
             </div>
             <div>
-              <Field
-                name='location'
-                component='input'
-                type='text'
-                placeholder='Enter a location'
-              />
+            <AutoSuggest
+              doLoadResults={doLoadResults}
+              autoSuggestOnChange={autoSuggestOnChange}
+              autoSuggestValue={autoSuggestValue} />
             </div>
             <button type='submit' disabled={submitting || pristine}>
               Search
