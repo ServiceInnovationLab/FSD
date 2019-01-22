@@ -11,7 +11,7 @@ export default class SearchForm extends Component {
 
   render() {
     const { doLoadResults, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
-    
+
     return (
       <Form
         onSubmit={doLoadResults}
@@ -26,10 +26,11 @@ export default class SearchForm extends Component {
               />
             </div>
             <div>
-            <AutoSuggest
-              doLoadResults={doLoadResults}
-              autoSuggestOnChange={autoSuggestOnChange}
-              autoSuggestValue={autoSuggestValue} />
+              <AutoSuggest
+                doLoadResults={doLoadResults}
+                autoSuggestOnChange={autoSuggestOnChange}
+                autoSuggestValue={autoSuggestValue}
+              />
             </div>
             <button type='submit' disabled={submitting || pristine}>
               Search
