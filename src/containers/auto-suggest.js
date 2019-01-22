@@ -1,14 +1,24 @@
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
 import React from 'react'
+import queryString from 'query-string';
 
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+const ADDRESS_FINDER_KEY = process.env.REACT_APP_ADDRESS_FINDER_API_KEY
 
-  const url = `https://api.addressfinder.io/api/nz/location?key=ADDRESSFINDER_DEMO_KEY&q=${value}&format=json&strict=2`
-
+const getSuggestions = userInput => {
+  const cleansedInput = userInput.trim().toLowerCase();
+  const inputLength = cleansedInput.length;
+  
   if (inputLength === 0) return []
+
+  const query = queryString.stringify({
+    key: ADDRESS_FINDER_KEY,
+    q: cleansedInput, 
+    format: 'json',
+    strict: 2
+  })
+
+  const url = `https://api.addressfinder.io/api/nz/location?${query}`
   
   return axios.get(url)
     .then(response => {
@@ -37,7 +47,14 @@ export default class Example extends React.Component {
   };
 
   onSuggestionSelected = (evt, {suggestion: {pxid, a}}) => {
-    const url = `https://api.addressfinder.io/api/nz/location/info?key=ADDRESSFINDER_DEMO_KEY&format=json&pxid=${pxid}`
+    const query = queryString.stringify({
+      key: ADDRESS_FINDER_KEY,
+      format:'json',
+      pxid: pxid
+    })
+    
+    const url = `https://api.addressfinder.io/api/nz/location/info?${query}`
+  
     const {doLoadResults} = this.props 
     return axios.get(url)
       .then(res => {
