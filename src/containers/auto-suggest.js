@@ -6,7 +6,7 @@ const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  const url = `https://api.addressfinder.io/api/nz/location?key=ADDRESSFINDER_DEMO_KEY&secret=ADDRESSFINDER_DEMO_SECRET&q=${value}&format=json&strict=2`
+  const url = `https://api.addressfinder.io/api/nz/location?key=ADDRESSFINDER_DEMO_KEY&q=${value}&format=json&strict=2`
 
   if (inputLength === 0) return []
   
@@ -37,7 +37,7 @@ export default class Example extends React.Component {
   };
 
   onSuggestionSelected = (evt, {suggestion: {pxid, a}}) => {
-    const url = `https://api.addressfinder.io/api/nz/location/info?key=ADDRESSFINDER_DEMO_KEY&secret=ADDRESSFINDER_DEMO_SECRET&format=json&pxid=${pxid}`
+    const url = `https://api.addressfinder.io/api/nz/location/info?key=ADDRESSFINDER_DEMO_KEY&format=json&pxid=${pxid}`
     const {doLoadResults} = this.props 
     return axios.get(url)
       .then(res => {
