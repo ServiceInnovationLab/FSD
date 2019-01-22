@@ -25,7 +25,9 @@ const loadResults = searchVars => {
   const { latitude, longitude, category, keyword, radius = 50000 } = searchVars;
 
   if (!category && !keyword && (!latitude || !longitude)) {
-    return []
+    return new Promise((resolve) => { 
+      resolve([]);
+    });
   } else {
     return axios
       .get(requestBuilder(searchVars))
