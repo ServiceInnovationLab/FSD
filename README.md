@@ -17,6 +17,11 @@ yarn run build
 
 ## Development
 
+Take a copy the example .env file
+
+```
+cp example.env .env
+```
 
 to install dependencies, cd into folder and run
 ```

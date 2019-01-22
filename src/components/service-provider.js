@@ -99,7 +99,9 @@ export default class ServiceProviders extends Component {
                 <div className="icon-prefix__icon">
                   <Icon icon={faMapMarkerAlt} />
                 </div>
-                <div className="icon-prefix__label">{address}</div>
+                <div className="icon-prefix__label">
+                  {address} - <a href={`https://www.google.com/maps/place/${address}`}>Directions</a>
+                </div>
               </div>
             )}
             {website && (
