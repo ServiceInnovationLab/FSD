@@ -7,6 +7,7 @@ import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
 import queryString from '../utilities/query-string';
+import Sharebar from '../components/social-sharebar';
 
 export default class Index extends Component {
   state = {
@@ -72,6 +73,7 @@ export default class Index extends Component {
             history={history}
           />
         )}
+        <Sharebar />
       </Page>
     );
   }
