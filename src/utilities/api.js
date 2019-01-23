@@ -16,34 +16,37 @@ const loadCategories = () => {
       return response.data.result.records;
     })
     .catch(error => {
-      return { error };
+      console.error(error)
+      return []
     });
 };
 
 const loadResults = searchVars => {
-  const { addressLatLng, category, keyword, radius } = searchVars;
-  const addressObj = Object.keys(addressLatLng ? addressLatLng : {});
+  const { latitude, longitude, category, keyword, radius = 50000 } = searchVars;
 
-  if (!category && !keyword && (!addressLatLng || !addressLatLng.latitude)) {
-    return [];
-  } else {
-    return axios
-      .get(requestBuilder(searchVars))
-      .then(response => {
-        if (addressObj.length === 2 && addressLatLng !== undefined) {
-          return findNearMe(
-            response.data.result.records,
-            addressLatLng,
-            radius > 50000 ? 100000 : radius
-          );
-        } else {
-          return response.data.result.records;
-        }
-      })
-      .catch(error => {
-        return { error };
-      });
+  if (!category && !keyword && (!latitude || !longitude)) {
+    return new Promise((resolve) => { 
+      resolve([]);
+    });
   }
+
+  return axios
+    .get(requestBuilder(searchVars))
+    .then(response => {
+      if (latitude !== undefined) {
+        return findNearMe(
+          response.data.result.records,
+          {latitude, longitude},
+          radius > 50000 ? 100000 : radius
+        );
+      } else {
+        return response.data.result.records;
+      }
+    })
+    .catch(error => {
+      console.error(error)
+      return [];
+    });
 };
 
 const loadService = serviceId => {
@@ -57,7 +60,8 @@ const loadService = serviceId => {
       return response.data.result.records;
     })
     .catch(error => {
-      return { error };
+      console.error(error)
+      return [];
     });
 };
 

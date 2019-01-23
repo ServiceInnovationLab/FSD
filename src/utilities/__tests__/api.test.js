@@ -71,7 +71,7 @@ describe('api.js', () => {
        searchVarsClone.keyword = null;
        searchVarsClone.addressLatLng = null;
 
-      expect(loadResults(searchVarsClone)).toMatchObject([]);
+      expect(loadResults(searchVarsClone)).toMatchObject({});
     });
     
     describe('fetch behavior', () => {

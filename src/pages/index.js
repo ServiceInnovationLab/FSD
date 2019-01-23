@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import queryString from 'query-string';
 
 import Page from '../containers/page';
 import SearchContainer from '../containers/search-container';
@@ -6,64 +7,87 @@ import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
-import queryString from '../utilities/query-string';
 import Sharebar from '../components/social-sharebar';
+import SearchForm from '../components/search-form'
 
 export default class Index extends Component {
   state = {
     serviceProviders: [],
-    showMap: false
+    showMap: false,
+    showExtraButtons: false,
+    autoSuggestValue: ''
   };
+  componentDidMount () {
+    this.doLoadResults()
+  }
 
+  autoSuggestOnChange (newValue) {
+    this.setState({
+      autoSuggestValue: newValue
+    });
+  };
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
 
   doSetCategory = categoryName => {
     const { categoryContext: { setCategory } } = this.props;
+
     setCategory(categoryName);
-    this.doLoadResults(categoryName);
+    this.doLoadResults({category: categoryName});
   };
-  doResetSearch = () => {
+  doResetSearch = (form) => {
     const { history: { push, location } } = this.props;
     const { categoryContext: { setCategory } } = this.props;
-    push(`${location.pathname}`);
-    setCategory();
-    this.setState({ serviceProviders: [] });
-  };
-  doLoadResults(categoryName) {
+
+    form.reset()
+    push(location.pathname);
+    setCategory()
+    this.setState({showMap: false, serviceProviders: [], autoSuggestValue: ''})
+  }
+
+  /* Accepts a new query parameter and combines it with existing parameters from the URL query string */
+  doLoadResults(newQuery) {
     const { history: { push, location } } = this.props;
 
     const searchVars = queryString.parse(location.search);
-    const newSearchVars = Object.assign(searchVars, { category: categoryName });
+    const newSearchVars = Object.assign({}, searchVars, newQuery);
+    const newSearchQuery = queryString.stringify(newSearchVars);
 
     loadResults(newSearchVars).then(res =>
       this.setState({ serviceProviders: res })
     );
-    push(`${location.pathname}?category=${categoryName}`);
+
+    push(`${location.pathname}?${newSearchQuery}`);
   }
 
-  showExtraFormButtons() {
-    const { serviceProviders, showMap } = this.state;
+  showToggleMapButton(showExtraButtons) {
+    const { showMap } = this.state;
 
-    return serviceProviders && serviceProviders[0] ? (
-      <Fragment>
+    return showExtraButtons ? (
         <button onClick={() => this.toggleShowMap()}>
           {' '}
           {showListOrMapText(showMap)}
         </button>
-        <button onClick={() => this.doResetSearch()}> Reset Form</button>
-      </Fragment>
     ) : null;
   }
 
   render() {
-    const { serviceProviders, showMap } = this.state;
+    const { serviceProviders, showMap, autoSuggestValue } = this.state;
     const { history } = this.props;
+
+    const showExtraButtons = Boolean(serviceProviders && serviceProviders[0])
 
     return (
       <Page>
         <SearchContainer>
           <ServiceCategories doSetCategory={this.doSetCategory} />
-          {this.showExtraFormButtons()}
+          <SearchForm
+            doLoadResults={this.doLoadResults.bind(this)}
+            doResetSearch={this.doResetSearch}
+            autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
+            autoSuggestValue={autoSuggestValue}
+            showExtraButtons={showExtraButtons}
+          />
+          {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
