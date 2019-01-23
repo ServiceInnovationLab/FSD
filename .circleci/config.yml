@@ -61,6 +61,7 @@ jobs:
       - run: git config --global user.email "labplus@dia.govt.nz"
       - run: git config --global user.name "Lab Plus"
       - run: yarn install
+      - run: yarn build
       - run: yarn deploy
 
 workflows:
@@ -72,7 +73,6 @@ workflows:
       - deploy:
           requires:
             - test
-            - build
           filters:
             branches:
               only: master
