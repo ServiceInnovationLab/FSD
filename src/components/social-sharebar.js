@@ -19,21 +19,20 @@ class Sharebar extends React.Component {
     } = this.props
 
     const socialLinks = [
+      createSocialLink({
+        name: 'email',
+        url: `mailto:?${stringify({subject: subject, body: url})}`,
+        fa_icon: faEnvelope}),
+        
+      createSocialLink({
+        name: 'Facebook',
+        url: `https://www.facebook.com/sharer/sharer.php?${stringify({u: url})}`,
+        fa_icon: faFacebookSquare}),
 
-      <SocialLink
-        name='email'
-        url={`mailto:?${stringify({subject: subject, body: url})}`}
-        fa_icon={faEnvelope} />,
-        
-      <SocialLink
-        name='Facebook'
-        url={`https://www.facebook.com/sharer/sharer.php?${stringify({u: url})}`}
-        fa_icon={faFacebookSquare} />,
-        
-      <SocialLink
-        name='Twitter'
-        url={`https://twitter.com/home?${stringify({status: description+' '+url})}`}
-        fa_icon={faTwitterSquare} />,
+      createSocialLink({
+        name: 'Twitter',
+        url: `https://twitter.com/home?${stringify({status: description+' '+url})}`,
+        fa_icon:  faTwitterSquare}),
     ]
     
     return (
@@ -49,12 +48,8 @@ class Sharebar extends React.Component {
   }
 }
 
-class SocialLink extends React.Component {
-  render(){
-    const { name, url, fa_icon } = this.props
-
-    return <a href={url} title={`Share via ${name}`}><FontAwesomeIcon icon={fa_icon} />{name}</a>
-  }
+function createSocialLink ({name, url, fa_icon}) {
+  return <a href={url} title={`Share via ${name}`}><FontAwesomeIcon icon={fa_icon} />{name}</a>
 }
 
 export default Sharebar;
