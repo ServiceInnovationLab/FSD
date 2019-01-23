@@ -28,25 +28,25 @@ const loadResults = searchVars => {
     return new Promise((resolve) => { 
       resolve([]);
     });
-  } else {
-    return axios
-      .get(requestBuilder(searchVars))
-      .then(response => {
-        if (latitude !== undefined) {
-          return findNearMe(
-            response.data.result.records,
-            {latitude, longitude},
-            radius > 50000 ? 100000 : radius
-          );
-        } else {
-          return response.data.result.records;
-        }
-      })
-      .catch(error => {
-        console.error(error)
-        return [];
-      });
   }
+
+  return axios
+    .get(requestBuilder(searchVars))
+    .then(response => {
+      if (latitude !== undefined) {
+        return findNearMe(
+          response.data.result.records,
+          {latitude, longitude},
+          radius > 50000 ? 100000 : radius
+        );
+      } else {
+        return response.data.result.records;
+      }
+    })
+    .catch(error => {
+      console.error(error)
+      return [];
+    });
 };
 
 const loadService = serviceId => {
