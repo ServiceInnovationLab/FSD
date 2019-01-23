@@ -38,11 +38,12 @@ export default class Index extends Component {
     const { categoryContext: { setCategory } } = this.props;
 
     form.reset()
-    push(`${location.pathname}`);
+    push(location.pathname);
     setCategory()
     this.setState({showMap: false, serviceProviders: [], autoSuggestValue: ''})
   }
 
+  /* Accepts a new query parameter and combines it with existing parameters from the URL query string */
   doLoadResults(newQuery) {
     const { history: { push, location } } = this.props;
 
