@@ -5,7 +5,7 @@ import AutoSuggest from '../containers/auto-suggest'
 
 export default class SearchForm extends Component {
   static propTypes = {
-    doLoadResults: PropTypes.func.isRequired,
+    updateSearchParams: PropTypes.func.isRequired,
     doResetSearch: PropTypes.func.isRequired,
     showExtraButtons: PropTypes.bool.isRequired, 
     autoSuggestOnChange: PropTypes.func.isRequired, 
@@ -13,11 +13,11 @@ export default class SearchForm extends Component {
   };
 
   render() {
-    const { doLoadResults, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
+    const { updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
 
     return (
       <Form
-        onSubmit={doLoadResults}
+        onSubmit={updateSearchParams}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -30,7 +30,7 @@ export default class SearchForm extends Component {
             </div>
             <div>
               <AutoSuggest
-                doLoadResults={doLoadResults}
+                updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
                 autoSuggestValue={autoSuggestValue}
               />
