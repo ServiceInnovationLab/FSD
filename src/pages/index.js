@@ -7,6 +7,7 @@ import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
+import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form'
 
 export default class Index extends Component {
@@ -96,6 +97,7 @@ export default class Index extends Component {
             history={history}
           />
         )}
+        <Sharebar />
       </Page>
     );
   }
