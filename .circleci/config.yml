@@ -5,10 +5,6 @@
 #
 version: 2
 
-branches:
-  ignore:
-    - gh-pages
-
 jobs:
   test:
     docker:
@@ -69,10 +65,15 @@ workflows:
   test-and-build:
     jobs:
       - test
+        branches:
+          ignore:
+            - gh-pages
       - build
+        branches:
+          ignore:
+            - gh-pages
       - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
+        requires:
+          - test
+        branches:
+          only: master
