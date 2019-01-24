@@ -65,15 +65,15 @@ workflows:
   test-and-build:
     jobs:
       - test
-        branches:
-          ignore:
-            - gh-pages
+          branches:
+            ignore:
+              - gh-pages
       - build
-        branches:
-          ignore:
-            - gh-pages
+          branches:
+            ignore:
+              - gh-pages
       - deploy:
-        requires:
-          - test
-        branches:
-          only: master
+          requires:
+            - test
+          branches:
+            only: master
