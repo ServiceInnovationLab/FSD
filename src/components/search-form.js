@@ -14,7 +14,7 @@ export default class SearchForm extends Component {
   };
 
   render() {
-    const { updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
+    const { initialValues, updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
 
     return (
       <Form
