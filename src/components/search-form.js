@@ -5,11 +5,12 @@ import AutoSuggest from '../containers/auto-suggest'
 
 export default class SearchForm extends Component {
   static propTypes = {
+    autoSuggestOnChange: PropTypes.func.isRequired, 
+    autoSuggestValue: PropTypes.string.isRequired,
     doLoadResults: PropTypes.func.isRequired,
     doResetSearch: PropTypes.func.isRequired,
-    showExtraButtons: PropTypes.bool.isRequired, 
-    autoSuggestOnChange: PropTypes.func.isRequired, 
-    autoSuggestValue: PropTypes.string.isRequired
+    initialValues: PropTypes.object.isRequired,
+    showExtraButtons: PropTypes.bool.isRequired
   };
 
   render() {
