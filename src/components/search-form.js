@@ -13,10 +13,11 @@ export default class SearchForm extends Component {
   };
 
   render() {
-    const { doLoadResults, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
+    const { initialValues, doLoadResults, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
 
     return (
       <Form
+        initialValues={initialValues}
         onSubmit={doLoadResults}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>

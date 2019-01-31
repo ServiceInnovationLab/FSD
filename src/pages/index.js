@@ -71,9 +71,12 @@ export default class Index extends Component {
 
   render() {
     const { serviceProviders, showMap, autoSuggestValue } = this.state;
-    const { history } = this.props;
+    const { history, location } = this.props;
 
-    const showExtraButtons = Boolean(serviceProviders && serviceProviders[0])
+    const searchVars = queryString.parse(location.search);
+    const showExtraButtons = Boolean(
+      (serviceProviders && serviceProviders[0])
+      || Object.keys(searchVars)[0])
 
     return (
       <Page>
@@ -85,6 +88,7 @@ export default class Index extends Component {
             autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
             autoSuggestValue={autoSuggestValue}
             showExtraButtons={showExtraButtons}
+            initialValues={{keyword: searchVars.keyword}}
           />
           {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>
