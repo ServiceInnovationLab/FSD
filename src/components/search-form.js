@@ -5,19 +5,21 @@ import AutoSuggest from '../containers/auto-suggest'
 
 export default class SearchForm extends Component {
   static propTypes = {
-    updateSearchParams: PropTypes.func.isRequired,
-    doResetSearch: PropTypes.func.isRequired,
-    showExtraButtons: PropTypes.bool.isRequired, 
     autoSuggestOnChange: PropTypes.func.isRequired, 
-    autoSuggestValue: PropTypes.string.isRequired
+    autoSuggestValue: PropTypes.string.isRequired,
+    doResetSearch: PropTypes.func.isRequired,
+    initialValues: PropTypes.object.isRequired,
+    updateSearchParams: PropTypes.func.isRequired,
+    showExtraButtons: PropTypes.bool.isRequired
   };
 
   render() {
-    const { updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
+    const { initialValues, updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
 
     return (
       <Form
         onSubmit={updateSearchParams}
+        initialValues={initialValues}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
