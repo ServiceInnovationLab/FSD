@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -67,10 +66,9 @@ export default class Service extends Component {
   };
 
   render() {
-    const { id } = this.props.match.params;
+    const { match: {params: {id}}, history: {goBack} } = this.props;
     const {
       loading,
-
       purpose,
       address,
       classification,
@@ -102,12 +100,12 @@ export default class Service extends Component {
     return (
       <Page className="service__page">
         <header>
-          <Link className="icon-prefix__container button back-button" to="/">
+          <button className="icon-prefix__container button back-button" onClick={goBack}>
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
             <span className="icon-prefix__label">Go back</span>
-          </Link>
+          </button>
 
           {!loading && (
             <Fragment>

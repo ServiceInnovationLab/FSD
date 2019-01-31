@@ -55,11 +55,11 @@ export default class Example extends React.Component {
     
     const url = `https://api.addressfinder.io/api/nz/location/info?${query}`
   
-    const {doLoadResults} = this.props 
+    const {updateSearchParams} = this.props 
     return axios.get(url)
       .then(res => {
         const { x: lng, y: lat} = res.data
-        doLoadResults({ latitude: lat, longitude: lng })
+        updateSearchParams({ latitude: lat, longitude: lng })
       });
   }
   onSuggestionsFetchRequested = ({ value }) => {

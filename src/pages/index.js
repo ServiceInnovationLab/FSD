@@ -7,6 +7,7 @@ import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
+import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form'
 
 export default class Index extends Component {
@@ -17,22 +18,19 @@ export default class Index extends Component {
     autoSuggestValue: ''
   };
   componentDidMount () {
-    this.doLoadResults()
+    const { search } = this.props.location
+    this.doLoadResults(search)
   }
-
-  autoSuggestOnChange (newValue) {
-    this.setState({
-      autoSuggestValue: newValue
-    });
-  };
-  toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
-
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      const { search } = this.props.location
+      this.doLoadResults(search)
+    }
+  }
   doSetCategory = categoryName => {
-    const { categoryContext: { setCategory } } = this.props;
-
-    setCategory(categoryName);
-    this.doLoadResults({category: categoryName});
+    this.updateSearchParams({category: categoryName})
   };
+
   doResetSearch = (form) => {
     const { history: { push, location } } = this.props;
     const { categoryContext: { setCategory } } = this.props;
@@ -44,20 +42,26 @@ export default class Index extends Component {
   }
 
   /* Accepts a new query parameter and combines it with existing parameters from the URL query string */
-  doLoadResults(newQuery) {
-    const { history: { push, location } } = this.props;
+  updateSearchParams (newQuery) {
+    const { history: { push, location }} = this.props;
 
     const searchVars = queryString.parse(location.search);
     const newSearchVars = Object.assign({}, searchVars, newQuery);
     const newSearchQuery = queryString.stringify(newSearchVars);
 
-    loadResults(newSearchVars).then(res =>
-      this.setState({ serviceProviders: res })
-    );
-
     push(`${location.pathname}?${newSearchQuery}`);
   }
+  doLoadResults(locationQuery) {
+    const { categoryContext: { setCategory } } = this.props;
+    const searchVars = queryString.parse(locationQuery);
 
+    if(searchVars.category) setCategory(searchVars.category)
+
+    loadResults(searchVars).then(res => {
+      this.setState({ serviceProviders: res })
+      }
+    );
+  }
   showToggleMapButton(showExtraButtons) {
     const { showMap } = this.state;
 
@@ -68,6 +72,12 @@ export default class Index extends Component {
         </button>
     ) : null;
   }
+  toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
+  autoSuggestOnChange (newValue) {
+    this.setState({
+      autoSuggestValue: newValue
+    });
+  };
 
   render() {
     const { serviceProviders, showMap, autoSuggestValue } = this.state;
@@ -83,7 +93,7 @@ export default class Index extends Component {
         <SearchContainer>
           <ServiceCategories doSetCategory={this.doSetCategory} />
           <SearchForm
-            doLoadResults={this.doLoadResults.bind(this)}
+            updateSearchParams={this.updateSearchParams.bind(this)}
             doResetSearch={this.doResetSearch}
             autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
             autoSuggestValue={autoSuggestValue}
@@ -100,6 +110,7 @@ export default class Index extends Component {
             history={history}
           />
         )}
+        <Sharebar />
       </Page>
     );
   }

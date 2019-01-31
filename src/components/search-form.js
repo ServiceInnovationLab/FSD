@@ -7,19 +7,19 @@ export default class SearchForm extends Component {
   static propTypes = {
     autoSuggestOnChange: PropTypes.func.isRequired, 
     autoSuggestValue: PropTypes.string.isRequired,
-    doLoadResults: PropTypes.func.isRequired,
     doResetSearch: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
+    updateSearchParams: PropTypes.func.isRequired,
     showExtraButtons: PropTypes.bool.isRequired
   };
 
   render() {
-    const { initialValues, doLoadResults, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
+    const { updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
 
     return (
       <Form
+        onSubmit={updateSearchParams}
         initialValues={initialValues}
-        onSubmit={doLoadResults}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -32,7 +32,7 @@ export default class SearchForm extends Component {
             </div>
             <div>
               <AutoSuggest
-                doLoadResults={doLoadResults}
+                updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
                 autoSuggestValue={autoSuggestValue}
               />
