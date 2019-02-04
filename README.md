@@ -72,3 +72,4 @@ To run Cucumber tests (not currently included in the CI pipeline)
 ```
 npm run cucumber
 ```
+Cucumber reports are generated in `features/reports/cucumber-report.html`
