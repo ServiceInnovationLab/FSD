@@ -32,8 +32,9 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "CI=true react-scripts test",
+    "eject": "react-scripts eject",
+    "cucumber": "node ./node_modules/selenium-cucumber-js/index.js --disableLaunchReport"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +46,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "selenium-cucumber-js": "^1.6.2"
   }
 }
