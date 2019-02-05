@@ -1,8 +1,8 @@
 # Family Services Directory Searchinator
-[![Build Status](https://travis-ci.org/ServiceInnovationLab/FamilyServiceDirectorySearchinator.svg?branch=master)](https://travis-ci.org/ServiceInnovationLab/FamilyServiceDirectorySearchinator)
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/FamilyServiceDirectorySearchinator.png?columns=all)](https://waffle.io/ServiceInnovationLab/FamilyServiceDirectorySearchinator?utm_source=badge)
+[![CircleCI](https://circleci.com/gh/ServiceInnovationLab/fsd-spike.svg?style=svg)](https://circleci.com/gh/ServiceInnovationLab/fsd-spike)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/fsd-spike.png?columns=all)](https://waffle.io/ServiceInnovationLab/fsd-spike?utm_source=badge)
 
-This runs [on github pages](https://serviceinnovationlab.github.io/FamilyServiceDirectorySearchinator/)
+This runs [on github pages](https://serviceinnovationlab.github.io/fsd-spike/)
 
 ## Overview
 A React frontend for the existing Family Services Directory providing keyword, category, and location-based search results
@@ -10,13 +10,13 @@ A React frontend for the existing Family Services Directory providing keyword, c
 ## Environments
 **Environment** | **URL**  | **Git Branch**
 --- | --- | ---
-Github Pages | https://serviceinnovationlab.github.io/FamilyServiceDirectorySearchinator/ | master |
+Github Pages | https://serviceinnovationlab.github.io/fsd-spike/ | master |
 
 ## Project Resources
 
 **Resource** | **URL**
 --- | ---
-Backlog | https://waffle.io/ServiceInnovationLab/FamilyServiceDirectorySearchinator
+Backlog | https://waffle.io/ServiceInnovationLab/fsd-spike
 CI | https://circleci.com/gh/ServiceInnovationLab/fsd-spike
 
 **Role(s)** | **Name(s)**
