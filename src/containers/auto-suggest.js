@@ -59,7 +59,7 @@ export default class Example extends React.Component {
     return axios.get(url)
       .then(res => {
         const { x: lng, y: lat} = res.data
-        updateSearchParams({ latitude: lat, longitude: lng })
+        updateSearchParams({ latitude: lat, longitude: lng, region: a})
       });
   }
   onSuggestionsFetchRequested = ({ value }) => {

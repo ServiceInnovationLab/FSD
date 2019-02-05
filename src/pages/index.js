@@ -27,6 +27,10 @@ export default class Index extends Component {
       this.doLoadResults(search)
     }
   }
+  setAutoSuggestInitialValue = (region) => {
+    this.setState({autoSuggestValue: region})
+  }
+
   doSetCategory = categoryName => {
     this.updateSearchParams({category: categoryName})
   };
@@ -54,8 +58,10 @@ export default class Index extends Component {
   doLoadResults(locationQuery) {
     const { categoryContext: { setCategory } } = this.props;
     const searchVars = queryString.parse(locationQuery);
+    const { category, region } = searchVars
 
-    if(searchVars.category) setCategory(searchVars.category)
+    if(category) setCategory(category)
+    if(region) this.setAutoSuggestInitialValue(region)
 
     loadResults(searchVars).then(res => {
       this.setState({ serviceProviders: res })
