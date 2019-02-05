@@ -8,22 +8,16 @@ module.exports = function () {
     // driver wait returns a promise so return that
     return driver.wait(until.elementsLocated(by.css('input[name=keyword]')), 10000)
         .then(() => driver.findElements(by.css('input[name=keyword]')))
-        .then(function (elements) {
+        .then((input_elements) => {
             // Expect one matching enabled element with type=text
-            expect(elements.length).to.equal(1)
-            const element = elements[0]
+            expect(input_elements.length).to.equal(1)
+            const keyword_box = input_elements[0]
 
-            element.getAttribute('type')
-                .then(function(value) {
-                    expect(value).to.equal('text')
-                });
+            keyword_box.getAttribute('type')
+                .then((type) => expect(type).to.equal('text'));
 
-            element.getAttribute('enabled')
-                .then(function(value) {
-                    expect('disabled').not.to.equal(true)
-                })
-                0
-            return elements
+            keyword_box.getAttribute('disabled')
+                .then((disabled) => expect(disabled).to.be.null);
         });
   });
 
@@ -32,29 +26,24 @@ module.exports = function () {
     // driver wait returns a promise so return that
     return driver.wait(until.elementsLocated(by.css('input[placeholder="Enter a location"]')), 10000)
         .then(() => driver.findElements(by.css('input[placeholder="Enter a location"]')))
-        .then(function (elements) {
+        .then(function (input_elements) {
             // Expect one matching enabled element with type=text
-            expect(elements.length).to.equal(1)
-            const element = elements[0]
+            expect(input_elements.length).to.equal(1)
+            const location_box = input_elements[0]
 
-            element.getAttribute('type')
-                .then((value) => expect(value).to.equal('text'));
+            location_box.getAttribute('type')
+                .then((type) => expect(type).to.equal('text'));
 
-            element.getAttribute('enabled')
-                .then((value) => expect('disabled').not.to.equal(true));
-
-            return elements
+            location_box.getAttribute('disabled')
+                .then((disabled) => expect(disabled).to.be.null);
         });
   });
 
   this.Then(/^I should see some category selectors$/, function () {
 
     // driver wait returns a promise so return that
-    return driver.wait(until.elementsLocated(by.css('.category__container')), 10000).then(function(){
-
-        // return the promise of an element to the following then.
-        return driver.findElements(by.css('.category__container > .category__button'));
-    })
-    .then((elements) => expect(elements.count).to.not.equal(0));
+    return driver.wait(until.elementsLocated(by.css('.category__container > .category__button')), 10000)
+        .then(() => driver.findElements(by.css('.category__container > .category__button')))
+        .then((categories) => expect(categories.length).to.be.above(1));
   });
 }
