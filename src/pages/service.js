@@ -38,26 +38,7 @@ export default class Service extends Component {
     const { id } = this.props.match.params;
 
     loadService(id).then(providers => {
-
-      // The API can return a list of results, including a duplicate for each
-      // type of service offered by the organisation or even other organisations
-      // which are (somehow) related.
-      //
-      // The provider object from the API has properties including fsdId, FSDID
-      // and FSD_ID. In the examples I've seen the fsdId and FSDID can apply to
-      // multiple providers, but the FSD_ID specifies the provider we were
-      // expecting. Also the FSD_ID is the first field returned in the server
-      // response which implies it's the primary key.
-      //
-      // It's also worth noting that the records which describe additional
-      // services from the same provider are being ignored currently, and the
-      // details for whichever service is arbitrarily listed first are
-      // displayed. TODO render the services in a list.
-      const selectAppropriateResult = (fsdId, providers) => {
-        return providers.filter(r => r.FSD_ID === Number(fsdId))[0]
-      }
-
-      const provider = selectAppropriateResult(id, providers);
+      const provider = providers[0];
 
       this.setState({
         loading: false,
@@ -83,8 +64,6 @@ export default class Service extends Component {
       });
     });
   };
-
-
 
   render() {
     const { match: {params: {id}}, history: {goBack} } = this.props;
