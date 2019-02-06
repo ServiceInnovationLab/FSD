@@ -80,13 +80,9 @@ export default class Service extends Component {
       longitude
     } = this.state;
 
-    const mapPoint = [
-      {
-        LATITUDE: latitude,
-        LONGITUDE: longitude
-      }
-    ];
-
+    const providerMap = latitude && longitude
+      ? <MapContainer serviceProviders={[{LATITUDE: latitude, LONGITUDE: longitude}]} />
+      : null
     return (
       <Page className="service__page">
         <header>
@@ -123,7 +119,7 @@ export default class Service extends Component {
                   serviceDetail={service.SERVICE_DETAIL}
                 />
               )}
-              <MapContainer serviceProviders={mapPoint} />
+              {providerMap}
             </Fragment>
           )}
         </header>
