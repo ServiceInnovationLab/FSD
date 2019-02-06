@@ -57,12 +57,34 @@ const loadService = serviceId => {
   return axios
     .get(url)
     .then(response => {
-      return response.data.result.records;
+      const filteredResults = selectAppropriateResults(serviceId, response.data.result.records);
+
+      // Because the API returns a list of records which look like a SQL join
+      // between one provider and many services, we can return the first result
+      // to be the provider object and all results to be the services objects,
+      // and the caller can ignore the additional properties on each object
+      return {
+        provider: filteredResults[0],
+        services: filteredResults
+      }
     })
     .catch(error => {
       console.error(error)
-      return [];
+      return { provider: {}, services: []};
     });
 };
 
 export { loadCategories, loadResults, loadService };
+
+// The API can return a list of results, including a duplicate for each
+// type of service offered by the organisation or even other organisations
+// which are (somehow) related.
+//
+// The provider object from the API has properties including fsdId, FSDID
+// and FSD_ID. In the examples I've seen the fsdId and FSDID can apply to
+// multiple providers, but the FSD_ID specifies the provider we were
+// expecting. Also the FSD_ID is the first field returned in the server
+// response which implies it's the primary key.
+const selectAppropriateResults = (id, providers) => {
+  return providers.filter(p => p.FSD_ID === Number(id))
+}
