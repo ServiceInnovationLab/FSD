@@ -68,6 +68,8 @@ export default class Example extends React.Component {
 
   onSuggestionsClearRequested = () => {
     const {updateSearchParams, autoSuggestOnChange} = this.props 
+
+    autoSuggestOnChange('')
     updateSearchParams({ latitude: '', longitude: '', region: ''})
 
     this.setState({
