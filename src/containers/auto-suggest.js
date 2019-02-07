@@ -76,7 +76,7 @@ export default class Example extends React.Component {
     const { suggestions } = this.state;
     const {autoSuggestValue} = this.props
     const inputProps = {
-      placeholder: 'Enter a location',
+      placeholder: 'Start typing an address',
       value: autoSuggestValue,
       onChange: this.onChange.bind(this)
     };
