@@ -14,10 +14,9 @@ export default class SearchForm extends Component {
   };
 
   onSubmit (values) {
-    const fields = arguments[1].getRegisteredFields()
-    
-    fields.forEach(field => {
-      if (!values[field]) values[field] = ''
+    const {dirtyFields} = arguments[1].getState()
+    Object.keys(dirtyFields).forEach(field => {
+      if (!values[field] && !(values[field] === 'undefined')) values[field] = ''
     })
     
     this.props.updateSearchParams(values)
