@@ -55,7 +55,7 @@ export default class SearchForm extends Component {
                   onClick={() => doResetSearch(form)}
                   disabled={submitting}
                 >
-                  Reset form
+                  Reset Search
                 </button>
               : null
             }
