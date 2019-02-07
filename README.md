@@ -1,6 +1,6 @@
 # Family Services Directory Searchinator
 [![CircleCI](https://circleci.com/gh/ServiceInnovationLab/fsd-spike.svg?style=svg)](https://circleci.com/gh/ServiceInnovationLab/fsd-spike)
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/fsd-spike.png?columns=all)](https://waffle.io/ServiceInnovationLab/fsd-spike?utm_source=badge)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/fsd-spike.png?columns=all)](https://waffle.io/ServiceInnovationLab/FSD?utm_source=badge)
 
 This runs [on github pages](https://serviceinnovationlab.github.io/fsd-spike/)
 
