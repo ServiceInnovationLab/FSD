@@ -32,7 +32,12 @@ export default class Index extends Component {
   }
 
   doSetCategory = categoryName => {
-    this.updateSearchParams({category: categoryName})
+    const { categoryContext: { selectedCategory, setCategory } } = this.props;
+    if (selectedCategory === categoryName) {
+      setCategory()
+      this.updateSearchParams({category: ''})
+    }
+    else this.updateSearchParams({category: categoryName})
   };
 
   doResetSearch = (form) => {
