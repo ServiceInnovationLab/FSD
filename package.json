@@ -1,6 +1,6 @@
 {
-  "name": "fsd-spike",
-  "homepage": "https://ServiceInnovationLab.github.io/fsd-spike",
+  "name": "FSD",
+  "homepage": "https://ServiceInnovationLab.github.io/FSD",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
