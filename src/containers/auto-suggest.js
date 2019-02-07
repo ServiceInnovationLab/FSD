@@ -1,30 +1,6 @@
 import Autosuggest from 'react-autosuggest';
-import axios from 'axios';
-import React from 'react'
-import queryString from 'query-string';
-
-const ADDRESS_FINDER_KEY = process.env.REACT_APP_ADDRESS_FINDER_API_KEY
-
-const getSuggestions = userInput => {
-  const cleansedInput = userInput.trim().toLowerCase();
-  const inputLength = cleansedInput.length;
-  
-  if (inputLength === 0) return []
-
-  const query = queryString.stringify({
-    key: ADDRESS_FINDER_KEY,
-    q: cleansedInput, 
-    format: 'json',
-    strict: 2
-  })
-
-  const url = `https://api.addressfinder.io/api/nz/location?${query}`
-  
-  return axios.get(url)
-    .then(response => {
-      return response.data.completions
-    });
-};
+import React from 'react';
+import { getSuggestions, getAddressMetadata } from '../utilities/addressfinder';
 
 const getSuggestionValue = suggestion => suggestion.a;
 
@@ -43,27 +19,27 @@ export default class Example extends React.Component {
   }
 
   onChange (event, { newValue }) {
+    if(newValue === '') {
+      const {updateSearchParams} = this.props;
+      updateSearchParams({ latitude: '', longitude: '', region: ''});
+    }
+
     this.props.autoSuggestOnChange(newValue)
   };
 
-  onSuggestionSelected = (evt, {suggestion: {pxid, a}}) => {
-    const query = queryString.stringify({
-      key: ADDRESS_FINDER_KEY,
-      format:'json',
-      pxid: pxid
-    })
-    
-    const url = `https://api.addressfinder.io/api/nz/location/info?${query}`
-  
-    const {updateSearchParams} = this.props 
-    return axios.get(url)
+  onSuggestionSelected = (event, {suggestion: {pxid, a}}) => {
+    const {updateSearchParams} = this.props
+
+    return getAddressMetadata(pxid)
       .then(res => {
         const { x: lng, y: lat} = res.data
         updateSearchParams({ latitude: lat, longitude: lng, region: a})
       });
   }
+
   onSuggestionsFetchRequested = ({ value }) => {
-    getSuggestions(value).then(suggestions => this.setState({suggestions}))
+    getSuggestions(value)
+      .then(suggestions => this.setState({suggestions}))
   };
 
   onSuggestionsClearRequested = () => {
