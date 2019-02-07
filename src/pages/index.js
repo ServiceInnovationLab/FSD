@@ -51,6 +51,14 @@ export default class Index extends Component {
 
     const searchVars = queryString.parse(location.search);
     const newSearchVars = Object.assign({}, searchVars, newQuery);
+
+    // Remove query parameters where no value is set (like `keyword=`)
+    for(var property in newSearchVars) {
+      if(newSearchVars[property] === '') {
+        delete newSearchVars[property]
+      }
+    }
+
     const newSearchQuery = queryString.stringify(newSearchVars);
 
     push(`${location.pathname}?${newSearchQuery}`);
