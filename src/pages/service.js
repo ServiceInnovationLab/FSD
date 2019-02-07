@@ -37,8 +37,8 @@ export default class Service extends Component {
   componentDidMount = () => {
     const { id } = this.props.match.params;
 
-    loadService(id).then(providers => {
-      const provider = providers[0];
+    loadService(id).then(args => {
+      const {provider, services} = args
 
       this.setState({
         loading: false,
@@ -51,13 +51,9 @@ export default class Service extends Component {
         email: provider.PUBLISHED_CONTACT_EMAIL_1,
         phoneNumber: provider.PUBLISHED_PHONE_1,
 
-        serviceName: provider.SERVICE_NAME,
-        targetAudiences: provider.SERVICE_TARGET_AUDIENCES,
-        deliveryMethods: provider.DELIVERY_METHODS,
-        serviceReferrals: provider.SERVICE_REFERRALS,
-        costType: provider.COST_TYPE,
-        costDescription: provider.COST_DESCRIPTION,
-        serviceDetail: provider.SERVICE_DETAIL,
+        //TODO this is limited to only showing one service until the page design
+        //is updated
+        services: services.slice(0, 1),
 
         latitude: provider.LATITUDE,
         longitude: provider.LONGITUDE
@@ -78,13 +74,7 @@ export default class Service extends Component {
       email,
       phoneNumber,
 
-      serviceName,
-      targetAudiences,
-      deliveryMethods,
-      serviceReferrals,
-      costType,
-      costDescription,
-      serviceDetail,
+      services,
 
       latitude,
       longitude
@@ -121,15 +111,18 @@ export default class Service extends Component {
                 phoneNumber={phoneNumber}
                 hideMoreDetails={true}
               />
-              <ServiceDetails
-                serviceName={serviceName}
-                targetAudiences={targetAudiences}
-                deliveryMethods={deliveryMethods}
-                serviceReferrals={serviceReferrals}
-                costType={costType}
-                costDescription={costDescription}
-                serviceDetail={serviceDetail}
-              />
+              {services.map((service, i) =>
+                <ServiceDetails
+                  key={i}
+                  serviceName={service.SERVICE_NAME}
+                  targetAudiences={service.SERVICE_TARGET_AUDIENCES}
+                  deliveryMethods={service.DELIVERY_METHODS}
+                  serviceReferrals={service.SERVICE_REFERRALS}
+                  costType={service.COST_TYPE}
+                  costDescription={service.COST_DESCRIPTION}
+                  serviceDetail={service.SERVICE_DETAIL}
+                />
+              )}
               <MapContainer serviceProviders={mapPoint} />
             </Fragment>
           )}

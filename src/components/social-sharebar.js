@@ -40,7 +40,7 @@ class Sharebar extends React.Component {
         <div className="container">
           <p>Share via: </p>
           <ul className="sharebar-share">
-            { socialLinks.map(value => <li>{value}</li>)}
+            { socialLinks.map((value, i) => <li key={value + i}>{value}</li>)}
           </ul>
         </div>
       </div>
