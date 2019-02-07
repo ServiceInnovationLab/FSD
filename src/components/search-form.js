@@ -13,12 +13,21 @@ export default class SearchForm extends Component {
     showExtraButtons: PropTypes.bool.isRequired
   };
 
+  onSubmit (values) {
+    const fields = arguments[1].getRegisteredFields()
+    
+    fields.forEach(field => {
+      if (!values[field]) values[field] = ''
+    })
+    
+    this.props.updateSearchParams(values)
+  }
+  
   render() {
     const { initialValues, updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
-
     return (
       <Form
-        onSubmit={updateSearchParams}
+        onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
@@ -28,6 +37,7 @@ export default class SearchForm extends Component {
                 component='input'
                 type='text'
                 placeholder='Enter topic or organisations'
+                onBlur={this.onBlur}
               />
             </div>
             <div>
@@ -37,7 +47,7 @@ export default class SearchForm extends Component {
                 autoSuggestValue={autoSuggestValue}
               />
             </div>
-            <button type='submit' disabled={submitting || pristine}>
+            <button type='submit' disabled={submitting}>
               Search
             </button>
             { showExtraButtons
