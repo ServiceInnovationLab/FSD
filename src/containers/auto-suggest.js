@@ -10,12 +10,15 @@ const renderSuggestion = suggestion => (
   </div>
 );
 
-// Represents the parts of a location (or address) we are interested in for this
-// app. 
+// Represents the parts of a region or street address we are interested in for
+// this app - specifically the properties which get included in the URL query
+// string.
 //
-// The default empty string properties ensure that when the object is used to
+// The default empty string properties ensure that when an instance is used to
 // update the search params in the URL any existing values are removed.
 export class SearchLocation {
+  static nullLocation = new SearchLocation();
+
   latitude = '';
   longitude = ''; 
   region = '';
@@ -24,9 +27,11 @@ export class SearchLocation {
   constructor(properties = {}) {
     Object.assign(this, properties);
   }
-}
 
-const noLocation = new SearchLocation();
+  // an empty location instance, suitable for clearing an existing location from
+  // the URL
+  static get None() { return SearchLocation.nullLocation; }
+}
 
 export default class Example extends React.Component {
   constructor() {
@@ -39,7 +44,7 @@ export default class Example extends React.Component {
   onChange (event, { newValue }) {
     if(newValue === '') {
       const {updateSearchParams} = this.props;
-      updateSearchParams(noLocation);
+      updateSearchParams(SearchLocation.None);
     }
 
     this.props.autoSuggestOnChange(newValue)
