@@ -27,10 +27,10 @@ module.exports = function () {
   this.Then(/^I should see the location search box$/, async () => {
 
     // wait for the page to load
-    await driver.wait(until.elementsLocated(by.css('input[placeholder="Enter a location"]')), 10000);
+    await driver.wait(until.elementsLocated(by.css('input[placeholder="Start typing an address"]')), 10000);
 
     // check one element exists
-    input_elements = await driver.findElements(by.css('input[placeholder="Enter a location"]'));
+    input_elements = await driver.findElements(by.css('input[placeholder="Start typing an address"]'));
     expect(input_elements.length).to.equal(1)
 
     // check the attributes are correct
@@ -53,4 +53,15 @@ module.exports = function () {
     categories = await driver.findElements(by.css('.category__container > .category__button'));
     expect(categories.length).to.be.above(1);
   });
+
+    // expect more the search radius selector widget
+    this.Then(/^I should see the radius selector$/, async () => {
+
+      // wait for the page to load
+      await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
+  
+      // expect there to be 4 radius buttons
+      categories = await driver.findElements(by.css('input[name="radius"]'));
+      expect(categories.length).to.equal(4);
+    });
 }
