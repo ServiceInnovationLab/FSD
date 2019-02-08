@@ -1,5 +1,4 @@
 const getInputElement = require('../helpers/get-input-element')
-const getAttribute = require('../helpers/get-attribute-for-input').default
 
 module.exports = function () {
   this.When(/^I visit the main page$/, async () => {
@@ -14,8 +13,11 @@ module.exports = function () {
     // check the attributes are correct
     const keyword_box = input_elements[0]
 
-    expect(getAttribute(keyword_box, 'type')).to.equal('text');
-    expect(getAttribute(keyword_box,'disabled')).to.be.null
+    const type_attribute = await keyword_box.getAttribute('type')
+    expect(type_attribute).to.equal('text');
+
+    const disabled_attribute = await keyword_box.getAttribute('disabled')
+    expect(disabled_attribute).to.be.null;
   });
 
   // Expect one input with placeholder="Start typing an address", enabled, type=text
@@ -26,11 +28,14 @@ module.exports = function () {
     // check the attributes are correct
     const location_box = input_elements[0]
     
-    expect(getAttribute(location_box, 'type')).to.equal('text');
-    expect(getAttribute(location_box,'disabled')).to.be.null
+    const type_attribute = await location_box.getAttribute('type')
+    expect(type_attribute).to.equal('text');
+
+    const disabled_attribute = await location_box.getAttribute('disabled')
+    expect(disabled_attribute).to.be.null;
   });
 
-  // Expect more than one category button
+  // expect more than one category button
   this.Then(/^I should see some category selectors$/, async () => {
     categories = await getInputElement('css', '.category__container > .category__button');
     expect(categories.length).to.be.above(1);
