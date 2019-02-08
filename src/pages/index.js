@@ -71,7 +71,7 @@ export default class Index extends Component {
     const searchVars = queryString.parse(locationQuery);
     const { category = '', region: address = '', keyword = '', radius = ''} = searchVars
 
-    setCategory(category)
+    if(category) setCategory(category)
     this.setState({address, keyword, radius})
 
     loadResults(searchVars).then(res => {
