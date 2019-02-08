@@ -15,7 +15,8 @@ export default class Index extends Component {
     serviceProviders: [],
     showMap: false,
     showExtraButtons: false,
-    autoSuggestValue: ''
+    address: ''
+  
   };
   componentDidMount () {
     const { search } = this.props.location
@@ -27,10 +28,7 @@ export default class Index extends Component {
       this.doLoadResults(search)
     }
   }
-  setAutoSuggestInitialValue = (region) => {
-    this.setState({autoSuggestValue: region})
-  }
-
+  
   doSetCategory = categoryName => {
     const { categoryContext: { selectedCategory, setCategory } } = this.props;
     if (selectedCategory === categoryName) {
@@ -71,10 +69,10 @@ export default class Index extends Component {
   doLoadResults(locationQuery) {
     const { categoryContext: { setCategory } } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { category, region } = searchVars
+    const { category = '', region: address = '', keyword = '', radius = ''} = searchVars
 
-    if(category) setCategory(category)
-    if(region) this.setAutoSuggestInitialValue(region)
+    setCategory(category)
+    this.setState({address, keyword, radius})
 
     loadResults(searchVars).then(res => {
       this.setState({ serviceProviders: res })
@@ -94,19 +92,18 @@ export default class Index extends Component {
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
   autoSuggestOnChange (newValue) {
     this.setState({
-      autoSuggestValue: newValue
+      address: newValue
     });
   };
 
   render() {
-    const { serviceProviders, showMap, autoSuggestValue } = this.state;
+    const { serviceProviders, showMap, address, keyword, radius} = this.state;
     const { history, location } = this.props;
 
     const searchVars = queryString.parse(location.search);
     const showExtraButtons = Boolean(
       (serviceProviders && serviceProviders[0])
       || Object.keys(searchVars)[0])
-
     return (
       <Page>
         <SearchContainer>
@@ -115,9 +112,9 @@ export default class Index extends Component {
             updateSearchParams={this.updateSearchParams.bind(this)}
             doResetSearch={this.doResetSearch}
             autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
-            autoSuggestValue={autoSuggestValue}
+            address={address}
             showExtraButtons={showExtraButtons}
-            initialValues={{keyword: searchVars.keyword}}
+            initialValues={{keyword, radius}}
           />
           {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>

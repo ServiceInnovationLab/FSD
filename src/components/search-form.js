@@ -3,6 +3,7 @@ import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import AutoSuggest from '../containers/auto-suggest'
 
+const radiusOptions = ['10', '25', '50', '100']
 export default class SearchForm extends Component {
   static propTypes = {
     autoSuggestOnChange: PropTypes.func.isRequired, 
@@ -14,8 +15,7 @@ export default class SearchForm extends Component {
   };
 
   render() {
-    const { initialValues, updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, autoSuggestValue } = this.props
-
+    const { initialValues, updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, address } = this.props
     return (
       <Form
         onSubmit={updateSearchParams}
@@ -34,8 +34,24 @@ export default class SearchForm extends Component {
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
-                autoSuggestValue={autoSuggestValue}
+                address={address}
               />
+            </div>
+            <div className='radio-group'>
+              <label>Radius:</label>
+              {
+                radiusOptions.map(radius => {
+                  return(<label>
+                    <Field
+                    name='radius'
+                    component='input'
+                    type='radio'
+                    value={radius}
+                    />
+                    {radius}
+                  </label>)
+                })
+              }
             </div>
             <button type='submit' disabled={submitting || pristine}>
               Search

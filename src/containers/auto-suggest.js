@@ -50,10 +50,10 @@ export default class Example extends React.Component {
 
   render() {
     const { suggestions } = this.state;
-    const {autoSuggestValue} = this.props
+    const {address} = this.props
     const inputProps = {
       placeholder: 'Enter a location',
-      value: autoSuggestValue,
+      value: address,
       onChange: this.onChange.bind(this)
     };
     return (
