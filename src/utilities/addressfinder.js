@@ -3,7 +3,9 @@
 // https://addressfinder.nz/
 import axios from 'axios';
 import queryString from 'query-string';
+import { Url } from 'url';
 
+const ADDRESS_FINDER_BASE_URL = process.env.REACT_APP_ADDRESS_FINDER_BASE_URL
 const ADDRESS_FINDER_KEY = process.env.REACT_APP_ADDRESS_FINDER_API_KEY
 
   // Get address or location suggestions as appropriate
@@ -15,76 +17,60 @@ const ADDRESS_FINDER_KEY = process.env.REACT_APP_ADDRESS_FINDER_API_KEY
 
     // return address suggestions if the query starts with a number, otherwise location suggestions
     return (cleansedInput[0] >= '0' && cleansedInput[0] <= '9')
-      ? (getAddressSuggestions(cleansedInput) || getLocationSuggestions(cleansedInput))
-      : (getLocationSuggestions(cleansedInput) || getAddressSuggestions(cleansedInput)) 
+      ? getAddressSuggestions(cleansedInput)
+      : getLocationSuggestions(cleansedInput)
   };
   
   // Get suggestions from the addressfinder Locations API (locations/regions)
-  const getLocationSuggestions = searchString => {
+  const getLocationSuggestions = async searchString => {
+
     // return an empty set for an empty query
     if (searchString.length === 0) return []
 
-    const query = queryString.stringify({
-      key: ADDRESS_FINDER_KEY,
+    const queryParams = {
       q: searchString, 
-      format: 'json',
       strict: 2
-    })
+    };
 
-    const url = `https://api.addressfinder.io/api/nz/location?${query}`
-    
-    return axios.get(url)
-      .then(response => {
-        return response.data.completions
-      });
+    const response = await addressFinderQuery("api/nz/location", queryParams);
+    // add the property type: location to each result so we can tell what type of suggestion it is
+    return response.completions.map(c => ({ ...c, type: 'location' }) );
   };
   
   // Get suggestions from the addressFinder Address API (street addresses)
-  const getAddressSuggestions = searchString => {
+  const getAddressSuggestions = async searchString => {
+
     // return an empty set for an empty query
     if (searchString.length === 0) return []
 
-    const query = queryString.stringify({
-      key: ADDRESS_FINDER_KEY,
+    const queryParams = {
       q: searchString, 
-      format: 'json',
       strict: 2
-    })
+    };
 
-    const url = `https://api.addressfinder.io/api/nz/address?${query}`
-    
-    return axios.get(url)
-      .then(response => {
-        return response.data.completions
-      });
+    const response = await addressFinderQuery("api/nz/address", queryParams);
+    // add the property type: address to each result so we can tell what type of suggestion it is
+    return response.completions.map(c => ({ ...c, type: 'address' }) );
   };
 
   // Get the full record for an address specified by its primary key (pxid)
   //
   // Note that this call also works for locations in practice
-  const getAddressMetadata = (pxid) => {
-    const query = queryString.stringify({
-      key: ADDRESS_FINDER_KEY,
-      format:'json',
+  const getAddressMetadata = pxid => {
+    const queryParams = {
       pxid: pxid
-    })
+    };
     
-    const url = `https://api.addressfinder.io/api/nz/address/info?${query}`
-  
-    return axios.get(url);
+    return addressFinderQuery("api/nz/address/info", queryParams);
   };
 
-  // Get teh full record for a location specified by its primay key (pxid)
-  const getLocationMetadata = (pxid) => {
-    const query = queryString.stringify({
-      key: ADDRESS_FINDER_KEY,
-      format:'json',
+  // Get the full record for a location specified by its primary key (pxid)
+  const getLocationMetadata = pxid => {
+    const queryParams = {
       pxid: pxid
-    })
+    };
     
-    const url = `https://api.addressfinder.io/api/nz/location/info?${query}`
-  
-    return axios.get(url);
+    return addressFinderQuery("api/nz/location/info", queryParams);
   };
 
   export { 
@@ -94,3 +80,20 @@ const ADDRESS_FINDER_KEY = process.env.REACT_APP_ADDRESS_FINDER_API_KEY
     getLocationSuggestions, 
     getLocationMetadata 
   }
+
+// Submits a query to an addressfinder API endpoint
+//
+// Applies the API key and format=json unless they are overridden in queryParams
+async function addressFinderQuery(method, queryParams) {
+  const combinedQueryParams = {
+    key: ADDRESS_FINDER_KEY,
+    format:'json',
+    ...queryParams
+  }
+  
+  const request = new URL(method, ADDRESS_FINDER_BASE_URL);
+  request.search = queryString.stringify(combinedQueryParams);
+
+  const response = await axios.get(request);
+  return response.data;
+};
