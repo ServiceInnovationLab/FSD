@@ -1,60 +1,56 @@
 module.exports = function () {
-  this.When(/^I visit the main page$/, function () {
-    return driver.get('localhost:3000/');
+  this.When(/^I visit the main page$/, async () => {
+    return driver.get(shared.host.siteRoot);
   });
 
-  this.Then(/^I should see the keyword search box$/, function () {
+  // Expect one input with name=keyword, enabled, type=text
+  this.Then(/^I should see the keyword search box$/, async () => {
 
-    // driver wait returns a promise so return that
-    return driver.wait(until.elementsLocated(by.css('input[name=keyword]')), 10000)
-        .then(() => driver.findElements(by.css('input[name=keyword]')))
-        .then(function (elements) {
-            // Expect one matching enabled element with type=text
-            expect(elements.length).to.equal(1)
-            const element = elements[0]
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css('input[name=keyword]')), 10000);
+    
+    // check one element exists
+    input_elements = await driver.findElements(by.css('input[name=keyword]'));
+    expect(input_elements.length).to.equal(1)
+    
+    // check the attributes are correct
+    const keyword_box = input_elements[0]
 
-            element.getAttribute('type')
-                .then(function(value) {
-                    expect(value).to.equal('text')
-                });
+    const type_attribute = await keyword_box.getAttribute('type')
+    expect(type_attribute).to.equal('text');
 
-            element.getAttribute('enabled')
-                .then(function(value) {
-                    expect('disabled').not.to.equal(true)
-                })
-                0
-            return elements
-        });
+    const disabled_attribute = await keyword_box.getAttribute('disabled')
+    expect(disabled_attribute).to.be.null;
   });
 
-  this.Then(/^I should see the location search box$/, function () {
+  // Expect one input with placeholder="Enter a location", enabled, type=text
+  this.Then(/^I should see the location search box$/, async () => {
 
-    // driver wait returns a promise so return that
-    return driver.wait(until.elementsLocated(by.css('input[placeholder="Enter a location"]')), 10000)
-        .then(() => driver.findElements(by.css('input[placeholder="Enter a location"]')))
-        .then(function (elements) {
-            // Expect one matching enabled element with type=text
-            expect(elements.length).to.equal(1)
-            const element = elements[0]
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css('input[placeholder="Enter a location"]')), 10000);
 
-            element.getAttribute('type')
-                .then((value) => expect(value).to.equal('text'));
+    // check one element exists
+    input_elements = await driver.findElements(by.css('input[placeholder="Enter a location"]'));
+    expect(input_elements.length).to.equal(1)
 
-            element.getAttribute('enabled')
-                .then((value) => expect('disabled').not.to.equal(true));
+    // check the attributes are correct
+    const location_box = input_elements[0]
+    
+    const type_attribute = await location_box.getAttribute('type')
+    expect(type_attribute).to.equal('text');
 
-            return elements
-        });
+    const disabled_attribute = await location_box.getAttribute('disabled')
+    expect(disabled_attribute).to.be.null;
   });
 
-  this.Then(/^I should see some category selectors$/, function () {
+  // expect more than one category button
+  this.Then(/^I should see some category selectors$/, async () => {
 
-    // driver wait returns a promise so return that
-    return driver.wait(until.elementsLocated(by.css('.category__container')), 10000).then(function(){
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css('.category__container > .category__button')), 10000);
 
-        // return the promise of an element to the following then.
-        return driver.findElements(by.css('.category__container > .category__button'));
-    })
-    .then((elements) => expect(elements.count).to.not.equal(0));
+    // expect there to be more than 1 category button
+    categories = await driver.findElements(by.css('.category__container > .category__button'));
+    expect(categories.length).to.be.above(1);
   });
 }

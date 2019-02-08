@@ -52,7 +52,7 @@ export default class Example extends React.Component {
     const { suggestions } = this.state;
     const {address} = this.props
     const inputProps = {
-      placeholder: 'Enter a location',
+      placeholder: 'Start typing an address',
       value: address,
       onChange: this.onChange.bind(this)
     };
