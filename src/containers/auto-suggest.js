@@ -54,7 +54,8 @@ export default class Example extends React.Component {
     const inputProps = {
       placeholder: 'Start typing an address',
       value: autoSuggestValue,
-      onChange: this.onChange.bind(this)
+      onChange: this.onChange.bind(this),
+      name: 'address-autosuggest'
     };
     return (
       <Autosuggest
