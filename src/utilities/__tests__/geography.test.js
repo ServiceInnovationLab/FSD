@@ -29,17 +29,17 @@ describe('geography.js', () => {
       dataPointClone.DISTANCE = getDistance(
         {
           latitude: addressLatLngClone.latitude,
-          longitude: addressLatLngClone.longitude
+          longitude: addressLatLngClone.longitude,
         },
         {
           latitude: dataPointClone.LATITUDE,
-          longitude: dataPointClone.LONGITUDE
-        }
+          longitude: dataPointClone.LONGITUDE,
+        },
       );
 
-      expect(
-        findNearMe([ dataPointClone ], addressLatLng, radius)
-      ).toMatchObject([ dataPointClone ]);
+      expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject(
+        [dataPointClone],
+      );
     });
 
     it("doesn't respond with points that are outside the radius", () => {
@@ -48,17 +48,17 @@ describe('geography.js', () => {
       dataPointClone.DISTANCE = getDistance(
         {
           latitude: addressLatLngClone.latitude,
-          longitude: addressLatLngClone.longitude
+          longitude: addressLatLngClone.longitude,
         },
         {
           latitude: dataPointClone.LATITUDE,
-          longitude: dataPointClone.LONGITUDE
-        }
+          longitude: dataPointClone.LONGITUDE,
+        },
       );
 
-      expect(
-        findNearMe([ dataPointClone ], addressLatLng, radius)
-      ).toMatchObject([]);
+      expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject(
+        [],
+      );
     });
   });
 
@@ -73,27 +73,27 @@ describe('geography.js', () => {
     });
 
     it('responds with data when data point qualifies', () => {
-      expect(checkLatLng([ dataPointClone ])).toMatchObject([ dataPointClone ]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
     });
 
     it("responds null when physical address doesn't qualify", () => {
       dataPointClone.PHYSICAL_ADDRESS = '';
 
-      expect(checkLatLng([ dataPointClone ])).toMatchObject([]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([]);
     });
 
     it("responds null when latitude doesn't qualify", () => {
       dataPointClone.LATITUDE = null;
-      expect(checkLatLng([ dataPointClone ])).toMatchObject([]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([]);
       dataPointClone.LATITUDE = '0';
-      expect(checkLatLng([ dataPointClone ])).toMatchObject([]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([]);
     });
 
     it("responds null when longitude doesn't qualify", () => {
       dataPointClone.LONGITUDE = null;
-      expect(checkLatLng([ dataPointClone ])).toMatchObject([]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([]);
       dataPointClone.LONGITUDE = '0';
-      expect(checkLatLng([ dataPointClone ])).toMatchObject([]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([]);
     });
   });
 
@@ -109,15 +109,15 @@ describe('geography.js', () => {
     });
 
     it('returns original array when only one point is given', () => {
-      expect(sortByDistance([ dataPointCloneA ])).toMatchObject([
-        dataPointCloneA
+      expect(sortByDistance([dataPointCloneA])).toMatchObject([
+        dataPointCloneA,
       ]);
     });
 
     it('maintains sort order when given in correct order', () => {
       dataPointCloneA.DISTANCE = 1;
       dataPointCloneB.DISTANCE = 2;
-      const dataClone = [ dataPointCloneA, dataPointCloneB ];
+      const dataClone = [dataPointCloneA, dataPointCloneB];
       const results = sortByDistance(dataClone);
 
       for (let result = 0, l = results.length; result < l; result++) {
@@ -128,7 +128,7 @@ describe('geography.js', () => {
     it('updates sort order when given in incorrect order', () => {
       dataPointCloneA.DISTANCE = 2;
       dataPointCloneB.DISTANCE = 1;
-      const dataClone = [ dataPointCloneA, dataPointCloneB ];
+      const dataClone = [dataPointCloneA, dataPointCloneB];
       const results = sortByDistance(dataClone);
 
       expect(results[0]).toMatchObject(dataPointCloneB);
