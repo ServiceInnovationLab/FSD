@@ -31,14 +31,14 @@ export default class Service extends Component {
     latitude: '',
     longitude: '',
 
-    loading: true
+    loading: true,
   };
 
   componentDidMount = () => {
     const { id } = this.props.match.params;
 
     loadService(id).then(args => {
-      const {provider, services} = args
+      const { provider, services } = args;
 
       this.setState({
         loading: false,
@@ -56,13 +56,18 @@ export default class Service extends Component {
         services: services.slice(0, 1),
 
         latitude: provider.LATITUDE,
-        longitude: provider.LONGITUDE
+        longitude: provider.LONGITUDE,
       });
     });
   };
 
   render() {
-    const { match: {params: {id}}, history: {goBack} } = this.props;
+    const {
+      match: {
+        params: { id },
+      },
+      history: { goBack },
+    } = this.props;
     const {
       loading,
       purpose,
@@ -77,16 +82,22 @@ export default class Service extends Component {
       services,
 
       latitude,
-      longitude
+      longitude,
     } = this.state;
 
-    const providerMap = latitude && longitude
-      ? <MapContainer serviceProviders={[{LATITUDE: latitude, LONGITUDE: longitude}]} />
-      : null
+    const providerMap =
+      latitude && longitude ? (
+        <MapContainer
+          serviceProviders={[{ LATITUDE: latitude, LONGITUDE: longitude }]}
+        />
+      ) : null;
     return (
       <Page className="service__page">
         <header>
-          <button className="icon-prefix__container button back-button" onClick={goBack}>
+          <button
+            className="icon-prefix__container button back-button"
+            onClick={goBack}
+          >
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
@@ -107,7 +118,7 @@ export default class Service extends Component {
                 phoneNumber={phoneNumber}
                 hideMoreDetails={true}
               />
-              {services.map((service, i) =>
+              {services.map((service, i) => (
                 <ServiceDetails
                   key={i}
                   serviceName={service.SERVICE_NAME}
@@ -118,7 +129,7 @@ export default class Service extends Component {
                   costDescription={service.COST_DESCRIPTION}
                   serviceDetail={service.SERVICE_DETAIL}
                 />
-              )}
+              ))}
               {providerMap}
             </Fragment>
           )}
