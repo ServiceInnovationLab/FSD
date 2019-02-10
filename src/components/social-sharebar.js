@@ -18,7 +18,7 @@ class Sharebar extends React.Component {
     const socialLinks = [
       createSocialLink({
         name: 'email',
-        url: `mailto:?${stringify({ subject: subject, body: url })}`,
+        url: `mailto:?${stringify({ subject, body: url })}`,
         fa_icon: faEnvelope,
       }),
 
@@ -33,7 +33,7 @@ class Sharebar extends React.Component {
       createSocialLink({
         name: 'Twitter',
         url: `https://twitter.com/home?${stringify({
-          status: description + ' ' + url,
+          status: `${description} ${url}`,
         })}`,
         fa_icon: faTwitterSquare,
       }),
