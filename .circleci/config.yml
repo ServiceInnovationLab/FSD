@@ -39,7 +39,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: npm install
-      - run: npm build
+      - run: npm run build
 
   deploy:
     docker:
@@ -57,8 +57,8 @@ jobs:
       - run: git config --global user.email "labplus@dia.govt.nz"
       - run: git config --global user.name "Lab Plus"
       - run: npm install
-      - run: npm build
-      - run: npm deploy
+      - run: npm run build
+      - run: npm run deploy
 
 workflows:
   version: 2
