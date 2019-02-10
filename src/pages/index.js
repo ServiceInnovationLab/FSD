@@ -14,7 +14,6 @@ export default class Index extends Component {
   state = {
     serviceProviders: [],
     showMap: false,
-    showExtraButtons: false,
     autoSuggestValue: ''
   };
   componentDidMount () {
