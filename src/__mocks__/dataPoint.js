@@ -3,7 +3,7 @@ const dataPoint = {
   NEARME: true,
   DISTANCE: 0,
   LATITUDE: -41.0,
-  LONGITUDE: 174.0
+  LONGITUDE: 174.0,
 };
 
 export default dataPoint;

@@ -17,7 +17,8 @@ const Header = () => {
             please visit{' '}
             <a href="https://www.familyservices.govt.nz/directory">
               Family Services Directory
-            </a>.
+            </a>
+            .
           </p>
         </div>
       </div>
