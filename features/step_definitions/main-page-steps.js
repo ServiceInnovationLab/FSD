@@ -74,7 +74,7 @@ module.exports = function () {
       expect(elements.length).to.be.above(1);
     });
 
-    this.Then(/^I click on the first region suggestion$/, async() => {
+    this.Then(/^I click on the first address suggestion$/, async() => {
       await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
       const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
       elements[0].click();

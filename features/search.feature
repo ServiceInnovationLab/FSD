@@ -12,6 +12,6 @@ Feature: Searching on the main page
     Then I see a list of service providers
 
   Scenario: I search near Thorndon Quay
-    Given I enter "Thorndon Quay" into the "region" input
-    And I click on the first region suggestion
+    Given I enter "Thorndon Quay" into the "address-autosuggest" input
+    And I click on the first address suggestion
     Then I see a list of service providers
