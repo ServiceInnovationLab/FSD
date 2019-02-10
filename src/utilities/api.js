@@ -38,9 +38,8 @@ const loadResults = searchVars => {
           { latitude, longitude },
           radius > 50000 ? 100000 : radius,
         );
-      } else {
-        return response.data.result.records;
       }
+      return response.data.result.records;
     })
     .catch(error => {
       console.error(error);
