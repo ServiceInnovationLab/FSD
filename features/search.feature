@@ -7,6 +7,6 @@ Feature: Searching on the main page
     Given I visit the main page
 
   Scenario:  I search for "family"
-    Given I enter "family" into the keyword input
+    Given I enter "family" into the "keyword" input
     And I click on "Search"
     Then I see a list of service providers

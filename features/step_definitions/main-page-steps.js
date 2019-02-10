@@ -64,4 +64,26 @@ module.exports = function () {
       categories = await driver.findElements(by.css('input[name="radius"]'));
       expect(categories.length).to.equal(4);
     });
+
+    this.Given(/^I enter "([^"]*)" into the "([^"]*)" input$/, async (value, input_name) => {
+      // wait for the page to load
+      await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
+  
+      const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
+
+      input_elements[0].sendKeys(value);
+    });
+
+    this.Given(/^I click on "([^"]*)"$/, async (text) => {
+      const element = await helpers.getFirstElementContainingText('button', text);
+      element.click();
+    });
+
+    this.Then(/^I see a list of service providers$/, async () => {
+      await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
+      const elements = await driver.findElements(by.css('section .service'));
+
+      // expect some results
+      expect(elements.length).to.be.above(1);
+    });
 }
