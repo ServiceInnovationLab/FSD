@@ -33,7 +33,7 @@ class Sharebar extends React.Component {
       createSocialLink({
         name: 'Twitter',
         url: `https://twitter.com/home?${stringify({
-          status: description + ' ' + url,
+          status: `${description} ${url}`,
         })}`,
         fa_icon: faTwitterSquare,
       }),
