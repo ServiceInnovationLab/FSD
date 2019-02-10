@@ -1,3 +1,5 @@
+const getInputElement = require('../helpers/get-input-element')
+
 module.exports = function () {
   this.When(/^I visit the main page$/, async () => {
     return driver.get(shared.host.siteRoot);
@@ -5,12 +7,7 @@ module.exports = function () {
 
   // Expect one input with name=keyword, enabled, type=text
   this.Then(/^I should see the keyword search box$/, async () => {
-
-    // wait for the page to load
-    await driver.wait(until.elementsLocated(by.css('input[name=keyword]')), 10000);
-    
-    // check one element exists
-    input_elements = await driver.findElements(by.css('input[name=keyword]'));
+    const input_elements = await getInputElement('name', 'keyword')
     expect(input_elements.length).to.equal(1)
     
     // check the attributes are correct
@@ -23,14 +20,9 @@ module.exports = function () {
     expect(disabled_attribute).to.be.null;
   });
 
-  // Expect one input with placeholder="Enter a location", enabled, type=text
+  // Expect one input with placeholder="Start typing an address", enabled, type=text
   this.Then(/^I should see the location search box$/, async () => {
-
-    // wait for the page to load
-    await driver.wait(until.elementsLocated(by.css('input[placeholder="Start typing an address"]')), 10000);
-
-    // check one element exists
-    input_elements = await driver.findElements(by.css('input[placeholder="Start typing an address"]'));
+    const input_elements = await getInputElement('name', 'address-autosuggest')
     expect(input_elements.length).to.equal(1)
 
     // check the attributes are correct
@@ -45,12 +37,7 @@ module.exports = function () {
 
   // expect more than one category button
   this.Then(/^I should see some category selectors$/, async () => {
-
-    // wait for the page to load
-    await driver.wait(until.elementsLocated(by.css('.category__container > .category__button')), 10000);
-
-    // expect there to be more than 1 category button
-    categories = await driver.findElements(by.css('.category__container > .category__button'));
+    categories = await getInputElement('css', '.category__container > .category__button');
     expect(categories.length).to.be.above(1);
   });
 
