@@ -20,12 +20,6 @@ export default class Service extends Component {
     email: '',
     phoneNumber: '',
 
-    serviceName: '',
-    targetAudiences: '',
-    deliveryMethods: '',
-    serviceReferrals: '',
-    costType: '',
-    costDescription: '',
     serviceDetail: '',
 
     latitude: '',
