@@ -18,7 +18,7 @@ const requestBuilder = searchVars => {
   const limit = addressLatLng.latitude ? '&limit=5000' : '';
 
   return encodeURI(
-    `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}${query}${categoryFilters}${limit}`
+    `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}${query}${categoryFilters}${limit}`,
   );
 };
 
@@ -29,5 +29,5 @@ export {
   STATICFIELDS,
   requestBuilder,
   SERVICE_FIELDS,
-  GH_PAGES_SUFFIX
+  GH_PAGES_SUFFIX,
 };

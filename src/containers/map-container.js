@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default class MapContainer extends Component {
   static propTypes = {
-    serviceProviders: PropTypes.array.isRequired
+    serviceProviders: PropTypes.array.isRequired,
   };
 
   render() {
@@ -16,19 +16,20 @@ export default class MapContainer extends Component {
       serviceProviders.length !== 1
         ? { lat: -41.0, lng: 174.0 }
         : {
-          lat: Number(serviceProviders[0].LATITUDE),
-          lng: Number(serviceProviders[0].LONGITUDE)
-        };
+            lat: Number(serviceProviders[0].LATITUDE),
+            lng: Number(serviceProviders[0].LONGITUDE),
+          };
 
     return (
       <Map center={center} zoom={serviceProviders.length !== 1 ? 5 : 12}>
         <TileLayer
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {serviceProviders.map((record, i) => (
           <ServiceMapMarker key={`marker-${i}`} record={record} />
-        ))};
+        ))}
+        ;
       </Map>
     );
   }

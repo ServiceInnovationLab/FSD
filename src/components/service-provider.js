@@ -8,15 +8,14 @@ import {
   faPhone,
   faMapMarkerAlt,
   faAt,
-  faFolderOpen
+  faFolderOpen,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { stripSpaces } from '../utilities/string';
 
 export default class ServiceProviders extends Component {
   static propTypes = {
-    fsdId: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ])
-      .isRequired,
+    fsdId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     purpose: PropTypes.string,
     address: PropTypes.string,
     classification: PropTypes.string,
@@ -25,7 +24,7 @@ export default class ServiceProviders extends Component {
     website: PropTypes.string,
     email: PropTypes.string,
     phoneNumber: PropTypes.string,
-    hideMoreDetails: PropTypes.bool
+    hideMoreDetails: PropTypes.bool,
   };
 
   render() {
@@ -39,7 +38,7 @@ export default class ServiceProviders extends Component {
       website,
       email,
       phoneNumber,
-      hideMoreDetails
+      hideMoreDetails,
     } = this.props;
 
     return (
@@ -100,7 +99,10 @@ export default class ServiceProviders extends Component {
                   <Icon icon={faMapMarkerAlt} />
                 </div>
                 <div className="icon-prefix__label">
-                  {address} - <a href={`https://www.google.com/maps/place/${address}`}>Directions</a>
+                  {address} -{' '}
+                  <a href={`https://www.google.com/maps/place/${address}`}>
+                    Directions
+                  </a>
                 </div>
               </div>
             )}
