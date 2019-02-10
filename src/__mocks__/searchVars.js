@@ -4,7 +4,7 @@ const searchVars = {
   addressLatLng,
   category: '',
   keyword: '',
-  radius: 0
+  radius: 0,
 };
 
 export default searchVars;

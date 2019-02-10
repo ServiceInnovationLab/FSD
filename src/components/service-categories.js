@@ -5,7 +5,7 @@ import { CategoryContext } from '../contexts/category-context';
 
 export default class ServiceCategories extends Component {
   static propTypes = {
-    doSetCategory: PropTypes.func.isRequired
+    doSetCategory: PropTypes.func.isRequired,
   };
 
   render() {
@@ -23,7 +23,7 @@ export default class ServiceCategories extends Component {
 
               {categories &&
                 categories.map((category, index) => {
-                  let classList = [ 'category__button' ];
+                  let classList = ['category__button'];
 
                   if (selectedCategory === category.name)
                     classList.push('selected');

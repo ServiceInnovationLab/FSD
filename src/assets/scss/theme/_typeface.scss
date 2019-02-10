@@ -1,21 +1,21 @@
 @font-face {
-  src: '../../fonts/FiraSans-Regular' format('ttf');
+  src: "../../fonts/FiraSans-Regular" format("ttf");
   font: {
-    family: 'FiraSans';
+    family: "FiraSans";
     weight: 400;
-  };
+  }
 }
 
 @font-face {
-  src: '../../fonts/FiraSans-Bold' format('ttf');
+  src: "../../fonts/FiraSans-Bold" format("ttf");
   font: {
-    family: 'FiraSans';
+    family: "FiraSans";
     weight: 700;
-  };
+  }
 }
 
-$heading-font: 'FiraSans', arial, sans-serif;
-$body-font: 'FiraSans', arial, sans-serif;
+$heading-font: "FiraSans", arial, sans-serif;
+$body-font: "FiraSans", arial, sans-serif;
 
 $base-font-unit: 16px;
 $default-font-weight: 400;

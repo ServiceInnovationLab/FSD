@@ -9,7 +9,7 @@ export default class Service extends Component {
     serviceReferrals: PropTypes.string,
     costType: PropTypes.string.isRequired,
     costDescription: PropTypes.string,
-    serviceDetail: PropTypes.string
+    serviceDetail: PropTypes.string,
   };
 
   render() {
@@ -20,7 +20,7 @@ export default class Service extends Component {
       serviceReferrals,
       costType,
       costDescription,
-      serviceDetail
+      serviceDetail,
     } = this.props;
 
     return (
