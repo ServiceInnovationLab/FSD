@@ -47,51 +47,6 @@ export default class ServiceProviders extends Component {
           <h2 className="service__name">
             <Link to={`/service/${fsdId}`}>{name}</Link>
           </h2>
-          {email && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faAt} />
-              </div>
-              <a
-                className="icon-prefix__label"
-                href={`mailto:${email}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {email}
-              </a>
-            </div>
-          )}
-          {contactAvailability && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faClock} />
-              </div>
-              <div className="icon-prefix__label">{contactAvailability}</div>
-            </div>
-          )}
-          {phoneNumber && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faPhone} />
-              </div>
-              <a
-                className="icon-prefix__label"
-                href={`tel:${stripSpaces(phoneNumber)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {phoneNumber}
-              </a>
-            </div>
-          )}
-        </header>
-
-        {purpose && (
-          <blockquote className="service__purpose">{purpose}</blockquote>
-        )}
-
-        <footer className="service__footer">
           <address className="service__address">
             {address && (
               <div className="icon-prefix__container">
@@ -121,15 +76,60 @@ export default class ServiceProviders extends Component {
                 </a>
               </div>
             )}
-            {classification && (
+            {contactAvailability && (
               <div className="icon-prefix__container">
                 <div className="icon-prefix__icon">
-                  <Icon icon={faFolderOpen} />
+                  <Icon icon={faClock} />
                 </div>
-                <div className="icon-prefix__label">{classification}</div>
+                <div className="icon-prefix__label">{contactAvailability}</div>
+              </div>
+            )}
+            {email && (
+            <div className="icon-prefix__container">
+              <div className="icon-prefix__icon">
+                <Icon icon={faAt} />
+              </div>
+              <a
+                className="icon-prefix__label"
+                href={`mailto:${email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {email}
+              </a>
+            </div>
+             )}
+            {phoneNumber && (
+              <div className="icon-prefix__container">
+                <div className="icon-prefix__icon">
+                  <Icon icon={faPhone} />
+                </div>
+                <a
+                  className="icon-prefix__label"
+                  href={`tel:${stripSpaces(phoneNumber)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {phoneNumber}
+                </a>
               </div>
             )}
           </address>
+        </header>
+
+        {purpose && (
+          <blockquote className="service__purpose">{purpose}</blockquote>
+        )}
+
+        <footer className="service__footer">
+          {classification && (
+            <div className="icon-prefix__container">
+              <div className="icon-prefix__icon">
+                <Icon icon={faFolderOpen} />
+              </div>
+              <div className="icon-prefix__label">{classification}</div>
+            </div>
+          )}
 
           {hideMoreDetails || (
             <Link className="button" to={`/service/${fsdId}`}>
