@@ -7,7 +7,7 @@ const CategoryContext = React.createContext();
 class CategoryProvider extends Component {
   state = {
     categories: [],
-    selectedCategory: ''
+    selectedCategory: '',
   };
 
   componentDidMount = () => {
@@ -22,7 +22,7 @@ class CategoryProvider extends Component {
 
   setCategory = categoryName => {
     this.setState({
-      selectedCategory: categoryName
+      selectedCategory: categoryName,
     });
   };
 
@@ -35,7 +35,7 @@ class CategoryProvider extends Component {
         value={{
           categories,
           selectedCategory,
-          setCategory: this.setCategory
+          setCategory: this.setCategory,
         }}
       >
         {children}
