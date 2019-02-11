@@ -37,63 +37,63 @@ module.exports = function () {
 
   // expect more than one category button
   this.Then(/^I should see some category selectors$/, async () => {
-    categories = await getInputElement('css', '.category__container > .category__button');
+    const categories = await getInputElement('css', '.category__container > .category__button');
     expect(categories.length).to.be.above(1);
   });
 
-    // expect more the search radius selector widget
-    this.Then(/^I should see the radius selector$/, async () => {
+  // expect more the search radius selector widget
+  this.Then(/^I should see the radius selector$/, async () => {
 
-      // wait for the page to load
-      await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
-  
-      // expect there to be 4 radius buttons
-      categories = await driver.findElements(by.css('input[name="radius"]'));
-      expect(categories.length).to.equal(4);
-    });
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
 
-        // expect more the search radius selector widget
-    this.Then(/^The radius selector should be set to "(\d+)" km radius$/, async (kilometres) => {
+    // expect there to be 4 radius buttons
+    const categories = await driver.findElements(by.css('input[name="radius"]'));
+    expect(categories.length).to.equal(4);
+  });
 
-          // wait for the page to load
-          await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
-      
-          button = await driver.findElement(by.css(`input[name="radius"][value="${kilometres}"]`));
-          expect(button).not.to.be.undefined;
-          expect(await button.getAttribute('checked')).to.equal('true');
-        });
+  // expect more the search radius selector widget
+  this.Then(/^The radius selector should be set to "(\d+)" km radius$/, async (kilometres) => {
 
-    this.Given(/^I enter "([^"]*)" into the "([^"]*)" input$/, async (value, input_name) => {
-      // wait for the page to load
-      await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
-  
-      const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
 
-      input_elements[0].sendKeys(value);
-    });
+    const button = await driver.findElement(by.css(`input[name="radius"][value="${kilometres}"]`));
+    expect(button).not.to.be.undefined;
+    expect(await button.getAttribute('checked')).to.equal('true');
+  });
 
-    this.Given(/^I click on "([^"]*)"$/, async (text) => {
-      const element = await helpers.getFirstElementContainingText('button', text);
-      element.click();
-    });
+  this.Given(/^I enter "([^"]*)" into the "([^"]*)" input$/, async (value, input_name) => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
 
-    this.Then(/^I see a list of service providers$/, async () => {
-      await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
-      const elements = await driver.findElements(by.css('section .service'));
+    const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
 
-      // expect some results
-      expect(elements.length).to.be.above(1);
-    });
+    input_elements[0].sendKeys(value);
+  });
 
-    this.Then(/^I click on the first address suggestion$/, async() => {
-      await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
-      const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
-      elements[0].click();
-    });
+  this.Given(/^I click on "([^"]*)"$/, async (text) => {
+    const element = await helpers.getFirstElementContainingText('button', text);
+    element.click();
+  });
 
-    this.Then(/^The first suggestion should be "([^"]*)"$/, async (address_text) => {
-      await driver.wait(
-        until.elementsLocated(
-          by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`)), 10000);
-    });
+  this.Then(/^I see a list of service providers$/, async () => {
+    await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
+    const elements = await driver.findElements(by.css('section .service'));
+
+    // expect some results
+    expect(elements.length).to.be.above(1);
+  });
+
+  this.Then(/^I click on the first address suggestion$/, async() => {
+    await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
+    const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
+    elements[0].click();
+  });
+
+  this.Then(/^The first suggestion should be "([^"]*)"$/, async (address_text) => {
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`)), 10000);
+  });
 }
