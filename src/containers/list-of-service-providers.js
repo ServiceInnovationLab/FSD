@@ -10,10 +10,6 @@ export default class ListOfServiceProviders extends Component {
 
   render() {
     const {
-      // history: {
-      // location,
-      //   push
-      // },
       serviceProviders,
     } = this.props;
 
