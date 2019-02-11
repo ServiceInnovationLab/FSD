@@ -90,4 +90,10 @@ module.exports = function () {
       const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
       elements[0].click();
     });
+
+    this.Then(/^The first suggestion should be "([^"]*)"$/, async (address_text) => {
+      await driver.wait(
+        until.elementsLocated(
+          by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`)), 10000);
+    });
 }
