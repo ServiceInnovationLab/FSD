@@ -10,11 +10,14 @@ import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
 
+const DEFAULT_SEARCH_RADIUS = '25';
+
 export default class Index extends Component {
+
   state = {
     serviceProviders: [],
     showMap: false,
-    autoSuggestValue: '',
+    address: ''
   };
   componentDidMount() {
     const { search } = this.props.location;
@@ -26,10 +29,7 @@ export default class Index extends Component {
       this.doLoadResults(search);
     }
   }
-  setAutoSuggestInitialValue = region => {
-    this.setState({ autoSuggestValue: region });
-  };
-
+  
   doSetCategory = categoryName => {
     const {
       categoryContext: { selectedCategory, setCategory },
@@ -83,10 +83,10 @@ export default class Index extends Component {
       categoryContext: { setCategory },
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { category, region } = searchVars;
+    const { category = '', region: address = '', keyword = '', radius = DEFAULT_SEARCH_RADIUS} = searchVars
 
-    if (category) setCategory(category);
-    if (region) this.setAutoSuggestInitialValue(region);
+    if(category) setCategory(category)
+    this.setState({address, keyword, radius})
 
     loadResults(searchVars).then(res => {
       this.setState({ serviceProviders: res });
@@ -105,18 +105,18 @@ export default class Index extends Component {
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
   autoSuggestOnChange(newValue) {
     this.setState({
-      autoSuggestValue: newValue,
+      address: newValue
     });
   }
 
   render() {
-    const { serviceProviders, showMap, autoSuggestValue } = this.state;
+    const { serviceProviders, showMap, address, keyword, radius} = this.state;
     const { history, location } = this.props;
 
     const searchVars = queryString.parse(location.search);
     const showExtraButtons = Boolean(
-      (serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0],
-    );
+      (serviceProviders && serviceProviders[0])
+      || Object.keys(searchVars)[0]);
 
     return (
       <Page>
@@ -126,9 +126,9 @@ export default class Index extends Component {
             updateSearchParams={this.updateSearchParams.bind(this)}
             doResetSearch={this.doResetSearch}
             autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
-            autoSuggestValue={autoSuggestValue}
+            address={address}
             showExtraButtons={showExtraButtons}
-            initialValues={{ keyword: searchVars.keyword }}
+            initialValues={{keyword, radius}}
           />
           {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>

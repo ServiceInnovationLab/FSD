@@ -1,33 +1,33 @@
 import Autosuggest from 'react-autosuggest';
-import axios from 'axios';
 import React from 'react';
-import queryString from 'query-string';
-
-const ADDRESS_FINDER_KEY = process.env.REACT_APP_ADDRESS_FINDER_API_KEY;
-
-const getSuggestions = userInput => {
-  const cleansedInput = userInput.trim().toLowerCase();
-  const inputLength = cleansedInput.length;
-
-  if (inputLength === 0) return [];
-
-  const query = queryString.stringify({
-    key: ADDRESS_FINDER_KEY,
-    q: cleansedInput,
-    format: 'json',
-    strict: 2,
-  });
-
-  const url = `https://api.addressfinder.io/api/nz/location?${query}`;
-
-  return axios.get(url).then(response => {
-    return response.data.completions;
-  });
-};
+import { getSuggestions, getAddressMetadata, getLocationMetadata } from '../utilities/addressfinder';
 
 const getSuggestionValue = suggestion => suggestion.a;
 
 const renderSuggestion = suggestion => <div>{suggestion.a}</div>;
+
+// Represents the parts of a region or street address we are interested in for
+// this app - specifically the properties which get included in the URL query
+// string.
+//
+// The default empty string properties ensure that when an instance is used to
+// update the search params in the URL any existing values are removed.
+export class SearchLocation {
+  static nullLocation = new SearchLocation();
+
+  latitude = '';
+  longitude = ''; 
+  region = '';
+  address = '';
+
+  constructor(properties = {}) {
+    Object.assign(this, properties);
+  }
+
+  // an empty location instance, suitable for clearing an existing location from
+  // the URL
+  static get None() { return SearchLocation.nullLocation; }
+}
 
 export default class Example extends React.Component {
   constructor() {
@@ -37,27 +37,30 @@ export default class Example extends React.Component {
     };
   }
 
-  onChange(event, { newValue }) {
-    this.props.autoSuggestOnChange(newValue);
+  onChange (event, { newValue }) {
+    if(newValue === '') {
+      const {updateSearchParams} = this.props;
+      updateSearchParams(SearchLocation.None);
+    }
+
+    this.props.autoSuggestOnChange(newValue)
+  };
+
+  onSuggestionSelected = async (event, {suggestion}) => {
+    const {updateSearchParams} = this.props
+
+    if (suggestion.type === 'location') {
+      const result = await getLocationMetadata(suggestion.pxid);
+      updateSearchParams(new SearchLocation({latitude: result.y, longitude: result.x, region: result.a}));
+    } else {
+      const result = await getAddressMetadata(suggestion.pxid);
+      updateSearchParams(new SearchLocation({latitude: result.y, longitude: result.x, address: result.a }));
+    }
   }
 
-  onSuggestionSelected = (evt, { suggestion: { pxid, a } }) => {
-    const query = queryString.stringify({
-      key: ADDRESS_FINDER_KEY,
-      format: 'json',
-      pxid: pxid,
-    });
-
-    const url = `https://api.addressfinder.io/api/nz/location/info?${query}`;
-
-    const { updateSearchParams } = this.props;
-    return axios.get(url).then(res => {
-      const { x: lng, y: lat } = res.data;
-      updateSearchParams({ latitude: lat, longitude: lng, region: a });
-    });
-  };
   onSuggestionsFetchRequested = ({ value }) => {
-    getSuggestions(value).then(suggestions => this.setState({ suggestions }));
+    getSuggestions(value)
+      .then(suggestions => this.setState({suggestions}))
   };
 
   onSuggestionsClearRequested = () => {
@@ -68,11 +71,12 @@ export default class Example extends React.Component {
 
   render() {
     const { suggestions } = this.state;
-    const { autoSuggestValue } = this.props;
+    const {address} = this.props
     const inputProps = {
       placeholder: 'Start typing an address',
-      value: autoSuggestValue,
+      value: address,
       onChange: this.onChange.bind(this),
+      name: 'address-autosuggest'
     };
     return (
       <Autosuggest

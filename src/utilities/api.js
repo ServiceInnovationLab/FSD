@@ -21,7 +21,7 @@ const loadCategories = () => {
 };
 
 const loadResults = searchVars => {
-  const { latitude, longitude, category, keyword, radius = 50000 } = searchVars;
+  const { latitude, longitude, category, keyword, radius = '25' } = searchVars;
 
   if (!category && !keyword && (!latitude || !longitude)) {
     return new Promise(resolve => {
@@ -29,14 +29,16 @@ const loadResults = searchVars => {
     });
   }
 
+  let parsedRadius = Number(radius) * 1000;
+  
   return axios
     .get(requestBuilder(searchVars))
     .then(response => {
       if (latitude !== undefined) {
         return findNearMe(
           response.data.result.records,
-          { latitude, longitude },
-          radius > 50000 ? 100000 : radius,
+          {latitude, longitude},
+          parsedRadius
         );
       }
       return response.data.result.records;
