@@ -1,31 +1,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from 'react-accessible-accordion';
 
 export default class Service extends Component {
   static propTypes = {
-    serviceName: PropTypes.string,
-    targetAudiences: PropTypes.string,
-    deliveryMethods: PropTypes.string,
-    serviceReferrals: PropTypes.string,
     costType: PropTypes.string.isRequired,
     costDescription: PropTypes.string,
+    deliveryMethods: PropTypes.string,
+    expanded: PropTypes.bool,
+    serviceReferrals: PropTypes.string,
     serviceDetail: PropTypes.string,
+    serviceName: PropTypes.string,
+    targetAudiences: PropTypes.string,
+
   };
 
   render() {
     const {
-      serviceName,
-      targetAudiences,
-      deliveryMethods,
-      serviceReferrals,
       costType,
       costDescription,
+      deliveryMethods,
+      expanded,
+      targetAudiences,
+      serviceName,
+      serviceReferrals,
       serviceDetail,
     } = this.props;
 
     return (
-      <div>
-        <h3>{serviceName}</h3>
+    <AccordionItem expanded={expanded}>
+      <AccordionItemTitle>
+        <h3 className=" u-position-relative u-margin-bottom-s">
+          {serviceName}
+          <div className="accordion__arrow" role="presentation" />
+        </h3>
+      </AccordionItemTitle>
+      <AccordionItemBody>
         <ul>
           {targetAudiences && (
             <li>
@@ -49,7 +63,8 @@ export default class Service extends Component {
           </li>
         </ul>
         {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
-      </div>
+      </AccordionItemBody>
+    </AccordionItem>
     );
   }
 }
