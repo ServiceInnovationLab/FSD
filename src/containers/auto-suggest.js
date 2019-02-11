@@ -16,7 +16,7 @@ export class SearchLocation {
   static nullLocation = new SearchLocation();
 
   latitude = '';
-  longitude = ''; 
+  longitude = '';
   region = '';
   address = '';
 
@@ -26,7 +26,9 @@ export class SearchLocation {
 
   // an empty location instance, suitable for clearing an existing location from
   // the URL
-  static get None() { return SearchLocation.nullLocation; }
+  static get None() {
+    return SearchLocation.nullLocation;
+  }
 }
 
 export default class Example extends React.Component {
@@ -37,30 +39,29 @@ export default class Example extends React.Component {
     };
   }
 
-  onChange (event, { newValue }) {
-    if(newValue === '') {
-      const {updateSearchParams} = this.props;
+  onChange(event, { newValue }) {
+    if (newValue === '') {
+      const { updateSearchParams } = this.props;
       updateSearchParams(SearchLocation.None);
     }
 
-    this.props.autoSuggestOnChange(newValue)
-  };
+    this.props.autoSuggestOnChange(newValue);
+  }
 
-  onSuggestionSelected = async (event, {suggestion}) => {
-    const {updateSearchParams} = this.props
+  onSuggestionSelected = async (event, { suggestion }) => {
+    const { updateSearchParams } = this.props;
 
     if (suggestion.type === 'location') {
       const result = await getLocationMetadata(suggestion.pxid);
-      updateSearchParams(new SearchLocation({latitude: result.y, longitude: result.x, region: result.a}));
+      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, region: result.a }));
     } else {
       const result = await getAddressMetadata(suggestion.pxid);
-      updateSearchParams(new SearchLocation({latitude: result.y, longitude: result.x, address: result.a }));
+      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, address: result.a }));
     }
-  }
+  };
 
   onSuggestionsFetchRequested = ({ value }) => {
-    getSuggestions(value)
-      .then(suggestions => this.setState({suggestions}))
+    getSuggestions(value).then(suggestions => this.setState({ suggestions }));
   };
 
   onSuggestionsClearRequested = () => {
@@ -71,12 +72,12 @@ export default class Example extends React.Component {
 
   render() {
     const { suggestions } = this.state;
-    const {address} = this.props
+    const { address } = this.props;
     const inputProps = {
       placeholder: 'Start typing an address',
       value: address,
       onChange: this.onChange.bind(this),
-      name: 'address-autosuggest'
+      name: 'address-autosuggest',
     };
     return (
       <Autosuggest
