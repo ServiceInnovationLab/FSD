@@ -6,7 +6,7 @@ import Page from '../containers/page';
 import ServiceProvider from '../components/service-provider';
 import ServiceDetails from '../components/service-details';
 import MapContainer from '../containers/map-container';
-import {Accordion} from 'react-accessible-accordion';
+import { Accordion } from 'react-accessible-accordion';
 import { loadService } from '../utilities/api';
 
 export default class Service extends Component {
@@ -33,7 +33,7 @@ export default class Service extends Component {
 
     loadService(id).then(args => {
       const { provider, services } = args;
-      console.log(provider, services, 'services')
+      console.log(provider, services, 'services');
 
       this.setState({
         loading: false,
@@ -77,18 +77,11 @@ export default class Service extends Component {
     } = this.state;
 
     const providerMap =
-      latitude && longitude ? (
-        <MapContainer
-          serviceProviders={[{ LATITUDE: latitude, LONGITUDE: longitude }]}
-        />
-      ) : null;
+      latitude && longitude ? <MapContainer serviceProviders={[{ LATITUDE: latitude, LONGITUDE: longitude }]} /> : null;
     return (
       <Page className="service__page">
         <header>
-          <button
-            className="icon-prefix__container button back-button"
-            onClick={goBack}
-          >
+          <button className="icon-prefix__container button back-button" onClick={goBack}>
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
@@ -110,20 +103,21 @@ export default class Service extends Component {
                 hideMoreDetails={true}
               />
               <Accordion>
-              {services.map((service, i) => {
-                return(<ServiceDetails
-                  expanded={i === 0}
-                  key={i}
-                  serviceName={service.SERVICE_NAME}
-                  targetAudiences={service.SERVICE_TARGET_AUDIENCES}
-                  deliveryMethods={service.DELIVERY_METHODS}
-                  serviceReferrals={service.SERVICE_REFERRALS}
-                  costType={service.COST_TYPE}
-                  costDescription={service.COST_DESCRIPTION}
-                  serviceDetail={service.SERVICE_DETAIL}
-                />)
-              }
-              )}
+                {services.map((service, i) => {
+                  return (
+                    <ServiceDetails
+                      expanded={i === 0}
+                      key={i}
+                      serviceName={service.SERVICE_NAME}
+                      targetAudiences={service.SERVICE_TARGET_AUDIENCES}
+                      deliveryMethods={service.DELIVERY_METHODS}
+                      serviceReferrals={service.SERVICE_REFERRALS}
+                      costType={service.COST_TYPE}
+                      costDescription={service.COST_DESCRIPTION}
+                      serviceDetail={service.SERVICE_DETAIL}
+                    />
+                  );
+                })}
               </Accordion>
               {providerMap}
             </Fragment>
@@ -134,11 +128,11 @@ export default class Service extends Component {
   }
 }
 
-function ensureUnique (services) {
-  let uniqueServiceIds = []
+function ensureUnique(services) {
+  let uniqueServiceIds = [];
   return services.filter(service => {
-    if(uniqueServiceIds.includes(service['SERVICE_NAME'])) return false
-    uniqueServiceIds.push(service['SERVICE_NAME'])
-    return service
-  })
+    if (uniqueServiceIds.includes(service['SERVICE_NAME'])) return false;
+    uniqueServiceIds.push(service['SERVICE_NAME']);
+    return service;
+  });
 }
