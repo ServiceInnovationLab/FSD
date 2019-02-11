@@ -3,7 +3,7 @@ import {
   API_PATH,
   categories,
   STATICFIELDS,
-  requestBuilder
+  requestBuilder,
 } from '../url';
 import searchVars from '../../__mocks__/searchVars';
 
@@ -47,7 +47,7 @@ describe('url.js', () => {
     it('is defined correctly', () => {
       expect(STATICFIELDS).toBeDefined();
       expect(STATICFIELDS).toBe(
-        'FSD_ID,PROVIDER_CLASSIFICATION,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,PROVIDER_WEBSITE_1'
+        'FSD_ID,PROVIDER_CLASSIFICATION,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,PROVIDER_WEBSITE_1',
       );
     });
   });
@@ -56,22 +56,22 @@ describe('url.js', () => {
     let searchVarsClone = { ...searchVars };
     const categoryExamples = {
       none: null,
-      valid: 'dogs'
+      valid: 'dogs',
     };
     const keywords = {
       none: null,
       tooShort: 'aa',
-      valid: 'aaa'
+      valid: 'aaa',
     };
     const addressLatLngs = {
       none: {
         latitude: null,
-        longitude: null
+        longitude: null,
       },
       valid: {
         latitude: 1,
-        longitude: 1
-      }
+        longitude: 1,
+      },
     };
 
     it('is defined correctly', () => {
@@ -88,8 +88,8 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`,
+        ),
       );
     });
 
@@ -100,8 +100,8 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`,
+        ),
       );
     });
 
@@ -112,8 +112,10 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${searchVarsClone.keyword}`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
+            searchVarsClone.keyword
+          }`,
+        ),
       );
     });
 
@@ -124,8 +126,10 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${searchVarsClone.keyword}`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
+            searchVarsClone.keyword
+          }`,
+        ),
       );
     });
 
@@ -136,10 +140,10 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${searchVarsClone.keyword}${categories(
-            searchVarsClone.category
-          )}`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
+            searchVarsClone.keyword
+          }${categories(searchVarsClone.category)}`,
+        ),
       );
     });
 
@@ -150,8 +154,10 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${searchVarsClone.keyword}`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
+            searchVarsClone.keyword
+          }`,
+        ),
       );
     });
 
@@ -162,8 +168,10 @@ describe('url.js', () => {
 
       expect(requestBuilder(searchVarsClone)).toBe(
         encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${searchVarsClone.keyword}&limit=5000`
-        )
+          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
+            searchVarsClone.keyword
+          }&limit=5000`,
+        ),
       );
     });
   });

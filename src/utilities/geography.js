@@ -12,16 +12,16 @@ const findNearMe = (data, addressLatLng, radius) => {
       { latitude, longitude },
       {
         latitude: currentLat,
-        longitude: currentLng
+        longitude: currentLng,
       },
-      radius
+      radius,
     );
     filteredData[point].DISTANCE = getDistance(
       { latitude, longitude },
       {
         latitude: currentLat,
-        longitude: currentLng
-      }
+        longitude: currentLng,
+      },
     );
   }
 

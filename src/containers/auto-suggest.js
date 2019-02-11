@@ -4,11 +4,7 @@ import { getSuggestions, getAddressMetadata, getLocationMetadata } from '../util
 
 const getSuggestionValue = suggestion => suggestion.a;
 
-const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.a}
-  </div>
-);
+const renderSuggestion = suggestion => <div>{suggestion.a}</div>;
 
 // Represents the parts of a region or street address we are interested in for
 // this app - specifically the properties which get included in the URL query
@@ -37,7 +33,7 @@ export default class Example extends React.Component {
   constructor() {
     super();
     this.state = {
-      suggestions: []
+      suggestions: [],
     };
   }
 
@@ -69,7 +65,7 @@ export default class Example extends React.Component {
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   };
 

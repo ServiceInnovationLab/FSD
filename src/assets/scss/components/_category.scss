@@ -6,7 +6,7 @@
   &__button {
     &.selected {
       background-color: $primary-color;
-      color: rgba($white, .9);
+      color: rgba($white, 0.9);
     }
   }
 }

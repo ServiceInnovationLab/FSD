@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
-import AutoSuggest from '../containers/auto-suggest'
+import AutoSuggest from '../containers/auto-suggest';
 
 const radiusOptions = ['10', '25', '50', '100']
 export default class SearchForm extends Component {
   static propTypes = {
-    autoSuggestOnChange: PropTypes.func.isRequired, 
+    autoSuggestOnChange: PropTypes.func.isRequired,
     autoSuggestValue: PropTypes.string.isRequired,
     doResetSearch: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
     updateSearchParams: PropTypes.func.isRequired,
-    showExtraButtons: PropTypes.bool.isRequired
+    showExtraButtons: PropTypes.bool.isRequired,
   };
 
   onSubmit (values) {
@@ -24,7 +24,15 @@ export default class SearchForm extends Component {
   }
   
   render() {
-    const { initialValues, updateSearchParams, doResetSearch, showExtraButtons, autoSuggestOnChange, address } = this.props
+    const { 
+      initialValues, 
+      updateSearchParams, 
+      doResetSearch, 
+      showExtraButtons, 
+      autoSuggestOnChange, 
+      address 
+    } = this.props
+    
     return (
       <Form
         onSubmit={this.onSubmit.bind(this)}
@@ -37,7 +45,6 @@ export default class SearchForm extends Component {
                 component='input'
                 type='text'
                 placeholder='Enter topic or organisations'
-                onBlur={this.onBlur}
               />
             </div>
             <div>
@@ -66,18 +73,18 @@ export default class SearchForm extends Component {
             <button type='submit' disabled={submitting || pristine}>
               Search
             </button>
-            { showExtraButtons
-              ? <button
-                  type='button'
-                  onClick={() => doResetSearch(form)}
-                  disabled={submitting}
-                >
-                  Reset Search
-                </button>
-              : null
-            }
+            {showExtraButtons ? (
+              <button
+                type="button"
+                onClick={() => doResetSearch(form)}
+                disabled={submitting}
+              >
+                Reset Search
+              </button>
+            ) : null}
           </form>
         )}
       />
     );
-  }}
+  }
+}

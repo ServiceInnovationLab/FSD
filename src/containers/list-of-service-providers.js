@@ -5,7 +5,7 @@ import ServiceProvider from '../components/service-provider';
 
 export default class ListOfServiceProviders extends Component {
   static propTypes = {
-    serviceProviders: PropTypes.array.isRequired
+    serviceProviders: PropTypes.array.isRequired,
   };
 
   render() {
@@ -14,7 +14,7 @@ export default class ListOfServiceProviders extends Component {
       // location,
       //   push
       // },
-      serviceProviders
+      serviceProviders,
     } = this.props;
 
     if (serviceProviders.length > 0) {

@@ -8,7 +8,7 @@ import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
-import SearchForm from '../components/search-form'
+import SearchForm from '../components/search-form';
 
 const DEFAULT_SEARCH_RADIUS = '25';
 
@@ -17,50 +17,60 @@ export default class Index extends Component {
   state = {
     serviceProviders: [],
     showMap: false,
-    showExtraButtons: false,
     address: ''
   };
-  componentDidMount () {
-    const { search } = this.props.location
-    this.doLoadResults(search)
+  componentDidMount() {
+    const { search } = this.props.location;
+    this.doLoadResults(search);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.location.search !== this.props.location.search) {
-      const { search } = this.props.location
-      this.doLoadResults(search)
+      const { search } = this.props.location;
+      this.doLoadResults(search);
     }
   }
   
   doSetCategory = categoryName => {
-    const { categoryContext: { selectedCategory, setCategory } } = this.props;
+    const {
+      categoryContext: { selectedCategory, setCategory },
+    } = this.props;
     if (selectedCategory === categoryName) {
-      setCategory()
-      this.updateSearchParams({category: ''})
-    }
-    else this.updateSearchParams({category: categoryName})
+      setCategory();
+      this.updateSearchParams({ category: '' });
+    } else this.updateSearchParams({ category: categoryName });
   };
 
-  doResetSearch = (form) => {
-    const { history: { push, location } } = this.props;
-    const { categoryContext: { setCategory } } = this.props;
+  doResetSearch = form => {
+    const {
+      history: { push, location },
+    } = this.props;
+    const {
+      categoryContext: { setCategory },
+    } = this.props;
 
-    form.reset()
+    form.reset();
     push(location.pathname);
-    setCategory()
-    this.setState({showMap: false, serviceProviders: [], autoSuggestValue: ''})
-  }
+    setCategory();
+    this.setState({
+      showMap: false,
+      serviceProviders: [],
+      autoSuggestValue: '',
+    });
+  };
 
   /* Accepts a new query parameter and combines it with existing parameters from the URL query string */
-  updateSearchParams (newQuery) {
-    const { history: { push, location }} = this.props;
+  updateSearchParams(newQuery) {
+    const {
+      history: { push, location },
+    } = this.props;
 
     const searchVars = queryString.parse(location.search);
     const newSearchVars = Object.assign({}, searchVars, newQuery);
 
     // Remove query parameters where no value is set (like `keyword=`)
-    for(var property in newSearchVars) {
-      if(newSearchVars[property] === '') {
-        delete newSearchVars[property]
+    for (var property in newSearchVars) {
+      if (newSearchVars[property] === '') {
+        delete newSearchVars[property];
       }
     }
 
@@ -69,7 +79,9 @@ export default class Index extends Component {
     push(`${location.pathname}?${newSearchQuery}`);
   }
   doLoadResults(locationQuery) {
-    const { categoryContext: { setCategory } } = this.props;
+    const {
+      categoryContext: { setCategory },
+    } = this.props;
     const searchVars = queryString.parse(locationQuery);
     const { category = '', region: address = '', keyword = '', radius = DEFAULT_SEARCH_RADIUS} = searchVars
 
@@ -77,26 +89,25 @@ export default class Index extends Component {
     this.setState({address, keyword, radius})
 
     loadResults(searchVars).then(res => {
-      this.setState({ serviceProviders: res })
-      }
-    );
+      this.setState({ serviceProviders: res });
+    });
   }
   showToggleMapButton(showExtraButtons) {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-        <button onClick={() => this.toggleShowMap()}>
-          {' '}
-          {showListOrMapText(showMap)}
-        </button>
+      <button onClick={() => this.toggleShowMap()}>
+        {' '}
+        {showListOrMapText(showMap)}
+      </button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
-  autoSuggestOnChange (newValue) {
+  autoSuggestOnChange(newValue) {
     this.setState({
       address: newValue
     });
-  };
+  }
 
   render() {
     const { serviceProviders, showMap, address, keyword, radius} = this.state;
@@ -105,7 +116,8 @@ export default class Index extends Component {
     const searchVars = queryString.parse(location.search);
     const showExtraButtons = Boolean(
       (serviceProviders && serviceProviders[0])
-      || Object.keys(searchVars)[0])
+      || Object.keys(searchVars)[0]);
+
     return (
       <Page>
         <SearchContainer>

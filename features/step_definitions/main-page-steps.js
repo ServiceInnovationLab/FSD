@@ -11,12 +11,12 @@ module.exports = function () {
     expect(input_elements.length).to.equal(1)
     
     // check the attributes are correct
-    const keyword_box = input_elements[0]
+    const keyword_box = input_elements[0];
 
-    const type_attribute = await keyword_box.getAttribute('type')
+    const type_attribute = await keyword_box.getAttribute('type');
     expect(type_attribute).to.equal('text');
 
-    const disabled_attribute = await keyword_box.getAttribute('disabled')
+    const disabled_attribute = await keyword_box.getAttribute('disabled');
     expect(disabled_attribute).to.be.null;
   });
 
@@ -26,12 +26,12 @@ module.exports = function () {
     expect(input_elements.length).to.equal(1)
 
     // check the attributes are correct
-    const location_box = input_elements[0]
-    
-    const type_attribute = await location_box.getAttribute('type')
+    const location_box = input_elements[0];
+
+    const type_attribute = await location_box.getAttribute('type');
     expect(type_attribute).to.equal('text');
 
-    const disabled_attribute = await location_box.getAttribute('disabled')
+    const disabled_attribute = await location_box.getAttribute('disabled');
     expect(disabled_attribute).to.be.null;
   });
 
