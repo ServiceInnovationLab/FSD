@@ -40,6 +40,7 @@ export default class Service extends Component {
         </h3>
       </AccordionItemTitle>
       <AccordionItemBody>
+        {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
         <ul>
           {targetAudiences && (
             <li>
@@ -62,7 +63,6 @@ export default class Service extends Component {
             {costDescription && <span>{costDescription}</span>}
           </li>
         </ul>
-        {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
       </AccordionItemBody>
     </AccordionItem>
     );

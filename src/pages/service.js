@@ -33,7 +33,6 @@ export default class Service extends Component {
 
     loadService(id).then(args => {
       const { provider, services } = args;
-      console.log(provider, services, 'services')
 
       this.setState({
         loading: false,
