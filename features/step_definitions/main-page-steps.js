@@ -52,6 +52,17 @@ module.exports = function () {
       expect(categories.length).to.equal(4);
     });
 
+        // expect more the search radius selector widget
+    this.Then(/^The radius selector should be set to "(\d+)" km radius$/, async (kilometres) => {
+
+          // wait for the page to load
+          await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
+      
+          button = await driver.findElement(by.css(`input[name="radius"][value="${kilometres}"]`));
+          expect(button).not.to.be.undefined;
+          expect(await button.getAttribute('checked')).to.equal('true');
+        });
+
     this.Given(/^I enter "([^"]*)" into the "([^"]*)" input$/, async (value, input_name) => {
       // wait for the page to load
       await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);

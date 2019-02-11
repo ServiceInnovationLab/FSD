@@ -10,13 +10,15 @@ import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form'
 
+const DEFAULT_SEARCH_RADIUS = '25';
+
 export default class Index extends Component {
+
   state = {
     serviceProviders: [],
     showMap: false,
     showExtraButtons: false,
     address: ''
-  
   };
   componentDidMount () {
     const { search } = this.props.location
@@ -69,7 +71,7 @@ export default class Index extends Component {
   doLoadResults(locationQuery) {
     const { categoryContext: { setCategory } } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { category = '', region: address = '', keyword = '', radius = ''} = searchVars
+    const { category = '', region: address = '', keyword = '', radius = DEFAULT_SEARCH_RADIUS} = searchVars
 
     if(category) setCategory(category)
     this.setState({address, keyword, radius})
