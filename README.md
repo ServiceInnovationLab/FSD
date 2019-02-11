@@ -35,19 +35,29 @@ Slack: LabPlus-team #family-searchinator
 
 ## Development
 
-to install dependencies, cd into folder and run
+Make a copy of the example environment file containing some important settings
+```
+cp example.env .env
+```
+
+To install dependencies, cd into folder and run
 ```
 npm install
 ```
 
-to run a development server:
+To run a development server:
 ```
 npm start
 ```
 
 ### Major Dependencies
+- React (^16.6.3)
+
 
 ### Quality assurance tools
+
+- jest
+- cucumber
 
 ## Deployment
 
