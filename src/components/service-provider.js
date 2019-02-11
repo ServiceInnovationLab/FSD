@@ -127,7 +127,11 @@ export default class ServiceProviders extends Component {
               <div className="icon-prefix__icon">
                 <Icon icon={faFolderOpen} />
               </div>
-              <div className="icon-prefix__label">{classification}</div>
+              <div className="icon-prefix__label">
+                <a href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}>
+                {classification}
+                </a>
+              </div>
             </div>
           )}
 
