@@ -6,7 +6,7 @@ import Page from '../containers/page';
 import ServiceProvider from '../components/service-provider';
 import ServiceDetails from '../components/service-details';
 import MapContainer from '../containers/map-container';
-
+import {Accordion} from 'react-accessible-accordion';
 import { loadService } from '../utilities/api';
 
 export default class Service extends Component {
@@ -33,6 +33,7 @@ export default class Service extends Component {
 
     loadService(id).then(args => {
       const { provider, services } = args;
+      console.log(provider, services, 'services')
 
       this.setState({
         loading: false,
@@ -44,10 +45,7 @@ export default class Service extends Component {
         website: provider.PROVIDER_WEBSITE_1,
         email: provider.PUBLISHED_CONTACT_EMAIL_1,
         phoneNumber: provider.PUBLISHED_PHONE_1,
-
-        //TODO this is limited to only showing one service until the page design
-        //is updated
-        services: services.slice(0, 1),
+        services: ensureUnique(services),
 
         latitude: provider.LATITUDE,
         longitude: provider.LONGITUDE,
@@ -72,7 +70,6 @@ export default class Service extends Component {
       website,
       email,
       phoneNumber,
-
       services,
 
       latitude,
@@ -112,8 +109,10 @@ export default class Service extends Component {
                 phoneNumber={phoneNumber}
                 hideMoreDetails={true}
               />
-              {services.map((service, i) => (
-                <ServiceDetails
+              <Accordion>
+              {services.map((service, i) => {
+                return(<ServiceDetails
+                  expanded={i === 0}
                   key={i}
                   serviceName={service.SERVICE_NAME}
                   targetAudiences={service.SERVICE_TARGET_AUDIENCES}
@@ -122,8 +121,10 @@ export default class Service extends Component {
                   costType={service.COST_TYPE}
                   costDescription={service.COST_DESCRIPTION}
                   serviceDetail={service.SERVICE_DETAIL}
-                />
-              ))}
+                />)
+              }
+              )}
+              </Accordion>
               {providerMap}
             </Fragment>
           )}
@@ -131,4 +132,13 @@ export default class Service extends Component {
       </Page>
     );
   }
+}
+
+function ensureUnique (services) {
+  let uniqueServiceIds = []
+  return services.filter(service => {
+    if(uniqueServiceIds.includes(service['SERVICE_NAME'])) return false
+    uniqueServiceIds.push(service['SERVICE_NAME'])
+    return service
+  })
 }
