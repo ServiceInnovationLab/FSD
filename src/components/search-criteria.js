@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class ServiceCategories extends Component {
+export default class SearchCriteria extends Component {
   render() {
     const {keyword, address, category} = this.props
     const parsedKeyword = keyword && firstLetterAsCap(keyword)
