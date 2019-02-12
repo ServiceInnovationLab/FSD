@@ -7,7 +7,7 @@ const radiusOptions = ['10', '25', '50', '100'];
 export default class SearchForm extends Component {
   static propTypes = {
     autoSuggestOnChange: PropTypes.func.isRequired,
-    autoSuggestValue: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     doResetSearch: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
     updateSearchParams: PropTypes.func.isRequired,

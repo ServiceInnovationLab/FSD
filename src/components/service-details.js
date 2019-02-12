@@ -27,39 +27,41 @@ export default class Service extends Component {
     } = this.props;
 
     return (
-      <AccordionItem expanded={expanded}>
-        <AccordionItemTitle>
-          <h3 className=" u-position-relative u-margin-bottom-s">
-            {serviceName}
-            <div className="accordion__arrow" role="presentation" />
-          </h3>
-        </AccordionItemTitle>
-        <AccordionItemBody>
-          <ul>
-            {targetAudiences && (
-              <li>
-                <b>Target Audience:</b> {targetAudiences}
-              </li>
-            )}
-            {deliveryMethods && (
-              <li>
-                <b>Delivery Methods:</b> {deliveryMethods}
-              </li>
-            )}
-            {serviceReferrals && (
-              <li>
-                <b>Service Referrals:</b> {serviceReferrals}
-              </li>
-            )}
+    <AccordionItem expanded={expanded}>
+      <AccordionItemTitle>
+        <h3 className=" u-position-relative u-margin-bottom-s">
+          {serviceName}
+          <div className="accordion__arrow" role="presentation" />
+        </h3>
+      </AccordionItemTitle>
+      <AccordionItemBody>
+        {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
+        <ul>
+          {targetAudiences && (
+            <li>
+              <b>Target Audience:</b> {targetAudiences}
+            </li>
+          )}
+          {deliveryMethods && (
+            <li>
+              <b>Delivery Methods:</b> {deliveryMethods}
+            </li>
+          )}
+          {serviceReferrals && (
             <li>
               <b>Cost:</b>
               {costType && <span> {costType}. </span>}
               {costDescription && <span>{costDescription}</span>}
             </li>
-          </ul>
-          {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
-        </AccordionItemBody>
-      </AccordionItem>
+          )}
+          <li>
+            <b>Cost:</b>
+            {costType && <span> {costType}. </span>}
+            {costDescription && <span>{costDescription}</span>}
+          </li>
+        </ul>
+      </AccordionItemBody>
+    </AccordionItem>
     );
   }
 }
