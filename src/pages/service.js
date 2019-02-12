@@ -76,7 +76,18 @@ export default class Service extends Component {
     } = this.state;
 
     const providerMap =
-      latitude && longitude ? <MapContainer serviceProviders={[{ LATITUDE: latitude, LONGITUDE: longitude }]} /> : null;
+      latitude && longitude ? (
+        <MapContainer
+          serviceProviders={[{
+            PROVIDER_NAME: name,
+            ORGANISATION_PURPOSE: purpose,
+            PHYSICAL_ADDRESS: address,
+            LATITUDE: latitude,
+            LONGITUDE: longitude
+          }]}
+        />
+      ) : null;
+    
     return (
       <Page className="service__page">
         <header>
