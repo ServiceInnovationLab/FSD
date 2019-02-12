@@ -9,6 +9,8 @@ import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
+import SearchCriteria from '../components/search-criteria';
+
 
 const DEFAULT_SEARCH_RADIUS = '25';
 
@@ -106,8 +108,8 @@ export default class Index extends Component {
   }
 
   render() {
-    const { serviceProviders, showMap, address, keyword, radius } = this.state;
-    const { history, location } = this.props;
+    const { serviceProviders, showMap, address, keyword, radius} = this.state;
+    const { history, location, categoryContext: {selectedCategory} } = this.props;
 
     const searchVars = queryString.parse(location.search);
     const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
@@ -126,6 +128,11 @@ export default class Index extends Component {
           />
           {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>
+        <SearchCriteria
+          keyword={searchVars.keyword}
+          address={address}
+          category={selectedCategory}
+        />
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
