@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import {
-  faLink,
-  faClock,
-  faPhone,
-  faMapMarkerAlt,
-  faAt,
-  faFolderOpen,
-} from '@fortawesome/free-solid-svg-icons';
+import { faLink, faClock, faPhone, faMapMarkerAlt, faAt, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 import { stripSpaces } from '../utilities/string';
 
@@ -54,10 +47,7 @@ export default class ServiceProviders extends Component {
                   <Icon icon={faMapMarkerAlt} />
                 </div>
                 <div className="icon-prefix__label">
-                  {address} -{' '}
-                  <a href={`https://www.google.com/maps/place/${address}`}>
-                    Directions
-                  </a>
+                  {address} - <a href={`https://www.google.com/maps/place/${address}`}>Directions</a>
                 </div>
               </div>
             )}
@@ -66,12 +56,7 @@ export default class ServiceProviders extends Component {
                 <div className="icon-prefix__icon">
                   <Icon icon={faLink} />
                 </div>
-                <a
-                  className="icon-prefix__label"
-                  href={website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className="icon-prefix__label" href={website} target="_blank" rel="noopener noreferrer">
                   {website}
                 </a>
               </div>
@@ -85,20 +70,15 @@ export default class ServiceProviders extends Component {
               </div>
             )}
             {email && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faAt} />
+              <div className="icon-prefix__container">
+                <div className="icon-prefix__icon">
+                  <Icon icon={faAt} />
+                </div>
+                <a className="icon-prefix__label" href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
+                  {email}
+                </a>
               </div>
-              <a
-                className="icon-prefix__label"
-                href={`mailto:${email}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {email}
-              </a>
-            </div>
-             )}
+            )}
             {phoneNumber && (
               <div className="icon-prefix__container">
                 <div className="icon-prefix__icon">
@@ -117,9 +97,7 @@ export default class ServiceProviders extends Component {
           </address>
         </header>
 
-        {purpose && (
-          <blockquote className="service__purpose">{purpose}</blockquote>
-        )}
+        {purpose && <blockquote className="service__purpose">{purpose}</blockquote>}
 
         <footer className="service__footer">
           {classification && (
@@ -128,9 +106,7 @@ export default class ServiceProviders extends Component {
                 <Icon icon={faFolderOpen} />
               </div>
               <div className="icon-prefix__label">
-                <a href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}>
-                {classification}
-                </a>
+                <a href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}>{classification}</a>
               </div>
             </div>
           )}

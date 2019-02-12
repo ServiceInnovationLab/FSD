@@ -1,15 +1,15 @@
-const getInputElement = require('../helpers/get-input-element')
+const getInputElement = require('../helpers/get-input-element');
 
-module.exports = function () {
+module.exports = function() {
   this.When(/^I visit the main page$/, async () => {
     return driver.get(shared.host.siteRoot);
   });
 
   // Expect one input with name=keyword, enabled, type=text
   this.Then(/^I should see the keyword search box$/, async () => {
-    const input_elements = await getInputElement('name', 'keyword')
-    expect(input_elements.length).to.equal(1)
-    
+    const input_elements = await getInputElement('name', 'keyword');
+    expect(input_elements.length).to.equal(1);
+
     // check the attributes are correct
     const keyword_box = input_elements[0];
 
@@ -22,8 +22,8 @@ module.exports = function () {
 
   // Expect one input with placeholder="Start typing an address", enabled, type=text
   this.Then(/^I should see the location search box$/, async () => {
-    const input_elements = await getInputElement('name', 'address-autosuggest')
-    expect(input_elements.length).to.equal(1)
+    const input_elements = await getInputElement('name', 'address-autosuggest');
+    expect(input_elements.length).to.equal(1);
 
     // check the attributes are correct
     const location_box = input_elements[0];
@@ -43,7 +43,6 @@ module.exports = function () {
 
   // expect more the search radius selector widget
   this.Then(/^I should see the radius selector$/, async () => {
-
     // wait for the page to load
     await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
 
@@ -53,8 +52,7 @@ module.exports = function () {
   });
 
   // expect more the search radius selector widget
-  this.Then(/^The radius selector should be set to "(\d+)" km radius$/, async (kilometres) => {
-
+  this.Then(/^The radius selector should be set to "(\d+)" km radius$/, async kilometres => {
     // wait for the page to load
     await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
 
@@ -72,7 +70,7 @@ module.exports = function () {
     input_elements[0].sendKeys(value);
   });
 
-  this.Given(/^I click on "([^"]*)"$/, async (text) => {
+  this.Given(/^I click on "([^"]*)"$/, async text => {
     const element = await helpers.getFirstElementContainingText('button', text);
     element.click();
   });
@@ -85,15 +83,18 @@ module.exports = function () {
     expect(elements.length).to.be.above(1);
   });
 
-  this.Then(/^I click on the first address suggestion$/, async() => {
+  this.Then(/^I click on the first address suggestion$/, async () => {
     await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
     const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
     elements[0].click();
   });
 
-  this.Then(/^The first suggestion should be "([^"]*)"$/, async (address_text) => {
+  this.Then(/^The first suggestion should be "([^"]*)"$/, async address_text => {
     await driver.wait(
       until.elementsLocated(
-        by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`)), 10000);
+        by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`),
+      ),
+      10000,
+    );
   });
-}
+};

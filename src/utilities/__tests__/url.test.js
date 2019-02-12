@@ -1,10 +1,4 @@
-import {
-  RESOURCE_ID,
-  API_PATH,
-  categories,
-  STATICFIELDS,
-  requestBuilder,
-} from '../url';
+import { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder } from '../url';
 import searchVars from '../../__mocks__/searchVars';
 
 describe('url.js', () => {
@@ -87,9 +81,7 @@ describe('url.js', () => {
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
       expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`,
-        ),
+        encodeURI(`${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`),
       );
     });
 
@@ -99,9 +91,7 @@ describe('url.js', () => {
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
       expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`,
-        ),
+        encodeURI(`${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`),
       );
     });
 

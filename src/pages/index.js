@@ -15,11 +15,10 @@ import SearchCriteria from '../components/search-criteria';
 const DEFAULT_SEARCH_RADIUS = '25';
 
 export default class Index extends Component {
-
   state = {
     serviceProviders: [],
     showMap: false,
-    address: ''
+    address: '',
   };
   componentDidMount() {
     const { search } = this.props.location;
@@ -31,7 +30,7 @@ export default class Index extends Component {
       this.doLoadResults(search);
     }
   }
-  
+
   doSetCategory = categoryName => {
     const {
       categoryContext: { selectedCategory, setCategory },
@@ -85,10 +84,10 @@ export default class Index extends Component {
       categoryContext: { setCategory },
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { category = '', region: address = '', keyword = '', radius = DEFAULT_SEARCH_RADIUS} = searchVars
+    const { category = '', region: address = '', keyword = '', radius = DEFAULT_SEARCH_RADIUS } = searchVars;
 
-    if(category) setCategory(category)
-    this.setState({address, keyword, radius})
+    if (category) setCategory(category);
+    this.setState({ address, keyword, radius });
 
     loadResults(searchVars).then(res => {
       this.setState({ serviceProviders: res });
@@ -98,16 +97,13 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button onClick={() => this.toggleShowMap()}>
-        {' '}
-        {showListOrMapText(showMap)}
-      </button>
+      <button onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
   autoSuggestOnChange(newValue) {
     this.setState({
-      address: newValue
+      address: newValue,
     });
   }
 
@@ -116,9 +112,7 @@ export default class Index extends Component {
     const { history, location, categoryContext: {selectedCategory} } = this.props;
 
     const searchVars = queryString.parse(location.search);
-    const showExtraButtons = Boolean(
-      (serviceProviders && serviceProviders[0])
-      || Object.keys(searchVars)[0]);
+    const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
 
     return (
       <Page>
@@ -130,7 +124,7 @@ export default class Index extends Component {
             autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
             address={address}
             showExtraButtons={showExtraButtons}
-            initialValues={{keyword, radius}}
+            initialValues={{ keyword, radius }}
           />
           {this.showToggleMapButton(showExtraButtons)}
         </SearchContainer>
@@ -142,10 +136,7 @@ export default class Index extends Component {
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
-          <ListOfServiceProviders
-            serviceProviders={serviceProviders}
-            history={history}
-          />
+          <ListOfServiceProviders serviceProviders={serviceProviders} history={history} />
         )}
         <Sharebar />
       </Page>

@@ -9,9 +9,7 @@ export default class ListOfServiceProviders extends Component {
   };
 
   render() {
-    const {
-      serviceProviders,
-    } = this.props;
+    const { serviceProviders } = this.props;
 
     if (serviceProviders.length > 0) {
       return (

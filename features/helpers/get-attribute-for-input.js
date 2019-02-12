@@ -1,3 +1,3 @@
-export default function (element, attribute) {
+export default function(element, attribute) {
   return element.getAttribute(attribute);
 }
