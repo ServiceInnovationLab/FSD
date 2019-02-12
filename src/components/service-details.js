@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  AccordionItem,
-  AccordionItemTitle,
-  AccordionItemBody,
-} from 'react-accessible-accordion';
+import { AccordionItem, AccordionItemTitle, AccordionItemBody } from 'react-accessible-accordion';
 
 export default class Service extends Component {
   static propTypes = {
@@ -16,7 +12,6 @@ export default class Service extends Component {
     serviceDetail: PropTypes.string,
     serviceName: PropTypes.string,
     targetAudiences: PropTypes.string,
-
   };
 
   render() {
@@ -54,7 +49,9 @@ export default class Service extends Component {
           )}
           {serviceReferrals && (
             <li>
-              <b>Service Referrals:</b> {serviceReferrals}
+              <b>Cost:</b>
+              {costType && <span> {costType}. </span>}
+              {costDescription && <span>{costDescription}</span>}
             </li>
           )}
           <li>
