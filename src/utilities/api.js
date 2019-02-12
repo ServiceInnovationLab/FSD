@@ -30,16 +30,12 @@ const loadResults = searchVars => {
   }
 
   let parsedRadius = Number(radius) * 1000;
-  
+
   return axios
     .get(requestBuilder(searchVars))
     .then(response => {
       if (latitude !== undefined) {
-        return findNearMe(
-          response.data.result.records,
-          {latitude, longitude},
-          parsedRadius
-        );
+        return findNearMe(response.data.result.records, { latitude, longitude }, parsedRadius);
       }
       return response.data.result.records;
     })
@@ -57,10 +53,7 @@ const loadService = serviceId => {
   return axios
     .get(url)
     .then(response => {
-      const filteredResults = selectAppropriateResults(
-        serviceId,
-        response.data.result.records,
-      );
+      const filteredResults = selectAppropriateResults(serviceId, response.data.result.records);
 
       // Because the API returns a list of records which look like a SQL join
       // between one provider and many services, we can return the first result

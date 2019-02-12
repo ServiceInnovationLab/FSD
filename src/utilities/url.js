@@ -2,8 +2,7 @@ const RESOURCE_ID = process.env.REACT_APP_API_RESOURCE_ID;
 const API_PATH = process.env.REACT_APP_API_PATH;
 const GH_PAGES_SUFFIX = process.env.REACT_APP_GH_PAGES_SUFFIX;
 
-const categories = category =>
-  category ? `&filters={"LEVEL_1_CATEGORY":"${category}"}` : '';
+const categories = category => (category ? `&filters={"LEVEL_1_CATEGORY":"${category}"}` : '');
 
 const STATICFIELDS =
   'FSD_ID,PROVIDER_CLASSIFICATION,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,PROVIDER_WEBSITE_1';
@@ -22,12 +21,4 @@ const requestBuilder = searchVars => {
   );
 };
 
-export {
-  RESOURCE_ID,
-  API_PATH,
-  categories,
-  STATICFIELDS,
-  requestBuilder,
-  SERVICE_FIELDS,
-  GH_PAGES_SUFFIX,
-};
+export { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder, SERVICE_FIELDS, GH_PAGES_SUFFIX };
