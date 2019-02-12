@@ -1,6 +1,7 @@
 // Modules
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+// Github Pages requires HashRouter to properly route subpages
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 // Styles
 import './assets/scss/style.scss';
@@ -21,7 +22,7 @@ class App extends Component {
       <CategoryProvider>
         <CategoryContext.Consumer>
           {categoryContext => (
-            <Router basename={GH_PAGES_SUFFIX}>
+            <Router basename={GH_PAGES_SUFFIX} hashType="slash">
               <Fragment>
                 <Route exact path="/" render={props => <Index categoryContext={categoryContext} {...props} />} />
                 <Route path="/service/:id" render={props => <Service categoryContext={categoryContext} {...props} />} />
