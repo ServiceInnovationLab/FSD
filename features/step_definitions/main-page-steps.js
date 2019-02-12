@@ -83,16 +83,32 @@ module.exports = function() {
     expect(elements.length).to.be.above(1);
   });
 
+  this.Then(/^I see at least "(\d+)" service providers$/, async num => {
+    await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
+    const elements = await driver.findElements(by.css('section .service'));
+
+    expect(elements.length).to.be.at.least(Number(num));
+  });
+
   this.Then(/^I click on the first address suggestion$/, async () => {
     await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
     const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
     elements[0].click();
   });
 
-  this.Then(/^The first suggestion should be "([^"]*)"$/, async address_text => {
+  this.Then(/^The first suggestion is "([^"]*)"$/, async address_text => {
     await driver.wait(
       until.elementsLocated(
         by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`),
+      ),
+      10000,
+    );
+  });
+
+  this.Then(/^The first result is "([^"]*)"$/, async resultTitle => {
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(`//*[@class='service__name']//a[contains(string(), '${resultTitle}')]`),
       ),
       10000,
     );
