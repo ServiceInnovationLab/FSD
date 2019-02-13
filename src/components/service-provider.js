@@ -6,6 +6,7 @@ import { faLink, faClock, faPhone, faMapMarkerAlt, faAt, faFolderOpen } from '@f
 import queryString from 'query-string';
 
 import { stripSpaces } from '../utilities/string';
+import SaveContact from '../components/save-contact';
 
 export default class ServiceProviders extends Component {
   static propTypes = {
@@ -120,6 +121,12 @@ export default class ServiceProviders extends Component {
                 </a>
               </div>
             )}
+            <SaveContact
+              name={name}
+              phoneNumber={phoneNumber}
+              address={address}
+              email={email}
+              />
           </address>
         </header>
 
