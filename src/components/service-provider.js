@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faLink, faClock, faPhone, faMapMarkerAlt, faAt, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import queryString from 'query-string';
 
 import { stripSpaces } from '../utilities/string';
 
@@ -32,13 +33,36 @@ export default class ServiceProviders extends Component {
       email,
       phoneNumber,
       hideMoreDetails,
+      userLatitude,
+      userLongitude,
+      providerLatitude,
+      providerLongitude
     } = this.props;
+
+    // The location of the user, if supplied.
+    // Used as the origin when preparing directions to the provider
+    const queryOrigin = (userLatitude && userLatitude)
+      ? queryString.stringify({ latitude: userLatitude, longitude: userLongitude })
+      : null;
+
+    // The url to use for directions to the provider. 
+    //
+    // Happily if the user location is not available we can still populate the
+    // destination and the user just needs to put their own address into Google.
+    const directionsUrl = (userLatitude && userLatitude)
+      ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${providerLatitude},${providerLongitude}`
+      : `https://www.google.com/maps/dir//${providerLatitude},${providerLongitude}`
 
     return (
       <section className="service">
         <header className="service__header">
           <h2 className="service__name">
-            <Link to={`/service/${fsdId}`}>{name}</Link>
+            <Link to={{
+              pathname: `/service/${fsdId}`, 
+              search: queryOrigin
+              }}>
+                {name}
+            </Link>
           </h2>
           <address className="service__address">
             {address && (
@@ -47,7 +71,7 @@ export default class ServiceProviders extends Component {
                   <Icon icon={faMapMarkerAlt} />
                 </div>
                 <div className="icon-prefix__label">
-                  {address} - <a href={`https://www.google.com/maps/place/${address}`}>Directions</a>
+                  {address} - <a href={directionsUrl}>Directions</a>
                 </div>
               </div>
             )}

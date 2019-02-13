@@ -9,7 +9,11 @@ export default class ListOfServiceProviders extends Component {
   };
 
   render() {
-    const { serviceProviders } = this.props;
+    const { 
+      serviceProviders, 
+      userLatitude, 
+      userLongitude 
+    } = this.props;
 
     if (serviceProviders.length > 0) {
       return (
@@ -26,6 +30,10 @@ export default class ListOfServiceProviders extends Component {
               website={provider.PROVIDER_WEBSITE_1}
               email={provider.PUBLISHED_CONTACT_EMAIL_1}
               phoneNumber={provider.PUBLISHED_PHONE_1}
+              providerLatitude={provider.LATITUDE}
+              providerLongitude={provider.LONGITUDE}
+              userLatitude={userLatitude}
+              userLongitude={userLongitude}
             />
           ))}
         </section>
