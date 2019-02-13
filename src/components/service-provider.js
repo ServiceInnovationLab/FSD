@@ -5,6 +5,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faLink, faClock, faPhone, faMapMarkerAlt, faAt, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 import { stripSpaces } from '../utilities/string';
+import SaveContact from '../components/save-contact';
 
 export default class ServiceProviders extends Component {
   static propTypes = {
@@ -94,6 +95,12 @@ export default class ServiceProviders extends Component {
                 </a>
               </div>
             )}
+            <SaveContact
+              name={name}
+              phoneNumber={phoneNumber}
+              address={address}
+              email={email}
+              />
           </address>
         </header>
 
