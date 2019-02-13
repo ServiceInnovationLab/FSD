@@ -50,7 +50,7 @@ export default class SearchForm extends Component {
               />
             </div>
             <div className="radio-group">
-              <label>Radius:</label>
+              <p>Distance (Km):</p>
               {radiusOptions.map(radius => {
                 return (
                   <label>
