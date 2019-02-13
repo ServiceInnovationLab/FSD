@@ -19,9 +19,7 @@ export default class Index extends Component {
     serviceProviders: [],
     showMap: false,
     address: '',
-    region: '',
-    userLatitude: '',
-    userLongitude: '',
+    region: ''
   };
   componentDidMount() {
     const { search } = this.props.location;
@@ -93,9 +91,7 @@ export default class Index extends Component {
       region = '', 
       address = '',
       keyword = '', 
-      radius = DEFAULT_SEARCH_RADIUS, 
-      latitude: userLatitude = '', 
-      longitude: userLongitude = ''
+      radius = DEFAULT_SEARCH_RADIUS
     } = searchVars;
 
     if (category) setCategory(category);
