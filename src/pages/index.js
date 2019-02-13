@@ -19,6 +19,7 @@ export default class Index extends Component {
     serviceProviders: [],
     showMap: false,
     address: '',
+    region: '',
     userLatitude: '',
     userLongitude: '',
   };
@@ -27,6 +28,7 @@ export default class Index extends Component {
     const { search } = this.props.location;
     this.doLoadResults(search);
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.location.search !== this.props.location.search) {
       const { search } = this.props.location;
@@ -89,7 +91,8 @@ export default class Index extends Component {
     const searchVars = queryString.parse(locationQuery);
     const { 
       category = '', 
-      region: address = '', 
+      region = '', 
+      address = '',
       keyword = '', 
       radius = DEFAULT_SEARCH_RADIUS, 
       latitude: userLatitude = '', 
@@ -97,7 +100,7 @@ export default class Index extends Component {
     } = searchVars;
 
     if (category) setCategory(category);
-    this.setState({ address, keyword, radius });
+    this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
       this.setState({ serviceProviders: res, userLatitude, userLongitude });
@@ -118,7 +121,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { serviceProviders, showMap, address, keyword, radius} = this.state;
+    const { serviceProviders, showMap, address, region, keyword, radius} = this.state;
     const { history, location, categoryContext: {selectedCategory} } = this.props;
 
     const searchVars = queryString.parse(location.search);
@@ -133,6 +136,7 @@ export default class Index extends Component {
             doResetSearch={this.doResetSearch}
             autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
             address={address}
+            region={region}
             showExtraButtons={showExtraButtons}
             initialValues={{ keyword, radius }}
           />
