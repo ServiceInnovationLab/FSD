@@ -1,5 +1,27 @@
-.radio-group{ 
-  color: $body-color;
-  margin: 0 0 .5em 0;
-  font-family: Helvetica, sans-serif;
+@media only screen and (max-width: 767px) {
+  .radio-group{
+    color: $body-color;
+    margin: 0 0 1em 0;
+    font-family: Helvetica, sans-serif;
+
+    > label
+    {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .radio-group{
+    color: $body-color;
+    margin: 0 0 1em 0;
+    font-family: Helvetica, sans-serif;
+
+    > label
+    {
+      padding-left: .5em;
+      padding-right: .5em;
+    }
+  }
 }
