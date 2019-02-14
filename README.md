@@ -3,7 +3,7 @@
 
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/FSD.png)](https://waffle.io/ServiceInnovationLab/FSD?utm_source=badge)
 
-![dependencies](https://david-dm.org/Growstuff/growstuff.svg)
+![dependencies](https://david-dm.org/ServiceInnovationLab/FSD.svg)
 
 This runs [on github pages](https://serviceinnovationlab.github.io/FSD/)
 
