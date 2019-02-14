@@ -5,7 +5,7 @@ const ServiceMapMarker = props => {
   const { record } = props;
   const { LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS } = record;
 
-  let position = { lat: Number(LATITUDE), lng: Number(LONGITUDE) };
+  const position = { lat: Number(LATITUDE), lng: Number(LONGITUDE) };
 
   return (
     <div>
