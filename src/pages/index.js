@@ -92,7 +92,9 @@ export default class Index extends Component {
       region = '', 
       address = '',
       keyword = '', 
-      radius = DEFAULT_SEARCH_RADIUS
+      radius = DEFAULT_SEARCH_RADIUS,
+      latitude: userLatitude,
+      longitude: userLongitude
     } = searchVars;
 
     if (category) setCategory(category);
