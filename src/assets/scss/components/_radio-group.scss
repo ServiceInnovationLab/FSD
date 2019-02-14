@@ -1,11 +1,11 @@
 @media only screen and (max-width: 767px) {
-  .radio-group{
+  .radio-group {
     color: $body-color;
-    margin: 0 0 1em 0;
+    margin: 0 0 1em;
     font-family: Helvetica, sans-serif;
 
     > label
-    {
+    { 
       padding-left: 1em;
       padding-right: 1em;
     }
@@ -13,13 +13,13 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .radio-group{
+  .radio-group {
     color: $body-color;
-    margin: 0 0 1em 0;
+    margin: 0 0 1em;
     font-family: Helvetica, sans-serif;
 
     > label
-    {
+    { 
       padding-left: .5em;
       padding-right: .5em;
     }
