@@ -53,15 +53,17 @@ export default class SearchForm extends Component {
             </div>
             {region ? (
               <div className="radio-group">
-                <p>Distance (Km):</p>
-                {radiusOptions.map(radius => {
-                  return (
-                    <label>
-                      <Field name="radius" component="input" type="radio" value={radius} />
-                      {radius}
-                    </label>
-                  );
-                })}
+                <fieldset>
+                <legend>Distance (Km):</legend>
+                  {radiusOptions.map(radius => {
+                    return (
+                      <label>
+                        <Field name="radius" component="input" type="radio" value={radius} />
+                        {radius}
+                      </label>
+                    );
+                  })}
+                </fieldset>
             </div> ) : null }
             <button type="submit" disabled={submitting || pristine}>
               Search
