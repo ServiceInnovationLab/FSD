@@ -41,7 +41,7 @@ export default class ServiceProviders extends Component {
 
     // The location of the user, if supplied.
     // Used as the origin when preparing directions to the provider
-    const queryOrigin = (userLatitude && userLatitude)
+    const queryOrigin = (userLatitude && userLongitude)
       ? queryString.stringify({ latitude: userLatitude, longitude: userLongitude })
       : null;
 

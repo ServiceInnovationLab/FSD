@@ -31,7 +31,7 @@ module.exports = function() {
     // wait for the first result to contain the expected title
     await driver.wait(
       until.elementsLocated(
-        by.xpath(`//section[@class='service__container']/section[@class='service'][1]//h2[contains(string(), '${title}')]`),
+        by.xpath(`//section[@class='service__container']/section[@class='service'][1]//*[class='service__name'][contains(string(), '${title}')]`),
       ),
       10000,
     );
@@ -55,7 +55,7 @@ module.exports = function() {
   });
 
   this.Then(/^I click on the result title$/, async () => {
-    const titles = await shared.the.result.findElements(by.css('h2 > a'));
+    const titles = await shared.the.result.findElements(by.css('.service__name > a'));
 
     titleLink = await titles[0];
 
