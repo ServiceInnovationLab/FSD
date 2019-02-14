@@ -11,7 +11,7 @@ export default class SearchCriteria extends Component {
 }
 
 function createSearchCriteria(keyword, address, category) {
-  let search = ['Searching'];
+  const search = ['Searching'];
 
   if (keyword)
     search.push(

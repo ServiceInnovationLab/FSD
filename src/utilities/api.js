@@ -29,7 +29,7 @@ const loadResults = searchVars => {
     });
   }
 
-  let parsedRadius = Number(radius) * 1000;
+  const parsedRadius = Number(radius) * 1000;
 
   return axios
     .get(requestBuilder(searchVars))
