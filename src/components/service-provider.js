@@ -41,7 +41,7 @@ export default class ServiceProviders extends Component {
 
     // The location of the user, if supplied.
     // Used as the origin when preparing directions to the provider
-    const queryOrigin = (userLatitude && userLongitude)
+    const userCoordinates = (userLatitude && userLongitude)
       ? queryString.stringify({ latitude: userLatitude, longitude: userLongitude })
       : null;
 
@@ -59,7 +59,7 @@ export default class ServiceProviders extends Component {
           <h2 className="service__name">
             <Link to={{
               pathname: `/service/${fsdId}`, 
-              search: queryOrigin
+              search: userCoordinates
               }}>
                 {name}
             </Link>
