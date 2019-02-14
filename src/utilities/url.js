@@ -11,14 +11,13 @@ const SERVICE_FIELDS =
   'FSD_ID,PROVIDER_CLASSIFICATION,LONGITUDE,LATITUDE,PROVIDER_NAME,PUBLISHED_CONTACT_EMAIL_1,PUBLISHED_PHONE_1,PROVIDER_CONTACT_AVAILABILITY,ORGANISATION_PURPOSE,PHYSICAL_ADDRESS,PROVIDER_WEBSITE_1,LEVEL_1_CATEGORY,SERVICE_NAME,SERVICE_TARGET_AUDIENCES,SERVICE_DETAIL,DELIVERY_METHODS,COST_TYPE,COST_DESCRIPTION,SERVICE_REFERRALS';
 
 const requestBuilder = searchVars => {
-  const { keyword, category, addressLatLng = {} } = searchVars;
-  const query = keyword && keyword.length > 2 ? `&q=${keyword}` : '';
+  const { keyword, category, address, region } = searchVars;
+  const query = keyword && keyword.length > 2 
+    ? keyword
+    : [category, address, region].join(' ');
   const categoryFilters = categories(category);
-  const limit = addressLatLng.latitude ? '&limit=5000' : '';
 
-  return encodeURI(
-    `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}${query}${categoryFilters}${limit}`,
-  );
+  return `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(query)}${categoryFilters}`;
 };
 
 export { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder, SERVICE_FIELDS, GH_PAGES_SUFFIX };
