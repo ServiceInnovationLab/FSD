@@ -17,3 +17,6 @@ linters:
   NestingDepth:
     enabled: true
     max_depth: 4
+  LeadingZero:
+    enabled: true
+    stryle: include_zero
