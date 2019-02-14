@@ -47,18 +47,16 @@ export default class Service extends Component {
               <b>Delivery Methods:</b> {deliveryMethods}
             </li>
           )}
-          {serviceReferrals && (
+          {costDescription && (
             <li>
-              <b>Cost:</b>
-              {costType && <span> {costType}. </span>}
-              {costDescription && <span>{costDescription}</span>}
+              <b>Cost:</b> {costType}. {costDescription}
             </li>
           )}
+          {serviceReferrals && (
           <li>
-            <b>Cost:</b>
-            {costType && <span> {costType}. </span>}
-            {costDescription && <span>{costDescription}</span>}
+            <b>Referrals:</b> {serviceReferrals}
           </li>
+          )}
         </ul>
       </AccordionItemBody>
     </AccordionItem>
