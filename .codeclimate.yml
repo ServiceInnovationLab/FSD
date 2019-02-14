@@ -1,0 +1,16 @@
+engines:
+  scss-lint:
+    enabled: true
+  shellcheck:
+    enabled: true
+  eslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  fixme:
+    enabled: true
+exclude_paths:
+- src/utilities/__tests__/**
