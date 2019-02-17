@@ -8,6 +8,7 @@ export default class SearchForm extends Component {
   static propTypes = {
     autoSuggestOnChange: PropTypes.func.isRequired,
     address: PropTypes.string.isRequired,
+    region: PropTypes.string.isRequired,
     doResetSearch: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
     updateSearchParams: PropTypes.func.isRequired,
@@ -31,6 +32,7 @@ export default class SearchForm extends Component {
       showExtraButtons,
       autoSuggestOnChange,
       address,
+      region,
     } = this.props;
 
     return (
@@ -46,20 +48,21 @@ export default class SearchForm extends Component {
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
-                address={address}
+                address={address ? address : region}
               />
             </div>
-            <div className="radio-group">
-              <label>Radius:</label>
-              {radiusOptions.map(radius => {
-                return (
-                  <label>
-                    <Field name="radius" component="input" type="radio" value={radius} />
-                    {radius}
-                  </label>
-                );
-              })}
-            </div>
+            {region ? (
+              <div className="radio-group">
+                <p>Distance (Km):</p>
+                {radiusOptions.map(radius => {
+                  return (
+                    <label>
+                      <Field name="radius" component="input" type="radio" value={radius} />
+                      {radius}
+                    </label>
+                  );
+                })}
+            </div> ) : null }
             <button type="submit" disabled={submitting || pristine}>
               Search
             </button>
