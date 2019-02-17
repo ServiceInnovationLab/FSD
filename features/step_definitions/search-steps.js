@@ -16,9 +16,11 @@ module.exports = function() {
     const input_elements = await getInputElement('name', 'address-autosuggest');
     input_elements[0].sendKeys(value);
 
-    // select the top address suggestion
-    await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
-    const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
+    // Select the top address suggestion which matches the input. We need to
+    // check that the suggestion matches the search because the suggestion
+    // values can lag behind the typing due to the small amount of time it takes
+    // for them to load.
+    const elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${value}')]`));
     elements[0].click();
   });
 
