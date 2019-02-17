@@ -57,7 +57,7 @@ module.exports = function() {
       // expect the radius selecto NOT to exist.
       await getInputElement('css', '.category__container > .category__button');
   
-      // expect there to be 4 radius buttons
+      // expect there to be 0 radius buttons
       const distance_options = await driver.findElements(by.css('input[name="radius"]'));
       expect(distance_options.length).to.equal(0);
     });
