@@ -13,5 +13,5 @@ Scenario: Using HashRouter to store the URL path in the URL fragment instead
   for more discussion.
 
   Given I visit the main page
-  Then the URL "pathname" should be "/"
-  And the URL "hash" should be "#/"
+  Then the URL "pathname" is "/"
+  And the URL "hash" is "#/"

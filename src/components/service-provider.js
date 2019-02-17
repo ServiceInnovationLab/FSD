@@ -39,8 +39,10 @@ export default class ServiceProviders extends Component {
       providerLongitude
     } = this.props;
 
-    // The location of the user, if supplied.
-    // Used as the origin when preparing directions to the provider
+    // The location of the user, if supplied. Used as the origin when preparing
+    // directions to the provider. The coordinates will be passed through to the
+    // service detail page in the URL query string, although other query string
+    // values will not.
     const userCoordinates = (userLatitude && userLongitude)
       ? queryString.stringify({ latitude: userLatitude, longitude: userLongitude })
       : null;
@@ -49,7 +51,7 @@ export default class ServiceProviders extends Component {
     //
     // Happily if the user location is not available we can still populate the
     // destination and the user just needs to put their own address into Google.
-    const directionsUrl = (userLatitude && userLatitude)
+    const directionsUrl = (userLatitude && userLongitude)
       ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${providerLatitude},${providerLongitude}`
       : `https://www.google.com/maps/dir//${providerLatitude},${providerLongitude}`
 
