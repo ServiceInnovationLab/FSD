@@ -11,7 +11,7 @@ export default class SearchCriteria extends Component {
 }
 
 function createSearchCriteria(keyword, address, category) {
-  let search = ['Searching'];
+  const search = ['Searching'];
 
   if (keyword)
     search.push(
@@ -22,7 +22,7 @@ function createSearchCriteria(keyword, address, category) {
     );
   if (address)
     search.push(
-      <span>
+      <span key={address}>
         {' '}
         near: <b>{address}</b>
       </span>,
