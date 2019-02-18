@@ -22,7 +22,7 @@ function createSearchCriteria(keyword, address, category) {
     );
   if (address)
     search.push(
-      <span>
+      <span key={address}>
         {' '}
         near: <b>{address}</b>
       </span>,

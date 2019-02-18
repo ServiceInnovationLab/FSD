@@ -111,7 +111,7 @@ export default class Index extends Component {
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
   autoSuggestOnChange(newValue) {
     this.setState({
-      address: newValue,
+      region: newValue,
     });
   }
 
