@@ -59,7 +59,7 @@ module.exports = function() {
   this.Then(/^I click on the result title$/, async () => {
     const titles = await shared.the.result.findElements(by.css('.service__name > a'));
 
-    titleLink = await titles[0];
+    const titleLink = await titles[0];
 
     titleLink.click();
     
