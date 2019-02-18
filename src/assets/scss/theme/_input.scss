@@ -1,46 +1,98 @@
-input[type="text"],
-input[type="search"],
-select,
-textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  box-shadow: none;
-  border: 1px solid $primary-color;
-  border-radius: 0.125rem;
-  color: $body-color;
-  background-color: rgba($white, 0.9);
-  padding: 0.25em 0.5em;
-  max-width: 100%;
+@media only screen and (max-width: 767px) {
+  input[type="text"],
+  input[type="search"],
+  select,
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: none;
+    border: 1px solid $primary-color;
+    border-radius: 0.125rem;
+    color: $body-color;
+    background-color: rgba($white, 0.9);
+    padding: 0.25em 0.5em;
+    max-width: 100%;
+    min-width: 100%;
+    width: 0;
 
-  font: {
-    size: 1rem;
-    family: $body-font;
+    font: {
+      size: 1rem;
+      family: $body-font;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: transparent;
+      box-shadow: inset 0 0 0 0.125rem $primary-color;
+    }
+
+    &:disabled {
+      background-color: $disabled-color;
+    }
+
+    &.error {
+      border: 1px solid $negative-color;
+    }
+
+    &.warning {
+      border: 1px solid $warning-color;
+    }
   }
 
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: transparent;
-    box-shadow: inset 0 0 0 0.125rem $primary-color;
+  textarea {
+    resize: vertical;
   }
 
-  &:disabled {
-    background-color: $disabled-color;
-  }
-
-  &.error {
-    border: 1px solid $negative-color;
-  }
-
-  &.warning {
-    border: 1px solid $warning-color;
+  label[for] {
+    cursor: pointer;
   }
 }
+@media only screen and (min-width: 768px) {
+  input[type="text"],
+  input[type="search"],
+  select,
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: none;
+    border: 1px solid $primary-color;
+    border-radius: 0.125rem;
+    color: $body-color;
+    background-color: rgba($white, 0.9);
+    padding: 0.25em 0.5em;
+    max-width: 100%;
 
-textarea {
-  resize: vertical;
-}
+    font: {
+      size: 1rem;
+      family: $body-font;
+    }
 
-label[for] {
-  cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: transparent;
+      box-shadow: inset 0 0 0 0.125rem $primary-color;
+    }
+
+    &:disabled {
+      background-color: $disabled-color;
+    }
+
+    &.error {
+      border: 1px solid $negative-color;
+    }
+
+    &.warning {
+      border: 1px solid $warning-color;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  label[for] {
+    cursor: pointer;
+  }
 }
