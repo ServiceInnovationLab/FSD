@@ -5,6 +5,9 @@ engines:
     enabled: true
   eslint:
     enabled: true
+    # Because we're not using the default filename `.eslintrc.js`
+    config:
+      config: .eslintrc
   duplication:
     enabled: true
     config:
