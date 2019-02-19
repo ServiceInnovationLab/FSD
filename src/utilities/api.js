@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { findNearMe } from './geography';
-import { RESOURCE_ID, API_PATH, requestBuilder, SERVICE_FIELDS } from './url';
+import { RESOURCE_ID, API_PATH, requestBuilder, SERVICE_FIELDS, isValidQuery, requestResultCount } from './url';
 
 const loadCategories = () => {
   const sql = encodeURI(
@@ -20,24 +20,37 @@ const loadCategories = () => {
     });
 };
 
-const loadResults = searchVars => {
-  const { latitude, longitude, category, keyword, radius = '25' } = searchVars;
+const loadResults = async searchVars => {
+  const { latitude, longitude, radius = '25', limit = 10} = searchVars;
 
-  if (!category && !keyword && (!latitude || !longitude)) {
-    return new Promise(resolve => {
-      resolve([]);
-    });
+  // return (a promise of) and empty list if the query isn't valid
+  if (!isValidQuery(searchVars)){
+    return [];
   }
 
-  const parsedRadius = Number(radius) * 1000;
+  // Calculate the offset for 'page 1' if no offset was specified in the parameters
+  let offset = searchVars.offset;
+  if (!offset) {
+    const resultCountResponse = await axios.get(requestResultCount(searchVars))
+      .catch(error => {
+        console.error(error);
+        return [];
+      });
+    const resultCount = resultCountResponse.data.result.total;
+    offset = resultCount - limit;
+  }
 
   return axios
-    .get(requestBuilder(searchVars))
+    .get(requestBuilder({...searchVars, offset: offset, limit: limit}))
     .then(response => {
       if (latitude !== undefined) {
-        return findNearMe(response.data.result.records, { latitude, longitude }, parsedRadius);
+        const radiusInMetres = Number(radius) * 1000;
+        // The results will be returned in distance order
+        return findNearMe(response.data.result.records, { latitude, longitude }, radiusInMetres);
       }
-      return response.data.result.records;
+      // The results will be returned in rank descending order - the
+      // server supplies them in rank ascendig order by default.
+      return response.data.result.records.sort(x => -x.rank);
     })
     .catch(error => {
       console.error(error);
