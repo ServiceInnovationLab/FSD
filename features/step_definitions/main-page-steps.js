@@ -108,7 +108,16 @@ module.exports = function() {
   this.Then(/^The first result is "([^"]*)"$/, async resultTitle => {
     await driver.wait(
       until.elementsLocated(
-        by.xpath(`//*[@class='service__name']//a[contains(string(), '${resultTitle}')]`),
+        by.xpath(`//*[@class='service__name'][1]//a[contains(string(), '${resultTitle}')]`),
+      ),
+      10000,
+    );
+  });
+
+  this.Then(/^a result is "([^"]*)"$/, async resultTitle => {
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(`//*[@class='service__name'][contains(string(), '${resultTitle}')]`),
       ),
       10000,
     );
