@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import queryString from 'query-string';
 
 import Page from '../containers/page';
 import ServiceProvider from '../components/service-provider';
@@ -22,15 +23,30 @@ export default class Service extends Component {
 
     serviceDetail: '',
 
-    latitude: '',
-    longitude: '',
+    userLatitude: '',
+    userLongitude: '',
+    providerLatitude: '',
+    providerLongitude: '',
 
     loading: true,
   };
 
+  doParseUrl = () => {
+    const { search } = this.props.location;
+    const { 
+      latitude = '', 
+      longitude = ''
+    } = queryString.parse(search);;
+
+    this.setState({
+      userLatitude: latitude,
+      userLongitude: longitude
+    });
+  };
+
   componentDidMount = () => {
     const { id } = this.props.match.params;
-
+ 
     loadService(id).then(args => {
       const { provider, services } = args;
 
@@ -46,10 +62,12 @@ export default class Service extends Component {
         phoneNumber: provider.PUBLISHED_PHONE_1,
         services: ensureUnique(services),
 
-        latitude: provider.LATITUDE,
-        longitude: provider.LONGITUDE,
+        providerLatitude: provider.LATITUDE,
+        providerLongitude: provider.LONGITUDE,
       });
     });
+
+    this.doParseUrl();
   };
 
   render() {
@@ -71,19 +89,21 @@ export default class Service extends Component {
       phoneNumber,
       services,
 
-      latitude,
-      longitude,
+      userLatitude,
+      userLongitude,
+      providerLatitude,
+      providerLongitude,
     } = this.state;
 
     const providerMap =
-      latitude && longitude ? (
+      providerLatitude && providerLongitude ? (
         <MapContainer
           serviceProviders={[{
             PROVIDER_NAME: name,
             ORGANISATION_PURPOSE: purpose,
             PHYSICAL_ADDRESS: address,
-            LATITUDE: latitude,
-            LONGITUDE: longitude
+            LATITUDE: providerLatitude,
+            LONGITUDE: providerLongitude
           }]}
         />
       ) : null;
@@ -111,6 +131,10 @@ export default class Service extends Component {
                 email={email}
                 phoneNumber={phoneNumber}
                 hideMoreDetails={true}
+                userLatitude={userLatitude}
+                userLongitude={userLongitude}
+                providerLatitude={providerLatitude}
+                providerLongitude={providerLongitude}
               />
               <Accordion>
                 {services.map((service, i) => {
