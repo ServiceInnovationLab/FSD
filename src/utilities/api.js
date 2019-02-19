@@ -24,38 +24,26 @@ const loadResults = async searchVars => {
   const { latitude, longitude, radius = '25', limit = 10} = searchVars;
 
   // return an empty list if the query isn't valid
-  if (!isValidQuery(searchVars)){
-    return [];
-  }
+  if (!isValidQuery(searchVars)) return [];
 
-  // Calculate the offset for 'page 1' if no offset was specified in the parameters
-  let offset = searchVars.offset;
-  if (!offset) {
-    const resultCountResponse = await axios.get(requestResultCount(searchVars))
-      .catch(error => {
-        console.error(error);
-        return [];
-      });
-    const resultCount = resultCountResponse.data.result.total;
-    offset = resultCount - limit;
-  }
+  const offset = await determineLastPageOffset({...searchVars, limit});
 
-  return axios
+  const response = await axios
     .get(requestBuilder({...searchVars, offset: offset, limit: limit}))
-    .then(response => {
-      if (latitude !== undefined) {
-        const radiusInMetres = Number(radius) * 1000;
-        // The results will be returned in distance order
-        return findNearMe(response.data.result.records, { latitude, longitude }, radiusInMetres);
-      }
-      // The results will be returned in rank descending order - the
-      // server supplies them in rank ascendig order by default.
-      return response.data.result.records.sort(x => -x.rank);
-    })
     .catch(error => {
       console.error(error);
       return [];
     });
+
+    if (latitude && longitude) {
+      const radiusInMetres = Number(radius) * 1000;
+      // The results will be returned in distance order
+      return findNearMe(response.data.result.records, { latitude, longitude }, radiusInMetres);
+    }
+    
+    // The results will be returned in rank descending order - the
+    // server supplies them in rank ascendig order by default.
+    return response.data.result.records.sort(x => -x.rank);
 };
 
 const loadService = serviceId => {
@@ -97,3 +85,19 @@ export { loadCategories, loadResults, loadService };
 const selectAppropriateResults = (id, providers) => {
   return providers.filter(p => p.FSD_ID === Number(id));
 };
+
+// Determine what the offset should be for the last page of search results
+//
+// Queries the server with limit=0 to get the count of results.
+const determineLastPageOffset = async searchVars => {
+  const { limit = 0 } = searchVars;
+
+  const resultCountResponse = await axios.get(requestResultCount({...searchVars, limit: 0}))
+    .catch(error => {
+      console.error(error);
+      return 0;
+    });
+
+  const resultCount = resultCountResponse.data.result.total;
+  return resultCount - limit;
+}
