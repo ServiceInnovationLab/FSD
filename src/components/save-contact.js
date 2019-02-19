@@ -9,8 +9,8 @@ class SaveContact extends React.Component {
                           "VERSION:3.0\n" +
                           `FN:${this.props.name}\n` +
                           `ORG:${this.props.name}\n` +
-                          `TEL;TYPE=${stripSpaces(this.props.phoneNumber)}\n` +
-                          `ADR;TYPE=WORK,PREF:;;${this.props.address}\n` +
+                          `TEL:${stripSpaces(this.props.phoneNumber)}\n` +
+                          `ADR:${this.props.address}\n` +
                           `EMAIL:${this.props.email}\n` +
                           `REV:${(new Date()).toISOString()}\n` +
                           "END:VCARD\n");
