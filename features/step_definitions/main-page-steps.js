@@ -82,8 +82,21 @@ module.exports = function() {
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
-    const element = await helpers.getFirstElementContainingText('button', text);
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.xpath(`//*[contains(text(), '${text}')]`)), 10000);
+    const element = await driver.findElement(by.xpath(`//*[contains(text(), '${text}')]`));
     element.click();
+  });
+
+  this.Given(/^I click on the "([^"]*)" with "([^"]*)" "([^"]*)"$/, async (elementType, attribute, text) => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.xpath(`//${elementType}[@${attribute}="${text}"]`)), 10000);
+    const element = await driver.findElement(by.xpath(`//${elementType}[@${attribute}="${text}"]`));
+    element.click();
+  });
+
+  this.Given(/^I see a "([^"]*)" which says "([^"]*)"$/, async (elementType, text) => {
+    await driver.wait(until.elementsLocated(by.xpath(`//${elementType}//*[text()[contains(.,'${text}')]]`)), 10000);
   });
 
   this.Then(/^I see a list of service providers$/, async () => {
@@ -94,16 +107,41 @@ module.exports = function() {
     expect(elements.length).to.be.above(1);
   });
 
+  this.Then(/^I see at least "(\d+)" service providers$/, async num => {
+    await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
+    const elements = await driver.findElements(by.css('section .service'));
+
+    expect(elements.length).to.be.at.least(Number(num));
+  });
+
   this.Then(/^I click on the first address suggestion$/, async () => {
     await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
     const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
     elements[0].click();
   });
 
-  this.Then(/^The first suggestion should be "([^"]*)"$/, async address_text => {
+  this.Then(/^The first suggestion is "([^"]*)"$/, async address_text => {
     await driver.wait(
       until.elementsLocated(
         by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`),
+      ),
+      10000,
+    );
+  });
+
+  this.Then(/^The first result is "([^"]*)"$/, async resultTitle => {
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(`//*[@class='service__name'][1]//a[contains(string(), '${resultTitle}')]`),
+      ),
+      10000,
+    );
+  });
+
+  this.Then(/^a result is "([^"]*)"$/, async resultTitle => {
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(`//*[@class='service__name'][contains(string(), '${resultTitle}')]`),
       ),
       10000,
     );

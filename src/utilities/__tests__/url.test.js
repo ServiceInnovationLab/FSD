@@ -1,4 +1,4 @@
-import { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder } from '../url';
+import { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder, isValidQuery } from '../url';
 import searchVars from '../../__mocks__/searchVars';
 
 describe('url.js', () => {
@@ -75,24 +75,12 @@ describe('url.js', () => {
       }).not.toThrow();
     });
 
-    it("doesn't clarify keyword when it's null", () => {
-      searchVarsClone.keyword = keywords.none;
-      searchVarsClone.category = categoryExamples.none;
-      searchVarsClone.addressLatLng = addressLatLngs.none;
-
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(`${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`),
-      );
-    });
-
-    it("doesn't clarify keyword when it's less than or equal to 2 chars", () => {
+    it("is not valid when the keyword length is <= 2 chars and there are no other search terms", () => {
       searchVarsClone.keyword = keywords.tooShort;
       searchVarsClone.category = categoryExamples.none;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(`${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}`),
-      );
+      expect(isValidQuery(searchVarsClone)).toBe(false)
     });
 
     it("clarifies keyword when it's greater than 2 chars", () => {
@@ -100,27 +88,17 @@ describe('url.js', () => {
       searchVarsClone.category = categoryExamples.none;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
-            searchVarsClone.keyword
-          }`,
-        ),
-      );
+      expect(requestBuilder(searchVarsClone))
+        .toContain(`q=${searchVarsClone.keyword}`);
     });
 
-    it("doesn't filter wihtout a category", () => {
+    it("doesn't filter without a category", () => {
       searchVarsClone.keyword = keywords.valid;
       searchVarsClone.category = categoryExamples.none;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
-            searchVarsClone.keyword
-          }`,
-        ),
-      );
+      expect(requestBuilder(searchVarsClone))
+        .not.toContain('filters={"LEVEL_1_CATEGORY":');
     });
 
     it('filters by category', () => {
@@ -128,41 +106,8 @@ describe('url.js', () => {
       searchVarsClone.category = categoryExamples.valid;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
-            searchVarsClone.keyword
-          }${categories(searchVarsClone.category)}`,
-        ),
-      );
-    });
-
-    it("doesn't limit when there is no address", () => {
-      searchVarsClone.keyword = keywords.valid;
-      searchVarsClone.category = categoryExamples.none;
-      searchVarsClone.addressLatLng = addressLatLngs.none;
-
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
-            searchVarsClone.keyword
-          }`,
-        ),
-      );
-    });
-
-    it('limits when there is an address', () => {
-      searchVarsClone.keyword = keywords.valid;
-      searchVarsClone.category = categoryExamples.none;
-      searchVarsClone.addressLatLng = addressLatLngs.valid;
-
-      expect(requestBuilder(searchVarsClone)).toBe(
-        encodeURI(
-          `${API_PATH}datastore_search?distinct=true&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${
-            searchVarsClone.keyword
-          }&limit=5000`,
-        ),
-      );
+      expect(requestBuilder(searchVarsClone))
+        .toContain(categories(searchVarsClone.category));
     });
   });
 });
