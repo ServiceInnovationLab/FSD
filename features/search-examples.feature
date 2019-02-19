@@ -34,3 +34,8 @@ Scenario: I search in a wide area around Wellington
   And I click on "Search"
   Then I see at least "10" service providers
   And I see a "address" which says "Lower Hutt"
+
+Scenario: I search for a phrase
+  Given I enter "age concern" into the "keyword" input
+  And I click on "Search"
+  Then I see a "header" which says "Age Concern"
