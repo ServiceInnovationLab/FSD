@@ -26,7 +26,7 @@ Scenario: I search with a category and a location
   Then I see at least "5" service providers
   And The first result is "New Plymouth Budget Advisory Service"
 
-Scenario: 
+Scenario: I search in a wide area around Wellington
   Given I click on "Child Care"
   Given I enter "56 the Terrace Wellington Central" into the "address-autosuggest" input
   And I click on the first address suggestion
