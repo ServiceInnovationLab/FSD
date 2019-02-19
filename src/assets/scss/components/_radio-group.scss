@@ -1,5 +1,27 @@
-.radio-group{ 
-  color: $body-color;
-  margin: 0 0 .5em 0;
-  font-family: Helvetica, sans-serif;
+@media only screen and (max-width: 767px) {
+  .radio-group {
+    color: $body-color;
+    margin: 0 0 1em;
+    font-family: Helvetica, sans-serif;
+    width: fit-content;
+  }
+
+  .radiusLabel {
+    padding-left: .75em;
+    padding-right: .75em;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .radio-group {
+    color: $body-color;
+    margin: 0 0 1em;
+    font-family: Helvetica, sans-serif;
+    width: fit-content;
+  }
+
+  .radiusLabel {
+    padding-left: .2em;
+    padding-right: .2em;
+  }
 }

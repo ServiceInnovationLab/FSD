@@ -8,6 +8,7 @@ export default class SearchForm extends Component {
   static propTypes = {
     autoSuggestOnChange: PropTypes.func.isRequired,
     address: PropTypes.string.isRequired,
+    region: PropTypes.string.isRequired,
     doResetSearch: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
     updateSearchParams: PropTypes.func.isRequired,
@@ -31,6 +32,7 @@ export default class SearchForm extends Component {
       showExtraButtons,
       autoSuggestOnChange,
       address,
+      region,
     } = this.props;
 
     return (
@@ -40,26 +42,32 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisations" />
+              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
             </div>
             <div>
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
-                address={address}
+                address={address ? address : region}
               />
             </div>
-            <div className="radio-group">
-              <label>Radius:</label>
-              {radiusOptions.map(radius => {
-                return (
-                  <label>
-                    <Field name="radius" component="input" type="radio" value={radius} />
-                    {radius}
-                  </label>
-                );
-              })}
-            </div>
+            {address
+              ? (
+                <div className="radio-group">
+                  <fieldset className="radiusFieldset">
+                  <legend>Distance (km):</legend>
+                    {radiusOptions.map(radius => {
+                      return (
+                        <label className="radiusLabel" key={radius}>
+                          <Field name="radius" component="input" type="radio" value={radius} />
+                          {radius}
+                        </label>
+                      );
+                    })}
+                  </fieldset>
+              </div> )
+              : null
+            }
             <button type="submit" disabled={submitting || pristine}>
               Search
             </button>

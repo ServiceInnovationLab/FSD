@@ -10,5 +10,3 @@ Feature: Stuff on the main page
     Then I should see the keyword search box
     And I should see the location search box
     And I should see some category selectors
-    And I should see the radius selector
-    And The radius selector should be set to "25" km radius
