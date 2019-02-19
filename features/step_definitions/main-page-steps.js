@@ -71,8 +71,21 @@ module.exports = function() {
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
-    const element = await helpers.getFirstElementContainingText('button', text);
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.xpath(`//*[contains(text(), '${text}')]`)), 10000);
+    const element = await driver.findElement(by.xpath(`//*[contains(text(), '${text}')]`));
     element.click();
+  });
+
+  this.Given(/^I click on the "([^"]*)" with "([^"]*)" "([^"]*)"$/, async (elementType, attribute, text) => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.xpath(`//${elementType}[@${attribute}="${text}"]`)), 10000);
+    const element = await driver.findElement(by.xpath(`//${elementType}[@${attribute}="${text}"]`));
+    element.click();
+  });
+
+  this.Given(/^I see a "([^"]*)" which says "([^"]*)"$/, async (elementType, text) => {
+    await driver.wait(until.elementsLocated(by.xpath(`//${elementType}//*[text()[contains(.,'${text}')]]`)), 10000);
   });
 
   this.Then(/^I see a list of service providers$/, async () => {
