@@ -15,7 +15,8 @@ const SERVICE_FIELDS =
 // Uses a looser match on other search vars if no keywords are present
 const requestBuilder = searchVars => {
   const { keyword } = searchVars;
-  return keyword && keyword.length > 2 
+
+  return keywordIsValid(keyword)
     ? keywordRequest(searchVars)
     : rankedRequest(searchVars)
 };
@@ -26,13 +27,7 @@ const requestBuilder = searchVars => {
 // the result count. Useful for getting the last page of results by setting
 // limit and offset in a subsequent query while reducing the amount of data
 // transferred.
-const requestResultCount = searchVars => {
-  const { keyword } = searchVars;
-
-  return keyword && keyword.length > 2 
-    ? keywordRequest({...searchVars, limit: 0})
-    : rankedRequest({...searchVars, limit: 0});
-};
+const requestResultCount = searchVars => requestBuilder({...searchVars, limit: 0});
 
 // false if not enough information is present to make a meaningful search
 const isValidQuery = searchVars => {
@@ -40,11 +35,15 @@ const isValidQuery = searchVars => {
 
   return Boolean(
     category 
-    || (keyword && keyword.length > 2) 
+    || keywordIsValid(keyword)
     || (latitude && longitude) 
     || address 
     || region);
 };
+
+const keywordIsValid = keyword => {
+  return keyword && keyword.length > 2;
+}
 
 export { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder, requestResultCount, isValidQuery, SERVICE_FIELDS, GH_PAGES_SUFFIX };
 

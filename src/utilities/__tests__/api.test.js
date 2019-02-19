@@ -59,10 +59,8 @@ describe('api.js', () => {
       }).not.toThrow();
     });
 
-    it('throws error without params', () => {
-      expect(() => {
-        loadResults();
-      }).toThrow();
+    it('returns no results for no params', () => {
+      expect(loadResults()).toMatchObject({});
     });
 
     it('returns an empty array when given invalid search parameters', () => {

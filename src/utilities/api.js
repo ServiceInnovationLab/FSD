@@ -23,7 +23,7 @@ const loadCategories = () => {
 const loadResults = async searchVars => {
   const { latitude, longitude, radius = '25', limit = 10} = searchVars;
 
-  // return (a promise of) and empty list if the query isn't valid
+  // return an empty list if the query isn't valid
   if (!isValidQuery(searchVars)){
     return [];
   }
