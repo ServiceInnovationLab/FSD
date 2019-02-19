@@ -2,9 +2,9 @@ import { isPointInCircle, getDistance } from 'geolib';
 
 const findNearMe = (data, addressLatLng, radius) => {
   const { latitude, longitude } = addressLatLng;
-  let filteredData = checkLatLng(data);
+  const filteredData = checkLatLng(data);
 
-  for (let point in filteredData) {
+  for (const point in filteredData) {
     const currentLat = filteredData[point].LATITUDE;
     const currentLng = filteredData[point].LONGITUDE;
 
