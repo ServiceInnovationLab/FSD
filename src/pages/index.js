@@ -21,6 +21,7 @@ export default class Index extends Component {
     address: '',
     region: ''
   };
+
   componentDidMount() {
     const { search } = this.props.location;
     this.doLoadResults(search);
@@ -91,14 +92,16 @@ export default class Index extends Component {
       region = '', 
       address = '',
       keyword = '', 
-      radius = DEFAULT_SEARCH_RADIUS
+      radius = DEFAULT_SEARCH_RADIUS,
+      latitude: userLatitude,
+      longitude: userLongitude
     } = searchVars;
 
     if (category) setCategory(category);
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
-      this.setState({ serviceProviders: res });
+      this.setState({ serviceProviders: res, userLatitude, userLongitude });
     });
   }
   showToggleMapButton(showExtraButtons) {
@@ -145,7 +148,12 @@ export default class Index extends Component {
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
-          <ListOfServiceProviders serviceProviders={serviceProviders} history={history} />
+          <ListOfServiceProviders 
+            serviceProviders={serviceProviders} 
+            history={history}
+            userLatitude={this.state.userLatitude}
+            userLongitude={this.state.userLongitude} 
+          />
         )}
         <Sharebar />
       </Page>

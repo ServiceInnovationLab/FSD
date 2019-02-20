@@ -6,7 +6,7 @@ module.exports = function() {
   });
 
   // Expect one input with name=keyword, enabled, type=text
-  this.Then(/^I should see the keyword search box$/, async () => {
+  this.Then(/^I see the keyword search box$/, async () => {
     const input_elements = await getInputElement('name', 'keyword');
     expect(input_elements.length).to.equal(1);
 
@@ -21,7 +21,7 @@ module.exports = function() {
   });
 
   // Expect one input with placeholder="Start typing an address", enabled, type=text
-  this.Then(/^I should see the location search box$/, async () => {
+  this.Then(/^I see the location search box$/, async () => {
     const input_elements = await getInputElement('name', 'address-autosuggest');
     expect(input_elements.length).to.equal(1);
 
@@ -36,23 +36,34 @@ module.exports = function() {
   });
 
   // expect more than one category button
-  this.Then(/^I should see some category selectors$/, async () => {
+  this.Then(/^I see some category selectors$/, async () => {
     const categories = await getInputElement('css', '.category__container > .category__button');
     expect(categories.length).to.be.above(1);
   });
 
   // expect more the search radius selector widget
-  this.Then(/^I should see the radius selector$/, async () => {
+  this.Then(/^I see the radius selector$/, async () => {
     // wait for the page to load
     await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
 
     // expect there to be 4 radius buttons
-    const categories = await driver.findElements(by.css('input[name="radius"]'));
-    expect(categories.length).to.equal(4);
+    const distance_options = await driver.findElements(by.css('input[name="radius"]'));
+    expect(distance_options.length).to.equal(4);
   });
 
+    // expect more the search radius selector widget
+    this.Then(/^I do not see the radius selector$/, async () => {
+      // wait for the page to load. Waiting on the category buttons since we
+      // expect the radius selecto NOT to exist.
+      await getInputElement('css', '.category__container > .category__button');
+  
+      // expect there to be 0 radius buttons
+      const distance_options = await driver.findElements(by.css('input[name="radius"]'));
+      expect(distance_options.length).to.equal(0);
+    });
+
   // expect more the search radius selector widget
-  this.Then(/^The radius selector should be set to "(\d+)" km radius$/, async kilometres => {
+  this.Then(/^The radius selector is set to "(\d+)" km radius$/, async kilometres => {
     // wait for the page to load
     await driver.wait(until.elementsLocated(by.css('form > div.radio-group')), 10000);
 

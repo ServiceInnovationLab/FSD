@@ -6,7 +6,8 @@ Feature: Stuff on the main page
   Background:
     Given I visit the main page
 
-  Scenario: Search controls
-    Then I should see the keyword search box
-    And I should see the location search box
-    And I should see some category selectors
+  Scenario: I can see the standard search controls
+    Then I see the keyword search box
+    And I see the location search box
+    And I see some category selectors
+    And I do not see the radius selector
