@@ -54,6 +54,7 @@
 .accordion__title > *:last-child,
 .accordion__body > *:last-child {
   margin-bottom: 0;
+  margin-right: 15px;
 }
 
 .accordion__arrow {
@@ -63,7 +64,7 @@
   height: 12px;
   position: absolute;
   top: 50%;
-  right: 0;
+  right: -15px;
   margin-top: -6px;
 }
 
