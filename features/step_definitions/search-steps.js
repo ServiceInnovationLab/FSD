@@ -12,15 +12,43 @@ module.exports = function() {
   });
 
   this.Given(/^I search near the address "([^"]*)"$/, async (value) => {
-    // Add the text to the address input
-    const input_elements = await getInputElement('name', 'address-autosuggest');
-    input_elements[0].sendKeys(value);
+    // Add the text to the address input 
+    //
+    // const input_element =
+    // document.querySelectorAll('input[name=address-autosuggest]');
+    // input_element.setAttribute('value', value); 
+    //
+    // add the text via setAttribute in the browser DOM, which happens
+    // instantaneously rather than using sendKeys which takes a while for each
+    // keystroke.
+    // driver.executeScript(
+    //   `document.querySelector('input[name=address-autosuggest]')
+    //     .setAttribute('value', '${value}')`);
+    //     await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${value}')]`)), 10000);
+
+      const input_elements = await getInputElement('name', 'address-autosuggest');
+      input_elements[0].sendKeys(value);
 
     // Select the top address suggestion which matches the input. We need to
     // check that the suggestion matches the search because the suggestion
     // values can lag behind the typing due to the small amount of time it takes
     // for them to load.
-    const elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${value}')]`));
+    let elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`));
+
+    // Press enter, wait and try again if no suggestions were loaded. Happens
+    // sometimes.
+    if(elements.length == 0){
+      // trigger a requery of suggestions
+      input_elements[0].sendKeys(' \b');
+
+      await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`)), 10000);
+      
+      elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`));
+
+      // There's a chance that still no element has been found, but that hasn't
+      // been observed.
+    }
+
     elements[0].click();
   });
 

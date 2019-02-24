@@ -12,8 +12,7 @@ Feature: Searching on the main page
     Then I see at least "5" service providers
 
   Scenario: I search near Thorndon Quay and get some results
-    Given I enter "Thorndon Quay" into the "address-autosuggest" input
-    And I click on the first address suggestion
+    Given I search near the address "Thorndon Quay"
     Then I see at least "5" service providers
 
   Scenario: Address searches will autosuggest regions
