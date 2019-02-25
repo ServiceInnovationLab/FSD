@@ -12,7 +12,7 @@ module.exports = function() {
   });
 
   this.Given(/^I search near the address "([^"]*)"$/, async (value) => {
-    // Add the text to the address input
+    // Add the text to the address input 
     const input_elements = await getInputElement('name', 'address-autosuggest');
     input_elements[0].sendKeys(value);
 
@@ -20,7 +20,26 @@ module.exports = function() {
     // check that the suggestion matches the search because the suggestion
     // values can lag behind the typing due to the small amount of time it takes
     // for them to load.
-    const elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${value}')]`));
+    let elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`));
+
+    // Press enter, wait and try again if no suggestions were loaded. Happens
+    // sometimes.
+    if(elements.length == 0){
+      // Trigger a requery of suggestions
+      //
+      // Sends space then backspace. Note that the address suggestions are
+      // sensitive to punctuation, so just pressing space would remove
+      // suggestions where the next character should be a comma.
+      input_elements[0].sendKeys(' \b');
+
+      await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`)), 10000);
+      
+      elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`));
+
+      // There's a chance that still no element has been found, but that hasn't
+      // been observed.
+    }
+
     elements[0].click();
   });
 
