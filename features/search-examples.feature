@@ -1,4 +1,4 @@
-Feature:
+Feature: Example search scenarios
   As user of the FSD search
   I expect that searches based on a location will show nearby results first
   So that I can find the most accessible services
@@ -11,25 +11,20 @@ Scenario: I search near a location
   Service to be the first result, but actually another service in the same
   building is presented first. We check for both here.
 
-  Given I enter "36 Leach Street New Plymouth" into the "address-autosuggest" input
-  And The first suggestion is "36 Leach Street, New Plymouth 4310"
-  And I click on the first address suggestion
+  Given I search near the address "36 Leach Street, New Plymouth"
   Then I see at least "5" service providers
   And The first result is "Epilepsy Association of New Zealand Taranaki Branch"
   And a result is "New Plymouth Budget Advisory Service"
 
 Scenario: I search with a category and a location
   Given I click on "Budgeting / Financial Capability"
-  And I enter "36 Leach Street New Plymouth" into the "address-autosuggest" input
-  And The first suggestion is "36 Leach Street, New Plymouth 4310"
-  And I click on the first address suggestion
+  And I search near the address "36 Leach Street, New Plymouth"
   Then I see at least "5" service providers
   And The first result is "New Plymouth Budget Advisory Service"
 
 Scenario: I search in a wide area around Wellington
   Given I click on "Child Care"
-  Given I enter "56 the Terrace Wellington Central" into the "address-autosuggest" input
-  And I click on the first address suggestion
+  Given I search near the address "56 The Terrace, Wellington Central"
   And I click on the "input" with "value" "100"
   And I click on "Search"
   Then I see at least "10" service providers
