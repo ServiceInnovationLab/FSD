@@ -12,7 +12,8 @@ const loadCategories = () => {
   return axios
     .get(url)
     .then(response => {
-      return response.data.result.records;
+      const {records} = response.data.result;
+      return records.filter(record => record.name);
     })
     .catch(error => {
       console.error(error);
