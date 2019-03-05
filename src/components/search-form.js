@@ -48,9 +48,6 @@ export default class SearchForm extends Component {
                 address={address ? address : region}
               />
             </div>
-            <div>
-              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
-            </div>
             {address
               ? (
                 <div className="radio-group">
@@ -68,6 +65,9 @@ export default class SearchForm extends Component {
               </div> )
               : null
             }
+            <div>
+              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
+            </div>
             <button type="submit" disabled={submitting || pristine}>
               Search
             </button>
