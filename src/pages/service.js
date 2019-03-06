@@ -9,6 +9,7 @@ import ServiceDetails from '../components/service-details';
 import MapContainer from '../containers/map-container';
 import { Accordion } from 'react-accessible-accordion';
 import { loadService } from '../utilities/api';
+import uniqueServices from '../utilities/uniqueServices';
 
 export default class Service extends Component {
   state = {
@@ -60,7 +61,7 @@ export default class Service extends Component {
         website: provider.PROVIDER_WEBSITE_1,
         email: provider.PUBLISHED_CONTACT_EMAIL_1,
         phoneNumber: provider.PUBLISHED_PHONE_1,
-        services: ensureUnique(services),
+        services: uniqueServices(services, 'SERVICE_NAME'),
 
         providerLatitude: provider.LATITUDE,
         providerLongitude: provider.LONGITUDE,
@@ -160,13 +161,4 @@ export default class Service extends Component {
       </Page>
     );
   }
-}
-
-function ensureUnique(services) {
-  let uniqueServiceIds = [];
-  return services.filter(service => {
-    if (uniqueServiceIds.includes(service['SERVICE_NAME'])) return false;
-    uniqueServiceIds.push(service['SERVICE_NAME']);
-    return service;
-  });
 }
