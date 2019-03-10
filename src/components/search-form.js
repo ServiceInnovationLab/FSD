@@ -42,9 +42,6 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
-            </div>
-            <div>
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
@@ -68,6 +65,9 @@ export default class SearchForm extends Component {
               </div> )
               : null
             }
+            <div>
+              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
+            </div>
             <button type="submit" disabled={submitting || pristine}>
               Search
             </button>
