@@ -67,7 +67,7 @@ export default class SearchForm extends Component {
             }
             <div className="search__topic">
               <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
-              <button type="submit" className="search__magnifyingGlass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} alt="Magnifying glass" />  
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} alt="Magnifying glass" />  
             </div>
 
             {showExtraButtons ? (
