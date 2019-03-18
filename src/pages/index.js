@@ -108,7 +108,7 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
+      <button className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
@@ -137,14 +137,14 @@ export default class Index extends Component {
             region={region}
             showExtraButtons={showExtraButtons}
             initialValues={{ keyword, radius }}
-          />
-          {this.showToggleMapButton(showExtraButtons)}
+          />  
         </SearchContainer>
         <SearchCriteria
           keyword={searchVars.keyword}
           address={address}
           category={selectedCategory}
         />
+        {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
