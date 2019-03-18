@@ -9,4 +9,36 @@
       margin: .25rem .5rem .25rem 0;
     }
   }
+
+  @media only screen and (max-width: 767px) {
+    &__topic {
+      position: relative;
+    }
+
+    &__magnifyingGlass {
+      background-image: url('../img/magnifying-glass.png');
+      background-size: cover;
+      height: 1.75rem;
+      width: 1.75rem;
+      position: absolute;
+      bottom: -0.25rem;
+      padding-left: 0;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    &__topic {
+      position: relative;
+    }
+
+    &__magnifyingGlass {
+      background-image: url('../img/magnifying-glass.png');
+      background-size: cover;
+      height: 1.75rem;
+      width: 1.75rem;
+      position: absolute;
+      bottom: -0.25rem;
+    }
+  }
 }
+
