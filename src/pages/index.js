@@ -137,14 +137,14 @@ export default class Index extends Component {
             region={region}
             showExtraButtons={showExtraButtons}
             initialValues={{ keyword, radius }}
-          />
-          {this.showToggleMapButton(showExtraButtons)}
+          />  
         </SearchContainer>
         <SearchCriteria
           keyword={searchVars.keyword}
           address={address}
           category={selectedCategory}
         />
+        {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
