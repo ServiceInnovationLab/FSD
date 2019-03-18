@@ -108,7 +108,7 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
+      <button className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
