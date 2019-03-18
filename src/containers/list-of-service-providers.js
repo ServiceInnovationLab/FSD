@@ -19,10 +19,9 @@ export default class ListOfServiceProviders extends Component {
     if (serviceProviders.length > 0) {
       return (
         <section className="service__container">
-          {uniqueServices(serviceProviders, 'PROVIDER_NAME').map((provider, index) => (
-            <div>{index+1}
+          {uniqueServices(serviceProviders, 'PROVIDER_NAME').map((provider, key) => (
             <ServiceProvider
-              key={`service_${index}`}
+              key={`service_${key}`}
               fsdId={provider.FSD_ID}
               purpose={provider.ORGANISATION_PURPOSE}
               address={provider.PHYSICAL_ADDRESS}
@@ -36,7 +35,7 @@ export default class ListOfServiceProviders extends Component {
               providerLongitude={provider.LONGITUDE}
               userLatitude={userLatitude}
               userLongitude={userLongitude}
-            /></div>
+            />
           ))}
         </section>
       );
