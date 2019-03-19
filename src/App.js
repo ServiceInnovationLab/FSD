@@ -13,7 +13,7 @@ import { CategoryContext, CategoryProvider } from './contexts/category-context';
 import { GH_PAGES_SUFFIX } from './utilities/url';
 
 // Pages
-import Index from './pages/index';
+import Index from './pages';
 import Service from './pages/service';
 
 class App extends Component {
