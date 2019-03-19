@@ -10,35 +10,18 @@
     }
   }
 
-  @media only screen and (max-width: 767px) {
-    &__topic {
-      position: relative;
-    }
-
-    &__magnifying-glass {
-      background-image: url('../img/magnifying-glass.png');
-      background-size: cover;
-      height: 1.75rem;
-      width: 1.75rem;
-      position: absolute;
-      bottom: -.25rem;
-      padding-left: 0;
-    }
+  &__topic {
+    position: relative;
   }
 
-  @media only screen and (min-width: 768px) {
-    &__topic {
-      position: relative;
-    }
-
-    &__magnifying-glass {
-      background-image: url('../img/magnifying-glass.png');
-      background-size: cover;
-      height: 1.75rem;
-      width: 1.75rem;
-      position: absolute;
-      bottom: -.25rem;
-    }
+  &__magnifying-glass {
+    background-image: url('../img/magnifying-glass.png');
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.75rem;
+    width: 1.75rem;
+    position: absolute;
+    bottom: -.25rem;
   }
 }
-
