@@ -11,7 +11,6 @@ import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
 import SearchCriteria from '../components/search-criteria';
 
-
 const DEFAULT_SEARCH_RADIUS = '25';
 
 export default class Index extends Component {
@@ -19,7 +18,7 @@ export default class Index extends Component {
     serviceProviders: [],
     showMap: false,
     address: '',
-    region: ''
+    region: '',
   };
 
   componentDidMount() {
@@ -87,14 +86,14 @@ export default class Index extends Component {
       categoryContext: { setCategory },
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { 
-      category = '', 
-      region = '', 
+    const {
+      category = '',
+      region = '',
       address = '',
-      keyword = '', 
+      keyword = '',
       radius = DEFAULT_SEARCH_RADIUS,
       latitude: userLatitude,
-      longitude: userLongitude
+      longitude: userLongitude,
     } = searchVars;
 
     if (category) setCategory(category);
@@ -108,7 +107,10 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
+      <button className="btn__search" onClick={() => this.toggleShowMap()}>
+        {' '}
+        {showListOrMapText(showMap)}
+      </button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
@@ -119,11 +121,24 @@ export default class Index extends Component {
   }
 
   render() {
-    const { serviceProviders, showMap, address, region, keyword, radius} = this.state;
-    const { history, location, categoryContext: {selectedCategory} } = this.props;
+    const {
+      serviceProviders,
+      showMap,
+      address,
+      region,
+      keyword,
+      radius,
+    } = this.state;
+    const {
+      history,
+      location,
+      categoryContext: { selectedCategory },
+    } = this.props;
 
     const searchVars = queryString.parse(location.search);
-    const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
+    const showExtraButtons = Boolean(
+      (serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0],
+    );
 
     return (
       <Page>
@@ -137,7 +152,7 @@ export default class Index extends Component {
             region={region}
             showExtraButtons={showExtraButtons}
             initialValues={{ keyword, radius }}
-          />  
+          />
         </SearchContainer>
         <SearchCriteria
           keyword={searchVars.keyword}
@@ -148,11 +163,11 @@ export default class Index extends Component {
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
-          <ListOfServiceProviders 
-            serviceProviders={serviceProviders} 
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
             history={history}
             userLatitude={this.state.userLatitude}
-            userLongitude={this.state.userLongitude} 
+            userLongitude={this.state.userLongitude}
           />
         )}
         <Sharebar />

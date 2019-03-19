@@ -34,20 +34,17 @@ export default class Service extends Component {
 
   doParseUrl = () => {
     const { search } = this.props.location;
-    const { 
-      latitude = '', 
-      longitude = ''
-    } = queryString.parse(search);;
+    const { latitude = '', longitude = '' } = queryString.parse(search);
 
     this.setState({
       userLatitude: latitude,
-      userLongitude: longitude
+      userLongitude: longitude,
     });
   };
 
   componentDidMount = () => {
     const { id } = this.props.match.params;
- 
+
     loadService(id).then(args => {
       const { provider, services } = args;
 
@@ -99,20 +96,25 @@ export default class Service extends Component {
     const providerMap =
       providerLatitude && providerLongitude ? (
         <MapContainer
-          serviceProviders={[{
-            PROVIDER_NAME: name,
-            ORGANISATION_PURPOSE: purpose,
-            PHYSICAL_ADDRESS: address,
-            LATITUDE: providerLatitude,
-            LONGITUDE: providerLongitude
-          }]}
+          serviceProviders={[
+            {
+              PROVIDER_NAME: name,
+              ORGANISATION_PURPOSE: purpose,
+              PHYSICAL_ADDRESS: address,
+              LATITUDE: providerLatitude,
+              LONGITUDE: providerLongitude,
+            },
+          ]}
         />
       ) : null;
-    
+
     return (
       <Page className="service__page">
         <header>
-          <button className="icon-prefix__container button back-button" onClick={goBack}>
+          <button
+            className="icon-prefix__container button back-button"
+            onClick={goBack}
+          >
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>

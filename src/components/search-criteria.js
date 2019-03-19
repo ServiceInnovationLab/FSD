@@ -4,7 +4,11 @@ export default class SearchCriteria extends Component {
   render() {
     const { keyword, address, category } = this.props;
     const parsedKeyword = keyword && firstLetterAsCap(keyword);
-    const searchCriteria = createSearchCriteria(parsedKeyword, address, category);
+    const searchCriteria = createSearchCriteria(
+      parsedKeyword,
+      address,
+      category,
+    );
 
     return <p>{searchCriteria}</p>;
   }

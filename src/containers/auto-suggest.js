@@ -1,6 +1,10 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
-import { getSuggestions, getAddressMetadata, getLocationMetadata } from '../utilities/addressfinder';
+import {
+  getSuggestions,
+  getAddressMetadata,
+  getLocationMetadata,
+} from '../utilities/addressfinder';
 
 const getSuggestionValue = suggestion => suggestion.a;
 
@@ -53,10 +57,22 @@ export default class Example extends React.Component {
 
     if (suggestion.type === 'location') {
       const result = await getLocationMetadata(suggestion.pxid);
-      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, region: result.a }));
+      updateSearchParams(
+        new SearchLocation({
+          latitude: result.y,
+          longitude: result.x,
+          region: result.a,
+        }),
+      );
     } else {
       const result = await getAddressMetadata(suggestion.pxid);
-      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, address: result.a }));
+      updateSearchParams(
+        new SearchLocation({
+          latitude: result.y,
+          longitude: result.x,
+          address: result.a,
+        }),
+      );
     }
   };
 

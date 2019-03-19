@@ -18,7 +18,8 @@ export default class SearchForm extends Component {
   onSubmit(values) {
     const { dirtyFields } = arguments[1].getState();
     Object.keys(dirtyFields).forEach(field => {
-      if (!values[field] && !(values[field] === 'undefined')) values[field] = '';
+      if (!values[field] && !(values[field] === 'undefined'))
+        values[field] = '';
     });
 
     this.props.updateSearchParams(values);
@@ -48,30 +49,48 @@ export default class SearchForm extends Component {
                 address={address ? address : region}
               />
             </div>
-            {address
-              ? (
-                <div className="radio-group">
-                  <fieldset className="radiusFieldset">
+            {address ? (
+              <div className="radio-group">
+                <fieldset className="radiusFieldset">
                   <legend>Distance (km):</legend>
-                    {radiusOptions.map(radius => {
-                      return (
-                        <label className="radiusLabel" key={radius}>
-                          <Field name="radius" component="input" type="radio" value={radius} />
-                          {radius}
-                        </label>
-                      );
-                    })}
-                  </fieldset>
-              </div> )
-              : null
-            }
+                  {radiusOptions.map(radius => {
+                    return (
+                      <label className="radiusLabel" key={radius}>
+                        <Field
+                          name="radius"
+                          component="input"
+                          type="radio"
+                          value={radius}
+                        />
+                        {radius}
+                      </label>
+                    );
+                  })}
+                </fieldset>
+              </div>
+            ) : null}
             <div className="search__topic">
-              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
-              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} alt="Magnifying glass" />  
+              <Field
+                name="keyword"
+                component="input"
+                type="text"
+                placeholder="Enter topic or organisation"
+              />
+              <button
+                type="submit"
+                className="search__magnifying-glass"
+                onClick={() => handleSubmit(form)}
+                disabled={submitting || pristine}
+                alt="Magnifying glass"
+              />
             </div>
 
             {showExtraButtons ? (
-              <button type="button" onClick={() => doResetSearch(form)} disabled={submitting}>
+              <button
+                type="button"
+                onClick={() => doResetSearch(form)}
+                disabled={submitting}
+              >
                 Reset Search
               </button>
             ) : null}
@@ -81,4 +100,3 @@ export default class SearchForm extends Component {
     );
   }
 }
-
