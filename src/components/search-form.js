@@ -65,12 +65,11 @@ export default class SearchForm extends Component {
               </div> )
               : null
             }
-            <div>
+            <div className="search__topic">
               <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} alt="Magnifying glass" />  
             </div>
-            <button type="submit" disabled={submitting || pristine}>
-              Search
-            </button>
+
             {showExtraButtons ? (
               <button type="button" onClick={() => doResetSearch(form)} disabled={submitting}>
                 Reset Search
@@ -82,3 +81,4 @@ export default class SearchForm extends Component {
     );
   }
 }
+
