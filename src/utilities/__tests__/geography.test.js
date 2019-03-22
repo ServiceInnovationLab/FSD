@@ -72,13 +72,13 @@ describe('geography.js', () => {
       expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
     });
 
-    it("responds null when physical address doesn't qualify", () => {
+    it("accepts addresses when they are blank (Bug 185)", () => {
       dataPointClone.PHYSICAL_ADDRESS = '';
 
-      expect(checkLatLng([dataPointClone])).toMatchObject([]);
+      expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
     });
 
-    it("accepts addresses which don't contain a street number", () => {
+    it("accepts addresses which don't contain a street number (Bug 185)", () => {
       dataPointClone.PHYSICAL_ADDRESS = 'Cnr Jackson Street and South Terrace';
 
       expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
