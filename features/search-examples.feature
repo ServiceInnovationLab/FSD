@@ -34,3 +34,8 @@ Scenario: I search for a phrase
   Given I enter "age concern" into the "keyword" input
   And I click on "Search"
   Then I see a "header" which says "Age Concern"
+
+Scenario: I search for a service provider with an address but no street number
+  Given I enter "Turanga" into the "keyword" input
+  And I search near the address "Gisborne"
+  Then a result is "Tūranga Ararau"
