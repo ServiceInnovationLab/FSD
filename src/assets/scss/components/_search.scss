@@ -9,4 +9,19 @@
       margin: .25rem .5rem .25rem 0;
     }
   }
+
+  &__topic {
+    position: relative;
+  }
+
+  &__magnifying-glass {
+    background-image: url('../img/magnifying-glass.png');
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.75rem;
+    width: 1.75rem;
+    position: absolute;
+    bottom: -.25rem;
+  }
 }

@@ -51,26 +51,31 @@ export default class SearchForm extends Component {
             {address
               ? (
                 <div className="radio-group">
-                  <fieldset className="radiusFieldset">
-                  <legend>Distance (km):</legend>
-                    {radiusOptions.map(radius => {
-                      return (
-                        <label className="radiusLabel" key={radius}>
-                          <Field name="radius" component="input" type="radio" value={radius} />
-                          {radius}
-                        </label>
-                      );
-                    })}
+                  <fieldset className="radius-fieldset">
+                    <legend>Distance (km):</legend>
+                      {radiusOptions.map(radius => {
+                        return (
+                          <label className="radius-label" key={radius}>
+                            <button
+                              className={radius === initialValues.radius ? 'radius-button--selected' : 'radius-button'}
+                              type="button"
+                              name="radius"
+                              value={radius}
+                              onClick={()=>  updateSearchParams({radius: radius})
+                              }
+                            >{radius}</button>
+                          </label>
+                        );
+                      })}
                   </fieldset>
               </div> )
               : null
             }
-            <div>
+            <div className="search__topic">
               <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} alt="Magnifying glass" />  
             </div>
-            <button type="submit" disabled={submitting || pristine}>
-              Search
-            </button>
+
             {showExtraButtons ? (
               <button type="button" onClick={() => doResetSearch(form)} disabled={submitting}>
                 Reset Search
@@ -82,3 +87,4 @@ export default class SearchForm extends Component {
     );
   }
 }
+
