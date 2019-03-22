@@ -148,7 +148,9 @@ export default class ServiceProviders extends Component {
             <Link className="button" to={`/service/${fsdId}`}>
               More details
             </Link>
+
           )}
+          <hr />
         </footer>
       </section>
     );
