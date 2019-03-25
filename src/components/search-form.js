@@ -51,16 +51,22 @@ export default class SearchForm extends Component {
             {address
               ? (
                 <div className="radio-group">
-                  <fieldset className="radiusFieldset">
-                  <legend>Distance (km):</legend>
-                    {radiusOptions.map(radius => {
-                      return (
-                        <label className="radiusLabel" key={radius}>
-                          <Field name="radius" component="input" type="radio" value={radius} />
-                          {radius}
-                        </label>
-                      );
-                    })}
+                  <fieldset className="radius-fieldset">
+                    <legend>Distance (km):</legend>
+                      {radiusOptions.map(radius => {
+                        return (
+                          <label className="radius-label" key={radius}>
+                            <button
+                              className={radius === initialValues.radius ? 'radius-button--selected' : 'radius-button'}
+                              type="button"
+                              name="radius"
+                              value={radius}
+                              onClick={()=>  updateSearchParams({radius: radius})
+                              }
+                            >{radius}</button>
+                          </label>
+                        );
+                      })}
                   </fieldset>
               </div> )
               : null
