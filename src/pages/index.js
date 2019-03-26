@@ -102,7 +102,8 @@ export default class Index extends Component {
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
-      this.setState({ serviceProviders: res, userLatitude, userLongitude, numOfResults: uniqueServices(res, 'PROVIDER_NAME').length});
+      const unique_Results = uniqueServices(res, 'PROVIDER_NAME')
+      this.setState({ serviceProviders: unique_Results, userLatitude, userLongitude, numOfResults: unique_Results.length});
     });
   }
   showToggleMapButton(showExtraButtons) {
