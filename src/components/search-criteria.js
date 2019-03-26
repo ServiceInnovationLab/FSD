@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 export default class SearchCriteria extends Component {
   render() {
-    const { keyword, address, category, numOfResults } = this.props;
-    const searchCriteria = createSearchCriteria(keyword, address, category);
+    const { keyword, address, region, category, numOfResults } = this.props;
+    const searchCriteria = createSearchCriteria(keyword, address, region, category);
 
     return (<p>
       {searchCriteria}
@@ -17,7 +17,7 @@ export default class SearchCriteria extends Component {
   }
 }
 
-function createSearchCriteria(keyword, address, category) {
+function createSearchCriteria(keyword, address, region, category) {
   const search = ['Searching'];
 
   if (keyword)
@@ -32,6 +32,13 @@ function createSearchCriteria(keyword, address, category) {
       <span key={address}>
         {' '}
         near: <b>{address}</b>
+      </span>,
+    );
+    if (region)
+    search.push(
+      <span key={region}>
+        {' '}
+        near: <b>{region}</b>
       </span>,
     );
   if (category)

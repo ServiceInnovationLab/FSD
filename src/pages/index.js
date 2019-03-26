@@ -144,6 +144,7 @@ export default class Index extends Component {
         <SearchCriteria
           keyword={searchVars.keyword}
           address={address}
+          region={region}
           category={selectedCategory}
           numOfResults={numOfResults}
         />
