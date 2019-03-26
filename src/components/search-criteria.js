@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 
 export default class SearchCriteria extends Component {
   render() {
-    const { keyword, address, category } = this.props;
-    const parsedKeyword = keyword && firstLetterAsCap(keyword);
-    const searchCriteria = createSearchCriteria(parsedKeyword, address, category);
+    const { keyword, address, category, numOfResults } = this.props;
+    const searchCriteria = createSearchCriteria(keyword, address, category);
 
-    return <p>{searchCriteria}</p>;
+    return (<p>
+      {searchCriteria}
+      {' '}
+      {searchCriteria && 
+        <span>
+        ({numOfResults} results found)
+        </span>
+      }
+      </p>);
   }
 }
 
@@ -39,12 +46,3 @@ function createSearchCriteria(keyword, address, category) {
   return search;
 }
 
-function firstLetterAsCap(str) {
-  str = str.split(' ');
-
-  for (let i = 0, x = str.length; i < x; i++) {
-    str[i] = str[i][0].toUpperCase() + str[i].substr(1);
-  }
-
-  return str.join(' ');
-}
