@@ -6,7 +6,12 @@ export default class SearchCriteria extends Component {
     const parsedKeyword = keyword && firstLetterAsCap(keyword);
     const searchCriteria = createSearchCriteria(parsedKeyword, address, category);
 
+    if (numOfResults !== 0){
     return <p>{searchCriteria} ({numOfResults} results found)</p>;
+    }
+    else {
+      return <p>{searchCriteria}</p>
+    }
   }
 }
 
