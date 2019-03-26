@@ -17,9 +17,11 @@ export default class ListOfServiceProviders extends Component {
     } = this.props;
 
     if (serviceProviders.length > 0) {
+      const services_list = uniqueServices(serviceProviders, 'PROVIDER_NAME')
+
       return (
         <section className="service__container">
-          {uniqueServices(serviceProviders, 'PROVIDER_NAME').map((provider, key) => (
+          {services_list.map((provider, key) => (
             <ServiceProvider
               key={`service_${key}`}
               fsdId={provider.FSD_ID}
