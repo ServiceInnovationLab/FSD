@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ServiceProvider from '../components/service-provider';
-import uniqueServices from '../utilities/uniqueServices';
 
 export default class ListOfServiceProviders extends Component {
   static propTypes = {
@@ -19,7 +18,7 @@ export default class ListOfServiceProviders extends Component {
     if (serviceProviders.length > 0) {
       return (
         <section className="service__container">
-          {uniqueServices(serviceProviders, 'PROVIDER_NAME').map((provider, key) => (
+          {serviceProviders.map((provider, key) => (
             <ServiceProvider
               key={`service_${key}`}
               fsdId={provider.FSD_ID}

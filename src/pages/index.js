@@ -10,6 +10,7 @@ import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
 import SearchCriteria from '../components/search-criteria';
+import uniqueServices from '../utilities/uniqueServices';
 
 
 const DEFAULT_SEARCH_RADIUS = '25';
@@ -101,7 +102,8 @@ export default class Index extends Component {
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
-      this.setState({ serviceProviders: res, userLatitude, userLongitude });
+      const unique_Results = uniqueServices(res, 'PROVIDER_NAME')
+      this.setState({ serviceProviders: unique_Results, userLatitude, userLongitude, numOfResults: unique_Results.length});
     });
   }
   showToggleMapButton(showExtraButtons) {
@@ -119,7 +121,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { serviceProviders, showMap, address, region, keyword, radius} = this.state;
+    const { serviceProviders, showMap, address, region, keyword, radius, numOfResults} = this.state;
     const { history, location, categoryContext: {selectedCategory} } = this.props;
 
     const searchVars = queryString.parse(location.search);
@@ -143,6 +145,7 @@ export default class Index extends Component {
           keyword={searchVars.keyword}
           address={address}
           category={selectedCategory}
+          numOfResults={numOfResults}
         />
         {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
