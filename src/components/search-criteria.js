@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 export default class SearchCriteria extends Component {
   render() {
-    const { keyword, address, category } = this.props;
+    const { keyword, address, category, numOfResults } = this.props;
     const parsedKeyword = keyword && firstLetterAsCap(keyword);
     const searchCriteria = createSearchCriteria(parsedKeyword, address, category);
 
-    return <p>{searchCriteria}</p>;
+    return <p>{searchCriteria} ({numOfResults} results found)</p>;
   }
 }
 
