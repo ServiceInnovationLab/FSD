@@ -42,7 +42,7 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="searchBox">Address</label>
+              <label htmlFor="searchBox" className="search__addressLabel">Address</label>
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
