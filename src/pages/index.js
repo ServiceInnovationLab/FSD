@@ -102,7 +102,7 @@ export default class Index extends Component {
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
-      const unique_Results = uniqueServices(res, 'PROVIDER_NAME')
+      const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
       this.setState({ serviceProviders: unique_Results, userLatitude, userLongitude, numOfResults: unique_Results.length});
     });
   }
@@ -144,6 +144,7 @@ export default class Index extends Component {
         <SearchCriteria
           keyword={searchVars.keyword}
           address={address}
+          region={region}
           category={selectedCategory}
           numOfResults={numOfResults}
         />
