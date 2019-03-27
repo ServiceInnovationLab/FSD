@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ServiceProvider from '../components/service-provider';
-import uniqueServices from '../utilities/uniqueServices';
 
 export default class ListOfServiceProviders extends Component {
   static propTypes = {
