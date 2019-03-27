@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import ServiceProvider from '../components/service-provider';
@@ -20,7 +20,8 @@ export default class ListOfServiceProviders extends Component {
       return (
         <section className="service__container">          
         {uniqueServices(serviceProviders, 'PROVIDER_NAME').map((provider, index) => (
-          <div><h3>{index+1}</h3>
+          <Fragment>
+            {process.env.REACT_APP_DISPLAY_INDEX && <h3>{index+1}</h3>}
             <ServiceProvider
               key={`service_${index}`}
               fsdId={provider.FSD_ID}
@@ -36,7 +37,8 @@ export default class ListOfServiceProviders extends Component {
               providerLongitude={provider.LONGITUDE}
               userLatitude={userLatitude}
               userLongitude={userLongitude}
-            /></div>
+            />
+          </Fragment>
           ))}
         </section>
       );
