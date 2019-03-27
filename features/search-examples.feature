@@ -25,12 +25,17 @@ Scenario: I search with a category and a location
 Scenario: I search in a wide area around Wellington
   Given I click on "Child Care"
   Given I search near the address "56 The Terrace, Wellington Central"
-  And I click on the "input" with "value" "100"
+  And I click on the "button" with "value" "100"
   And I click on "Search"
   Then I see at least "10" service providers
   And I see a "address" which says "Lower Hutt"
 
 Scenario: I search for a phrase
   Given I enter "age concern" into the "keyword" input
-  And I click on "Search"
+  And I click on "Magnifying Glass"
   Then I see a "header" which says "Age Concern"
+
+Scenario: I search for a service provider with an address but no street number
+  Given I enter "Turanga" into the "keyword" input
+  And I search near the address "Gisborne"
+  Then a result is "Tūranga Ararau"
