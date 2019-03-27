@@ -78,6 +78,7 @@ export default class Example extends React.Component {
       value: address,
       onChange: this.onChange.bind(this),
       name: 'address-autosuggest',
+      id: 'searchBox'
     };
     return (
       <Autosuggest
