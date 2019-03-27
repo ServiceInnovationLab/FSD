@@ -74,7 +74,7 @@ export default class SearchForm extends Component {
             }
             <div className="search__topic">
               <Field name="keyword" component="input" type="text" aria-label="Enter topic or organisation" placeholder="Enter topic or organisation" />
-              <button type="submit" className="search__magnifying-glass" aria-label="Search" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button> 
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button> 
             </div>
 
             {showExtraButtons ? (
