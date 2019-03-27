@@ -42,6 +42,7 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
+              <label htmlFor="searchBox" className="search__addressLabel">Address</label>
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
@@ -72,8 +73,8 @@ export default class SearchForm extends Component {
               : null
             }
             <div className="search__topic">
-              <Field name="keyword" component="input" type="text" placeholder="Enter topic or organisation" />
-              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} alt="Magnifying glass" />  
+              <Field name="keyword" component="input" type="text" aria-label="Enter topic or organisation" placeholder="Enter topic or organisation" />
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button> 
             </div>
 
             {showExtraButtons ? (

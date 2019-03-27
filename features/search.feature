@@ -8,7 +8,7 @@ Feature: Searching on the main page
 
   Scenario:  I search for "family" and get some results
     Given I enter "family" into the "keyword" input
-    And I click on "Search"
+    And I click on "Magnifying Glass"
     Then I see at least "5" service providers
 
   Scenario: I search near Thorndon Quay and get some results
