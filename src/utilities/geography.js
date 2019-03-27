@@ -31,7 +31,6 @@ const findNearMe = (data, addressLatLng, radius) => {
 const checkLatLng = data => {
   return data.filter(r => {
     return (
-      r.PHYSICAL_ADDRESS.match(/\d+/g) !== null &&
       r.LATITUDE !== '0' &&
       r.LONGITUDE !== '0' &&
       r.LATITUDE !== null &&
