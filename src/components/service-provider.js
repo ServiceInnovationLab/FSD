@@ -149,6 +149,7 @@ export default class ServiceProviders extends Component {
               More details
             </Link>
           )}
+          <hr />
         </footer>
       </section>
     );
