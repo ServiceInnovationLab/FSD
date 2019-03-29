@@ -22,7 +22,7 @@ const loadCategories = () => {
 };
 
 const loadResults = async searchVars => {
-  const { latitude, longitude, radius = '25', limit = 50} = searchVars;
+  const { latitude, longitude, radius = '25', limit = 500} = searchVars;
 
   // return an empty list if the query isn't valid
   if (!isValidQuery(searchVars)) return [];
@@ -41,7 +41,7 @@ const loadResults = async searchVars => {
       // The results will be returned in distance order
       return findNearMe(response.data.result.records, { latitude, longitude }, radiusInMetres);
     }
-    
+
     // The results will be returned in rank descending order - the
     // server supplies them in rank ascendig order by default.
     return response.data.result.records.sort(x => -x.rank);
