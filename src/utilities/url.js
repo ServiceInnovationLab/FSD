@@ -77,8 +77,6 @@ const rankedRequest = searchVars => {
 
   // note plain=false to enable the advanced query mode, otherwise all terms will be ANDed together not ORed
   return `${API_PATH}datastore_search?distinct=true&plain=false&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(query)}${categoryFilters}&offset=${Math.max(0, offset)}&limit=${limit}`;
-
-  // return `https://catalogue.data.govt.nz/api/action/datastore_search?q={%22LEVEL_1_CATEGORY%22:%22Parents%20and%20Caregivers%22,%20%22PHYSICAL_ADDRESS%22:%22masterton%22}&resource_id=35de6bf8-b254-4025-89f5-da9eb6adf9a0&limit=5000&plain=true`;
 };
 
 // Break a string into tokens (words)
