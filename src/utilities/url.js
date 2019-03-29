@@ -21,7 +21,7 @@ const requestBuilder = searchVars => {
     : rankedRequest(searchVars)
 };
 
-// Get the number of results available for a query. 
+// Get the number of results available for a query.
 //
 // This will actually perform the query on the remote server but only ask for
 // the result count. Useful for getting the last page of results by setting
@@ -34,10 +34,10 @@ const isValidQuery = searchVars => {
   const { keyword, category, address, region, latitude, longitude } = searchVars;
 
   return Boolean(
-    category 
+    category
     || keywordIsValid(keyword)
-    || (latitude && longitude) 
-    || address 
+    || (latitude && longitude)
+    || address
     || region);
 };
 
@@ -59,7 +59,7 @@ const keywordRequest = searchVars => {
   const additionalTerms = [category, address, region].join(' ')
   const additionalQuery = tokenize(additionalTerms).join(' | ');
 
-  const query = additionalQuery 
+  const query = additionalQuery
     ? `(${keywordQuery}) & (${additionalQuery})`
     : keywordQuery;
 
@@ -77,6 +77,8 @@ const rankedRequest = searchVars => {
 
   // note plain=false to enable the advanced query mode, otherwise all terms will be ANDed together not ORed
   return `${API_PATH}datastore_search?distinct=true&plain=false&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(query)}${categoryFilters}&offset=${Math.max(0, offset)}&limit=${limit}`;
+
+  // return `https://catalogue.data.govt.nz/api/action/datastore_search?q={%22LEVEL_1_CATEGORY%22:%22Parents%20and%20Caregivers%22,%20%22PHYSICAL_ADDRESS%22:%22masterton%22}&resource_id=35de6bf8-b254-4025-89f5-da9eb6adf9a0&limit=5000&plain=true`;
 };
 
 // Break a string into tokens (words)
