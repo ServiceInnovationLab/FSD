@@ -44,3 +44,10 @@ Scenario: I search and find a lot of results, but only see the top 50 service pr
   Given I enter "Citizens Advice Bureau" into the "keyword" input
   And I click on "Magnifying Glass"
   Then I see exactly "50" service providers
+  And the search summary says "50"
+
+Scenario: I search and find 27 results, and see all of them displayed
+  Given I enter "Stand Children's Services" into the "keyword" input
+  And I click on "Magnifying Glass"
+  Then I see exactly "27" service providers
+  And the search summary says "27"
