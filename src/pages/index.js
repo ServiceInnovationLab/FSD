@@ -104,7 +104,13 @@ export default class Index extends Component {
     loadResults(searchVars).then(res => {
       const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
       const paged_results = unique_Results.slice(0, serviceProvidersPerPage)
-      this.setState({ serviceProviders: paged_results, userLatitude, userLongitude, numOfResults: unique_Results.length});
+      this.setState({ 
+        serviceProviders: paged_results, 
+        userLatitude, 
+        userLongitude, 
+        numOfResults: unique_Results.length, 
+        numOfResultsDisplayed: paged_results.length
+      });
     });
   }
   showToggleMapButton(showExtraButtons) {
@@ -122,7 +128,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { serviceProviders, showMap, address, region, keyword, radius, numOfResults} = this.state;
+    const { serviceProviders, showMap, address, region, keyword, radius, numOfResults, numOfResultsDisplayed} = this.state;
     const { history, location, categoryContext: {selectedCategory} } = this.props;
 
     const searchVars = queryString.parse(location.search);
@@ -148,6 +154,7 @@ export default class Index extends Component {
           region={region}
           category={selectedCategory}
           numOfResults={numOfResults}
+          numOfResultsDisplayed={numOfResultsDisplayed}
         />
         {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
