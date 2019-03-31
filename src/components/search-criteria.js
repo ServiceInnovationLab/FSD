@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 
 export default class SearchCriteria extends Component {
   render() {
-    const { keyword, address, region, category, numOfResults } = this.props;
+    /* Note that numOfResults is currently ignored, in favour of
+    numOfResultsDisplayed. This reflects the default limit of 50 search provider
+    results displayed in index.js. 
+
+    If pagination of results is added in future numOfResults will become useful
+    again to show the total number of results found across all pages, for
+    example "Showing ${numOfResultsDisplayed} of {numOfResults} results". */
+    const { keyword, address, region, category, numOfResults, numOfResultsDisplayed } = this.props;
     const searchCriteria = createSearchCriteria(keyword, address, region, category);
 
     return (<p>
@@ -10,7 +17,7 @@ export default class SearchCriteria extends Component {
       {' '}
       {searchCriteria && 
         <span>
-        ({numOfResults} results found)
+        ({numOfResultsDisplayed} results)
         </span>
       }
       </p>);
