@@ -99,6 +99,10 @@ module.exports = function() {
     await driver.wait(until.elementsLocated(by.xpath(`//${elementType}//*[text()[contains(.,'${text}')]]`)), 10000);
   });
 
+  this.Given(/^the search summary says "([^"]*)"$/, async text => {
+    await driver.wait(until.elementsLocated(by.xpath(`//section[@class='search__criteria']//*[text()[contains(.,'${text}')]]`)), 10000);
+  });
+
   this.Then(/^I see a list of service providers$/, async () => {
     await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
     const elements = await driver.findElements(by.css('section .service'));

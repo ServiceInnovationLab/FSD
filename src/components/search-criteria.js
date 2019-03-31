@@ -12,15 +12,18 @@ export default class SearchCriteria extends Component {
     const { keyword, address, region, category, numOfResults, numOfResultsDisplayed } = this.props;
     const searchCriteria = createSearchCriteria(keyword, address, region, category);
 
-    return (<p>
-      {searchCriteria}
-      {' '}
-      {searchCriteria && 
-        <span>
-        ({numOfResultsDisplayed} results)
-        </span>
-      }
-      </p>);
+    return (
+      <section class="search__criteria">
+        <p>
+        {searchCriteria}
+        {' '}
+        {searchCriteria && 
+          <span>
+          ({numOfResultsDisplayed} results)
+          </span>
+        }
+        </p>
+      </section>);
   }
 }
 
