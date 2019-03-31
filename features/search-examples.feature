@@ -39,3 +39,8 @@ Scenario: I search for a service provider with an address but no street number
   Given I enter "Turanga" into the "keyword" input
   And I search near the address "Gisborne"
   Then a result is "Tūranga Ararau"
+
+Scenario: I search and find a lot of results, but only see the top 50 service providers
+  Given I enter "Citizens Advice Bureau" into the "keyword" input
+  And I click on "Magnifying Glass"
+  Then I see exactly "50" service providers
