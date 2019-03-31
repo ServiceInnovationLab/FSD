@@ -83,7 +83,7 @@ export default class Index extends Component {
 
     push(`${location.pathname}?${newSearchQuery}`);
   }
-  doLoadResults(locationQuery) {
+  doLoadResults(locationQuery, serviceProvidersPerPage = 50) {
     const {
       categoryContext: { setCategory },
     } = this.props;
@@ -103,7 +103,8 @@ export default class Index extends Component {
 
     loadResults(searchVars).then(res => {
       const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
-      this.setState({ serviceProviders: unique_Results, userLatitude, userLongitude, numOfResults: unique_Results.length});
+      const paged_results = unique_Results.slice(0, serviceProvidersPerPage)
+      this.setState({ serviceProviders: paged_results, userLatitude, userLongitude, numOfResults: unique_Results.length});
     });
   }
   showToggleMapButton(showExtraButtons) {
