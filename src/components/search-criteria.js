@@ -9,6 +9,7 @@ export default class SearchCriteria extends Component {
     If pagination of results is added in future numOfResults will become useful
     again to show the total number of results found across all pages, for
     example "Showing ${numOfResultsDisplayed} of {numOfResults} results". */
+    // eslint-disable-next-line no-unused-vars
     const { keyword, address, region, category, numOfResults, numOfResultsDisplayed } = this.props;
     const searchCriteria = createSearchCriteria(keyword, address, region, category);
 
