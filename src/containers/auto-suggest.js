@@ -15,7 +15,6 @@ const CLEAR_ADDRESS_KEYS = [
   'Backspace',
   'Clear',
   'Delete',
-  'EraseEof',
 ];
 
 // Represents the parts of a region or street address we are interested in for
