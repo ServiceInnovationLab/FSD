@@ -118,6 +118,19 @@ module.exports = function() {
     await driver.wait(until.elementsLocated(by.css('#react-autowhatever-1--item-0')), 10000);
     const elements = await driver.findElements(by.css('#react-autowhatever-1--item-0'));
     elements[0].click();
+
+    // this is a crude helper to wait for the address selection and subsequent
+    // search take effect. It would be better to wait for part of the page to
+    // become stale, but with a quick implementation it wasn't working well and
+    // time doesn't allow more polishing
+    await driver.sleep(500);
+
+    // const search__containers = await driver.findElements(by.css('section.search__container'));
+    // // wait for the page to be refreshed
+    // await driver.wait(until.stalenessOf(search__containers[0]), 10000);
+
+    // // wait for the search controls to be rendered again
+    // await driver.wait(until.elementsLocated(by.css('section .search__container')), 10000);
   });
 
   this.Then(/^The first suggestion is "([^"]*)"$/, async address_text => {
