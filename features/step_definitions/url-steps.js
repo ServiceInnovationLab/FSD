@@ -1,8 +1,8 @@
-const parseHashRouterUrl = require('../../src/utilities/hashRoutedUrls').getSearchParams;
+const getHashRouterQueryParams = require('../../src/utilities/hashRoutedUrls').getQueryParams;
 
-// Get an object representing the URL search parameters from the current browser URL
-const getCurrentUrlSearchParameters = async () => {
-  return parseHashRouterUrl(
+// Get an object representing the URL query parameters from the current browser URL
+const getCurrentUrlQueryParameters = async () => {
+  return getHashRouterQueryParams(
     await driver.getCurrentUrl()
   );
 };
@@ -17,13 +17,13 @@ module.exports = function() {
   });
 
   this.Then(/^the URL query has key "(\w+)" with value "([^"]+)"$/, async (k, v) => {
-    const searchParameters = await getCurrentUrlSearchParameters();
-    expect(searchParameters[k]).to.equal(v);
+    const queryParameters = await getCurrentUrlQueryParameters();
+    expect(queryParameters[k]).to.equal(v);
   });
 
   this.Then(/^the URL query does not have key "(\w+)"$/, async k => {
-    const searchParameters = await getCurrentUrlSearchParameters();
-    expect(searchParameters[k]).to.be.undefined;
+    const queryParameters = await getCurrentUrlQueryParameters();
+    expect(queryParameters[k]).to.be.undefined;
   });
 
   this.Then(/^I am on a service detail page$/, async () => {

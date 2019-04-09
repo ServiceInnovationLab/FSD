@@ -1,6 +1,6 @@
 import { 
   getRelativePath, 
-  getSearchParams, 
+  getQueryParams, 
   getFragment,
 } from '../hashRoutedUrls'
 
@@ -13,8 +13,8 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({});
     });
     
@@ -32,8 +32,8 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('/relative/path');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({});
     });
     
@@ -51,8 +51,8 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('relative/path');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({});
     });
     
@@ -62,7 +62,7 @@ describe('parseHashRouterUrl.js', () => {
     });
   });
 
-  describe('when the URL has search params only', () => {
+  describe('when the URL has query params only', () => {
     let url = 'http://mydomain.com/basepath/#/?size=medium&color=red';
 
     it('getRelativePath responds correctly', () => {
@@ -70,8 +70,8 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('/');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({
           size: 'medium', 
           color: 'red'}
@@ -87,13 +87,13 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('/');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({});
     });
   });
 
-  describe('when the URL has a relative path and search params', () =>{
+  describe('when the URL has a relative path and query params', () =>{
     let url = 'http://mydomain.com/basepath/#/relative/path?size=medium&color=red';
 
     it('getRelativePath responds correctly', () => {
@@ -101,8 +101,8 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('/relative/path');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({
           size: 'medium', 
           color: 'red'}
@@ -110,7 +110,7 @@ describe('parseHashRouterUrl.js', () => {
     });
   });
 
-  describe('when the URL has a relative path, search params, and an additional fragment', () =>{
+  describe('when the URL has a relative path, query params, and an additional fragment', () =>{
     let url = 'http://mydomain.com/basepath/#/relative/path?size=medium&color=red#top';
 
     it('getRelativePath responds correctly', () => {
@@ -118,8 +118,8 @@ describe('parseHashRouterUrl.js', () => {
         .toBe('/relative/path');
     });
 
-    it('getSearchParams responds correctly', () => {
-      expect(getSearchParams(url))
+    it('getQueryParams responds correctly', () => {
+      expect(getQueryParams(url))
         .toMatchObject({
           size: 'medium', 
           color: 'red'}

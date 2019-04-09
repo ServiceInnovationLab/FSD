@@ -22,10 +22,10 @@ const queryString = require('query-string');
 // To a site user the URLs look very similar and are easy to interpret, but the
 // # character significantly changes the way the URL is parsed.
 //
-// Within a web app we often want to get the URL search parameters and use them
+// Within a web app we often want to get the URL query parameters and use them
 // within the code of the app. With a normal URL there are standard functions to
 // parse out the different parts of a URL, but with hash routing the relative
-// route, search, and maybe a further fragment, are all moved into the fragment
+// path, query, and maybe a further fragment, are all moved into the fragment
 // section of the URL. A custom URL parsing function is required.
 
 // Retrieve the path portion of a hash-routed URL. 
@@ -36,10 +36,10 @@ const getRelativePath = urlString => {
   return getUrlFragmentGroups(urlString).groups['path'] || '';
 };
 
-// Retrieve the search portion of a hash-routed URL, parsed as an object where
+// Retrieve the query portion of a hash-routed URL, parsed as an object where
 // each key is an attribute.
-const getSearchParams = urlString => {
-  return queryString.parse(getUrlFragmentGroups(urlString).groups['search'] || '');
+const getQueryParams = urlString => {
+  return queryString.parse(getUrlFragmentGroups(urlString).groups['query'] || '');
 };
 
 // Retrieve the URL fragment portion of a hash-routed URL
@@ -51,19 +51,19 @@ const getFragment = urlString => {
 };
 
 // Parse a hash-routed URL to extract the main URL (everything before the
-// fragment), and also parse a path, search, and fragment out of the 'main'
+// fragment), and also parse a path, query, and fragment out of the 'main'
 // fragment
 //
 // If the regex doesn't match it returns an emtpy object with an empty groups
 // attribute as a convenience for the caller.
 const getUrlFragmentGroups = urlString => {
-  const regex = /^(?<main>[^#]*)#(?<path>[^?#]*)?(?<search>\?[^?#]*)?(?<fragment>#[^#?]*)?$/g;
+  const regex = /^(?<main>[^#]*)#(?<path>[^?#]*)?(?<query>\?[^?#]*)?(?<fragment>#[^#?]*)?$/g;
   const matches = regex.exec(urlString);
   return matches || { groups: {} };
 };
 
 module.exports = {
   getRelativePath,
-  getSearchParams,
+  getQueryParams,
   getFragment,
 } 
