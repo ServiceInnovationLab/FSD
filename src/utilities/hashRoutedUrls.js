@@ -59,7 +59,6 @@ const getFragment = urlString => {
 const getUrlFragmentGroups = urlString => {
   const regex = /^([^#]*)#([^?#]*)?(\?[^?#]*)?(#[^#?]*)?$/g;
   const matches = regex.exec(urlString);
-  console.log(matches);
   return matches || { groups: {} };
 };
 
