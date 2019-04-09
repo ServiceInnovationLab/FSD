@@ -21,7 +21,7 @@ const requestBuilder = searchVars => {
     : rankedRequest(searchVars)
 };
 
-// Get the number of results available for a query. 
+// Get the number of results available for a query.
 //
 // This will actually perform the query on the remote server but only ask for
 // the result count. Useful for getting the last page of results by setting
@@ -34,10 +34,10 @@ const isValidQuery = searchVars => {
   const { keyword, category, address, region, latitude, longitude } = searchVars;
 
   return Boolean(
-    category 
+    category
     || keywordIsValid(keyword)
-    || (latitude && longitude) 
-    || address 
+    || (latitude && longitude)
+    || address
     || region);
 };
 
@@ -59,7 +59,7 @@ const keywordRequest = searchVars => {
   const additionalTerms = [category, address, region].join(' ')
   const additionalQuery = tokenize(additionalTerms).join(' | ');
 
-  const query = additionalQuery 
+  const query = additionalQuery
     ? `(${keywordQuery}) & (${additionalQuery})`
     : keywordQuery;
 
