@@ -33,13 +33,13 @@ const queryString = require('query-string');
 // This is the path after the first hash. Note that There mgiht also be a path
 // as part of the main URL which will be ignored by this function.
 const getRelativePath = urlString => {
-  return getUrlFragmentGroups(urlString).groups['path'] || '';
+  return getUrlFragmentGroups(urlString)[2] || '';
 };
 
 // Retrieve the query portion of a hash-routed URL, parsed as an object where
 // each key is an attribute.
 const getQueryParams = urlString => {
-  return queryString.parse(getUrlFragmentGroups(urlString).groups['query'] || '');
+  return queryString.parse(getUrlFragmentGroups(urlString)[3] || '');
 };
 
 // Retrieve the URL fragment portion of a hash-routed URL
@@ -47,7 +47,7 @@ const getQueryParams = urlString => {
 // This is unusual because it will be after the second hash in a URL, which
 // might not actually be supported.
 const getFragment = urlString => {
-  return getUrlFragmentGroups(urlString).groups['fragment'] || '';
+  return getUrlFragmentGroups(urlString)[4] || '';
 };
 
 // Parse a hash-routed URL to extract the main URL (everything before the
@@ -57,8 +57,9 @@ const getFragment = urlString => {
 // If the regex doesn't match it returns an emtpy object with an empty groups
 // attribute as a convenience for the caller.
 const getUrlFragmentGroups = urlString => {
-  const regex = /^(?<main>[^#]*)#(?<path>[^?#]*)?(?<query>\?[^?#]*)?(?<fragment>#[^#?]*)?$/g;
+  const regex = /^([^#]*)#([^?#]*)?(\?[^?#]*)?(#[^#?]*)?$/g;
   const matches = regex.exec(urlString);
+  console.log(matches);
   return matches || { groups: {} };
 };
 
