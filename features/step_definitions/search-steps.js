@@ -43,6 +43,7 @@ module.exports = function() {
     }
 
     elements[0].click();
+    await driver.sleep(500);
   });
 
   this.When(/^the address box is empty$/, async () => {
@@ -58,19 +59,16 @@ module.exports = function() {
 
   this.Then(/^I press the Backspace key in the address box$/, async () =>{
     const input_elements = await getInputElement('name', 'address-autosuggest');
-    await driver.sleep(500);
     input_elements[0].sendKeys(Keys.BACK_SPACE);
   });
 
   this.Then(/^I press the Clear key in the address box$/, async () =>{
     const input_elements = await getInputElement('name', 'address-autosuggest');
-    await driver.sleep(500);
     input_elements[0].sendKeys(Keys.CLEAR);
   });
 
   this.Then(/^I press the Delete key in the address box$/, async () =>{
     const input_elements = await getInputElement('name', 'address-autosuggest');
-    await driver.sleep(500);
     input_elements[0].sendKeys(Keys.DELETE);
   });
   
