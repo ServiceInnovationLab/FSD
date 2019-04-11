@@ -2,9 +2,7 @@
 ![dependencies](https://david-dm.org/ServiceInnovationLab/FSD.svg)
 [![CircleCI](https://circleci.com/gh/ServiceInnovationLab/FSD.svg?style=svg)](https://circleci.com/gh/ServiceInnovationLab/FSD)
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/ServiceInnovationLab/FSD.png)](https://waffle.io/ServiceInnovationLab/FSD?utm_source=badge)
-
-This runs [on github pages](https://serviceinnovationlab.github.io/FSD/)
+This runs [on github pages](https://serviceinnovationlab.github.io/FSD/) but has a lovely custom domain name http://family.services.govt.nz
 
 ## Overview
 A React frontend for the existing Family Services Directory providing keyword, category, and location-based search results
