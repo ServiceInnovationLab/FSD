@@ -23,3 +23,13 @@ Feature: Searching on the main page
       Given I enter "191 Thorndon" into the "address-autosuggest" input
       Then The first suggestion is "191 Thorndon Quay, Pipitea, Wellington"
 
+  Scenario: When I select an address suggestion it is used as a search parameter
+      Given I enter "191 Thorndon" into the "address-autosuggest" input
+      And The first suggestion is "191 Thorndon Quay, Pipitea, Wellington 6011"
+      And I click on the first address suggestion
+      Then the address box shows "191 Thorndon Quay, Pipitea, Wellington 6011"
+      And the URL query has key "address" with value "191 Thorndon Quay, Pipitea, Wellington 6011"
+      And the URL query does not have key "location"
+      And the URL query has key "latitude" with value "-41.2717302167"
+      And the URL query has key "longitude" with value "174.7817695667"
+

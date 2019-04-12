@@ -6,6 +6,17 @@ const getSuggestionValue = suggestion => suggestion.a;
 
 const renderSuggestion = suggestion => <div>{suggestion.a}</div>;
 
+// Once an address suggestion has been selected, pressing any of these keys will
+// clear the address value.
+//
+// These key definitions are available at
+// https://www.w3.org/TR/uievents-key/#named-key-attribute-value
+const CLEAR_ADDRESS_KEYS = [
+  'Backspace',
+  'Clear',
+  'Delete',
+];
+
 // Represents the parts of a region or street address we are interested in for
 // this app - specifically the properties which get included in the URL query
 // string.
@@ -37,20 +48,29 @@ export default class Example extends React.Component {
     this.state = {
       suggestions: [],
     };
-  }
+  };
+
+  clearAddress() {
+    this.props.updateSearchParams(SearchLocation.None);
+  };
 
   onChange(event, { newValue }) {
     if (newValue === '') {
-      const { updateSearchParams } = this.props;
-      updateSearchParams(SearchLocation.None);
+      this.clearAddress();
     }
 
     this.props.autoSuggestOnChange(newValue);
-  }
+  };
+
+  onKeyDown(event) {
+    if(CLEAR_ADDRESS_KEYS.includes(event.key)){
+      this.clearAddress();
+    }
+  };
 
   onSuggestionSelected = async (event, { suggestion }) => {
     const { updateSearchParams } = this.props;
-
+    
     if (suggestion.type === 'location') {
       const result = await getLocationMetadata(suggestion.pxid);
       updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, region: result.a }));
@@ -77,6 +97,7 @@ export default class Example extends React.Component {
       placeholder: 'Start typing an address',
       value: address,
       onChange: this.onChange.bind(this),
+      onKeyDown: this.onKeyDown.bind(this),
       name: 'address-autosuggest',
       id: 'searchBox'
     };
