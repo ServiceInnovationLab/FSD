@@ -26,7 +26,7 @@ Scenario: I search in a wide area around Wellington
   Given I click on "Child Care"
   Given I search near the address "56 The Terrace, Wellington Central"
   And I click on the "button" with "value" "100"
-  And I click on "Search"
+  And I click on "Magnifying Glass"
   Then I see at least "10" service providers
   And I see a "address" which says "Lower Hutt"
 

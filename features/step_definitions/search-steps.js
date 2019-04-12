@@ -1,6 +1,8 @@
 
 
 const getInputElement = require('../helpers/get-input-element');
+const webdriver = require('selenium-webdriver');
+const Keys = webdriver.Key;
 
 module.exports = function() {
 
@@ -41,11 +43,33 @@ module.exports = function() {
     }
 
     elements[0].click();
+    await driver.sleep(500);
   });
 
   this.When(/^the address box is empty$/, async () => {
     const input_elements = await getInputElement('name', 'address-autosuggest');
-    expect(await input_elements[0].getText()).to.equal('');
+    expect(await input_elements[0].getAttribute("value")).to.equal('');
+  });
+
+  this.Then(/^the address box shows "([^"]*)"$/, async value =>{
+    const input_elements = await getInputElement('name', 'address-autosuggest');
+    const text = await input_elements[0].getAttribute("value")
+    expect(text).to.equal(value);
+  });
+
+  this.Then(/^I press the Backspace key in the address box$/, async () =>{
+    const input_elements = await getInputElement('name', 'address-autosuggest');
+    input_elements[0].sendKeys(Keys.BACK_SPACE);
+  });
+
+  this.Then(/^I press the Clear key in the address box$/, async () =>{
+    const input_elements = await getInputElement('name', 'address-autosuggest');
+    input_elements[0].sendKeys(Keys.CLEAR);
+  });
+
+  this.Then(/^I press the Delete key in the address box$/, async () =>{
+    const input_elements = await getInputElement('name', 'address-autosuggest');
+    input_elements[0].sendKeys(Keys.DELETE);
   });
   
   this.Then(/^the first result is titled "([^"]*)"$/, async title => {
