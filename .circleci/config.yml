@@ -45,7 +45,7 @@ jobs:
     docker:
       - image: circleci/node:9.11.2
     environment:
-      REACT_APP_HOST: family.services.govt.nz
+      REACT_APP_HOST: https://family.services.govt.nz/
       REACT_APP_GH_PAGES_SUFFIX: /FSD
       REACT_APP_ADDRESS_FINDER_API_KEY: ADDRESSFINDER_DEMO_KEY
     steps:
