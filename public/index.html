@@ -2,7 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' ws://localhost:3000 https://catalogue.data.govt.nz https://api.addressfinder.io; style-src blob: https://api.addressfinder.io https://unpkg.com https://family.services.govt.nz 'unsafe-inline'; script-src 'self' https://api.addressfinder.io https://family.services.govt.nz https://unpkg.com 'unsafe-eval' 'unsafe-inline' 'unsafe-inline'; default-src 'none'; img-src 'self' data: https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org https://family.services.govt.nz https://unpkg.com; child-src 'none'; base-uri https://family.services.govt.nz; form-action https://family.services.govt.nz; object-src 'none'; manifest-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="
+    connect-src 'self' %REACT_APP_HOST% https://catalogue.data.govt.nz %REACT_APP_ADDRESS_FINDER_BASE_URL%; 
+    style-src blob: %REACT_APP_ADDRESS_FINDER_BASE_URL% https://unpkg.com %REACT_APP_HOST% 'unsafe-inline'; 
+    script-src 'self' %REACT_APP_ADDRESS_FINDER_BASE_URL% %REACT_APP_HOST% https://unpkg.com 'unsafe-eval' 'unsafe-inline' 'unsafe-inline'; 
+    default-src 'none'; 
+    img-src 'self' data: https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org %REACT_APP_HOST% https://unpkg.com; 
+    child-src 'none'; 
+    base-uri %REACT_APP_HOST%; 
+    form-action %REACT_APP_HOST%; 
+    object-src 'none'; 
+    manifest-src 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
