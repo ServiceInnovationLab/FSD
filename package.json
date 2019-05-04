@@ -16,7 +16,7 @@
     "geolib": "^2.0.24",
     "jest-enzyme": "^7.0.2",
     "leaflet": "^1.3.4",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "query-string": "6",
     "react": "^16.8.6",
