@@ -1,4 +1,4 @@
-import { isPointInCircle, getDistance } from 'geolib';
+import { isPointWithinRadius, getDistance } from 'geolib';
 
 const findNearMe = (data, addressLatLng, radius) => {
   const { latitude, longitude } = addressLatLng;
@@ -8,7 +8,7 @@ const findNearMe = (data, addressLatLng, radius) => {
     const currentLat = filteredData[point].LATITUDE;
     const currentLng = filteredData[point].LONGITUDE;
 
-    filteredData[point].NEARME = isPointInCircle(
+    filteredData[point].NEARME = isPointWithinRadius(
       { latitude, longitude },
       {
         latitude: currentLat,
