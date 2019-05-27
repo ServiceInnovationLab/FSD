@@ -46,6 +46,14 @@ module.exports = function() {
     expect(categories.length).to.eq(0);
   });
 
+  this.Then(/^the "([^"]*)" category is selected$/, async expected_category => {
+    await driver.wait(until.elementsLocated(by.css('.category__container > .category__button.selected')), 10000);
+    const categories = await driver.findElements(by.css('.category__container > .category__button.selected'));
+    expect(categories.length).to.eq(1);
+    const selected_category = await categories[0].getText();
+    expect(selected_category).to.eq(expected_category);
+  });
+
   // expect more the search radius selector widget
   this.Then(/^I see the radius selector$/, async () => {
     // wait for the page to load
@@ -93,6 +101,15 @@ module.exports = function() {
     const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
     const value = await input_elements[0].getAttribute('value');
     expect(value).to.be.empty
+  });
+
+  this.Then(/^the "([^"]*)" input shows "([^"]*)"$/, async (input_name, expected_value) => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
+
+    const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
+    const value = await input_elements[0].getAttribute('value');
+    expect(value).to.eq(expected_value);
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
