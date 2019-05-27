@@ -91,9 +91,8 @@ module.exports = function() {
     await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
 
     const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
-    const value = await input_elements[0].getAttribute('value')
-
-    return value == "";
+    const value = await input_elements[0].getAttribute('value');
+    expect(value).to.be.empty
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
