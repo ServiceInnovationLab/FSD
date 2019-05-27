@@ -98,7 +98,7 @@ export default class Index extends Component {
       longitude: userLongitude
     } = searchVars;
 
-    if (category) setCategory(category);
+    setCategory(category);
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
