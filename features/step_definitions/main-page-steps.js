@@ -41,6 +41,11 @@ module.exports = function() {
     expect(categories.length).to.be.above(1);
   });
 
+  this.Then(/^no categories are selected$/, async () => {
+    const categories = await driver.findElements(by.css('.category__container > .category__button.selected'));
+    expect(categories.length).to.eq(0);
+  });
+
   // expect more the search radius selector widget
   this.Then(/^I see the radius selector$/, async () => {
     // wait for the page to load
@@ -79,6 +84,16 @@ module.exports = function() {
     const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
 
     input_elements[0].sendKeys(value);
+  });
+
+  this.Then(/^the "([^"]*)" input is empty$/, async input_name => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
+
+    const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
+    const value = await input_elements[0].getAttribute('value')
+
+    return value == "";
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
