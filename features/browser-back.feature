@@ -7,8 +7,12 @@ Background:
 
 Scenario: I search with a category then navigate back and the category is unselected
   Given I click on "Budgeting / Financial Capability"
-  And I enter "age concern" into the "keyword" input
   And I see at least "5" service providers
   And I navigate back
   Then no categories are selected
-  And the "keyword" input is empty
+
+Scenario: I search with a keyword then navigate back and the keyword is cleared
+  Given I search for "age concern"
+  And I see at least "5" service providers
+  And I navigate back
+  Then the "keyword" input is empty
