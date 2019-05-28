@@ -16,7 +16,7 @@ Github Pages | https://serviceinnovationlab.github.io/FSD/ | master |
 
 **Resource** | **URL**
 --- | ---
-Backlog | https://waffle.io/ServiceInnovationLab/FSD
+Backlog | https://github.com/orgs/ServiceInnovationLab/projects/8
 CI | https://circleci.com/gh/ServiceInnovationLab/FSD
 
 **Role(s)** | **Name(s)**
