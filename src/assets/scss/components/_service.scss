@@ -24,6 +24,13 @@
     margin: 0 0 1rem;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
     border-left: 0.125rem solid $secondary-color;
+    white-space: pre-wrap;
+    &--truncate {
+      @media only screen and (max-width: 767px) {
+        overflow: scroll;
+        max-height: 250px;
+      }
+    }
   }
 
   &__page {
