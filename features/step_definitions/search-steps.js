@@ -9,8 +9,40 @@ module.exports = function() {
   this.Given(/^I search for "([^"]*)"$/, async (value) => {
     // Add the text to the keyword input
     const input_elements = await getInputElement('name', 'keyword');
-    input_elements[0].sendKeys(value);
-    input_elements[0].sendKeys('\n');
+    // Clear field by select all + delete. React doesn't allow the standard .clear()
+    input_elements[0].sendKeys(
+      Keys.END, 
+      Keys.chord(Keys.SHIFT, Keys.HOME), 
+      Keys.BACK_SPACE,
+      value, 
+      Keys.RETURN);
+
+    // Wait until the search description is updated with the new query
+    await driver.wait(
+      until.elementTextContains(
+        driver.findElement(
+          by.css('section.search__criteria')
+        ), 
+        value));
+  });
+
+  this.Given(/^I select the category "([^"]*)"$/, async (value) => {
+    // Click on the category button
+    driver.wait(
+      until.elementLocated(
+        by.xpath(
+          `//*[contains(@class, 'category__container')]/button[contains(@class, 'category__button')][contains(text(), '${value}')]`
+          ), 
+        10000))
+      .click();
+
+    // Wait until the search description is updated with the new query
+    await driver.wait(
+      until.elementTextContains(
+        driver.findElement(
+          by.css('section.search__criteria')
+        ), 
+        `in: ${value}`));
   });
 
   this.Given(/^I search near the address "([^"]*)"$/, async (value) => {
