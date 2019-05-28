@@ -14,7 +14,7 @@ export default class SearchCriteria extends Component {
     const searchCriteria = createSearchCriteria(keyword, address, region, category);
 
     return (
-      <section class="search__criteria">
+      <section className="search__criteria">
         <p>
         {searchCriteria}
         {' '}

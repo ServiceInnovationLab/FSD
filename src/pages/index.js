@@ -12,7 +12,6 @@ import SearchForm from '../components/search-form';
 import SearchCriteria from '../components/search-criteria';
 import uniqueServices from '../utilities/uniqueServices';
 
-
 const DEFAULT_SEARCH_RADIUS = '25';
 
 export default class Index extends Component {
@@ -20,7 +19,9 @@ export default class Index extends Component {
     serviceProviders: [],
     showMap: false,
     address: '',
-    region: ''
+    region: '',
+    keyword: '',
+    radius: DEFAULT_SEARCH_RADIUS
   };
 
   componentDidMount() {
@@ -98,7 +99,7 @@ export default class Index extends Component {
       longitude: userLongitude
     } = searchVars;
 
-    if (category) setCategory(category);
+    setCategory(category);
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
