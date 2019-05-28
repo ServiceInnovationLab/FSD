@@ -104,12 +104,13 @@ module.exports = function() {
   });
 
   this.Then(/^the "([^"]*)" input shows "([^"]*)"$/, async (input_name, expected_value) => {
-    // wait for the page to load
-    await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
-
-    const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
-    const value = await input_elements[0].getAttribute('value');
-    expect(value).to.eq(expected_value);
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(
+          `//input[@name='${input_name}'][@value='${expected_value}']`
+        )
+      ), 
+      10000);
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
