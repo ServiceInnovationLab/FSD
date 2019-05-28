@@ -42,16 +42,24 @@ module.exports = function() {
   });
 
   this.Then(/^no categories are selected$/, async () => {
+    // wait until the category container is visible so we don't get false
+    // positives on pages which haven't finished rendering
+    await driver.wait(until.elementLocated(by.css('.category__container')), 10000);
+
     const categories = await driver.findElements(by.css('.category__container > .category__button.selected'));
     expect(categories.length).to.eq(0);
   });
 
   this.Then(/^the "([^"]*)" category is selected$/, async expected_category => {
-    await driver.wait(until.elementsLocated(by.css('.category__container > .category__button.selected')), 10000);
-    const categories = await driver.findElements(by.css('.category__container > .category__button.selected'));
-    expect(categories.length).to.eq(1);
-    const selected_category = await categories[0].getText();
-    expect(selected_category).to.eq(expected_category);
+    const category = await driver.wait(
+      until.elementLocated(
+        by.css(
+          '.category__container > .category__button.selected'
+        )
+      ), 
+      10000);
+
+    expect(await category.getText()).to.eq(expected_category);
   });
 
   // expect more the search radius selector widget
