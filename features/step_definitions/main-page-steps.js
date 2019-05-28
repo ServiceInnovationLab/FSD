@@ -41,6 +41,27 @@ module.exports = function() {
     expect(categories.length).to.be.above(1);
   });
 
+  this.Then(/^no categories are selected$/, async () => {
+    // wait until the category container is visible so we don't get false
+    // positives on pages which haven't finished rendering
+    await driver.wait(until.elementLocated(by.css('.category__container')), 10000);
+
+    const categories = await driver.findElements(by.css('.category__container > .category__button.selected'));
+    expect(categories.length).to.eq(0);
+  });
+
+  this.Then(/^the "([^"]*)" category is selected$/, async expected_category => {
+    const category = await driver.wait(
+      until.elementLocated(
+        by.css(
+          '.category__container > .category__button.selected'
+        )
+      ), 
+      10000);
+
+    expect(await category.getText()).to.eq(expected_category);
+  });
+
   // expect more the search radius selector widget
   this.Then(/^I see the radius selector$/, async () => {
     // wait for the page to load
@@ -79,6 +100,25 @@ module.exports = function() {
     const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
 
     input_elements[0].sendKeys(value);
+  });
+
+  this.Then(/^the "([^"]*)" input is empty$/, async input_name => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.css(`input[name=${input_name}]`)), 10000);
+
+    const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
+    const value = await input_elements[0].getAttribute('value');
+    expect(value).to.be.empty
+  });
+
+  this.Then(/^the "([^"]*)" input shows "([^"]*)"$/, async (input_name, expected_value) => {
+    await driver.wait(
+      until.elementsLocated(
+        by.xpath(
+          `//input[@name='${input_name}'][@value='${expected_value}']`
+        )
+      ), 
+      10000);
   });
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
