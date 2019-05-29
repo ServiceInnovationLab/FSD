@@ -21,8 +21,8 @@ export default class Service extends Component {
 
   componentDidMount = async () => {
     const { 
-      userLatitude, 
-      userLongitude,
+      latitude: userLatitude, 
+      longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
 
     const {
