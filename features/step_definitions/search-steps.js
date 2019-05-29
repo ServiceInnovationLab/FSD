@@ -66,16 +66,15 @@ module.exports = function() {
       // suggestions where the next character should be a comma.
       input_elements[0].sendKeys(' \b');
 
-      await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`)), 10000);
-      
-      elements = await driver.findElements(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`));
+      elements = await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`)), 10000);
 
       // There's a chance that still no element has been found, but that hasn't
       // been observed.
     }
 
     elements[0].click();
-    await driver.sleep(500);
+    
+    await driver.wait(until.stalenessOf(elements[0]));
   });
 
   this.When(/^the address box is empty$/, async () => {

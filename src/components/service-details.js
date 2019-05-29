@@ -4,26 +4,21 @@ import { AccordionItem, AccordionItemTitle, AccordionItemBody } from 'react-acce
 
 export default class Service extends Component {
   static propTypes = {
-    costType: PropTypes.string.isRequired,
-    costDescription: PropTypes.string,
-    deliveryMethods: PropTypes.string,
-    expanded: PropTypes.bool,
-    serviceReferrals: PropTypes.string,
-    serviceDetail: PropTypes.string,
-    serviceName: PropTypes.string,
-    targetAudiences: PropTypes.string,
+    service: PropTypes.object.isRequired,
   };
 
   render() {
     const {
-      costType,
-      costDescription,
-      deliveryMethods,
       expanded,
-      targetAudiences,
-      serviceName,
-      serviceReferrals,
-      serviceDetail,
+      service: {
+        COST_TYPE: costType,
+        COST_DESCRIPTION: costDescription,
+        DELIVERY_METHODS: deliveryMethods,
+        SERVICE_TARGET_AUDIENCES: targetAudiences,
+        SERVICE_NAME: serviceName,
+        SERVICE_REFERRALS: serviceReferrals,
+        SERVICE_DETAIL: serviceDetail,
+      }
     } = this.props;
 
     return (

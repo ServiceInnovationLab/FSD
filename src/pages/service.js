@@ -13,105 +13,46 @@ import uniqueServices from '../utilities/uniqueServices';
 
 export default class Service extends Component {
   state = {
-    purpose: '',
-    address: '',
-    classification: '',
-    contactAvailability: '',
-    name: '',
-    website: '',
-    email: '',
-    phoneNumber: '',
-
-    serviceDetail: '',
-
+    provider: null,
+    services: [],
     userLatitude: '',
     userLongitude: '',
-    providerLatitude: '',
-    providerLongitude: '',
-
-    loading: true,
   };
 
-  doParseUrl = () => {
-    const { search } = this.props.location;
+  componentDidMount = async () => {
     const { 
-      latitude = '', 
-      longitude = ''
-    } = queryString.parse(search);;
+      latitude: userLatitude, 
+      longitude: userLongitude,
+    } = queryString.parse(this.props.location.search);
+
+    const {
+      provider, 
+      services
+    } = await loadService(this.props.match.params.id)
 
     this.setState({
-      userLatitude: latitude,
-      userLongitude: longitude
+      provider: provider,
+      services: uniqueServices(services, 'SERVICE_NAME'),
+      userLatitude,
+      userLongitude,
     });
-  };
-
-  componentDidMount = () => {
-    const { id } = this.props.match.params;
- 
-    loadService(id).then(args => {
-      const { provider, services } = args;
-
-      this.setState({
-        loading: false,
-        purpose: provider.ORGANISATION_PURPOSE,
-        address: provider.PHYSICAL_ADDRESS,
-        classification: provider.PROVIDER_CLASSIFICATION,
-        contactAvailability: provider.PROVIDER_CONTACT_AVAILABILITY,
-        name: provider.PROVIDER_NAME,
-        website: provider.PROVIDER_WEBSITE_1,
-        email: provider.PUBLISHED_CONTACT_EMAIL_1,
-        phoneNumber: provider.PUBLISHED_PHONE_1,
-        services: uniqueServices(services, 'SERVICE_NAME'),
-
-        providerLatitude: provider.LATITUDE,
-        providerLongitude: provider.LONGITUDE,
-      });
-    });
-
-    this.doParseUrl();
   };
 
   render() {
     const {
-      match: {
-        params: { id },
-      },
       history: { goBack },
     } = this.props;
-    const {
-      loading,
-      purpose,
-      address,
-      classification,
-      contactAvailability,
-      name,
-      website,
-      email,
-      phoneNumber,
-      services,
 
+    const {
+      provider,
+      services,
       userLatitude,
       userLongitude,
-      providerLatitude,
-      providerLongitude,
     } = this.state;
 
-    const providerMap =
-      providerLatitude && providerLongitude ? (
-        <MapContainer
-          serviceProviders={[{
-            PROVIDER_NAME: name,
-            ORGANISATION_PURPOSE: purpose,
-            PHYSICAL_ADDRESS: address,
-            LATITUDE: providerLatitude,
-            LONGITUDE: providerLongitude
-          }]}
-        />
-      ) : null;
-    
     return (
       <Page className="service__page">
-        <header>
+        <section>
           <button className="icon-prefix__container button back-button" onClick={goBack}>
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
@@ -119,45 +60,27 @@ export default class Service extends Component {
             <span className="icon-prefix__label">Go back</span>
           </button>
 
-          {!loading && (
-            <Fragment>
+          {(provider && services) && <Fragment>
               <ServiceProvider
-                fsdId={id}
-                purpose={purpose}
-                address={address}
-                classification={classification}
-                contactAvailability={contactAvailability}
-                name={name}
-                website={website}
-                email={email}
-                phoneNumber={phoneNumber}
-                hideMoreDetails={true}
+                provider={provider}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
-                providerLatitude={providerLatitude}
-                providerLongitude={providerLongitude}
               />
               <Accordion>
-                {services.map((service, i) => {
-                  return (
+                {services.map((service, i) =>
                     <ServiceDetails
                       expanded={i === 0}
-                      key={i}
-                      serviceName={service.SERVICE_NAME}
-                      targetAudiences={service.SERVICE_TARGET_AUDIENCES}
-                      deliveryMethods={service.DELIVERY_METHODS}
-                      serviceReferrals={service.SERVICE_REFERRALS}
-                      costType={service.COST_TYPE}
-                      costDescription={service.COST_DESCRIPTION}
-                      serviceDetail={service.SERVICE_DETAIL}
-                    />
-                  );
-                })}
+                      key={`service_${i}`}
+                      service={service}
+                    />)}
               </Accordion>
-              {providerMap}
-            </Fragment>
-          )}
-        </header>
+              <MapContainer 
+                serviceProviders={[provider]}
+                userLatitude={userLatitude}
+                userLongitude={userLongitude}
+              />
+            </Fragment>}
+        </section>
       </Page>
     );
   }

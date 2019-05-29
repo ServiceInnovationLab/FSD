@@ -32,13 +32,13 @@ function createSearchCriteria(keyword, address, region, category) {
   const search = ['Searching'];
 
   if (keyword) search.push(
-      <span>{' '} for: <b>{keyword}</b>{' '}</span>,
+      <span key={`k:${keyword}`}>{' '} for: <b>{keyword}</b>{' '}</span>,
     );
   if (address || region) search.push(
-      <span key={address || region}>{' '} near: <b>{address || region}</b></span>,
+      <span key={`a:${address || region}`}>{' '} near: <b>{address || region}</b></span>,
     );
   if (category) search.push(
-      <span>{' '} in: <b>{category}</b></span>,
+      <span key={`c:${category}`}>{' '} in: <b>{category}</b></span>,
     );
   if (search.length < 2) return null;
 
