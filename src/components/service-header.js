@@ -10,28 +10,26 @@ import SaveContact from './save-contact';
 
 export default class ServiceHeader extends Component {
   static propTypes = {
-    fsdId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    address: PropTypes.string,
-    contactAvailability: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    website: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
+    provider: PropTypes.object.isRequired,
+    userLatitude: PropTypes.string,
+    userLongitude: PropTypes.string
   };
 
   render() {
     const {
-      fsdId,
-      address,
-      contactAvailability,
-      name,
-      website,
-      email,
-      phoneNumber,
+      provider: {
+        FSD_ID: fsdId,
+        PROVIDER_NAME: name,
+        PHYSICAL_ADDRESS: address,
+        PROVIDER_CONTACT_AVAILABILITY: availability,
+        PROVIDER_WEBSITE_1: website,
+        PUBLISHED_CONTACT_EMAIL_1: email,
+        PUBLISHED_PHONE_1: phone,
+        LATITUDE: latitude, 
+        LONGITUDE: longitude
+      },
       userLatitude,
-      userLongitude,
-      providerLatitude,
-      providerLongitude
+      userLongitude
     } = this.props;
 
     // The location of the user, if supplied. Used as the origin when preparing
@@ -47,8 +45,8 @@ export default class ServiceHeader extends Component {
     // Happily if the user location is not available we can still populate the
     // destination and the user just needs to put their own address into Google.
     const directionsUrl = (userLatitude && userLongitude)
-      ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${providerLatitude},${providerLongitude}`
-      : `https://www.google.com/maps/dir//${providerLatitude},${providerLongitude}`
+      ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${latitude},${longitude}`
+      : `https://www.google.com/maps/dir//${latitude},${longitude}`
 
     return (
       <header className="service__header">
@@ -81,12 +79,12 @@ export default class ServiceHeader extends Component {
               </a>
             </div>
           )}
-          {contactAvailability && (
+          {availability && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faClock} />
               </div>
-              <div className="icon-prefix__label">{contactAvailability}</div>
+              <div className="icon-prefix__label">{availability}</div>
             </div>
           )}
           {email && (
@@ -99,24 +97,24 @@ export default class ServiceHeader extends Component {
               </a>
             </div>
           )}
-          {phoneNumber && (
+          {phone && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faPhone} />
               </div>
               <a
                 className="icon-prefix__label"
-                href={`tel:${stripSpaces(phoneNumber)}`}
+                href={`tel:${stripSpaces(phone)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {phoneNumber}
+                {phone}
               </a>
             </div>
           )}
           <SaveContact
             name={name}
-            phoneNumber={phoneNumber}
+            phoneNumber={phone}
             address={address}
             email={email}
             />

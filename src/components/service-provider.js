@@ -7,57 +7,36 @@ import ServiceClassification from './service-classification';
 
 export default class ServiceProviders extends Component {
   static propTypes = {
-    fsdId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    purpose: PropTypes.string,
-    address: PropTypes.string,
-    classification: PropTypes.string,
-    contactAvailability: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    website: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    hideMoreDetails: PropTypes.bool,
+    provider: PropTypes.object.isRequired,
+    userLatitude: PropTypes.string,
+    userLongitude: PropTypes.string
   };
 
   render() {
     const {
-      fsdId,
-      purpose,
-      address,
-      classification,
-      contactAvailability,
-      name,
-      website,
-      email,
-      phoneNumber,
+      provider,
+      provider: {
+        PROVIDER_CLASSIFICATION: classification,
+        ORGANISATION_PURPOSE: purpose,
+      },
       userLatitude,
       userLongitude,
-      providerLatitude,
-      providerLongitude
     } = this.props;
 
     return (
       <section className="service">
         <ServiceHeader
-          fsdId={fsdId}
-          address={address}
-          contactAvailability={contactAvailability}
-          name={name}
-          website={website}
-          email={email}
-          phoneNumber={phoneNumber}
+          provider={provider}
           userLatitude={userLatitude}
           userLongitude={userLongitude}
-          providerLatitude={providerLatitude}
-          providerLongitude={providerLongitude}
         />
 
-        {purpose && <blockquote className="service__purpose">{purpose}</blockquote>}
+        {purpose && <blockquote className="service__purpose">
+            {purpose}
+          </blockquote>}
 
         <footer className="service__footer">
-          {classification && 
-            <ServiceClassification classification={classification} />
-          }
+          {classification && <ServiceClassification classification={classification} />}
         </footer>
       </section>
     );

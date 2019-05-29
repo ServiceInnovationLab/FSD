@@ -18,7 +18,7 @@ export default class ServiceClassification extends Component {
         </div>
         <div className="icon-prefix__label">
           <a href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}>
-            {classification.split(',').join(', ')}
+            {classification && classification.split(',').join(', ')}
           </a>
         </div>
       </div>

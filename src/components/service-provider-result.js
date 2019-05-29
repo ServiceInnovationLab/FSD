@@ -7,62 +7,36 @@ import ServiceClassification from './service-classification';
 export default class ServiceProviderResult extends Component {
   static propTypes = {
     index: PropTypes.number,
-    fsdId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    purpose: PropTypes.string,
-    address: PropTypes.string,
-    classification: PropTypes.string,
-    contactAvailability: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    website: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    hideMoreDetails: PropTypes.bool,
+    provider: PropTypes.object.isRequired,
+    userLatitude: PropTypes.string,
+    userLongitude: PropTypes.string
   };
 
   render() {
     const {
       index,
-      fsdId,
-      purpose,
-      address,
-      classification,
-      contactAvailability,
-      name,
-      website,
-      email,
-      phoneNumber,
+      provider,
+      provider: {
+        PROVIDER_CLASSIFICATION: classification,
+        ORGANISATION_PURPOSE: purpose,
+      },
       userLatitude,
       userLongitude,
-      providerLatitude,
-      providerLongitude
     } = this.props;
 
     return (
       <section className="service" result-index={index}>
+        {process.env.REACT_APP_DISPLAY_INDEX && index+1 }
         <ServiceHeader
-          fsdId={fsdId}
-          address={address}
-          contactAvailability={contactAvailability}
-          name={process.env.REACT_APP_DISPLAY_INDEX ? `${index+1}. ${name}` : name}
-          website={website}
-          email={email}
-          phoneNumber={phoneNumber}
+          provider={provider}
           userLatitude={userLatitude}
           userLongitude={userLongitude}
-          providerLatitude={providerLatitude}
-          providerLongitude={providerLongitude}
         />
 
-        {purpose && 
-          <blockquote className="service__purpose service__purpose--truncate">
-            {purpose}
-          </blockquote>
-        }
+        {purpose && <blockquote className="service__purpose service__purpose--truncatable">{purpose}</blockquote>}
 
         <footer className="service__footer">
-          {classification && 
-            <ServiceClassification classification={classification} />
-          }
+          {classification && <ServiceClassification classification={classification} />}
         </footer>
       </section>
     );
