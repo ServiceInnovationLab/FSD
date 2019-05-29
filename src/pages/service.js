@@ -13,6 +13,7 @@ import uniqueServices from '../utilities/uniqueServices';
 
 export default class Service extends Component {
   state = {
+    provider: null,
     purpose: '',
     address: '',
     classification: '',
@@ -53,6 +54,7 @@ export default class Service extends Component {
 
       this.setState({
         loading: false,
+        provider: provider,
         purpose: provider.ORGANISATION_PURPOSE,
         address: provider.PHYSICAL_ADDRESS,
         classification: provider.PROVIDER_CLASSIFICATION,
@@ -80,6 +82,7 @@ export default class Service extends Component {
     } = this.props;
     const {
       loading,
+      provider,
       purpose,
       address,
       classification,
@@ -122,20 +125,9 @@ export default class Service extends Component {
           {!loading && (
             <Fragment>
               <ServiceProvider
-                fsdId={id}
-                purpose={purpose}
-                address={address}
-                classification={classification}
-                contactAvailability={contactAvailability}
-                name={name}
-                website={website}
-                email={email}
-                phoneNumber={phoneNumber}
-                hideMoreDetails={true}
+                provider={provider}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
-                providerLatitude={providerLatitude}
-                providerLongitude={providerLongitude}
               />
               <Accordion>
                 {services.map((service, i) => {
