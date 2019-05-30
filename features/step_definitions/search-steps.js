@@ -1,5 +1,6 @@
 const getInputElement = require('../helpers/get-input-element');
 const webdriver = require('selenium-webdriver');
+
 const Keys = webdriver.Key;
 
 module.exports = function() {
