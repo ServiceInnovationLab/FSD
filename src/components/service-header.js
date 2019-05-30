@@ -45,7 +45,7 @@ export default class ServiceHeader extends Component {
     // service detail page in the URL query string, although other query string
     // values will not.
     const userCoordinates = (userLatitude && userLongitude)
-      ? queryString.stringify({ address: userAddress,latitude: userLatitude, longitude: userLongitude })
+      ? queryString.stringify({ address: userAddress, latitude: userLatitude, longitude: userLongitude })
       : null;
 
     // The url to use for directions to the provider.
