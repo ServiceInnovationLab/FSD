@@ -32,8 +32,6 @@ export default class ServiceHeader extends Component {
         PROVIDER_WEBSITE_1: website,
         PUBLISHED_CONTACT_EMAIL_1: email,
         PUBLISHED_PHONE_1: phone,
-        LATITUDE: latitude,
-        LONGITUDE: longitude,
       },
       userAddress,
       userLatitude,
