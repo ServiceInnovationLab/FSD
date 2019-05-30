@@ -7,13 +7,15 @@ import uniqueServices from '../utilities/uniqueServices';
 export default class ListOfServiceProviders extends Component {
   static propTypes = {
     serviceProviders: PropTypes.array.isRequired,
+    userAddress: PropTypes.string,
     userLatitude: PropTypes.string,
-    userLongitude: PropTypes.string
+    userLongitude: PropTypes.string,
   };
 
   render() {
     const { 
       serviceProviders, 
+      userAddress,
       userLatitude, 
       userLongitude 
     } = this.props;
@@ -27,6 +29,7 @@ export default class ListOfServiceProviders extends Component {
               key={provider.FSD_ID} 
               index={index}
               provider={provider}
+              userAddress={userAddress}
               userLatitude={userLatitude}
               userLongitude={userLongitude}
             />

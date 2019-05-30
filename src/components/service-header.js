@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faLink, faClock, faPhone, faMapMarkerAlt, faAt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faLink,
+  faClock,
+  faPhone,
+  faMapMarkerAlt,
+  faAt,
+} from '@fortawesome/free-solid-svg-icons';
 import queryString from 'query-string';
 
 import { stripSpaces } from '../utilities/string';
@@ -11,8 +17,9 @@ import SaveContact from './save-contact';
 export default class ServiceHeader extends Component {
   static propTypes = {
     provider: PropTypes.object.isRequired,
+    userAddress: PropTypes.string,
     userLatitude: PropTypes.string,
-    userLongitude: PropTypes.string
+    userLongitude: PropTypes.string,
   };
 
   render() {
@@ -25,11 +32,12 @@ export default class ServiceHeader extends Component {
         PROVIDER_WEBSITE_1: website,
         PUBLISHED_CONTACT_EMAIL_1: email,
         PUBLISHED_PHONE_1: phone,
-        LATITUDE: latitude, 
-        LONGITUDE: longitude
+        LATITUDE: latitude,
+        LONGITUDE: longitude,
       },
+      userAddress,
       userLatitude,
-      userLongitude
+      userLongitude,
     } = this.props;
 
     // The location of the user, if supplied. Used as the origin when preparing
@@ -37,25 +45,28 @@ export default class ServiceHeader extends Component {
     // service detail page in the URL query string, although other query string
     // values will not.
     const userCoordinates = (userLatitude && userLongitude)
-      ? queryString.stringify({ latitude: userLatitude, longitude: userLongitude })
+      ? queryString.stringify({ address: userAddress,latitude: userLatitude, longitude: userLongitude })
       : null;
 
-    // The url to use for directions to the provider. 
+    // The url to use for directions to the provider.
     //
     // Happily if the user location is not available we can still populate the
     // destination and the user just needs to put their own address into Google.
-    const directionsUrl = (userLatitude && userLongitude)
-      ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${latitude},${longitude}`
-      : `https://www.google.com/maps/dir//${latitude},${longitude}`
+    const directionsUrl =
+      userLatitude && userLongitude
+        ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${latitude},${longitude}`
+        : `https://www.google.com/maps/dir//${latitude},${longitude}`;
 
     return (
       <header className="service__header">
         <h2 className="service__name">
-          <Link to={{
-            pathname: `/service/${fsdId}`, 
-            search: userCoordinates
-            }}>
-              {name}
+          <Link
+            to={{
+              pathname: `/service/${fsdId}`,
+              search: userCoordinates,
+            }}
+          >
+            {name}
           </Link>
         </h2>
         <address className="service__address">
@@ -74,7 +85,12 @@ export default class ServiceHeader extends Component {
               <div className="icon-prefix__icon">
                 <Icon icon={faLink} />
               </div>
-              <a className="icon-prefix__label" href={website} target="_blank" rel="noopener noreferrer">
+              <a
+                className="icon-prefix__label"
+                href={website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {website}
               </a>
             </div>
@@ -92,7 +108,12 @@ export default class ServiceHeader extends Component {
               <div className="icon-prefix__icon">
                 <Icon icon={faAt} />
               </div>
-              <a className="icon-prefix__label" href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
+              <a
+                className="icon-prefix__label"
+                href={`mailto:${email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {email}
               </a>
             </div>
@@ -117,7 +138,7 @@ export default class ServiceHeader extends Component {
             phoneNumber={phone}
             address={address}
             email={email}
-            />
+          />
         </address>
       </header>
     );
