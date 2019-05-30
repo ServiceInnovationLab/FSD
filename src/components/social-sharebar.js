@@ -2,11 +2,18 @@ import React from 'react';
 import { stringify } from 'querystring';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
+import {
+  faFacebookSquare,
+  faTwitterSquare,
+} from '@fortawesome/free-brands-svg-icons';
 
 class Sharebar extends React.Component {
   render() {
-    const { url = window.location.href, subject = document.title, description = document.title } = this.props;
+    const {
+      url = window.location.href,
+      subject = document.title,
+      description = document.title,
+    } = this.props;
 
     const socialLinks = [
       createSocialLink({

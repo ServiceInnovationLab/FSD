@@ -20,15 +20,14 @@ export default class Service extends Component {
   };
 
   componentDidMount = async () => {
-    const { 
-      latitude: userLatitude, 
+    const {
+      latitude: userLatitude,
       longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
 
-    const {
-      provider, 
-      services
-    } = await loadService(this.props.match.params.id)
+    const { provider, services } = await loadService(
+      this.props.match.params.id,
+    );
 
     this.setState({
       provider: provider,
@@ -43,43 +42,44 @@ export default class Service extends Component {
       history: { goBack },
     } = this.props;
 
-    const {
-      provider,
-      services,
-      userLatitude,
-      userLongitude,
-    } = this.state;
+    const { provider, services, userLatitude, userLongitude } = this.state;
 
     return (
       <Page className="service__page">
         <section>
-          <button className="icon-prefix__container button back-button" onClick={goBack}>
+          <button
+            className="icon-prefix__container button back-button"
+            onClick={goBack}
+          >
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
             <span className="icon-prefix__label">Go back</span>
           </button>
 
-          {(provider && services) && <Fragment>
+          {provider && services && (
+            <Fragment>
               <ServiceProvider
                 provider={provider}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
               />
               <Accordion>
-                {services.map((service, i) =>
-                    <ServiceDetails
-                      expanded={i === 0}
-                      key={`service_${i}`}
-                      service={service}
-                    />)}
+                {services.map((service, i) => (
+                  <ServiceDetails
+                    expanded={i === 0}
+                    key={`service_${i}`}
+                    service={service}
+                  />
+                ))}
               </Accordion>
-              <MapContainer 
+              <MapContainer
                 serviceProviders={[provider]}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
               />
-            </Fragment>}
+            </Fragment>
+          )}
         </section>
       </Page>
     );
