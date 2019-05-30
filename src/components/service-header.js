@@ -54,8 +54,8 @@ export default class ServiceHeader extends Component {
     // destination and the user just needs to put their own address into Google.
     const directionsUrl =
       userLatitude && userLongitude
-        ? `https://www.google.com/maps/dir/${userLatitude},${userLongitude}/${latitude},${longitude}`
-        : `https://www.google.com/maps/dir//${latitude},${longitude}`;
+      ? `https://maps.google.com/maps?saddr=${userAddress}&daddr=${address}`
+      : `https://maps.google.com/maps?daddr=${address}`
 
     return (
       <header className="service__header">
