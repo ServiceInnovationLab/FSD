@@ -10,6 +10,7 @@ const UserMapMarker = props => {
 
   const homeIcon = new L.Icon({
     iconUrl: require('../assets/img/user-marker-icon.png'),
+    iconRetinaUrl: require('../assets/img/user-marker-icon-2x.png'),
     iconAnchor: [12, 41],
     iconSize: [25, 41],
     popupAnchor: [1, -34],
