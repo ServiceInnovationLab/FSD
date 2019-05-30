@@ -2,11 +2,11 @@ import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-const UserMapMarker = props => {
+const UserMapMarker = params => {
   const { 
     geoCoordinates, 
     address = 'Origin'
-  } = props;
+  } = params;
 
   const homeIcon = new L.Icon({
     iconUrl: require('../assets/img/user-marker-icon.png'),
@@ -14,7 +14,7 @@ const UserMapMarker = props => {
     iconAnchor: [12, 41],
     iconSize: [25, 41],
     popupAnchor: [1, -34],
-    shadowUrl: "marker-shadow.png",
+    shadowUrl: 'marker-shadow.png',
     shadowSize: [41, 41]
   });
 
