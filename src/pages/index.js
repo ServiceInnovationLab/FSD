@@ -154,7 +154,7 @@ export default class Index extends Component {
     );
 
     const userLocation = new UserLocation(
-      address || location, 
+      address || region, 
       userLatitude, 
       userLongitude);
 
