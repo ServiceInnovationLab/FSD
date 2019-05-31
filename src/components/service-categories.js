@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { MDBContainer, MDBInput, MDBBtn } from 'mdbreact';
 import { CategoryContext } from '../contexts/category-context';
 
 export default class ServiceCategories extends Component {
@@ -18,26 +19,28 @@ export default class ServiceCategories extends Component {
           return (
             <section className="category__container">
               <header className="category__header">
-                <h3>Choose a category:</h3>
+                <h3>
+                  <strong>Choose a category</strong>
+                </h3>
               </header>
-
               {categories &&
                 categories.map((category, index) => {
                   let classList = ['category__button'];
 
-                  if (selectedCategory === category.name) classList.push('selected');
+                  let selected = (selectedCategory !== category.name)
 
                   return (
-                    <button
+                    <MDBBtn
                       onClick={e => {
                         e.preventDefault();
                         doSetCategory(category.name);
                       }}
-                      className={classList.join(' ')}
+                      color="success"
+                      flat={selected}
                       key={`category_${index}`}
                     >
                       {category.name}
-                    </button>
+                    </MDBBtn>
                   );
                 })}
             </section>
