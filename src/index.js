@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// Styles
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import "./assets/scss/mdb.scss"
+
 ReactDOM.render(<App />, document.querySelector('#root'));
 
 // If you want your app to work offline and load faster, you can change
