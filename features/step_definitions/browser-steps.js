@@ -5,7 +5,7 @@ module.exports = function() {
     driver.navigate().back();
 
     await driver.wait(async () => {
-      return (await driver.getCurrentUrl()) !== old_url;
+      return await driver.getCurrentUrl() !== old_url;
     });
   });
 
@@ -15,7 +15,7 @@ module.exports = function() {
     await driver.navigate().forward();
 
     await driver.wait(async () => {
-      return (await driver.getCurrentUrl()) !== old_url;
+      return await driver.getCurrentUrl() !== old_url;
     });
   });
 
@@ -26,4 +26,4 @@ module.exports = function() {
 
     await driver.wait(until.stalenessOf(body));
   });
-};
+}

@@ -17,9 +17,7 @@ export default class ServiceClassification extends Component {
           <Icon icon={faFolderOpen} />
         </div>
         <div className="icon-prefix__label">
-          <a
-            href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}
-          >
+          <a href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}>
             {classification && classification.split(',').join(', ')}
           </a>
         </div>

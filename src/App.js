@@ -24,19 +24,8 @@ class App extends Component {
           {categoryContext => (
             <Router basename={GH_PAGES_SUFFIX} hashType="slash">
               <Fragment>
-                <Route
-                  exact
-                  path="/"
-                  render={props => (
-                    <Index categoryContext={categoryContext} {...props} />
-                  )}
-                />
-                <Route
-                  path="/service/:id"
-                  render={props => (
-                    <Service categoryContext={categoryContext} {...props} />
-                  )}
-                />
+                <Route exact path="/" render={props => <Index categoryContext={categoryContext} {...props} />} />
+                <Route path="/service/:id" render={props => <Service categoryContext={categoryContext} {...props} />} />
               </Fragment>
             </Router>
           )}
