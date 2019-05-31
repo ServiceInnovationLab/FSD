@@ -1,10 +1,6 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
-import {
-  getSuggestions,
-  getAddressMetadata,
-  getLocationMetadata,
-} from '../utilities/addressfinder';
+import { getSuggestions, getAddressMetadata, getLocationMetadata } from '../utilities/addressfinder';
 
 const getSuggestionValue = suggestion => suggestion.a;
 
@@ -15,7 +11,11 @@ const renderSuggestion = suggestion => <div>{suggestion.a}</div>;
 //
 // These key definitions are available at
 // https://www.w3.org/TR/uievents-key/#named-key-attribute-value
-const CLEAR_ADDRESS_KEYS = ['Backspace', 'Clear', 'Delete'];
+const CLEAR_ADDRESS_KEYS = [
+  'Backspace',
+  'Clear',
+  'Delete',
+];
 
 // Represents the parts of a region or street address we are interested in for
 // this app - specifically the properties which get included in the URL query
@@ -48,11 +48,11 @@ export default class Example extends React.Component {
     this.state = {
       suggestions: [],
     };
-  }
+  };
 
   clearAddress() {
     this.props.updateSearchParams(SearchLocation.None);
-  }
+  };
 
   onChange(event, { newValue }) {
     if (newValue === '') {
@@ -60,35 +60,23 @@ export default class Example extends React.Component {
     }
 
     this.props.autoSuggestOnChange(newValue);
-  }
+  };
 
   onKeyDown(event) {
-    if (CLEAR_ADDRESS_KEYS.includes(event.key)) {
+    if(CLEAR_ADDRESS_KEYS.includes(event.key)){
       this.clearAddress();
     }
-  }
+  };
 
   onSuggestionSelected = async (event, { suggestion }) => {
     const { updateSearchParams } = this.props;
-
+    
     if (suggestion.type === 'location') {
       const result = await getLocationMetadata(suggestion.pxid);
-      updateSearchParams(
-        new SearchLocation({
-          latitude: result.y,
-          longitude: result.x,
-          region: result.a,
-        }),
-      );
+      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, region: result.a }));
     } else {
       const result = await getAddressMetadata(suggestion.pxid);
-      updateSearchParams(
-        new SearchLocation({
-          latitude: result.y,
-          longitude: result.x,
-          address: result.a,
-        }),
-      );
+      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, address: result.a }));
     }
   };
 
@@ -111,7 +99,7 @@ export default class Example extends React.Component {
       onChange: this.onChange.bind(this),
       onKeyDown: this.onKeyDown.bind(this),
       name: 'address-autosuggest',
-      id: 'searchBox',
+      id: 'searchBox'
     };
     return (
       <Autosuggest

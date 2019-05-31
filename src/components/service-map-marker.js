@@ -3,14 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 
 const ServiceMapMarker = props => {
   const { record } = props;
-  const {
-    LATITUDE,
-    LONGITUDE,
-    PROVIDER_NAME,
-    SERVICE_NAME,
-    ORGANISATION_PURPOSE,
-    PHYSICAL_ADDRESS,
-  } = record;
+  const { LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS } = record;
 
   const position = { lat: Number(LATITUDE), lng: Number(LONGITUDE) };
 
