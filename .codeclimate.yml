@@ -23,4 +23,5 @@ exclude_paths:
 - src/assets/scss/core/**
 - src/assets/scss/free/**
 - src/assets/scss/theme/**
+- src/assets/scss/mdb.scss
 - features/**
