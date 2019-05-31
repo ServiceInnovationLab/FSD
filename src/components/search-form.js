@@ -93,8 +93,8 @@ export default class SearchForm extends Component {
                         <MDBInput
                           {...input}
                           size="lg"
-                          placeholder="Enter topic or organisation"
-                          label="keyword"
+                          className="w-100"
+                          label="Enter topic or organisation"
                           aria-label="Enter topic or organisation"
                           />
                         {meta.touched && meta.error && <span>{meta.error}</span>}

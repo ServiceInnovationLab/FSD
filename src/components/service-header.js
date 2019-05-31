@@ -7,8 +7,9 @@ import queryString from 'query-string';
 
 import { stripSpaces } from '../utilities/string';
 import SaveContact from './save-contact';
+import ServiceClassification from './service-classification';
 
-import { MDBCard, MDBCardText} from 'mdbreact';
+import { MDBCard, MDBCardHeader, MDBCardTitle, MDBCardBody, MDBCardImage, MDBCardFooter , MDBNav} from 'mdbreact';
 
 export default class ServiceHeader extends Component {
   static propTypes = {
@@ -51,74 +52,86 @@ export default class ServiceHeader extends Component {
       : `https://www.google.com/maps/dir//${latitude},${longitude}`
 
     return (
-      <header className="service__header">
-        <h2 className="service__name">
-          <Link to={{
-            pathname: `/service/${fsdId}`,
-            search: userCoordinates
-            }}>
-              {name}
-          </Link>
-        </h2>
-        <p className="float-right">
+      <MDBCard result-index={this.props.index_number}>
+        <MDBCardHeader>
+          {process.env.REACT_APP_DISPLAY_INDEX &&
+            <p className="text-muted float-right">{this.props.index_number }</p>
+          }
+          {this.props.classification &&
+            <p>
+              <ServiceClassification classification={this.props.classification} />
+            </p>
+          }
+          <h2 className="service__name">
+            <Link to={{
+              pathname: `/service/${fsdId}`,
+              search: userCoordinates
+              }}>
+                {name}
+            </Link>
+          </h2>
+        </MDBCardHeader>
+        <MDBCardBody>
+          <header className="service__header">
+            <address className="service__address">
+              {address && (
+                <div className="icon-prefix__container">
+                  <div className="icon-prefix__icon">
+                    <Icon icon={faMapMarkerAlt} />
+                  </div>
+                  <div className="icon-prefix__label">
+                    {address} - <a href={directionsUrl}>Directions</a>
+                  </div>
+                </div>
+              )}
+              {website && (
+                <div className="icon-prefix__container">
+                  <div className="icon-prefix__icon">
+                    <Icon icon={faLink} />
+                  </div>
+                  <a className="icon-prefix__label" href={website} target="_blank" rel="noopener noreferrer">
+                    {website}
+                  </a>
+                </div>
+              )}
+              {availability && (
+                <div className="icon-prefix__container">
+                  <div className="icon-prefix__icon">
+                    <Icon icon={faClock} />
+                  </div>
+                  <div className="icon-prefix__label">{availability}</div>
+                </div>
+              )}
+              {email && (
+                <div className="icon-prefix__container">
+                  <div className="icon-prefix__icon">
+                    <Icon icon={faAt} />
+                  </div>
+                  <a className="icon-prefix__label" href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
+                    {email}
+                  </a>
+                </div>
+              )}
+              {phone && (
+                <div className="icon-prefix__container">
+                  <div className="icon-prefix__icon">
+                    <Icon icon={faPhone} />
+                  </div>
+                  <a
+                    className="icon-prefix__label"
+                    href={`tel:${stripSpaces(phone)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {phone}
+                  </a>
+                </div>
+              )}
+            </address>
+          </header>
           <SaveContact name={name} phoneNumber={phone} address={address} email={email} />
-        </p>
-        <address className="service__address">
-          {address && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faMapMarkerAlt} />
-              </div>
-              <div className="icon-prefix__label">
-                {address} - <a href={directionsUrl}>Directions</a>
-              </div>
-            </div>
-          )}
-          {website && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faLink} />
-              </div>
-              <a className="icon-prefix__label" href={website} target="_blank" rel="noopener noreferrer">
-                {website}
-              </a>
-            </div>
-          )}
-          {availability && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faClock} />
-              </div>
-              <div className="icon-prefix__label">{availability}</div>
-            </div>
-          )}
-          {email && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faAt} />
-              </div>
-              <a className="icon-prefix__label" href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
-                {email}
-              </a>
-            </div>
-          )}
-          {phone && (
-            <div className="icon-prefix__container">
-              <div className="icon-prefix__icon">
-                <Icon icon={faPhone} />
-              </div>
-              <a
-                className="icon-prefix__label"
-                href={`tel:${stripSpaces(phone)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {phone}
-              </a>
-            </div>
-          )}
-        </address>
-      </header>
+        </MDBCardBody>
+      </MDBCard>
     );
   }
 }
