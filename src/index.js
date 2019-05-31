@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 // Styles
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
-import "./assets/scss/mdb.scss"
+import "./assets/scss/mdb.scss";
 
 ReactDOM.render(<App />, document.querySelector('#root'));
 
