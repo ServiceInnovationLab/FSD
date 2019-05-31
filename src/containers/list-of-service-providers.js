@@ -8,26 +8,29 @@ export default class ListOfServiceProviders extends Component {
   static propTypes = {
     serviceProviders: PropTypes.array.isRequired,
     userLatitude: PropTypes.string,
-    userLongitude: PropTypes.string,
+    userLongitude: PropTypes.string
   };
 
   render() {
-    const { serviceProviders, userLatitude, userLongitude } = this.props;
+    const { 
+      serviceProviders, 
+      userLatitude, 
+      userLongitude 
+    } = this.props;
 
     if (serviceProviders.length > 0) {
       return (
-        <section className="service__container">
-          {uniqueServices(serviceProviders, 'PROVIDER_NAME').map(
-            (provider, index) => (
-              <ServiceProviderResult
-                key={provider.FSD_ID}
-                index={index}
-                provider={provider}
-                userLatitude={userLatitude}
-                userLongitude={userLongitude}
-              />
-            ),
-          )}
+        <section className="service__container">          
+        {uniqueServices(serviceProviders, 'PROVIDER_NAME')
+          .map((provider, index) => (
+            <ServiceProviderResult
+              key={provider.FSD_ID} 
+              index={index}
+              provider={provider}
+              userLatitude={userLatitude}
+              userLongitude={userLongitude}
+            />
+          ))}
         </section>
       );
     } else {

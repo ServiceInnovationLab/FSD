@@ -18,8 +18,7 @@ export default class SearchForm extends Component {
   onSubmit(values) {
     const { dirtyFields } = arguments[1].getState();
     Object.keys(dirtyFields).forEach(field => {
-      if (!values[field] && !(values[field] === 'undefined'))
-        values[field] = '';
+      if (!values[field] && !(values[field] === 'undefined')) values[field] = '';
     });
 
     this.props.updateSearchParams(values);
@@ -43,66 +42,43 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="searchBox" className="search__addressLabel">
-                Address
-              </label>
+              <label htmlFor="searchBox" className="search__addressLabel">Address</label>
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
                 autoSuggestOnChange={autoSuggestOnChange}
                 address={address ? address : region}
               />
             </div>
-            {address ? (
-              <div className="radio-group">
-                <fieldset className="radius-fieldset">
-                  <legend>Distance (km):</legend>
-                  {radiusOptions.map(radius => {
-                    return (
-                      <label className="radius-label" key={radius}>
-                        <button
-                          className={
-                            radius === initialValues.radius
-                              ? 'radius-button--selected'
-                              : 'radius-button'
-                          }
-                          type="button"
-                          name="radius"
-                          value={radius}
-                          onClick={() => updateSearchParams({ radius: radius })}
-                        >
-                          {radius}
-                        </button>
-                      </label>
-                    );
-                  })}
-                </fieldset>
-              </div>
-            ) : null}
+            {address
+              ? (
+                <div className="radio-group">
+                  <fieldset className="radius-fieldset">
+                    <legend>Distance (km):</legend>
+                      {radiusOptions.map(radius => {
+                        return (
+                          <label className="radius-label" key={radius}>
+                            <button
+                              className={radius === initialValues.radius ? 'radius-button--selected' : 'radius-button'}
+                              type="button"
+                              name="radius"
+                              value={radius}
+                              onClick={()=>  updateSearchParams({radius: radius})
+                              }
+                            >{radius}</button>
+                          </label>
+                        );
+                      })}
+                  </fieldset>
+              </div> )
+              : null
+            }
             <div className="search__topic">
-              <Field
-                name="keyword"
-                component="input"
-                type="text"
-                aria-label="Enter topic or organisation"
-                placeholder="Enter topic or organisation"
-              />
-              <button
-                type="submit"
-                className="search__magnifying-glass"
-                onClick={() => handleSubmit(form)}
-                disabled={submitting || pristine}
-                aria-label="Magnifying glass"
-              >
-                Magnifying Glass
-              </button>
+              <Field name="keyword" component="input" type="text" aria-label="Enter topic or organisation" placeholder="Enter topic or organisation" />
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button> 
             </div>
 
             {showExtraButtons ? (
-              <button
-                type="button"
-                onClick={() => doResetSearch(form)}
-                disabled={submitting}
-              >
+              <button type="button" onClick={() => doResetSearch(form)} disabled={submitting}>
                 Reset Search
               </button>
             ) : null}
@@ -112,3 +88,4 @@ export default class SearchForm extends Component {
     );
   }
 }
+
