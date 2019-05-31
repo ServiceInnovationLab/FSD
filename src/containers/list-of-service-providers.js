@@ -12,19 +12,19 @@ export default class ListOfServiceProviders extends Component {
   };
 
   render() {
-    const { 
-      serviceProviders, 
-      userLatitude, 
-      userLongitude 
+    const {
+      serviceProviders,
+      userLatitude,
+      userLongitude
     } = this.props;
 
     if (serviceProviders.length > 0) {
       return (
-        <section className="service__container">          
+        <section className="service__container">
         {uniqueServices(serviceProviders, 'PROVIDER_NAME')
           .map((provider, index) => (
             <ServiceProviderResult
-              key={provider.FSD_ID} 
+              key={provider.FSD_ID}
               index={index}
               provider={provider}
               userLatitude={userLatitude}
