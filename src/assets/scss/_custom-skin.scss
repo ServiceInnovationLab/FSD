@@ -3,23 +3,23 @@
 $skins: () !default;
 $skins: map-merge((
   "test": (
-    "skin-primary-color":      #000000,
-    "skin-navbar":             #000000,
-    "skin-footer-color":       #000000,
-    "skin-flat":               #000000,
-    "skin-accent":             #000000,
-    "skin-sidenav-item":       #000000,
-    "skin-sidenav-item-hover": #000000,
-    "skin-gradient-start":     #000000,
-    "skin-gradient-end":       #000000,
-    "skin-mask-slight":        #000000,
-    "skin-mask-light":         #000000,
-    "skin-mask-strong":        #000000,
-    "skin-sn-child":           #000000,
-    "skin-btn-primary":        #000000,
-    "skin-btn-secondary":      #000000,
-    "skin-btn-default":        #000000,
-    "skin-text":               #000000
+    "skin-primary-color":      $black,
+    "skin-navbar":             $black,
+    "skin-footer-color":       $black,
+    "skin-flat":               $black,
+    "skin-accent":             $black,
+    "skin-sidenav-item":       $black,
+    "skin-sidenav-item-hover": $black,
+    "skin-gradient-start":     $black,
+    "skin-gradient-end":       $black,
+    "skin-mask-slight":        $black,
+    "skin-mask-light":         $black,
+    "skin-mask-strong":        $black,
+    "skin-sn-child":           $black,
+    "skin-btn-primary":        $black,
+    "skin-btn-secondary":      $black,
+    "skin-btn-default":        $black,
+    "skin-text":               $black
   )
 ), $skins);
 
