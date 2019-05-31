@@ -28,7 +28,7 @@ const queryString = require('query-string');
 // path, query, and maybe a further fragment, are all moved into the fragment
 // section of the URL. A custom URL parsing function is required.
 
-// Retrieve the path portion of a hash-routed URL.
+// Retrieve the path portion of a hash-routed URL. 
 //
 // This is the path after the first hash. Note that There mgiht also be a path
 // as part of the main URL which will be ignored by this function.
