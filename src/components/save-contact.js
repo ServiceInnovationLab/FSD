@@ -1,6 +1,10 @@
 import React from 'react';
 
 import { stripSpaces } from '../utilities/string';
+import { MDBBtn } from 'mdbreact';
+
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 class SaveContact extends React.Component {
   _save_vcard = () => {
@@ -16,12 +20,17 @@ class SaveContact extends React.Component {
                           "END:VCARD\n");
     downloadContent('contact.vcf', vcard_content);
   }
-  
+
   render() {
     return (
-      <div>
-        <button onClick={this._save_vcard}>Save Contact</button>
-      </div>
+      <MDBBtn flat onClick={this._save_vcard}>
+        <div className="icon-prefix__container">
+          <div className="icon-prefix__icon">
+            <Icon icon={faDownload} />
+          </div>
+          Save Contact
+        </div>
+      </MDBBtn>
     );
   }
 }
