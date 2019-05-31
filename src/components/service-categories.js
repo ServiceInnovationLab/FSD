@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { MDBContainer, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBBtn } from 'mdbreact';
 import { CategoryContext } from '../contexts/category-context';
 
 export default class ServiceCategories extends Component {
@@ -25,8 +25,6 @@ export default class ServiceCategories extends Component {
               </header>
               {categories &&
                 categories.map((category, index) => {
-                  let classList = ['category__button'];
-
                   let selected = (selectedCategory !== category.name)
 
                   return (

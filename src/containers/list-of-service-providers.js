@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ServiceProviderResult from '../components/service-provider-result';
 import uniqueServices from '../utilities/uniqueServices';
-import { MDBCard, MDBCardHeader, MDBCardTitle, MDBCardBody, MDBCardImage } from 'mdbreact';
+import { MDBCard, MDBCardHeader, MDBCardTitle } from 'mdbreact';
 
 export default class ListOfServiceProviders extends Component {
   static propTypes = {

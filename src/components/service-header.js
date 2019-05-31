@@ -9,7 +9,7 @@ import { stripSpaces } from '../utilities/string';
 import SaveContact from './save-contact';
 import ServiceClassification from './service-classification';
 
-import { MDBCard, MDBCardHeader, MDBCardTitle, MDBCardBody, MDBCardImage, MDBCardFooter , MDBNav} from 'mdbreact';
+import { MDBCard, MDBCardHeader, MDBCardBody } from 'mdbreact';
 
 export default class ServiceHeader extends Component {
   static propTypes = {
