@@ -14,7 +14,7 @@ Feature: Service detail
   Then I am on a service detail page
   And the page shows a provider
   And the provider has a "Directions" link
-  And the link URL contains "dir//"
+  And the link URL contains "daddr="
 
   Scenario: A service has a "Directions" link which is populated with my location
   When I search near the address "Wellington Harbour"
@@ -23,4 +23,5 @@ Feature: Service detail
   Then I am on a service detail page
   And the page shows a provider
   And the provider has a "Directions" link
-  And the link URL contains "dir/-41.277678285716,174.849669865579/"
+  And the link URL contains "saddr=Wellington%20Harbour%20(Port%20Nicholson)"
+  And the link URL contains "daddr=63%20Miramar%20Avenue,%20Wellington,%206022"
