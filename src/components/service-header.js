@@ -8,6 +8,8 @@ import queryString from 'query-string';
 import { stripSpaces } from '../utilities/string';
 import SaveContact from './save-contact';
 
+import { MDBCard, MDBCardText} from 'mdbreact';
+
 export default class ServiceHeader extends Component {
   static propTypes = {
     provider: PropTypes.object.isRequired,
@@ -58,6 +60,9 @@ export default class ServiceHeader extends Component {
               {name}
           </Link>
         </h2>
+        <p className="float-right">
+          <SaveContact name={name} phoneNumber={phone} address={address} email={email} />
+        </p>
         <address className="service__address">
           {address && (
             <div className="icon-prefix__container">
@@ -112,12 +117,6 @@ export default class ServiceHeader extends Component {
               </a>
             </div>
           )}
-          <SaveContact
-            name={name}
-            phoneNumber={phone}
-            address={address}
-            email={email}
-            />
         </address>
       </header>
     );

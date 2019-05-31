@@ -12,6 +12,7 @@ import SearchForm from '../components/search-form';
 import SearchCriteria from '../components/search-criteria';
 import uniqueServices from '../utilities/uniqueServices';
 
+import { MDBBtn} from 'mdbreact';
 const DEFAULT_SEARCH_RADIUS = '25';
 
 export default class Index extends Component {
@@ -118,7 +119,7 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
+      <MDBBtn color="info" className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</MDBBtn>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });

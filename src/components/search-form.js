@@ -119,7 +119,12 @@ export default class SearchForm extends Component {
                 color="warning"
                 onClick={() => doResetSearch(form)} disabled={submitting}
                 >
-                <Icon icon={faTimesCircle} />Reset Search
+                  <div className="icon-prefix__container">
+                    <div>
+                      <Icon icon={faTimesCircle} />
+                    </div>
+                    Reset Search
+                  </div>
               </MDBBtn>
               </p>
             ) : null}

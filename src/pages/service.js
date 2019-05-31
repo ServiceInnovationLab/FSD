@@ -11,6 +11,8 @@ import { Accordion } from 'react-accessible-accordion';
 import { loadService } from '../utilities/api';
 import uniqueServices from '../utilities/uniqueServices';
 
+import { MDBBtn} from 'mdbreact';
+
 export default class Service extends Component {
   state = {
     provider: null,
@@ -20,13 +22,13 @@ export default class Service extends Component {
   };
 
   componentDidMount = async () => {
-    const { 
-      latitude: userLatitude, 
+    const {
+      latitude: userLatitude,
       longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
 
     const {
-      provider, 
+      provider,
       services
     } = await loadService(this.props.match.params.id)
 
@@ -53,12 +55,10 @@ export default class Service extends Component {
     return (
       <Page className="service__page">
         <section>
-          <button className="icon-prefix__container button back-button" onClick={goBack}>
-            <div className="icon-prefix__icon">
-              <Icon icon={faChevronLeft} />
-            </div>
-            <span className="icon-prefix__label">Go back</span>
-          </button>
+          <MDBBtn onClick={goBack}>
+            <Icon icon={faChevronLeft} />
+            Go back
+          </MDBBtn>
 
           {(provider && services) && <Fragment>
               <ServiceProvider
@@ -74,7 +74,7 @@ export default class Service extends Component {
                       service={service}
                     />)}
               </Accordion>
-              <MapContainer 
+              <MapContainer
                 serviceProviders={[provider]}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ServiceProviderResult from '../components/service-provider-result';
 import uniqueServices from '../utilities/uniqueServices';
+import { MDBCard, MDBCardHeader, MDBCardTitle, MDBCardBody, MDBCardImage } from 'mdbreact';
 
 export default class ListOfServiceProviders extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ export default class ListOfServiceProviders extends Component {
 
     if (serviceProviders.length > 0) {
       return (
-        <section className="service__container">
+        <section>
         {uniqueServices(serviceProviders, 'PROVIDER_NAME')
           .map((provider, index) => (
             <ServiceProviderResult
@@ -35,11 +36,11 @@ export default class ListOfServiceProviders extends Component {
       );
     } else {
       return (
-        <section className="service__container">
-          <header className="service__header">
-            <h2>Make a search or choose a category above.</h2>
-          </header>
-        </section>
+        <MDBCard>
+          <MDBCardHeader>
+            <MDBCardTitle>Make a search or choose a category above.</MDBCardTitle>
+          </MDBCardHeader>
+        </MDBCard>
       );
     }
   }
