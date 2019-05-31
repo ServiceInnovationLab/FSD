@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBJumbotron } from "mdbreact";
 
 const Header = () => {
   return (
