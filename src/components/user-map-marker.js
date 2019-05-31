@@ -6,7 +6,7 @@ import L from 'leaflet';
 
 class UserMapMarker extends Component {
   static propTypes = {
-    userLocation: PropTypes.object.isRequired
+    userLocation: PropTypes.object
   }
 
   static homeIcon = new L.Icon({
@@ -21,6 +21,11 @@ class UserMapMarker extends Component {
 
   render() {
     const { userLocation } = this.props;
+
+    // Don't render if userLocation isn't valid
+    if(!userLocation){
+      return null;
+    }
 
     return (
       <Marker 

@@ -11,15 +11,16 @@ export default class MapContainer extends Component {
     userLocation: PropTypes.object
   };
 
+  // roughly the centre of aotearoa
+  get defaultMapFocus() {
+    return { lat: -41.0, lng: 174.0 };
+  }
+
   render() {
     const { 
       serviceProviders,
       userLocation
     } = this.props;
-
-    // roughly the centre of aotearoa
-    const defaultMapFocus = { lat: -41.0, lng: 174.0 }
-    const userCoordinates = userLocation && { lat: Number(userLocation.lat), lng: Number(userLocation.lng) }
 
     const center =
       serviceProviders.length === 1 
@@ -27,7 +28,7 @@ export default class MapContainer extends Component {
             lat: Number(serviceProviders[0].LATITUDE),
             lng: Number(serviceProviders[0].LONGITUDE),
           }
-        : userCoordinates || defaultMapFocus
+        : userLocation || this.defaultMapFocus;
 
     return (
       <Map center={center} zoom={serviceProviders.length !== 1 ? 5 : 12}>

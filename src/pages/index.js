@@ -153,10 +153,12 @@ export default class Index extends Component {
       (serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0],
     );
 
-    const userLocation = new UserLocation(
-      address || region, 
-      userLatitude, 
-      userLongitude);
+    const userLocation = (address || region) && userLatitude && userLongitude
+      ? new UserLocation(
+        address || region, 
+        userLatitude, 
+        userLongitude)
+      : null;
 
     return (
       <Page>
@@ -190,9 +192,7 @@ export default class Index extends Component {
           <ListOfServiceProviders
             serviceProviders={serviceProviders}
             history={history}
-            userAddress={address || region}
-            userLatitude={userLatitude}
-            userLongitude={userLongitude} 
+            userLocation={userLocation}
           />
         )}
         <Sharebar />

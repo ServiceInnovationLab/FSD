@@ -12,8 +12,7 @@ class UserLocation {
   lng;
   
   constructor(address, lat, lng) {
-
-    this.adress = address;
+    this.address = address;
     this.lat = Number(lat);
     this.lng = Number(lng);
   }
