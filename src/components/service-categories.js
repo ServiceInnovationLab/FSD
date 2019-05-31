@@ -25,8 +25,7 @@ export default class ServiceCategories extends Component {
                 categories.map((category, index) => {
                   let classList = ['category__button'];
 
-                  if (selectedCategory === category.name)
-                    classList.push('selected');
+                  if (selectedCategory === category.name) classList.push('selected');
 
                   return (
                     <button

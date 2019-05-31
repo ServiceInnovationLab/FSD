@@ -1,11 +1,4 @@
-import {
-  RESOURCE_ID,
-  API_PATH,
-  categories,
-  STATICFIELDS,
-  requestBuilder,
-  isValidQuery,
-} from '../url';
+import { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder, isValidQuery } from '../url';
 import searchVars from '../../__mocks__/searchVars';
 
 describe('url.js', () => {
@@ -82,12 +75,12 @@ describe('url.js', () => {
       }).not.toThrow();
     });
 
-    it('is not valid when the keyword length is <= 2 chars and there are no other search terms', () => {
+    it("is not valid when the keyword length is <= 2 chars and there are no other search terms", () => {
       searchVarsClone.keyword = keywords.tooShort;
       searchVarsClone.category = categoryExamples.none;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(isValidQuery(searchVarsClone)).toBe(false);
+      expect(isValidQuery(searchVarsClone)).toBe(false)
     });
 
     it("clarifies keyword when it's greater than 2 chars", () => {
@@ -95,9 +88,8 @@ describe('url.js', () => {
       searchVarsClone.category = categoryExamples.none;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).toContain(
-        `q=${searchVarsClone.keyword}`,
-      );
+      expect(requestBuilder(searchVarsClone))
+        .toContain(`q=${searchVarsClone.keyword}`);
     });
 
     it("doesn't filter without a category", () => {
@@ -105,9 +97,8 @@ describe('url.js', () => {
       searchVarsClone.category = categoryExamples.none;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).not.toContain(
-        'filters={"LEVEL_1_CATEGORY":',
-      );
+      expect(requestBuilder(searchVarsClone))
+        .not.toContain('filters={"LEVEL_1_CATEGORY":');
     });
 
     it('filters by category', () => {
@@ -115,9 +106,8 @@ describe('url.js', () => {
       searchVarsClone.category = categoryExamples.valid;
       searchVarsClone.addressLatLng = addressLatLngs.none;
 
-      expect(requestBuilder(searchVarsClone)).toContain(
-        categories(searchVarsClone.category),
-      );
+      expect(requestBuilder(searchVarsClone))
+        .toContain(categories(searchVarsClone.category));
     });
   });
 });

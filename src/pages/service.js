@@ -28,9 +28,10 @@ export default class Service extends Component {
       longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
 
-    const { provider, services } = await loadService(
-      this.props.match.params.id,
-    );
+    const {
+      provider, 
+      services
+    } = await loadService(this.props.match.params.id)
 
     this.setState({
       provider: provider,
@@ -62,39 +63,33 @@ export default class Service extends Component {
     return (
       <Page className="service__page">
         <section>
-          <button
-            className="icon-prefix__container button back-button"
-            onClick={goBack}
-          >
+          <button className="icon-prefix__container button back-button" onClick={goBack}>
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
             <span className="icon-prefix__label">Go back</span>
           </button>
 
-          {provider && services && (
-            <Fragment>
+          {(provider && services) && <Fragment>
               <ServiceProvider
                 provider={provider}
                 userLocation={userLocation}
               />
               <Accordion>
-                {services.map((service, i) => (
-                  <ServiceDetails
-                    expanded={i === 0}
-                    key={`service_${i}`}
-                    service={service}
-                  />
-                ))}
+                {services.map((service, i) =>
+                    <ServiceDetails
+                      expanded={i === 0}
+                      key={`service_${i}`}
+                      service={service}
+                    />)}
               </Accordion>
-              <MapContainer
+              <MapContainer 
                 serviceProviders={[provider]}
                 userAddress={userAddress}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
               />
-            </Fragment>
-          )}
+            </Fragment>}
         </section>
       </Page>
     );
