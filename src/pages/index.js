@@ -89,11 +89,11 @@ export default class Index extends Component {
       categoryContext: { setCategory },
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { 
-      category = '', 
-      region = '', 
+    const {
+      category = '',
+      region = '',
       address = '',
-      keyword = '', 
+      keyword = '',
       radius = DEFAULT_SEARCH_RADIUS,
       latitude: userLatitude,
       longitude: userLongitude
@@ -105,11 +105,11 @@ export default class Index extends Component {
     loadResults(searchVars).then(res => {
       const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
       const paged_results = unique_Results.slice(0, serviceProvidersPerPage)
-      this.setState({ 
-        serviceProviders: paged_results, 
-        userLatitude, 
-        userLongitude, 
-        numOfResults: unique_Results.length, 
+      this.setState({
+        serviceProviders: paged_results,
+        userLatitude,
+        userLongitude,
+        numOfResults: unique_Results.length,
         numOfResultsDisplayed: paged_results.length
       });
     });
@@ -147,7 +147,7 @@ export default class Index extends Component {
             region={region}
             showExtraButtons={showExtraButtons}
             initialValues={{ keyword, radius }}
-          />  
+          />
         </SearchContainer>
         <SearchCriteria
           keyword={searchVars.keyword}
@@ -161,11 +161,11 @@ export default class Index extends Component {
         {showMap ? (
           <MapContainer serviceProviders={serviceProviders} />
         ) : (
-          <ListOfServiceProviders 
-            serviceProviders={serviceProviders} 
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
             history={history}
             userLatitude={this.state.userLatitude}
-            userLongitude={this.state.userLongitude} 
+            userLongitude={this.state.userLongitude}
           />
         )}
         <Sharebar />

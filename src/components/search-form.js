@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import AutoSuggest from '../containers/auto-suggest';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 const radiusOptions = ['10', '25', '50', '100'];
 export default class SearchForm extends Component {
@@ -36,12 +41,13 @@ export default class SearchForm extends Component {
     } = this.props;
 
     return (
+      <MDBContainer>
       <Form
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
-            <div>
+            <div className="search__topic">
               <label htmlFor="searchBox" className="search__addressLabel">Address</label>
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
@@ -51,41 +57,78 @@ export default class SearchForm extends Component {
             </div>
             {address
               ? (
-                <div className="radio-group">
-                  <fieldset className="radius-fieldset">
+            <div className="search__topic">
+              <div className="form-group">
                     <legend>Distance (km):</legend>
                       {radiusOptions.map(radius => {
+                        let selected = (radius !== initialValues.radius)
                         return (
                           <label className="radius-label" key={radius}>
-                            <button
-                              className={radius === initialValues.radius ? 'radius-button--selected' : 'radius-button'}
+                            <MDBBtn
+                              flat={selected}
                               type="button"
                               name="radius"
                               value={radius}
+                              color="success"
                               onClick={()=>  updateSearchParams({radius: radius})
                               }
-                            >{radius}</button>
+                            >{radius}</MDBBtn>
                           </label>
                         );
                       })}
-                  </fieldset>
-              </div> )
+                  </div>
+                  </div>)
               : null
             }
-            <div className="search__topic">
-              <Field name="keyword" component="input" type="text" aria-label="Enter topic or organisation" placeholder="Enter topic or organisation" />
-              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button> 
-            </div>
+            <MDBRow>
+              <MDBCol>
+                  <Field
+                    group
+                    name="keyword"
+                    component="input"
+                    type="text"
+                    >
+                    {({ input, meta }) => (
+                      <Fragment>
+                        <MDBInput
+                          {...input}
+                          size="lg"
+                          placeholder="Enter topic or organisation"
+                          label="keyword"
+                          aria-label="Enter topic or organisation"
+                          />
+                        {meta.touched && meta.error && <span>{meta.error}</span>}
+                      </Fragment>
+                    )}
+                  </Field>
+                  <MDBBtn
+                    group
+                    color="success"
+                    type="submit"
+                    onClick={() => handleSubmit(form)}
+                    aria-label="search"
+                    >
+                      <Icon icon={faSearch} />
+                      Search
+                    </MDBBtn>
 
             {showExtraButtons ? (
-              <button type="button" onClick={() => doResetSearch(form)} disabled={submitting}>
-                Reset Search
-              </button>
+              <p className="float-right">
+
+              <MDBBtn
+                color="warning"
+                onClick={() => doResetSearch(form)} disabled={submitting}
+                >
+                <Icon icon={faTimesCircle} />Reset Search
+              </MDBBtn>
+              </p>
             ) : null}
+              </MDBCol>
+            </MDBRow>
           </form>
         )}
       />
+      </MDBContainer>
     );
   }
 }
-
