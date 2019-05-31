@@ -2,7 +2,7 @@ import {
   getRelativePath, 
   getQueryParams, 
   getFragment,
-} from '../hashRoutedUrls'
+} from '../hashRoutedUrls';
 
 describe('parseHashRouterUrl.js', () => {
   describe ('when the URL has no fragment at all', () => {
