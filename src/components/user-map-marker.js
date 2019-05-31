@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-const UserMapMarker = params => {
-  const { 
-    geoCoordinates, 
-    address = 'Origin'
-  } = params;
 
-  const homeIcon = new L.Icon({
+class UserMapMarker extends Component {
+  static propTypes = {
+    userLocation: PropTypes.object.isRequired
+  }
+
+  static homeIcon = new L.Icon({
     iconUrl: require('../assets/img/user-marker-icon.png'),
     iconRetinaUrl: require('../assets/img/user-marker-icon-2x.png'),
     iconAnchor: [12, 41],
@@ -18,20 +19,22 @@ const UserMapMarker = params => {
     shadowSize: [41, 41]
   });
 
-  return (
-    <div>
+  render() {
+    const { userLocation } = this.props;
+
+    return (
       <Marker 
-        position={geoCoordinates}
-        icon={homeIcon}
+        position={userLocation}
+        icon={UserMapMarker.homeIcon}
       >
         <Popup>
           <span>
-            <p>{address}</p>
+            <p>{userLocation.address}</p>
           </span>
         </Popup>
       </Marker>
-    </div>
-  );
+    );
+  }
 };
 
 export default UserMapMarker;

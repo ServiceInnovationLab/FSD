@@ -11,6 +11,7 @@ import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
 import SearchCriteria from '../components/search-criteria';
 import uniqueServices from '../utilities/uniqueServices';
+import UserLocation from '../utilities/userLocation';
 
 const DEFAULT_SEARCH_RADIUS = '25';
 
@@ -152,6 +153,11 @@ export default class Index extends Component {
       (serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0],
     );
 
+    const userLocation = new UserLocation(
+      address || location, 
+      userLatitude, 
+      userLongitude);
+
     return (
       <Page>
         <SearchContainer>
@@ -178,9 +184,7 @@ export default class Index extends Component {
         {showMap ? (
           <MapContainer 
             serviceProviders={serviceProviders} 
-            userAddress={address || region}
-            userLatitude={userLatitude}
-            userLongitude={userLongitude}
+            userLocation={userLocation}
           />
         ) : (
           <ListOfServiceProviders

@@ -8,22 +8,18 @@ export default class MapContainer extends Component {
 
   static propTypes = {
     serviceProviders: PropTypes.array.isRequired,
-    userAddress: PropTypes.string,
-    userLatitude: PropTypes.string,
-    userLongitude: PropTypes.string,
+    userLocation: PropTypes.object
   };
 
   render() {
     const { 
       serviceProviders,
-      userAddress, 
-      userLatitude, 
-      userLongitude 
+      userLocation
     } = this.props;
 
     // roughly the centre of aotearoa
     const defaultMapFocus = { lat: -41.0, lng: 174.0 }
-    const userCoordinates = userLatitude && userLongitude && { lat: Number(userLatitude), lng: Number(userLongitude) }
+    const userCoordinates = userLocation && { lat: Number(userLocation.lat), lng: Number(userLocation.lng) }
 
     const center =
       serviceProviders.length === 1 
@@ -40,12 +36,9 @@ export default class MapContainer extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {serviceProviders.map((record, i) => (
-          <ServiceMapMarker key={`marker-${i}`} record={record} />
+          <ServiceMapMarker key={record.FSD_ID} record={record} />
         ))}
-        {userCoordinates && <UserMapMarker 
-          geoCoordinates={userCoordinates} 
-          address={userAddress}
-        />}
+        <UserMapMarker userLocation={userLocation} />
       </Map>
     );
   }
