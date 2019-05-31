@@ -18,4 +18,9 @@ plugins:
     enabled: true
 exclude_paths:
 - src/utilities/__tests__/**
+- src/assets/scss/addons/**
+- src/assets/scss/components/**
+- src/assets/scss/core/**
+- src/assets/scss/free/**
+- src/assets/scss/theme/**
 - features/**
