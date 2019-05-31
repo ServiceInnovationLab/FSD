@@ -153,12 +153,10 @@ export default class Index extends Component {
       (serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0],
     );
 
-    const userLocation = (address || region) && userLatitude && userLongitude
-      ? new UserLocation(
+    const userLocation = UserLocation(
         address || region, 
         userLatitude, 
-        userLongitude)
-      : null;
+        userLongitude);
 
     return (
       <Page>

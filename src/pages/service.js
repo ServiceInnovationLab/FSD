@@ -54,12 +54,10 @@ export default class Service extends Component {
       userLongitude,
     } = this.state;
 
-    const userLocation = userAddress && userLatitude && userLongitude
-      ? new UserLocation(
+    const userLocation = UserLocation(
         userAddress,
         userLatitude, 
-        userLongitude)
-      : null;
+        userLongitude);
 
     return (
       <Page className="service__page">
