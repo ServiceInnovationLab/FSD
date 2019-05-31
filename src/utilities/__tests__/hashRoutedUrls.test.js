@@ -1,6 +1,6 @@
-import { 
-  getRelativePath, 
-  getQueryParams, 
+import {
+  getRelativePath,
+  getQueryParams,
   getFragment,
 } from '../hashRoutedUrls';
 
@@ -17,7 +17,7 @@ describe('parseHashRouterUrl.js', () => {
       expect(getQueryParams(url))
         .toMatchObject({});
     });
-    
+
     it('getFragment responds correctly', () => {
       expect(getFragment(url))
         .toBe('');
@@ -36,7 +36,7 @@ describe('parseHashRouterUrl.js', () => {
       expect(getQueryParams(url))
         .toMatchObject({});
     });
-    
+
     it('getFragment responds correctly', () => {
       expect(getFragment(url))
         .toBe('');
@@ -55,7 +55,7 @@ describe('parseHashRouterUrl.js', () => {
       expect(getQueryParams(url))
         .toMatchObject({});
     });
-    
+
     it('getFragment responds correctly', () => {
       expect(getFragment(url))
         .toBe('');
@@ -73,7 +73,7 @@ describe('parseHashRouterUrl.js', () => {
     it('getQueryParams responds correctly', () => {
       expect(getQueryParams(url))
         .toMatchObject({
-          size: 'medium', 
+          size: 'medium',
           color: 'red'}
         );
     });
@@ -104,7 +104,7 @@ describe('parseHashRouterUrl.js', () => {
     it('getQueryParams responds correctly', () => {
       expect(getQueryParams(url))
         .toMatchObject({
-          size: 'medium', 
+          size: 'medium',
           color: 'red'}
         );
     });
@@ -121,7 +121,7 @@ describe('parseHashRouterUrl.js', () => {
     it('getQueryParams responds correctly', () => {
       expect(getQueryParams(url))
         .toMatchObject({
-          size: 'medium', 
+          size: 'medium',
           color: 'red'}
         );
     });
