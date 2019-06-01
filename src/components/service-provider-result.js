@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ServiceHeader from './service-header';
-import ServiceClassification from './service-classification';
 
 export default class ServiceProviderResult extends Component {
   static propTypes = {
