@@ -8,8 +8,7 @@ import ServiceClassification from './service-classification';
 export default class ServiceProviders extends Component {
   static propTypes = {
     provider: PropTypes.object.isRequired,
-    userLatitude: PropTypes.string,
-    userLongitude: PropTypes.string
+    userLocation: PropTypes.object
   };
 
   render() {
@@ -19,16 +18,14 @@ export default class ServiceProviders extends Component {
         PROVIDER_CLASSIFICATION: classification,
         ORGANISATION_PURPOSE: purpose,
       },
-      userLatitude,
-      userLongitude,
+      userLocation,
     } = this.props;
 
     return (
       <section className="service">
         <ServiceHeader
           provider={provider}
-          userLatitude={userLatitude}
-          userLongitude={userLongitude}
+          userLocation={userLocation}
         />
 
         {purpose && <blockquote className="service__purpose">
