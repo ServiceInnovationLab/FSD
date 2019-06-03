@@ -157,4 +157,9 @@ module.exports = function() {
     const url_string = await shared.the.link.getAttribute('href');
     expect(url_string).to.have.string(value);
   });
+
+  this.Then(/^the link URL does not contain "([^"]*)"$/, async value => {
+    const url_string = await shared.the.link.getAttribute('href');
+    expect(url_string).not.to.have.string(value);
+  });
 };

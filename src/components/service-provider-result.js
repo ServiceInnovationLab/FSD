@@ -8,8 +8,7 @@ export default class ServiceProviderResult extends Component {
   static propTypes = {
     index: PropTypes.number,
     provider: PropTypes.object.isRequired,
-    userLatitude: PropTypes.string,
-    userLongitude: PropTypes.string
+    userLocation: PropTypes.object,
   };
 
   render() {
@@ -20,8 +19,7 @@ export default class ServiceProviderResult extends Component {
         PROVIDER_CLASSIFICATION: classification,
         ORGANISATION_PURPOSE: purpose,
       },
-      userLatitude,
-      userLongitude,
+      userLocation,
     } = this.props;
 
     return (
@@ -29,8 +27,7 @@ export default class ServiceProviderResult extends Component {
         {process.env.REACT_APP_DISPLAY_INDEX && index+1 }
         <ServiceHeader
           provider={provider}
-          userLatitude={userLatitude}
-          userLongitude={userLongitude}
+          userLocation={userLocation}
         />
 
         {purpose && <blockquote className="service__purpose service__purpose--truncatable">{purpose}</blockquote>}

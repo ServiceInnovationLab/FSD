@@ -10,17 +10,20 @@ import MapContainer from '../containers/map-container';
 import { Accordion } from 'react-accessible-accordion';
 import { loadService } from '../utilities/api';
 import uniqueServices from '../utilities/uniqueServices';
+import UserLocation from '../utilities/userLocation';
 
 export default class Service extends Component {
   state = {
     provider: null,
     services: [],
+    userAddresss: null,
     userLatitude: '',
     userLongitude: '',
   };
 
   componentDidMount = async () => {
     const { 
+      address: userAddress,
       latitude: userLatitude, 
       longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
@@ -33,6 +36,7 @@ export default class Service extends Component {
     this.setState({
       provider: provider,
       services: uniqueServices(services, 'SERVICE_NAME'),
+      userAddress,
       userLatitude,
       userLongitude,
     });
@@ -46,9 +50,15 @@ export default class Service extends Component {
     const {
       provider,
       services,
+      userAddress,
       userLatitude,
       userLongitude,
     } = this.state;
+
+    const userLocation = UserLocation(
+        userAddress,
+        userLatitude, 
+        userLongitude);
 
     return (
       <Page className="service__page">
@@ -63,8 +73,7 @@ export default class Service extends Component {
           {(provider && services) && <Fragment>
               <ServiceProvider
                 provider={provider}
-                userLatitude={userLatitude}
-                userLongitude={userLongitude}
+                userLocation={userLocation}
               />
               <Accordion>
                 {services.map((service, i) =>
@@ -76,6 +85,7 @@ export default class Service extends Component {
               </Accordion>
               <MapContainer 
                 serviceProviders={[provider]}
+                userAddress={userAddress}
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
               />
