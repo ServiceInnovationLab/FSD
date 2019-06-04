@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ServiceHeader from './service-header';
@@ -16,6 +17,7 @@ export default class ServiceProviderResult extends Component {
       index,
       provider,
       provider: {
+        FSD_ID: fsdId,
         PROVIDER_CLASSIFICATION: classification,
         ORGANISATION_PURPOSE: purpose,
       },
@@ -35,6 +37,9 @@ export default class ServiceProviderResult extends Component {
         <footer className="service__footer">
           {classification && <ServiceClassification classification={classification} />}
         </footer>
+        <Link className="button" to={`/service/${fsdId}`}>
+          More details
+        </Link>
       </section>
     );
   }
