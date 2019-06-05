@@ -26,7 +26,8 @@ export default class ServiceProviderResult extends Component {
 
     return (
       <section className="service" result-index={index}>
-        {process.env.REACT_APP_DISPLAY_INDEX && index+1 }
+        {process.env.REACT_APP_DISPLAY_INDEX && (<div>{index+1}</div>) }
+        {process.env.REACT_APP_DISPLAY_INDEX && (<div>{provider.rank}</div>) }
         <ServiceHeader
           provider={provider}
           userLocation={userLocation}
