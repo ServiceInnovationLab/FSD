@@ -45,8 +45,6 @@ export default class ServiceHeader extends Component {
         ? `https://maps.google.com/maps?saddr=${userLocation.address}&daddr=${address}`
         : `https://maps.google.com/maps?daddr=${address}`
 
-    debugger
-
     return (
       <header className="service__header">
         <h2 className="service__name">
