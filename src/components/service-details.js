@@ -14,7 +14,6 @@ export default class Service extends Component {
         COST_TYPE: costType,
         COST_DESCRIPTION: costDescription,
         DELIVERY_METHODS: deliveryMethods,
-        SERVICE_TARGET_AUDIENCES: targetAudiences,
         SERVICE_NAME: serviceName,
         SERVICE_REFERRALS: serviceReferrals,
         SERVICE_DETAIL: serviceDetail,
@@ -32,11 +31,6 @@ export default class Service extends Component {
       <AccordionItemBody>
         {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
         <ul>
-          {targetAudiences && (
-            <li>
-              <b>Target Audience:</b> {targetAudiences}
-            </li>
-          )}
           {deliveryMethods && (
             <li>
               <b>Delivery Methods:</b> {deliveryMethods}
