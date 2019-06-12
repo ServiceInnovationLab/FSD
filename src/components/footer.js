@@ -17,8 +17,6 @@ export default class Footer extends Component {
             {' '}|{' '}
             <a href="mailto:familyservices@msd.govt.nz">Send us your feedback</a>
             {' '}|{' '}
-            Data sourced from <a href="https://data.govt.nz">data.govt.nz</a>
-            {' '}|{' '}
             <a href="https://www.familyservices.govt.nz/directory/providerapplication.htm">Apply to list on the Family Services Directory</a>
             {' '}|{' '}
             Data sourced from <a href="https://data.govt.nz">data.govt.nz</a>
