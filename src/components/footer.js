@@ -15,7 +15,7 @@ export default class Footer extends Component {
           <p>
             <a href="https://www.digital.govt.nz/blog/labplus-reusable-component-family-services-directory/">About this site</a>
             {' '}|{' '}
-            <a href="mailto:familyservices@msd.govt.nz">Send us your feedback</a>
+            <a href="mailto:updates@familyservices.govt.nz?subject=Feedback%20on%20Mobile%20Site">Send us your feedback</a>
             {' '}|{' '}
             <a href="https://www.familyservices.govt.nz/directory/providerapplication.htm">Apply to list on the Family Services Directory</a>
             {' '}|{' '}
