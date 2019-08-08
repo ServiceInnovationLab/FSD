@@ -34,10 +34,12 @@ describe('geography.js', () => {
         {
           latitude: dataPointClone.LATITUDE,
           longitude: dataPointClone.LONGITUDE,
-        },
+        }
       );
 
-      expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject([dataPointClone]);
+      expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject(
+        [dataPointClone]
+      );
     });
 
     it("doesn't respond with points that are outside the radius", () => {
@@ -51,10 +53,12 @@ describe('geography.js', () => {
         {
           latitude: dataPointClone.LATITUDE,
           longitude: dataPointClone.LONGITUDE,
-        },
+        }
       );
 
-      expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject([]);
+      expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject(
+        []
+      );
     });
   });
 
@@ -72,7 +76,7 @@ describe('geography.js', () => {
       expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
     });
 
-    it("accepts addresses when they are blank (Bug 185)", () => {
+    it('accepts addresses when they are blank (Bug 185)', () => {
       dataPointClone.PHYSICAL_ADDRESS = '';
 
       expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
@@ -111,7 +115,9 @@ describe('geography.js', () => {
     });
 
     it('returns original array when only one point is given', () => {
-      expect(sortByDistance([dataPointCloneA])).toMatchObject([dataPointCloneA]);
+      expect(sortByDistance([dataPointCloneA])).toMatchObject([
+        dataPointCloneA,
+      ]);
     });
 
     it('maintains sort order when given in correct order', () => {

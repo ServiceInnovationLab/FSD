@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 import UserMapMarker from '../components/user-map-marker';
 
 export default class MapContainer extends Component {
-
   static propTypes = {
     serviceProviders: PropTypes.array.isRequired,
-    userLocation: PropTypes.object
+    userLocation: PropTypes.object,
   };
 
   // roughly the centre of aotearoa
@@ -17,13 +16,10 @@ export default class MapContainer extends Component {
   }
 
   render() {
-    const { 
-      serviceProviders,
-      userLocation
-    } = this.props;
+    const { serviceProviders, userLocation } = this.props;
 
     const center =
-      serviceProviders.length === 1 
+      serviceProviders.length === 1
         ? {
             lat: Number(serviceProviders[0].LATITUDE),
             lng: Number(serviceProviders[0].LONGITUDE),
