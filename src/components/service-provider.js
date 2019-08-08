@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 import ServiceHeader from './service-header';
 import ServiceClassification from './service-classification';
 
 export default class ServiceProviders extends Component {
   static propTypes = {
     provider: PropTypes.object.isRequired,
-    userLocation: PropTypes.object
+    userLocation: PropTypes.object,
   };
 
   render() {
@@ -23,17 +22,16 @@ export default class ServiceProviders extends Component {
 
     return (
       <section className="service">
-        <ServiceHeader
-          provider={provider}
-          userLocation={userLocation}
-        />
+        <ServiceHeader provider={provider} userLocation={userLocation} />
 
-        {purpose && <blockquote className="service__purpose">
-            {purpose}
-          </blockquote>}
+        {purpose && (
+          <blockquote className="service__purpose">{purpose}</blockquote>
+        )}
 
         <footer className="service__footer">
-          {classification && <ServiceClassification classification={classification} />}
+          {classification && (
+            <ServiceClassification classification={classification} />
+          )}
         </footer>
       </section>
     );

@@ -26,17 +26,20 @@ export default class ServiceProviderResult extends Component {
 
     return (
       <section className="service" result-index={index}>
-        {process.env.REACT_APP_DISPLAY_INDEX && (<div>{index+1}</div>) }
-        {process.env.REACT_APP_DISPLAY_INDEX && (<div>{provider.rank}</div>) }
-        <ServiceHeader
-          provider={provider}
-          userLocation={userLocation}
-        />
+        {process.env.REACT_APP_DISPLAY_INDEX && <div>{index + 1}</div>}
+        {process.env.REACT_APP_DISPLAY_INDEX && <div>{provider.rank}</div>}
+        <ServiceHeader provider={provider} userLocation={userLocation} />
 
-        {purpose && <blockquote className="service__purpose service__purpose--truncatable">{purpose}</blockquote>}
+        {purpose && (
+          <blockquote className="service__purpose service__purpose--truncatable">
+            {purpose}
+          </blockquote>
+        )}
 
         <footer className="service__footer">
-          {classification && <ServiceClassification classification={classification} />}
+          {classification && (
+            <ServiceClassification classification={classification} />
+          )}
         </footer>
         <Link className="button" to={`/service/${fsdId}`}>
           More details

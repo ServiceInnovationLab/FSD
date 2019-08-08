@@ -22,38 +22,45 @@ export default class SearchCriteria extends Component {
       keyword,
       address,
       region,
-      category,
+      category
     );
 
     return (
       <section className="search__criteria">
         <p>
-        {searchCriteria}
-        {' '}
-        {searchCriteria && 
-          <span>
-          ({numOfResultsDisplayed} results)
-          </span>
-        }
+          {searchCriteria}{' '}
+          {searchCriteria && <span>({numOfResultsDisplayed} results)</span>}
         </p>
-      </section>);
+      </section>
+    );
   }
 }
 
 function createSearchCriteria(keyword, address, region, category) {
   const search = ['Searching'];
 
-  if (keyword) search.push(
-      <span key={`k:${keyword}`}>{' '} for: <b>{keyword}</b>{' '}</span>,
+  if (keyword)
+    search.push(
+      <span key={`k:${keyword}`}>
+        {' '}
+        for: <b>{keyword}</b>{' '}
+      </span>
     );
-  if (address || region) search.push(
-      <span key={`a:${address || region}`}>{' '} near: <b>{address || region}</b></span>,
+  if (address || region)
+    search.push(
+      <span key={`a:${address || region}`}>
+        {' '}
+        near: <b>{address || region}</b>
+      </span>
     );
-  if (category) search.push(
-      <span key={`c:${category}`}>{' '} in: <b>{category}</b></span>,
+  if (category)
+    search.push(
+      <span key={`c:${category}`}>
+        {' '}
+        in: <b>{category}</b>
+      </span>
     );
   if (search.length < 2) return null;
 
   return search;
 }
-

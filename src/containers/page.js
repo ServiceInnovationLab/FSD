@@ -6,7 +6,10 @@ import Footer from '../components/footer';
 
 export default class Page extends Component {
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
   };
 
   render() {
