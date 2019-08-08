@@ -27,14 +27,14 @@ class App extends Component {
                 <Route
                   exact
                   path="/"
-                  render={props => (
-                    <Index categoryContext={categoryContext} {...props} />
+                  render={properties => (
+                    <Index categoryContext={categoryContext} {...properties} />
                   )}
                 />
                 <Route
                   path="/service/:id"
-                  render={props => (
-                    <Service categoryContext={categoryContext} {...props} />
+                  render={properties => (
+                    <Service categoryContext={categoryContext} {...properties} />
                   )}
                 />
               </Fragment>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 
-const ServiceMapMarker = props => {
-  const { record } = props;
+const ServiceMapMarker = properties => {
+  const { record } = properties;
   const {
     LATITUDE,
     LONGITUDE,

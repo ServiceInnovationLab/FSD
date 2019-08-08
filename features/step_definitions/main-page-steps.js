@@ -218,18 +218,18 @@ module.exports = function() {
     expect(elements.length).to.be.above(1);
   });
 
-  this.Then(/^I see at least "(\d+)" service providers$/, async num => {
+  this.Then(/^I see at least "(\d+)" service providers$/, async number => {
     await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
     const elements = await driver.findElements(by.css('section .service'));
 
-    expect(elements.length).to.be.at.least(Number(num));
+    expect(elements.length).to.be.at.least(Number(number));
   });
 
-  this.Then(/^I see exactly "(\d+)" service providers$/, async num => {
+  this.Then(/^I see exactly "(\d+)" service providers$/, async number => {
     await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
     const elements = await driver.findElements(by.css('section .service'));
 
-    expect(elements.length).to.equal(Number(num));
+    expect(elements.length).to.equal(Number(number));
   });
 
   this.Then(/^I click on the first address suggestion$/, async () => {
