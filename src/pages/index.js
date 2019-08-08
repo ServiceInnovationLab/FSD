@@ -22,7 +22,7 @@ export default class Index extends Component {
     address: '',
     region: '',
     keyword: '',
-    radius: DEFAULT_SEARCH_RADIUS
+    radius: DEFAULT_SEARCH_RADIUS,
   };
 
   componentDidMount() {
@@ -90,28 +90,28 @@ export default class Index extends Component {
       categoryContext: { setCategory },
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { 
-      category = '', 
-      region = '', 
+    const {
+      category = '',
+      region = '',
       address = '',
-      keyword = '', 
+      keyword = '',
       radius = DEFAULT_SEARCH_RADIUS,
       latitude: userLatitude,
-      longitude: userLongitude
+      longitude: userLongitude,
     } = searchVars;
 
     setCategory(category);
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
-      const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
-      const paged_results = unique_Results.slice(0, serviceProvidersPerPage)
-      this.setState({ 
-        serviceProviders: paged_results, 
-        userLatitude, 
-        userLongitude, 
-        numOfResults: unique_Results.length, 
-        numOfResultsDisplayed: paged_results.length
+      const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1');
+      const paged_results = unique_Results.slice(0, serviceProvidersPerPage);
+      this.setState({
+        serviceProviders: paged_results,
+        userLatitude,
+        userLongitude,
+        numOfResults: unique_Results.length,
+        numOfResultsDisplayed: paged_results.length,
       });
     });
   }
@@ -119,7 +119,10 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
+      <button className="btn__search" onClick={() => this.toggleShowMap()}>
+        {' '}
+        {showListOrMapText(showMap)}
+      </button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
@@ -130,28 +133,35 @@ export default class Index extends Component {
   }
 
   render() {
-    const { 
-      serviceProviders, 
-      showMap, 
-      address, 
-      region, 
-      keyword, 
-      radius, 
-      numOfResults, 
+    const {
+      serviceProviders,
+      showMap,
+      address,
+      region,
+      keyword,
+      radius,
+      numOfResults,
       numOfResultsDisplayed,
-      userLatitude, 
-      userLongitude
+      userLatitude,
+      userLongitude,
     } = this.state;
 
-    const { history, location, categoryContext: {selectedCategory} } = this.props;
+    const {
+      history,
+      location,
+      categoryContext: { selectedCategory },
+    } = this.props;
 
     const searchVars = queryString.parse(location.search);
-    const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
+    const showExtraButtons = Boolean(
+      (serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]
+    );
 
     const userLocation = UserLocation(
-        address || region, 
-        userLatitude, 
-        userLongitude);
+      address || region,
+      userLatitude,
+      userLongitude
+    );
 
     return (
       <Page>
@@ -165,7 +175,7 @@ export default class Index extends Component {
             region={region}
             showExtraButtons={showExtraButtons}
             initialValues={{ keyword, radius }}
-          />  
+          />
         </SearchContainer>
         <SearchCriteria
           keyword={searchVars.keyword}
@@ -177,13 +187,13 @@ export default class Index extends Component {
         />
         {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
-          <MapContainer 
-            serviceProviders={serviceProviders} 
+          <MapContainer
+            serviceProviders={serviceProviders}
             userLocation={userLocation}
           />
         ) : (
-          <ListOfServiceProviders 
-            serviceProviders={serviceProviders} 
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
             history={history}
             userLocation={userLocation}
           />
