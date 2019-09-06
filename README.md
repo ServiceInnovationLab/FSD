@@ -7,6 +7,13 @@ This runs [on github pages](https://serviceinnovationlab.github.io/FSD/) but has
 ## Overview
 A React frontend for the existing Family Services Directory providing keyword, category, and location-based search results
 
+## Technologies used
+
+* ReactJs (client-side web framework)
+* Dataset on [data.govt.nz](https://data.govt.nz)
+* [axios javascript rest client](https://www.npmjs.com/package/axios-rest-client)
+* [font awesome](https://fontawesome.com/)
+
 ![Architecture](fsd_arch.png)
 
 ## Environments
