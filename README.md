@@ -7,6 +7,8 @@ This runs [on github pages](https://serviceinnovationlab.github.io/FSD/) but has
 ## Overview
 A React frontend for the existing Family Services Directory providing keyword, category, and location-based search results
 
+![Architecture](fsd_arch.png)
+
 ## Environments
 **Environment** | **URL**  | **Git Branch**
 --- | --- | ---
