@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { MDBCollapse } from "mdbreact";
+import { MDBCollapse, MDBCard, MDBCardBody } from "mdbreact";
 
 import { CategoryContext } from '../contexts/category-context';
 
@@ -28,7 +28,7 @@ export default class ServiceCategories extends Component {
                         if (selectedCategory === category.name) classList.push('selected');
                         return (
                           <div class="category__item">
-                            <button
+                            <a href="#address-search"
                               onClick={e => {
                                 e.preventDefault();
                                 doSetCategory(category.name);
@@ -36,8 +36,12 @@ export default class ServiceCategories extends Component {
                               className={classList.join(' ')}
                               key={`category_${index}`}
                             >
-                              {category.name}
-                            </button>
+                              <MDBCard>
+                                <MDBCardBody>
+                                  {category.name}
+                                </MDBCardBody>
+                              </MDBCard>
+                            </a>
                           </div>
                         );
                       })}
@@ -45,16 +49,20 @@ export default class ServiceCategories extends Component {
                 </div>
                 </MDBCollapse>
                 <MDBCollapse id='collapse1' isOpen={ (selectedCategory !== "") }>
-                  <button
+                  <a
                     onClick={e => {
                       e.preventDefault();
                       doSetCategory(selectedCategory);
                     }}
                     className='category__button selected'
-                    key={`category_${0}`}
+                    key={`category_${categories.indexOf(selectedCategory)}`}
                   >
-                    {selectedCategory}
-                  </button>
+                    <MDBCard>
+                      <MDBCardBody>
+                        {selectedCategory}
+                      </MDBCardBody>
+                    </MDBCard>
+                  </a>
                   <div className="d-flex justify-content-end">
                     <button className="reset"
                     onClick={e => {

@@ -21,9 +21,13 @@
   &__button {
     width: 100%;
     height: 100%;
-    &.selected {
-      background-color: $primary-color;
-      color: rgba($white, 0.9);
+    display: inline-block;
+    border: 0;
+    .card {
+      height: 100%;
+    }
+    &.selected .card {
+      background-color: mix($primary-color, #FFF, 20);
     }
   }
 }
