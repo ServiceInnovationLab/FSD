@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import AutoSuggest from '../containers/auto-suggest';
+import DistanceSelector from './distance-selector';
 
 const radiusOptions = ['10', '25', '50', '100'];
 export default class SearchForm extends Component {
@@ -50,31 +51,16 @@ export default class SearchForm extends Component {
               />
             </div>
             {address
-              ? (
-                <div className="radio-group">
-                  <fieldset className="radius-fieldset">
-                    <legend>Distance (km):</legend>
-                      {radiusOptions.map(radius => {
-                        return (
-                          <label className="radius-label" key={radius}>
-                            <button
-                              className={radius === initialValues.radius ? 'radius-button--selected' : 'radius-button'}
-                              type="button"
-                              name="radius"
-                              value={radius}
-                              onClick={()=>  updateSearchParams({radius: radius})
-                              }
-                            >{radius}</button>
-                          </label>
-                        );
-                      })}
-                  </fieldset>
-              </div> )
+              ?
+              <DistanceSelector
+                updateSearchParams={updateSearchParams}
+                initialValue={initialValues.radius}
+                />
               : null
             }
             <div className="search__topic">
               <Field name="keyword" component="input" type="text" aria-label="Enter topic or organisation" placeholder="Enter topic or organisation" />
-              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button> 
+              <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button>
             </div>
 
             {showExtraButtons ? (
@@ -88,4 +74,3 @@ export default class SearchForm extends Component {
     );
   }
 }
-
