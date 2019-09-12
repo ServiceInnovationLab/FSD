@@ -42,7 +42,7 @@ export class SearchLocation {
   }
 }
 
-export default class Example extends React.Component {
+export default class AutoSuggest extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -70,7 +70,7 @@ export default class Example extends React.Component {
 
   onSuggestionSelected = async (event, { suggestion }) => {
     const { updateSearchParams } = this.props;
-    
+
     if (suggestion.type === 'location') {
       const result = await getLocationMetadata(suggestion.pxid);
       updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, region: result.a }));
