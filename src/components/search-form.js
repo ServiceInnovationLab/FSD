@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import AutoSuggest from '../containers/auto-suggest';
-import DistanceSelector from './distance-selector';
 
-const radiusOptions = ['10', '25', '50', '100'];
 export default class SearchForm extends Component {
   static propTypes = {
     autoSuggestOnChange: PropTypes.func.isRequired,
@@ -50,14 +48,6 @@ export default class SearchForm extends Component {
                 address={address ? address : region}
               />
             </div>
-            {address
-              ?
-              <DistanceSelector
-                updateSearchParams={updateSearchParams}
-                initialValue={initialValues.radius}
-                />
-              : null
-            }
             <div className="search__topic">
               <Field name="keyword" component="input" type="text" aria-label="Enter topic or organisation" placeholder="Enter topic or organisation" />
               <button type="submit" className="search__magnifying-glass" onClick={() => handleSubmit(form)} disabled={submitting || pristine} aria-label="Magnifying glass">Magnifying Glass</button>

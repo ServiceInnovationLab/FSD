@@ -21,7 +21,7 @@ export default class DistanceSelector extends Component {
             return (
               <label className="radius-label" key={radius}>
                 <button
-                  className={radius === initialValue ? 'radius-button--selected' : 'radius-button'}
+                  className={radius === initialValue ? 'radius-button is-selected' : 'radius-button'}
                   type="button"
                   name="radius"
                   value={radius}
