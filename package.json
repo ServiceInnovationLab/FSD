@@ -51,7 +51,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "chromedriver": "^75.0.0",
+    "chromedriver": "^76.0.1",
     "gh-pages": "^2.1.1",
     "selenium-cucumber-js": "^1.7.0"
   }
