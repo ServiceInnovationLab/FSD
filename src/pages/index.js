@@ -176,10 +176,14 @@ export default class Index extends Component {
           numOfResults={numOfResults}
           numOfResultsDisplayed={numOfResultsDisplayed}
         />
-        <DistanceSelector
-          updateSearchParams={this.updateSearchParams.bind(this)}
-          initialValue={ radius }
-          />
+        {
+          address ? (
+            <DistanceSelector
+            updateSearchParams={this.updateSearchParams.bind(this)}
+            initialValue={ radius }
+            />
+          ) : null
+        }
         {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
           <MapContainer
