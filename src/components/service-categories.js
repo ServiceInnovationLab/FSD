@@ -17,29 +17,30 @@ export default class ServiceCategories extends Component {
           const { categories, selectedCategory } = categoryContext;
           return (
             <section className="category__container">
-              <header className="category__header">
-                <h3>Choose a category:</h3>
-              </header>
+              <h3 className="category__header">Choose a category:</h3>
+              <div class="category__list">
+                {categories &&
+                  categories.map((category, index) => {
+                    let classList = ['category__button'];
 
-              {categories &&
-                categories.map((category, index) => {
-                  let classList = ['category__button'];
+                    if (selectedCategory === category.name) classList.push('selected');
 
-                  if (selectedCategory === category.name) classList.push('selected');
-
-                  return (
-                    <button
-                      onClick={e => {
-                        e.preventDefault();
-                        doSetCategory(category.name);
-                      }}
-                      className={classList.join(' ')}
-                      key={`category_${index}`}
-                    >
-                      {category.name}
-                    </button>
-                  );
-                })}
+                    return (
+                      <div class="category__item">
+                        <button
+                          onClick={e => {
+                            e.preventDefault();
+                            doSetCategory(category.name);
+                          }}
+                          className={classList.join(' ')}
+                          key={`category_${index}`}
+                        >
+                          {category.name}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
             </section>
           );
         }}
