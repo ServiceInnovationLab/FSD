@@ -8,6 +8,7 @@ class CategoryProvider extends Component {
   state = {
     categories: [],
     selectedCategory: '',
+    categoriesExpanded: true,
   };
 
   componentDidMount = () => {
@@ -23,11 +24,18 @@ class CategoryProvider extends Component {
   setCategory = categoryName => {
     this.setState({
       selectedCategory: categoryName,
+      categoriesExpanded: (categoryName === '')
     });
   };
 
+  toggleCategories = () => {
+    this.setState({
+      categoriesExpanded: !this.state.categoriesExpanded
+    });
+  }
+
   render() {
-    const { categories, selectedCategory } = this.state;
+    const { categories, selectedCategory, categoriesExpanded } = this.state;
     const { children } = this.props;
 
     return (
@@ -35,7 +43,9 @@ class CategoryProvider extends Component {
         value={{
           categories,
           selectedCategory,
+          categoriesExpanded,
           setCategory: this.setCategory,
+          toggleCategories: this.toggleCategories,
         }}
       >
         {children}
