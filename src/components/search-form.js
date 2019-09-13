@@ -54,9 +54,11 @@ export default class SearchForm extends Component {
             </div>
 
             {showExtraButtons ? (
-              <button type="button" onClick={() => doResetSearch(form)} disabled={submitting}>
-                Reset Search
-              </button>
+              <div className="d-flex justify-content-end">
+                <button type="button" onClick={() => doResetSearch(form)} disabled={submitting} className="reset">
+                  Reset search
+                </button>
+              </div>
             ) : null}
           </form>
         )}

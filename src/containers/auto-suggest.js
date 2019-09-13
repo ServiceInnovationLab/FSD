@@ -42,7 +42,7 @@ export class SearchLocation {
   }
 }
 
-export default class Example extends React.Component {
+export default class AutoSuggest extends React.Component {
   constructor() {
     super();
     this.state = {
