@@ -22,20 +22,15 @@ export default class ServiceCategories extends Component {
           const { categories, selectedCategory, categoriesExpanded, toggleCategories } = categoryContext;
           return (
             <section className="category__container">
+                <label class='small-label'>Services for</label>
                 <div>
                   <ExpansionPanel
                     expanded={ categoriesExpanded } onClick={ toggleCategories }
                     className='green-expansion-panel' elevation={0}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                      <div className='category__heading'>Select a category</div>
-                      { selectedCategory
-                        ?
-                        (<div className='category__current'>
-                          {selectedCategory}
-                        </div>)
-                        :
-                        null
-                      }
+                      <div className={ selectedCategory ? '' : 'text-grey' }>
+                        { selectedCategory && !categoriesExpanded ? selectedCategory : 'Select a category' }
+                      </div>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                       <div className="category__list">

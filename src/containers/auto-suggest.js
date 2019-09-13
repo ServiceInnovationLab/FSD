@@ -99,18 +99,21 @@ export default class AutoSuggest extends React.Component {
       onChange: this.onChange.bind(this),
       onKeyDown: this.onKeyDown.bind(this),
       name: 'address-autosuggest',
-      id: 'searchBox'
+      id: 'searchBox',
     };
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        onSuggestionSelected={this.onSuggestionSelected}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <formset class="form-section">
+        <label for='#searchBox' className='react-autosuggest__label'>Near address</label>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          onSuggestionSelected={this.onSuggestionSelected}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+      </formset>
     );
   }
 }

@@ -16,8 +16,8 @@
     }
   }
 
-  &__topic {
-    position: relative;
+  &__section {
+    margin-bottom: 1rem;
   }
 
   &__magnifying-glass {
@@ -31,4 +31,13 @@
     bottom: -.25rem;
     text-indent: -9999px;
   }
+}
+
+.react-autosuggest__label, .small-label {
+  font-size: 0.9em;
+  margin-bottom: 0.2em;
+}
+
+.MuiTextField-root {
+  width: 100%;
 }

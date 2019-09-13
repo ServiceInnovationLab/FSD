@@ -36,7 +36,7 @@ export default class ServiceHeader extends Component {
       ? queryString.stringify({ address: userLocation.address, latitude: userLocation.lat, longitude: userLocation.lng })
       : null;
 
-    // The url to use for directions to the provider. 
+    // The url to use for directions to the provider.
     //
     // Happily if the user location is not available we can still populate the
     // destination and the user just needs to put their own address into Google.
@@ -49,13 +49,13 @@ export default class ServiceHeader extends Component {
       <header className="service__header">
         <h2 className="service__name">
           <Link to={{
-            pathname: `/service/${fsdId}`, 
+            pathname: `/service/${fsdId}`,
             search: userCoordinates
             }}>
               {name}
           </Link>
         </h2>
-        <address className="service__address">
+        <address className="service__address service__section">
           {address && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">

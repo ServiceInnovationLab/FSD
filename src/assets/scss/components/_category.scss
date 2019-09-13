@@ -28,20 +28,8 @@
       height: 100%;
     }
     &.selected {
-      background-color: $primary-color;
-      color: #FFF !important;
-      &:hover, &:active {
-        color: $primary-color !important;
-      }
+      background-color: mix(#FFF, $primary-color, 50);
     }
-  }
-  &__heading {
-    flex-basis: 33%;
-  }
-  &__current {
-    color: mix(#000, #FFF, 50);
-    text-align: right;
-    width: 100%;
   }
 }
 

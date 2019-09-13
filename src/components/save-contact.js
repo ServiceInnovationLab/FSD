@@ -16,11 +16,11 @@ class SaveContact extends React.Component {
                           "END:VCARD\n");
     downloadContent('contact.vcf', vcard_content);
   }
-  
+
   render() {
     return (
-      <div>
-        <button onClick={this._save_vcard}>Save Contact</button>
+      <div class="margin-top">
+        <button class="button" onClick={this._save_vcard}>Save Contact</button>
       </div>
     );
   }

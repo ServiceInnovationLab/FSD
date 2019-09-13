@@ -38,7 +38,7 @@ export default class ServiceProviderResult extends Component {
         <footer className="service__footer">
           {classification && <ServiceClassification classification={classification} />}
         </footer>
-        <Link className="button" to={`/service/${fsdId}`}>
+        <Link className="button margin-top" to={`/service/${fsdId}`}>
           More details
         </Link>
       </section>

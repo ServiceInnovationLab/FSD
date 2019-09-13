@@ -1,5 +1,5 @@
-input[type="text"],
-input[type="search"],
+*[type="text"],
+*[type="search"],
 select,
 textarea {
   -webkit-appearance: none;
@@ -22,7 +22,6 @@ textarea {
   &:active,
   &:focus {
     background-color: transparent;
-    box-shadow: inset 0 0 0 0.125rem $primary-color;
   }
 
   &:disabled {
