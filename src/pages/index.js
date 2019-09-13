@@ -9,6 +9,7 @@ import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
+import DistanceSelector from '../components/distance-selector';
 import SearchCriteria from '../components/search-criteria';
 import uniqueServices from '../utilities/uniqueServices';
 import UserLocation from '../utilities/userLocation';
@@ -90,11 +91,11 @@ export default class Index extends Component {
       categoryContext: { setCategory },
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
-    const { 
-      category = '', 
-      region = '', 
+    const {
+      category = '',
+      region = '',
       address = '',
-      keyword = '', 
+      keyword = '',
       radius = DEFAULT_SEARCH_RADIUS,
       latitude: userLatitude,
       longitude: userLongitude
@@ -106,11 +107,11 @@ export default class Index extends Component {
     loadResults(searchVars).then(res => {
       const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
       const paged_results = unique_Results.slice(0, serviceProvidersPerPage)
-      this.setState({ 
-        serviceProviders: paged_results, 
-        userLatitude, 
-        userLongitude, 
-        numOfResults: unique_Results.length, 
+      this.setState({
+        serviceProviders: paged_results,
+        userLatitude,
+        userLongitude,
+        numOfResults: unique_Results.length,
         numOfResultsDisplayed: paged_results.length
       });
     });
@@ -130,16 +131,16 @@ export default class Index extends Component {
   }
 
   render() {
-    const { 
-      serviceProviders, 
-      showMap, 
-      address, 
-      region, 
-      keyword, 
-      radius, 
-      numOfResults, 
+    const {
+      serviceProviders,
+      showMap,
+      address,
+      region,
+      keyword,
+      radius,
+      numOfResults,
       numOfResultsDisplayed,
-      userLatitude, 
+      userLatitude,
       userLongitude
     } = this.state;
 
@@ -149,8 +150,8 @@ export default class Index extends Component {
     const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
 
     const userLocation = UserLocation(
-        address || region, 
-        userLatitude, 
+        address || region,
+        userLatitude,
         userLongitude);
 
     return (
@@ -164,8 +165,8 @@ export default class Index extends Component {
             address={address}
             region={region}
             showExtraButtons={showExtraButtons}
-            initialValues={{ keyword, radius }}
-          />  
+            initialValues={{ keyword }}
+          />
         </SearchContainer>
         <SearchCriteria
           keyword={searchVars.keyword}
@@ -175,15 +176,23 @@ export default class Index extends Component {
           numOfResults={numOfResults}
           numOfResultsDisplayed={numOfResultsDisplayed}
         />
+        {
+          address ? (
+            <DistanceSelector
+            updateSearchParams={this.updateSearchParams.bind(this)}
+            initialValue={ radius }
+            />
+          ) : null
+        }
         {this.showToggleMapButton(showExtraButtons)}
         {showMap ? (
-          <MapContainer 
-            serviceProviders={serviceProviders} 
+          <MapContainer
+            serviceProviders={serviceProviders}
             userLocation={userLocation}
           />
         ) : (
-          <ListOfServiceProviders 
-            serviceProviders={serviceProviders} 
+          <ListOfServiceProviders
+            serviceProviders={serviceProviders}
             history={history}
             userLocation={userLocation}
           />
