@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { MDBCollapse, MDBCard, MDBCardBody } from "mdbreact";
+import { ButtonBase } from '@material-ui/core';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { CategoryContext } from '../contexts/category-context';
 
@@ -15,64 +19,43 @@ export default class ServiceCategories extends Component {
     return (
       <CategoryContext.Consumer>
         {categoryContext => {
-          const { categories, selectedCategory } = categoryContext;
+          const { categories, selectedCategory, categoriesExpanded, toggleCategories } = categoryContext;
           return (
             <section className="category__container">
-            <MDBCollapse id='collapse1' isOpen={ (selectedCategory === "") }>
                 <div>
-                  <h3 className="category__header">Choose a category:</h3>
-                  <div className="category__list">
-                    {categories &&
-                      categories.map((category, index) => {
-                        let classList = ['category__button'];
-                        if (selectedCategory === category.name) classList.push('selected');
-                        return (
-                          <div class="category__item">
-                            <a href="#address-search"
-                              onClick={e => {
-                                e.preventDefault();
-                                doSetCategory(category.name);
-                              }}
-                              className={classList.join(' ')}
-                              key={`category_${index}`}
-                            >
-                              <MDBCard>
-                                <MDBCardBody>
+                  <ExpansionPanel expanded={ categoriesExpanded } onClick={ toggleCategories }>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <div className='category__heading'>Select a category</div>
+                      { selectedCategory
+                        ?
+                        (<div className='category__current'>
+                          {selectedCategory}
+                        </div>)
+                        :
+                        null
+                      }
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <div className="category__list">
+                        {categories &&
+                          categories.map((category, index) => {
+                            let classList = ['category__button'];
+                            if (selectedCategory === category.name) classList.push('selected');
+                            return (
+                              <div class="category__item">
+                                <ButtonBase className={classList} onClick={e => {
+                                  e.preventDefault();
+                                  doSetCategory(category.name);
+                                }}>
                                   {category.name}
-                                </MDBCardBody>
-                              </MDBCard>
-                            </a>
-                          </div>
-                        );
-                      })}
-                  </div>
+                                </ButtonBase>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
                 </div>
-                </MDBCollapse>
-                <MDBCollapse id='collapse1' isOpen={ (selectedCategory !== "") }>
-                  <a
-                    onClick={e => {
-                      e.preventDefault();
-                      doSetCategory(selectedCategory);
-                    }}
-                    className='category__button selected'
-                    key={`category_${categories.indexOf(selectedCategory)}`}
-                  >
-                    <MDBCard>
-                      <MDBCardBody>
-                        {selectedCategory}
-                      </MDBCardBody>
-                    </MDBCard>
-                  </a>
-                  <div className="d-flex justify-content-end">
-                    <button className="reset"
-                    onClick={e => {
-                      e.preventDefault();
-                      doSetCategory(selectedCategory);
-                    }}>
-                      Select another category
-                    </button>
-                  </div>
-              </MDBCollapse>
             </section>
           );
         }}
