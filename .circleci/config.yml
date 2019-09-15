@@ -48,6 +48,8 @@ jobs:
       REACT_APP_HOST: https://family.services.govt.nz/
       REACT_APP_GH_PAGES_SUFFIX: /
       REACT_APP_ADDRESS_FINDER_API_KEY: XU3BTFEQHKV9NY8AWDMG
+      REACT_APP_API_PATH: https://catalogue.data.govt.nz/api/3/action/
+      REACT_APP_API_RESOURCE_ID: 35de6bf8-b254-4025-89f5-da9eb6adf9a0
     steps:
       - add_ssh_keys:
           fingerprints:
