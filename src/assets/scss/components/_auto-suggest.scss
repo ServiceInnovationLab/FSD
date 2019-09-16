@@ -1,14 +1,9 @@
 .react-autosuggest__container {
   position: relative;
 }
-
-.react-autosuggest__input {
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 4px;
+.react-autosuggest__parent, .react-autosuggest__container {
   width: 100%;
 }
-
 .react-autosuggest__input--focused {
   outline: none;
 }

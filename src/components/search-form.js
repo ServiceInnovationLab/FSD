@@ -49,6 +49,9 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div className="search__section">
+              <ServiceCategories doSetCategory={doSetCategory} />
+            </div>
+            <div className="search__section">
               <label className="small-label">Search for</label>
               <Field name="keyword"  aria-label="Enter topic or organisation">
                 {props => (
@@ -63,7 +66,6 @@ export default class SearchForm extends Component {
                 )}
               </Field>
             </div>
-            <ServiceCategories doSetCategory={doSetCategory} />
             <div className="search__section">
               <AutoSuggest
                 updateSearchParams={updateSearchParams}
