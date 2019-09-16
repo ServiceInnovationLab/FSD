@@ -5,6 +5,8 @@ import AutoSuggest from '../containers/auto-suggest';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
+import ServiceCategories from '../components/service-categories';
+var scrollToElement = require('scroll-to-element');
 
 export default class SearchForm extends Component {
   static propTypes = {
@@ -12,6 +14,7 @@ export default class SearchForm extends Component {
     address: PropTypes.string.isRequired,
     region: PropTypes.string.isRequired,
     doResetSearch: PropTypes.func.isRequired,
+    doSetCategory: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
     updateSearchParams: PropTypes.func.isRequired,
     showExtraButtons: PropTypes.bool.isRequired,
@@ -24,6 +27,7 @@ export default class SearchForm extends Component {
     });
 
     this.props.updateSearchParams(values);
+    scrollToElement('#results');
   }
 
   render() {
@@ -33,6 +37,7 @@ export default class SearchForm extends Component {
       doResetSearch,
       showExtraButtons,
       autoSuggestOnChange,
+      doSetCategory,
       address,
       region,
     } = this.props;
@@ -44,31 +49,33 @@ export default class SearchForm extends Component {
         render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <div className="search__section">
-              <AutoSuggest
-                updateSearchParams={updateSearchParams}
-                autoSuggestOnChange={autoSuggestOnChange}
-                address={address ? address : region}
-              />
-            </div>
-            <div className="search__section">
-              <label class="small-label">Related to</label>
-              <Field name="keyword"  aria-label="Enter topic or organisation" placeholder="Enter topic or organisation">
+              <label className="small-label">Search for</label>
+              <Field name="keyword"  aria-label="Enter topic or organisation">
                 {props => (
                   <div>
                     <TextField
                       name={props.input.name}
                       value={props.input.value}
                       onChange={props.input.onChange}
+                      placeholder="Enter topic or organisation"
                     />
                   </div>
                 )}
               </Field>
             </div>
+            <ServiceCategories doSetCategory={doSetCategory} />
+            <div className="search__section">
+              <AutoSuggest
+                updateSearchParams={updateSearchParams}
+                autoSuggestOnChange={autoSuggestOnChange}
+                address={address ? address : region}
+              />
+            </div>
             <div className="search__section d-flex justify-content-between">
               <Button
-                color="primary" className="button" variant="contained"
+                color="primary" variant="contained"
                 type="submit"
-                onClick={() => handleSubmit(form)} disabled={submitting || pristine}
+                onClick={() => handleSubmit(form)}
                 aria-label="Magnifying glass">
                 <SearchIcon />
                 Search

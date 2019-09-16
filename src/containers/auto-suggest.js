@@ -102,8 +102,8 @@ export default class AutoSuggest extends React.Component {
       id: 'searchBox',
     };
     return (
-      <formset class="form-section">
-        <label for='#searchBox' className='react-autosuggest__label'>Near address</label>
+      <div className="form-section">
+        <label htmlFor='#searchBox' className='react-autosuggest__label'>Near address</label>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -113,7 +113,7 @@ export default class AutoSuggest extends React.Component {
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
         />
-      </formset>
+      </div>
     );
   }
 }

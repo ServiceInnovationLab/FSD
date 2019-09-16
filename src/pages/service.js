@@ -22,14 +22,14 @@ export default class Service extends Component {
   };
 
   componentDidMount = async () => {
-    const { 
+    const {
       address: userAddress,
-      latitude: userLatitude, 
+      latitude: userLatitude,
       longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
 
     const {
-      provider, 
+      provider,
       services
     } = await loadService(this.props.match.params.id)
 
@@ -57,12 +57,12 @@ export default class Service extends Component {
 
     const userLocation = UserLocation(
         userAddress,
-        userLatitude, 
+        userLatitude,
         userLongitude);
 
     return (
       <Page className="service__page">
-        <section>
+        <section className="white-bg-section">
           <button className="icon-prefix__container button back-button" onClick={goBack}>
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
@@ -83,7 +83,7 @@ export default class Service extends Component {
                       service={service}
                     />)}
               </Accordion>
-              <MapContainer 
+              <MapContainer
                 serviceProviders={[provider]}
                 userAddress={userAddress}
                 userLatitude={userLatitude}

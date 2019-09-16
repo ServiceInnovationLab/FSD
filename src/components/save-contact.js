@@ -19,8 +19,8 @@ class SaveContact extends React.Component {
 
   render() {
     return (
-      <div class="margin-top">
-        <button class="button" onClick={this._save_vcard}>Save Contact</button>
+      <div className="margin-top">
+        <button className="button" onClick={this._save_vcard}>Save Contact</button>
       </div>
     );
   }

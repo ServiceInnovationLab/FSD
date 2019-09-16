@@ -2,7 +2,7 @@
 $black: #000;
 $white: #fff;
 
-// Color palate
+// Color palette
 $red: #ff3e3e;
 $orange: #e79531;
 $yellow: #ffe13d;
@@ -15,9 +15,9 @@ $primary-color: $green;
 $secondary-color: darken($green, 10%);
 
 // Area colors
-$header-bg: darken($white, 5%);
+$header-bg: $white;
 $footer-bg: #151829;
-$body-bg: $white;
+$body-bg: $green;
 
 // Font colors
 $body-color: #111;

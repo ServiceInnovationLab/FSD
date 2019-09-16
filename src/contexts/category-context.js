@@ -8,7 +8,7 @@ class CategoryProvider extends Component {
   state = {
     categories: [],
     selectedCategory: '',
-    categoriesExpanded: true,
+    categoriesExpanded: false,
   };
 
   componentDidMount = () => {
@@ -24,7 +24,7 @@ class CategoryProvider extends Component {
   setCategory = categoryName => {
     this.setState({
       selectedCategory: categoryName,
-      categoriesExpanded: (categoryName === '')
+      categoriesExpanded: false
     });
   };
 

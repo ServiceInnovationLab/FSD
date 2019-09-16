@@ -4,7 +4,7 @@ export default class SearchCriteria extends Component {
   render() {
     /* Note that numOfResults is currently ignored, in favour of
     numOfResultsDisplayed. This reflects the default limit of 50 search provider
-    results displayed in index.js. 
+    results displayed in index.js.
 
     If pagination of results is added in future numOfResults will become useful
     again to show the total number of results found across all pages, for
@@ -30,7 +30,7 @@ export default class SearchCriteria extends Component {
         <p>
         {searchCriteria}
         {' '}
-        {searchCriteria && 
+        {searchCriteria &&
           <span>
           ({numOfResultsDisplayed} results)
           </span>
@@ -56,4 +56,3 @@ function createSearchCriteria(keyword, address, region, category) {
 
   return search;
 }
-

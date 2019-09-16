@@ -22,7 +22,7 @@ export default class ServiceCategories extends Component {
           const { categories, selectedCategory, categoriesExpanded, toggleCategories } = categoryContext;
           return (
             <section className="category__container">
-                <label class='small-label'>Services for</label>
+                <label className='small-label'>Service category</label>
                 <div>
                   <ExpansionPanel
                     expanded={ categoriesExpanded } onClick={ toggleCategories }
@@ -39,8 +39,8 @@ export default class ServiceCategories extends Component {
                             let classList = ['category__button'];
                             if (selectedCategory === category.name) classList.push('selected');
                             return (
-                              <div class="category__item">
-                                <ButtonBase className={classList} onClick={e => {
+                              <div className="category__item" key={'category-' + index}>
+                                <ButtonBase className={classList.join(' ')} onClick={e => {
                                   e.preventDefault();
                                   doSetCategory(category.name);
                                 }}>

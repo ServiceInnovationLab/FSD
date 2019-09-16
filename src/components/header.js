@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className="app__header">
       <div className="container">
-        <h1>Find Whānau Support - Mobile Site</h1>
+        <h1>Find Whānau Support</h1>
         <div>
           <p>
             This is the mobile responsive site for the Ministry of Social Development&apos;s Family Services Directory.

@@ -4,7 +4,7 @@ button {
   font-size: 1em;
 }
 
-.button, button {
+.button {
   transition: all 0.2s ease-in-out;
   display: inline-block;
   border: 1px solid $primary-color;
