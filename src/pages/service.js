@@ -12,6 +12,8 @@ import { loadService } from '../utilities/api';
 import uniqueServices from '../utilities/uniqueServices';
 import UserLocation from '../utilities/userLocation';
 
+var scrollToElement = require('scroll-to-element');
+
 export default class Service extends Component {
   state = {
     provider: null,
@@ -22,6 +24,7 @@ export default class Service extends Component {
   };
 
   componentDidMount = async () => {
+    scrollToElement('#top');
     const {
       address: userAddress,
       latitude: userLatitude,
@@ -69,7 +72,7 @@ export default class Service extends Component {
             </div>
             <span className="icon-prefix__label">Go back</span>
           </button>
-
+          <a id="top" href="#"></a>
           {(provider && services) && <Fragment>
               <ServiceProvider
                 provider={provider}
