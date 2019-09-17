@@ -1,7 +1,11 @@
-button:not(.reset),
+button {
+  -webkit-appearance: none;
+  display: inline-block;
+  font-size: 1em;
+}
+
 .button {
   transition: all 0.2s ease-in-out;
-  -webkit-appearance: none;
   display: inline-block;
   border: 1px solid $primary-color;
   border-radius: 0.125rem;
@@ -18,7 +22,6 @@ button:not(.reset),
   }
 }
 @media only screen and (min-width: 768px) {
-  button:not(.reset),
   .button {
     padding: 0.25em 0.5em;
   }

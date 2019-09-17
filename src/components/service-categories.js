@@ -22,20 +22,15 @@ export default class ServiceCategories extends Component {
           const { categories, selectedCategory, categoriesExpanded, toggleCategories } = categoryContext;
           return (
             <section className="category__container">
+                <label className='small-label'>Service category</label>
                 <div>
                   <ExpansionPanel
                     expanded={ categoriesExpanded } onClick={ toggleCategories }
-                    className='green-expansion-panel' elevation={0}>
+                    className='category-expansion-panel' elevation={0}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                      <div className='category__heading'>Select a category</div>
-                      { selectedCategory
-                        ?
-                        (<div className='category__current'>
-                          {selectedCategory}
-                        </div>)
-                        :
-                        null
-                      }
+                      <div className={ selectedCategory ? 'category__selected' : 'text-grey' }>
+                        { selectedCategory && !categoriesExpanded ? selectedCategory : 'Select a category' }
+                      </div>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                       <div className="category__list">
@@ -44,8 +39,8 @@ export default class ServiceCategories extends Component {
                             let classList = ['category__button'];
                             if (selectedCategory === category.name) classList.push('selected');
                             return (
-                              <div class="category__item">
-                                <ButtonBase className={classList} onClick={e => {
+                              <div className="category__item" key={'category-' + index}>
+                                <ButtonBase className={classList.join(' ')} onClick={e => {
                                   e.preventDefault();
                                   doSetCategory(category.name);
                                 }}>

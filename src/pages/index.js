@@ -3,7 +3,6 @@ import queryString from 'query-string';
 
 import Page from '../containers/page';
 import SearchContainer from '../containers/search-container';
-import ServiceCategories from '../components/service-categories';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
 import { loadResults } from '../utilities/api';
@@ -83,7 +82,6 @@ export default class Index extends Component {
     }
 
     const newSearchQuery = queryString.stringify(newSearchVars);
-
     push(`${location.pathname}?${newSearchQuery}`);
   }
   doLoadResults(locationQuery, serviceProvidersPerPage = 50) {
@@ -120,7 +118,7 @@ export default class Index extends Component {
     const { showMap } = this.state;
 
     return showExtraButtons ? (
-      <button className="btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
+      <button className="button btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
     ) : null;
   }
   toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
@@ -156,48 +154,54 @@ export default class Index extends Component {
 
     return (
       <Page>
-        <SearchContainer>
-          <ServiceCategories doSetCategory={this.doSetCategory} />
-          <SearchForm
-            updateSearchParams={this.updateSearchParams.bind(this)}
-            doResetSearch={this.doResetSearch}
-            autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
+        <section className="white-bg-section" id="search">
+          <SearchContainer>
+            <SearchForm
+              updateSearchParams={this.updateSearchParams.bind(this)}
+              doResetSearch={this.doResetSearch}
+              autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
+              doSetCategory={this.doSetCategory}
+              address={address}
+              region={region}
+              showExtraButtons={showExtraButtons}
+              initialValues={{ keyword }}
+            />
+          </SearchContainer>
+        </section>
+        <section className="white-bg-section" id="results">
+          <SearchCriteria
+            keyword={searchVars.keyword}
             address={address}
             region={region}
-            showExtraButtons={showExtraButtons}
-            initialValues={{ keyword }}
+            category={selectedCategory}
+            numOfResults={numOfResults}
+            numOfResultsDisplayed={numOfResultsDisplayed}
           />
-        </SearchContainer>
-        <SearchCriteria
-          keyword={searchVars.keyword}
-          address={address}
-          region={region}
-          category={selectedCategory}
-          numOfResults={numOfResults}
-          numOfResultsDisplayed={numOfResultsDisplayed}
-        />
-        {
-          address ? (
-            <DistanceSelector
-            updateSearchParams={this.updateSearchParams.bind(this)}
-            initialValue={ radius }
+          {
+            address ? (
+              <DistanceSelector
+              updateSearchParams={this.updateSearchParams.bind(this)}
+              initialValue={ radius }
+              />
+            ) : null
+          }
+          {this.showToggleMapButton(showExtraButtons)}
+          {showMap ? (
+            <MapContainer
+              serviceProviders={serviceProviders}
+              userLocation={userLocation}
             />
-          ) : null
-        }
-        {this.showToggleMapButton(showExtraButtons)}
-        {showMap ? (
-          <MapContainer
-            serviceProviders={serviceProviders}
-            userLocation={userLocation}
-          />
-        ) : (
-          <ListOfServiceProviders
-            serviceProviders={serviceProviders}
-            history={history}
-            userLocation={userLocation}
-          />
-        )}
-        <Sharebar />
+          ) : (
+            <ListOfServiceProviders
+              serviceProviders={serviceProviders}
+              history={history}
+              userLocation={userLocation}
+            />
+          )}
+        </section>
+        <section className="white-bg-section" id="share">
+          <Sharebar />
+        </section>
       </Page>
     );
   }
