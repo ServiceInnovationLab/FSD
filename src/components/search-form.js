@@ -78,7 +78,7 @@ export default class SearchForm extends Component {
                 color="primary" variant="contained"
                 type="submit"
                 onClick={() => handleSubmit(form)}
-                aria-label="Magnifying glass">
+                aria-label="Search">
                 <SearchIcon />
                 Search
               </Button>

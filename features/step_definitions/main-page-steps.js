@@ -37,7 +37,14 @@ module.exports = function() {
 
   // expect more than one category button
   this.Then(/^I see some category selectors$/, async () => {
-    const categories = await getInputElement('css', '.category__container > .category__button');
+    driver.wait(
+      until.elementLocated(
+        by.xpath(
+          `//*[contains(@class, 'category-expansion-panel')]`
+          ),
+        1000))
+      .click();
+    const categories = await getInputElement('css', '.category__button');
     expect(categories.length).to.be.above(1);
   });
 
@@ -46,7 +53,7 @@ module.exports = function() {
     // positives on pages which haven't finished rendering
     await driver.wait(until.elementLocated(by.css('.category__container')), 10000);
 
-    const categories = await driver.findElements(by.css('.category__container > .category__button.selected'));
+    const categories = await driver.findElements(by.css('.category__selected'));
     expect(categories.length).to.eq(0);
   });
 
@@ -54,10 +61,10 @@ module.exports = function() {
     const category = await driver.wait(
       until.elementLocated(
         by.css(
-          '.category__container > .category__button.selected'
+          '.category__selected'
         )
-      ), 
-      10000);
+      ),
+      1000);
 
     expect(await category.getText()).to.eq(expected_category);
   });
@@ -75,9 +82,16 @@ module.exports = function() {
     // expect more the search radius selector widget
     this.Then(/^I do not see the radius selector$/, async () => {
       // wait for the page to load. Waiting on the category buttons since we
-      // expect the radius selecto NOT to exist.
-      await getInputElement('css', '.category__container > .category__button');
-  
+      // expect the radius selector NOT to exist.
+      driver.wait(
+        until.elementLocated(
+          by.xpath(
+            `//*[contains(@class, 'category-expansion-panel')]`
+            ),
+          1000))
+        .click();
+      await getInputElement('css', '.category__button');
+
       // expect there to be 0 radius buttons
       const distance_options = await driver.findElements(by.css('input[name="radius"]'));
       expect(distance_options.length).to.equal(0);
@@ -117,13 +131,22 @@ module.exports = function() {
         by.xpath(
           `//input[@name='${input_name}'][@value='${expected_value}']`
         )
-      ), 
+      ),
       10000);
   });
 
+
+  this.Given(/^I click on the search button$/, async () => {
+    // wait for the page to load
+    await driver.wait(until.elementsLocated(by.xpath(`//button[@aria-label='Search']`)), 1000);
+    const element = await driver.findElement(by.xpath(`//button[@aria-label='Search']`));
+    element.click();
+  });
+
+
   this.Given(/^I click on "([^"]*)"$/, async text => {
     // wait for the page to load
-    await driver.wait(until.elementsLocated(by.xpath(`//*[contains(text(), '${text}')]`)), 10000);
+    await driver.wait(until.elementsLocated(by.xpath(`//*[contains(text(), '${text}')]`)), 1000);
     const element = await driver.findElement(by.xpath(`//*[contains(text(), '${text}')]`));
     element.click();
   });

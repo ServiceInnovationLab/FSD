@@ -12,10 +12,10 @@ module.exports = function() {
     const input_elements = await getInputElement('name', 'keyword');
     // Clear field by select all + delete. React doesn't allow the standard .clear()
     input_elements[0].sendKeys(
-      Keys.END, 
-      Keys.chord(Keys.SHIFT, Keys.HOME), 
+      Keys.END,
+      Keys.chord(Keys.SHIFT, Keys.HOME),
       Keys.BACK_SPACE,
-      value, 
+      value,
       Keys.RETURN);
 
     // Wait until the search description is updated with the new query
@@ -23,18 +23,27 @@ module.exports = function() {
       until.elementTextContains(
         driver.findElement(
           by.css('section.search__criteria')
-        ), 
+        ),
         value));
   });
 
   this.Given(/^I select the category "([^"]*)"$/, async (value) => {
-    // Click on the category button
+    // expand categories
     driver.wait(
       until.elementLocated(
         by.xpath(
-          `//*[contains(@class, 'category__container')]/button[contains(@class, 'category__button')][contains(text(), '${value}')]`
-          ), 
-        10000))
+          `//*[contains(@class, 'category-expansion-panel')]`
+          ),
+        1000))
+      .click();
+
+    // click on the category button
+    driver.wait(
+      until.elementLocated(
+        by.xpath(
+          `//button[contains(@class, 'category__button')][contains(text(), '${value}')]`
+          ),
+        1000))
       .click();
 
     // Wait until the search description is updated with the new query
@@ -42,12 +51,12 @@ module.exports = function() {
       until.elementTextContains(
         driver.findElement(
           by.css('section.search__criteria')
-        ), 
+        ),
         `in: ${value}`));
   });
 
   this.Given(/^I search near the address "([^"]*)"$/, async (value) => {
-    // Add the text to the address input 
+    // Add the text to the address input
     const input_elements = await getInputElement('name', 'address-autosuggest');
     input_elements[0].sendKeys(value);
 
@@ -67,14 +76,14 @@ module.exports = function() {
       // suggestions where the next character should be a comma.
       input_elements[0].sendKeys(' \b');
 
-      elements = await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`)), 10000);
+      elements = await driver.wait(until.elementsLocated(by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(text(), '${value}')]`)), 1000);
 
       // There's a chance that still no element has been found, but that hasn't
       // been observed.
     }
 
     elements[0].click();
-    
+
     await driver.wait(until.stalenessOf(elements[0]));
   });
 
@@ -103,14 +112,14 @@ module.exports = function() {
     const input_elements = await getInputElement('name', 'address-autosuggest');
     input_elements[0].sendKeys(Keys.DELETE);
   });
-  
+
   this.Then(/^the first result is titled "([^"]*)"$/, async title => {
     // wait for the first result to contain the expected title
     await driver.wait(
       until.elementsLocated(
         by.xpath(`//section[@class='service__container']/section[@class='service'][1]//*[@class='service__name']//*[contains(string(), '${title}')]`),
       ),
-      10000,
+      1000,
     );
 
     // select the first result
@@ -121,7 +130,7 @@ module.exports = function() {
   });
 
   this.Given(/^I consider the first result$/, async () => {
-    await driver.wait(until.elementsLocated(by.css('section .service')), 10000);
+    await driver.wait(until.elementsLocated(by.css('section .service')), 1000);
     const elements = await driver.findElements(by.css('section .service'));
 
     // expect some results
@@ -137,15 +146,15 @@ module.exports = function() {
     const titleLink = await titles[0];
 
     titleLink.click();
-    
+
     // wait for the page to be refreshed
-    await driver.wait(until.stalenessOf(titleLink), 10000);
+    await driver.wait(until.stalenessOf(titleLink), 1000);
   });
 
   this.Then(/^the result has a "([^"]*)" link$/, async (value) => {
-    
+
     const elements = await shared.the.result.findElements(by.linkText(value));
-    
+
     // expect one match
     expect(elements.length).to.equal(1);
 

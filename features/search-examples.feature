@@ -17,22 +17,22 @@ Scenario: I search near a location
   And a result is "New Plymouth Budget Advisory Service"
 
 Scenario: I search with a category and a location
-  Given I click on "Budgeting / Financial Capability"
+  Given I select the category "Budgeting / Financial Capability"
   And I search near the address "36 Leach Street, New Plymouth"
   Then I see at least "5" service providers
   And The first result is "New Plymouth Budget Advisory Service"
 
 Scenario: I search in a wide area around Wellington
-  Given I click on "Child Care"
+  Given I select the category "Child Care"
   Given I search near the address "56 The Terrace, Wellington Central"
   And I click on the "button" with "value" "100"
-  And I click on "Magnifying Glass"
+  And I click on the search button
   Then I see at least "10" service providers
   And I see a "address" which says "Lower Hutt"
 
 Scenario: I search for a phrase
   Given I enter "age concern" into the "keyword" input
-  And I click on "Magnifying Glass"
+  And I click on the search button
   Then I see a "header" which says "Age Concern"
 
 Scenario: I search for a service provider with an address but no street number
@@ -42,12 +42,12 @@ Scenario: I search for a service provider with an address but no street number
 
 Scenario: I search and find a lot of results, but only see the top 50 service providers
   Given I enter "Citizens Advice Bureau" into the "keyword" input
-  And I click on "Magnifying Glass"
+  And I click on the search button
   Then I see exactly "50" service providers
   And the search summary says "50"
 
 Scenario: I search and find 26 results, and see all of them displayed
   Given I enter "Stand Children's Services" into the "keyword" input
-  And I click on "Magnifying Glass"
+  And I click on the search button
   Then I see exactly "26" service providers
   And the search summary says "26"

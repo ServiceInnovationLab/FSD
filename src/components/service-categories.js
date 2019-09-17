@@ -26,9 +26,9 @@ export default class ServiceCategories extends Component {
                 <div>
                   <ExpansionPanel
                     expanded={ categoriesExpanded } onClick={ toggleCategories }
-                    className='green-expansion-panel' elevation={0}>
+                    className='category-expansion-panel' elevation={0}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                      <div className={ selectedCategory ? '' : 'text-grey' }>
+                      <div className={ selectedCategory ? 'category__selected' : 'text-grey' }>
                         { selectedCategory && !categoriesExpanded ? selectedCategory : 'Select a category' }
                       </div>
                     </ExpansionPanelSummary>
