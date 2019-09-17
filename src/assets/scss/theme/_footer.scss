@@ -5,6 +5,12 @@
   color: $dark-bg-color;
   background-color: $footer-bg;
 
+  a, a:visited {
+    color: mix($primary-color, $dark-bg-color, 50);
+  }
+  a:active {
+    color: mix($primary-color, $dark-bg-color, 20);
+  }
   .container {
     width: 100%;
     max-width: 80rem;
