@@ -99,18 +99,24 @@ export default class AutoSuggest extends React.Component {
       onChange: this.onChange.bind(this),
       onKeyDown: this.onKeyDown.bind(this),
       name: 'address-autosuggest',
-      id: 'searchBox'
+      id: 'searchBox',
+      className: "MuiInputBase-input"
     };
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        onSuggestionSelected={this.onSuggestionSelected}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <div className="form-section">
+        <div><label htmlFor='#searchBox' className='react-autosuggest__label'>Near</label></div>
+        <div className="react-autosuggest__parent MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            onSuggestionSelected={this.onSuggestionSelected}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+          />
+        </div>
+      </div>
     );
   }
 }

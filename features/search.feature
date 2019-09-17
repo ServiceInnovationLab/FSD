@@ -8,7 +8,7 @@ Feature: Searching on the main page
 
   Scenario:  I search for "family" and get some results
     Given I enter "family" into the "keyword" input
-    And I click on "Magnifying Glass"
+    And I click on the search button
     Then I see at least "5" service providers
 
   Scenario: I search near Thorndon Quay and get some results
@@ -32,4 +32,3 @@ Feature: Searching on the main page
       And the URL query does not have key "location"
       And the URL query has key "latitude" with value "-41.2717302167"
       And the URL query has key "longitude" with value "174.7817695667"
-

@@ -3,7 +3,7 @@ body {
   color: $body-color;
   background-color: $body-bg;
   line-height: 1.4;
-
+  scroll-behavior: smooth;
   font: {
     size: $base-font-unit;
     family: $body-font;

@@ -22,29 +22,19 @@
     width: 100%;
     height: 100%;
     display: inline-block;
-    border: 0;
     min-height: 2rem;
+    border: 1px solid $pink !important;
+    padding: 0.5em !important;
     .card {
       height: 100%;
     }
     &.selected {
-      background-color: $primary-color;
-      color: #FFF !important;
-      &:hover, &:active {
-        color: $primary-color !important;
-      }
+      background-color: $pink;
+      color: $white;
     }
-  }
-  &__heading {
-    flex-basis: 33%;
-  }
-  &__current {
-    color: mix(#000, #FFF, 50);
-    text-align: right;
-    width: 100%;
   }
 }
 
-.green-expansion-panel {
-  border: 1px solid $primary-color;
+.category-expansion-panel {
+  border: 1px solid $medium-grey;
 }

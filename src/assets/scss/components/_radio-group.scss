@@ -5,6 +5,7 @@
   width: fit-content;
 
   .radius-button {
+    @extend .button;
     padding: .75rem;
     font-size: 1rem;
     margin: .25rem .5rem .25rem 0;

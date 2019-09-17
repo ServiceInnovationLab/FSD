@@ -12,6 +12,8 @@ import { loadService } from '../utilities/api';
 import uniqueServices from '../utilities/uniqueServices';
 import UserLocation from '../utilities/userLocation';
 
+var scrollToElement = require('scroll-to-element');
+
 export default class Service extends Component {
   state = {
     provider: null,
@@ -22,14 +24,15 @@ export default class Service extends Component {
   };
 
   componentDidMount = async () => {
-    const { 
+    scrollToElement('#top');
+    const {
       address: userAddress,
-      latitude: userLatitude, 
+      latitude: userLatitude,
       longitude: userLongitude,
     } = queryString.parse(this.props.location.search);
 
     const {
-      provider, 
+      provider,
       services
     } = await loadService(this.props.match.params.id)
 
@@ -57,19 +60,19 @@ export default class Service extends Component {
 
     const userLocation = UserLocation(
         userAddress,
-        userLatitude, 
+        userLatitude,
         userLongitude);
 
     return (
       <Page className="service__page">
-        <section>
+        <section className="white-bg-section">
           <button className="icon-prefix__container button back-button" onClick={goBack}>
             <div className="icon-prefix__icon">
               <Icon icon={faChevronLeft} />
             </div>
             <span className="icon-prefix__label">Go back</span>
           </button>
-
+          <span id="top"></span>
           {(provider && services) && <Fragment>
               <ServiceProvider
                 provider={provider}
@@ -83,7 +86,7 @@ export default class Service extends Component {
                       service={service}
                     />)}
               </Accordion>
-              <MapContainer 
+              <MapContainer
                 serviceProviders={[provider]}
                 userAddress={userAddress}
                 userLatitude={userLatitude}

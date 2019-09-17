@@ -6,18 +6,14 @@
   }
 
   &__container {
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    max-width: 40rem;
-
     button {
       font-size: 1rem;
       margin: .25rem .5rem .25rem 0;
     }
   }
 
-  &__topic {
-    position: relative;
+  &__section {
+    margin-bottom: 1rem;
   }
 
   &__magnifying-glass {
@@ -31,4 +27,14 @@
     bottom: -.25rem;
     text-indent: -9999px;
   }
+}
+
+.react-autosuggest__label, .small-label {
+  font-size: 0.9em;
+   font-weight: bold;
+   margin-bottom: 0.2em;
+}
+
+.MuiTextField-root {
+  width: 100%;
 }
