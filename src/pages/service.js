@@ -72,7 +72,7 @@ export default class Service extends Component {
             </div>
             <span className="icon-prefix__label">Go back</span>
           </button>
-          <a id="top" href="#"></a>
+          <span id="top"></span>
           {(provider && services) && <Fragment>
               <ServiceProvider
                 provider={provider}
