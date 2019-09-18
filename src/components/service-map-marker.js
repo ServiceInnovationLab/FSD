@@ -1,9 +1,10 @@
 import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 
 const ServiceMapMarker = props => {
   const { record } = props;
-  const { LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS } = record;
+  const { FSD_ID, LATITUDE, LONGITUDE, PROVIDER_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS} = record;
 
   const position = { lat: Number(LATITUDE), lng: Number(LONGITUDE) };
 
@@ -13,8 +14,11 @@ const ServiceMapMarker = props => {
         <Marker position={position}>
           <Popup>
             <span>
-              <h5>{PROVIDER_NAME}</h5>
-              <h6>{SERVICE_NAME}</h6>
+              <h5>
+                <Link to={{pathname: `/service/${FSD_ID}`}}>
+                  {PROVIDER_NAME}
+                </Link>
+              </h5>
               <p>{ORGANISATION_PURPOSE}</p>
               <p>{PHYSICAL_ADDRESS}</p>
             </span>
