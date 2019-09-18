@@ -176,7 +176,7 @@ export default class Index extends Component {
             category={selectedCategory}
             numOfResults={numOfResults}
             numOfResultsDisplayed={numOfResultsDisplayed}
-            showLocation={this.userLatitude && this.userLongitude}
+            showLocation={userLatitude !== undefined}
           />
           {
             address ? (
