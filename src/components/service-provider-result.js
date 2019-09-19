@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Card from '@material-ui/core/card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 
 import ServiceHeader from './service-header';
+import SaveContact from './save-contact';
 import ServiceClassification from './service-classification';
 
 export default class ServiceProviderResult extends Component {
@@ -25,23 +30,35 @@ export default class ServiceProviderResult extends Component {
     } = this.props;
 
     return (
-      <section className="service" result-index={index}>
-        {process.env.REACT_APP_DISPLAY_INDEX && (<div>{index+1}</div>) }
-        {process.env.REACT_APP_DISPLAY_INDEX && (<div>{provider.rank}</div>) }
-        <ServiceHeader
-          provider={provider}
-          userLocation={userLocation}
-        />
+      <Card result-index={index} className="service">
+        <CardContent>
+          {process.env.REACT_APP_DISPLAY_INDEX && (<div>{index+1}</div>) }
+          {process.env.REACT_APP_DISPLAY_INDEX && (<div>{provider.rank}</div>) }
+          <ServiceHeader
+            provider={provider}
+            userLocation={userLocation}
+          />
 
-        {purpose && <blockquote className="service__purpose service__purpose--truncatable">{purpose}</blockquote>}
+          {purpose && <blockquote className="service__purpose service__purpose--truncatable">{purpose}</blockquote>}
 
-        <footer className="service__footer">
-          {classification && <ServiceClassification classification={classification} />}
-        </footer>
-        <Link className="button margin-top" to={`/service/${fsdId}`}>
-          More details
-        </Link>
-      </section>
+          <footer className="service__footer">
+            {classification && <ServiceClassification classification={classification} />}
+          </footer>
+        </CardContent>
+        <CardActions>
+          <SaveContact
+            name={provider.name}
+            phoneNumber={provider.phone}
+            address={provider.address}
+            email={provider.email}
+            />
+          <Button>
+            <Link to={`/service/${fsdId}`}>
+              More details
+            </Link>
+          </Button>
+        </CardActions>
+      </Card>
     );
   }
 }

@@ -1,37 +1,50 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 const radiusOptions = ['10', '25', '50', '100'];
 export default class DistanceSelector extends Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   static propTypes = {
-    initialValue: PropTypes.string.isRequired,
-    updateSearchParams: PropTypes.func.isRequired
+    currentRadius: PropTypes.string.isRequired,
+    handleRadiusChange: PropTypes.func.isRequired
   };
+
+  handleChange = function(e) {
+    this.props.handleRadiusChange(e.currentTarget.value)
+  }
 
   render() {
     const {
-      initialValue,
-      updateSearchParams,
+      currentRadius
     } = this.props;
 
-    return (<div className="radio-group">
-      <fieldset className="radius-fieldset">
-        <legend>Distance (km):</legend>
-          {radiusOptions.map(radius => {
-            return (
-              <label className="radius-label" key={radius}>
-                <button
-                  className={radius === initialValue ? 'radius-button is-selected' : 'radius-button'}
-                  type="button"
-                  name="radius"
-                  value={radius}
-                  onClick={()=> updateSearchParams({radius: radius})
-                  }
-                >{radius}</button>
-              </label>
-            );
-          })}
-      </fieldset>
-    </div>)
+    return (
+      <div>
+        <label className="small-label d-block">Distance (km)</label>
+        <ToggleButtonGroup
+          value={currentRadius}
+          onChange={this.handleChange}
+          exclusive>
+          {
+            radiusOptions.map(option => {
+              return(
+                <ToggleButton value={option}
+                key={'button-' + option}
+                >
+                  {option}
+                </ToggleButton>
+              )
+            })
+          }
+        </ToggleButtonGroup>
+      </div>
+    )
   }
 }

@@ -15,7 +15,6 @@ export default class SearchCriteria extends Component {
       address,
       region,
       category,
-      // numOfResults,
       numOfResultsDisplayed,
     } = this.props;
     const searchCriteria = createSearchCriteria(

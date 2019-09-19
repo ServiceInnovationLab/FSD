@@ -9,6 +9,7 @@ import { loadResults } from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
 import DistanceSelector from '../components/distance-selector';
+import MapListToggle from '../components/map-list-toggle';
 import SearchCriteria from '../components/search-criteria';
 import uniqueServices from '../utilities/uniqueServices';
 import UserLocation from '../utilities/userLocation';
@@ -16,6 +17,14 @@ import UserLocation from '../utilities/userLocation';
 const DEFAULT_SEARCH_RADIUS = '25';
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.handleRadiusChange = this.handleRadiusChange.bind(this);
+    this.toggleShowMap = this.toggleShowMap.bind(this);
+    this.autoSuggestOnChange = this.autoSuggestOnChange.bind(this);
+    this.updateSearchParams = this.updateSearchParams.bind(this);
+  }
+
   state = {
     serviceProviders: [],
     showMap: false,
@@ -84,6 +93,7 @@ export default class Index extends Component {
     const newSearchQuery = queryString.stringify(newSearchVars);
     push(`${location.pathname}?${newSearchQuery}`);
   }
+
   doLoadResults(locationQuery, serviceProvidersPerPage = 50) {
     const {
       categoryContext: { setCategory },
@@ -114,18 +124,24 @@ export default class Index extends Component {
       });
     });
   }
-  showToggleMapButton(showExtraButtons) {
-    const { showMap } = this.state;
 
-    return showExtraButtons ? (
-      <button className="button btn__search" onClick={() => this.toggleShowMap()}> {showListOrMapText(showMap)}</button>
-    ) : null;
+  toggleShowMap() {
+    this.setState({
+      showMap: !this.state.showMap
+    });
   }
-  toggleShowMap = () => this.setState({ showMap: !this.state.showMap });
+
   autoSuggestOnChange(newValue) {
     this.setState({
       region: newValue,
     });
+  }
+
+  handleRadiusChange(radius) {
+    this.setState({
+      radius: radius
+    });
+    this.updateSearchParams({radius: radius});
   }
 
   render() {
@@ -157,9 +173,9 @@ export default class Index extends Component {
         <section className="white-bg-section" id="search">
           <SearchContainer>
             <SearchForm
-              updateSearchParams={this.updateSearchParams.bind(this)}
+              updateSearchParams={this.updateSearchParams}
               doResetSearch={this.doResetSearch}
-              autoSuggestOnChange={this.autoSuggestOnChange.bind(this)}
+              autoSuggestOnChange={this.autoSuggestOnChange}
               doSetCategory={this.doSetCategory}
               address={address}
               region={region}
@@ -168,7 +184,7 @@ export default class Index extends Component {
             />
           </SearchContainer>
         </section>
-        <section className="white-bg-section" id="results">
+        <section id="results" className="white-bg-section">
           <SearchCriteria
             keyword={searchVars.keyword}
             address={address}
@@ -177,15 +193,23 @@ export default class Index extends Component {
             numOfResults={numOfResults}
             numOfResultsDisplayed={numOfResultsDisplayed}
           />
-          {
-            address ? (
-              <DistanceSelector
-              updateSearchParams={this.updateSearchParams.bind(this)}
-              initialValue={ radius }
-              />
-            ) : null
-          }
-          {this.showToggleMapButton(showExtraButtons)}
+          <div className="d-flex justify-content-between align-end">
+            {
+              address ? (
+                <DistanceSelector
+                handleRadiusChange={this.handleRadiusChange}
+                currentRadius={ radius }
+                />
+              ) : null
+            }
+            {
+              showExtraButtons ? (
+                <MapListToggle showMap={showMap} toggleShowMap={this.toggleShowMap} />
+              ) : null
+            }
+          </div>
+        </section>
+        <section>
           {showMap ? (
             <MapContainer
               serviceProviders={serviceProviders}
@@ -205,8 +229,4 @@ export default class Index extends Component {
       </Page>
     );
   }
-}
-
-function showListOrMapText(showMap) {
-  return showMap ? 'Show List' : 'Show Map';
 }

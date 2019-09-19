@@ -6,7 +6,6 @@ import { faLink, faClock, faPhone, faMapMarkerAlt, faAt } from '@fortawesome/fre
 import queryString from 'query-string';
 
 import { stripSpaces } from '../utilities/string';
-import SaveContact from './save-contact';
 
 export default class ServiceHeader extends Component {
   static propTypes = {
@@ -109,12 +108,6 @@ export default class ServiceHeader extends Component {
               </a>
             </div>
           )}
-          <SaveContact
-            name={name}
-            phoneNumber={phone}
-            address={address}
-            email={email}
-            />
         </address>
       </header>
     );
