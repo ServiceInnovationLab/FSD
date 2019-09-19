@@ -37,7 +37,7 @@ export default class ServiceMapMarker extends Component {
                 </h5>
                 }
                 <p>{ORGANISATION_PURPOSE}</p>
-                <p>{PHYSICAL_ADDRESS}</p>
+                <address>{PHYSICAL_ADDRESS}</address>
               </span>
             </Popup>
           </Marker>
