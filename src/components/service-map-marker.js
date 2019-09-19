@@ -26,15 +26,15 @@ export default class ServiceMapMarker extends Component {
           <Marker position={position}>
             <Popup>
               <span>
-              <h5>
+              <h4>
                 <Link to={{pathname: `/service/${FSD_ID}`}}>
                   {PROVIDER_NAME}
                 </Link>
-              </h5>
+              </h4>
               {SERVICE_NAME &&
-                <h6>
+                <h5>
                   {SERVICE_NAME}
-                </h6>
+                </h5>
                 }
                 <p>{ORGANISATION_PURPOSE}</p>
                 <p>{PHYSICAL_ADDRESS}</p>
