@@ -11,33 +11,27 @@ export default class ListOfServiceProviders extends Component {
   };
 
   render() {
-    const { 
-      serviceProviders, 
+    const {
+      serviceProviders,
       userLocation,
     } = this.props;
 
     if (serviceProviders.length > 0) {
       return (
-        <section className="service__container">          
-        {uniqueServices(serviceProviders, 'PROVIDER_NAME')
-          .map((provider, index) => (
-            <ServiceProviderResult
-              key={provider.FSD_ID} 
-              index={index}
-              provider={provider}
-              userLocation={userLocation}
-            />
-          ))}
-        </section>
+        <div>
+            {uniqueServices(serviceProviders, 'PROVIDER_NAME')
+              .map((provider, index) => (
+                <ServiceProviderResult
+                  key={provider.FSD_ID}
+                  index={index}
+                  provider={provider}
+                  userLocation={userLocation}
+                />
+              ))}
+        </div>
       );
     } else {
-      return (
-        <section className="service__container">
-          <header className="service__header">
-            <h2>Make a search or choose a category above.</h2>
-          </header>
-        </section>
-      );
+      return (null)
     }
   }
 }

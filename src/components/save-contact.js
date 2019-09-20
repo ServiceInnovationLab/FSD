@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Button from '@material-ui/core/Button';
 import { stripSpaces } from '../utilities/string';
 
 class SaveContact extends React.Component {
@@ -19,9 +19,9 @@ class SaveContact extends React.Component {
 
   render() {
     return (
-      <div className="margin-top">
-        <button className="button" onClick={this._save_vcard}>Save Contact</button>
-      </div>
+      <Button onClick={this._save_vcard}>
+        Save Contact
+      </Button>
     );
   }
 }

@@ -15,7 +15,6 @@ export default class SearchCriteria extends Component {
       address,
       region,
       category,
-      // numOfResults,
       numOfResultsDisplayed,
       showLocation,
     } = this.props;
@@ -30,16 +29,22 @@ export default class SearchCriteria extends Component {
     return (
       <section className="search__criteria">
         <p>
-        {searchCriteria}
-        {' '}
-        {searchCriteria &&
-          <span>
-          ({numOfResultsDisplayed} results)
-          </span>
+        {
+          searchCriteria ?
+          ( <p>{searchCriteria} {resultsDisplayed(numOfResultsDisplayed)}</p> )
+          :
+          "Make a search or choose a category above."
         }
         </p>
       </section>);
   }
+}
+
+function resultsDisplayed(numOfResultsDisplayed){
+  if(numOfResultsDisplayed){
+    return(<span>({numOfResultsDisplayed} results)</span>)
+  }
+  return null
 }
 
 function createSearchCriteria(keyword, address, region, category, showLocation) {
