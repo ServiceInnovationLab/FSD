@@ -192,6 +192,7 @@ export default class Index extends Component {
             category={selectedCategory}
             numOfResults={numOfResults}
             numOfResultsDisplayed={numOfResultsDisplayed}
+            showLocation={userLatitude !== undefined}
           />
           <div className="d-flex justify-content-between align-end">
             {

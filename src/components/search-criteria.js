@@ -16,12 +16,14 @@ export default class SearchCriteria extends Component {
       region,
       category,
       numOfResultsDisplayed,
+      showLocation,
     } = this.props;
     const searchCriteria = createSearchCriteria(
       keyword,
       address,
       region,
       category,
+      showLocation,
     );
 
     return (
@@ -45,13 +47,12 @@ function resultsDisplayed(numOfResultsDisplayed){
   return null
 }
 
-function createSearchCriteria(keyword, address, region, category) {
+function createSearchCriteria(keyword, address, region, category, showLocation) {
   const search = ['Searching'];
-
   if (keyword) search.push(
       <span key={`k:${keyword}`}>{' '} for: <b>{keyword}</b>{' '}</span>,
     );
-  if (address || region) search.push(
+  if (showLocation) search.push(
       <span key={`a:${address || region}`}>{' '} near: <b>{address || region}</b></span>,
     );
   if (category) search.push(
