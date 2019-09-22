@@ -31,12 +31,6 @@ export default class ServiceProviders extends Component {
           provider={provider}
           userLocation={userLocation}
         />
-        <SaveContact
-          name={name}
-          phoneNumber={phone}
-          address={address}
-          email={email}
-          />
 
         {purpose && <blockquote className="service__purpose">
             {purpose}
@@ -45,6 +39,12 @@ export default class ServiceProviders extends Component {
         <footer className="service__footer">
           {classification && <ServiceClassification classification={classification} />}
         </footer>
+        <SaveContact
+          name={name}
+          phoneNumber={phone}
+          address={address}
+          email={email}
+          />
       </section>
     );
   }
