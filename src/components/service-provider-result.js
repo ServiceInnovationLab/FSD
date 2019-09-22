@@ -25,6 +25,10 @@ export default class ServiceProviderResult extends Component {
         FSD_ID: fsdId,
         PROVIDER_CLASSIFICATION: classification,
         ORGANISATION_PURPOSE: purpose,
+        PROVIDER_NAME: name,
+        PHYSICAL_ADDRESS: address,
+        PUBLISHED_CONTACT_EMAIL_1: email,
+        PUBLISHED_PHONE_1: phone,
       },
       userLocation,
     } = this.props;
@@ -45,18 +49,20 @@ export default class ServiceProviderResult extends Component {
             {classification && <ServiceClassification classification={classification} />}
           </footer>
         </CardContent>
+        <div>
+        </div>
         <CardActions>
-          <SaveContact
-            name={provider.name}
-            phoneNumber={provider.phone}
-            address={provider.address}
-            email={provider.email}
-            />
-          <Button>
+          <Button color="primary" variant="contained">
             <Link to={`/service/${fsdId}`}>
               More details
             </Link>
           </Button>
+          <SaveContact
+            name={name}
+            phoneNumber={phone}
+            address={address}
+            email={email}
+            />
         </CardActions>
       </Card>
     );

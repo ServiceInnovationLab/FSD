@@ -3,6 +3,16 @@
 }
 .MuiToggleButton-root {
   font-family: $body-font !important;
+  &.Mui-selected {
+    color: #FFF !important;
+    background-color: $blue !important;
+  }
+}
+.MuiButton-containedPrimary {
+  background-color: $blue !important;
+  a, a:hover, a:visited {
+    color: $white !important;
+  }
 }
 .MuiInputBase-input {
   font-family: $body-font !important;
