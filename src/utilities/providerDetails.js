@@ -13,7 +13,7 @@ const providerDetails = (provider) => {
       purpose: provider.ORGANISATION_PURPOSE,
       website: provider.PROVIDER_WEBSITE_1,
     };
-  };
+  }
 };
 
 export default providerDetails;
