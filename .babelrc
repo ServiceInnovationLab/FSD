@@ -14,7 +14,7 @@
           ],
           "uglify": true
         },
-        "useBuiltIns": true
+        "useBuiltIns": "usage"
       }
     ],
     "react"
