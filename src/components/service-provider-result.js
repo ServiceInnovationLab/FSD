@@ -40,7 +40,7 @@ export default class ServiceProviderResult extends Component {
         <div>
         </div>
         <CardActions>
-          <Link to={`/service/${mappedProvider.fsdId}`} className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary">
+          <Link to={`/service/${mappedProvider.fsdId}`} className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-contained MuiButton-containedPrimary">
             More details
           </Link>
           <SaveContact
