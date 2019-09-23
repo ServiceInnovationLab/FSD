@@ -10,7 +10,7 @@
             ">0.2%",
             "not dead",
             "not op_mini all",
-            "ie": "11"
+            "ie 11"
           ],
           "uglify": true
         },
