@@ -9,21 +9,13 @@ import { stripSpaces } from '../utilities/string';
 
 export default class ServiceHeader extends Component {
   static propTypes = {
-    provider: PropTypes.object.isRequired,
+    mappedProvider: PropTypes.object.isRequired,
     userLocation: PropTypes.object
   };
 
   render() {
     const {
-      provider: {
-        FSD_ID: fsdId,
-        PROVIDER_NAME: name,
-        PHYSICAL_ADDRESS: address,
-        PROVIDER_CONTACT_AVAILABILITY: availability,
-        PROVIDER_WEBSITE_1: website,
-        PUBLISHED_CONTACT_EMAIL_1: email,
-        PUBLISHED_PHONE_1: phone,
-      },
+      mappedProvider,
       userLocation,
     } = this.props;
 
@@ -41,70 +33,70 @@ export default class ServiceHeader extends Component {
     // destination and the user just needs to put their own address into Google.
     const directionsUrl =
       userLocation
-        ? `https://maps.google.com/maps?saddr=${userLocation.address}&daddr=${address}`
-        : `https://maps.google.com/maps?daddr=${address}`
+        ? `https://maps.google.com/maps?saddr=${userLocation.address}&daddr=${mappedProvider.address}`
+        : `https://maps.google.com/maps?daddr=${mappedProvider.address}`
 
     return (
       <header className="service__header">
         <h2 className="service__name">
           <Link to={{
-            pathname: `/service/${fsdId}`,
+            pathname: `/service/${mappedProvider.fsdId}`,
             search: userCoordinates
             }}>
-              {name}
+              {mappedProvider.name}
           </Link>
         </h2>
         <address className="service__address service__section">
-          {address && (
+          {mappedProvider.address && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faMapMarkerAlt} />
               </div>
               <div className="icon-prefix__label">
-                {address} - <a href={directionsUrl}>Directions</a>
+                {mappedProvider.address} - <a href={directionsUrl}>Directions</a>
               </div>
             </div>
           )}
-          {website && (
+          {mappedProvider.website && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faLink} />
               </div>
-              <a className="icon-prefix__label" href={website} target="_blank" rel="noopener noreferrer">
-                {website}
+              <a className="icon-prefix__label" href={mappedProvider.website} target="_blank" rel="noopener noreferrer">
+                {mappedProvider.website}
               </a>
             </div>
           )}
-          {availability && (
+          {mappedProvider.availability && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faClock} />
               </div>
-              <div className="icon-prefix__label">{availability}</div>
+              <div className="icon-prefix__label">{mappedProvider.availability}</div>
             </div>
           )}
-          {email && (
+          {mappedProvider.email && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faAt} />
               </div>
-              <a className="icon-prefix__label" href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
-                {email}
+              <a className="icon-prefix__label" href={`mailto:${mappedProvider.email}`} target="_blank" rel="noopener noreferrer">
+                {mappedProvider.email}
               </a>
             </div>
           )}
-          {phone && (
+          {mappedProvider.phone && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
                 <Icon icon={faPhone} />
               </div>
               <a
                 className="icon-prefix__label"
-                href={`tel:${stripSpaces(phone)}`}
+                href={`tel:${stripSpaces(mappedProvider.phone)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {phone}
+                {mappedProvider.phone}
               </a>
             </div>
           )}
