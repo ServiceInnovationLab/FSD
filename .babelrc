@@ -9,8 +9,8 @@
           "browserslist": [
             ">0.2%",
             "not dead",
-            "not ie <= 11",
-            "not op_mini all"
+            "not op_mini all",
+            "ie": "11"
           ],
           "uglify": true
         },
