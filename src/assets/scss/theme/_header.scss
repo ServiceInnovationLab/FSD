@@ -1,3 +1,6 @@
+header {
+  display: block; // for IE
+}
 .app__header {
   background-color: $header-bg;
 

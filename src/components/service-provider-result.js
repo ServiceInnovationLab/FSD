@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 
 import ServiceHeader from './service-header';
 import SaveContact from './save-contact';
@@ -52,11 +51,9 @@ export default class ServiceProviderResult extends Component {
             address={provider.address}
             email={provider.email}
             />
-          <Button>
-            <Link to={`/service/${fsdId}`}>
-              More details
-            </Link>
-          </Button>
+          <Link to={`/service/${fsdId}`} className="MuiButtonBase-root MuiButton-root MuiButton-text">
+            More details
+          </Link>
         </CardActions>
       </Card>
     );
