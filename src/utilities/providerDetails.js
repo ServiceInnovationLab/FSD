@@ -1,6 +1,6 @@
 const providerDetails = (provider) => {
   if(provider === null || typeof(provider) === undefined) {
-    return {}
+    return {};
   } else {
     return {
       address: provider.PHYSICAL_ADDRESS,
@@ -12,8 +12,8 @@ const providerDetails = (provider) => {
       phone: provider.PUBLISHED_PHONE_1,
       purpose: provider.ORGANISATION_PURPOSE,
       website: provider.PROVIDER_WEBSITE_1,
-    }
-  }
-}
+    };
+  };
+};
 
 export default providerDetails;
