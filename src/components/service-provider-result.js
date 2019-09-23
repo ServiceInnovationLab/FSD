@@ -39,8 +39,10 @@ export default class ServiceProviderResult extends Component {
         </CardContent>
         <div>
         </div>
-        <CardActions>
-          <Link to={`/service/${mappedProvider.fsdId}`} className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-contained MuiButton-containedPrimary">
+        <CardActions className="justify-content-around">
+          <Link to={`/service/${mappedProvider.fsdId}`}
+                className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-contained MuiButton-containedPrimary"
+          >
             More details
           </Link>
           <SaveContact
