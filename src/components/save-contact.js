@@ -19,7 +19,7 @@ class SaveContact extends React.Component {
 
   render() {
     return (
-      <Button onClick={this._save_vcard}>
+      <Button onClick={this._save_vcard} color="primary" variant="contained">
         Save Contact
       </Button>
     );

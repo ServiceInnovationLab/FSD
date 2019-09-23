@@ -11,6 +11,7 @@ import { Accordion } from 'react-accessible-accordion';
 import { loadService } from '../utilities/api';
 import uniqueServices from '../utilities/uniqueServices';
 import UserLocation from '../utilities/userLocation';
+import providerDetails from '../utilities/providerDetails';
 
 var scrollToElement = require('scroll-to-element');
 
@@ -38,6 +39,7 @@ export default class Service extends Component {
 
     this.setState({
       provider: provider,
+      mappedProvider: providerDetails(provider),
       services: uniqueServices(services, 'SERVICE_NAME'),
       userAddress,
       userLatitude,
@@ -56,6 +58,7 @@ export default class Service extends Component {
       userAddress,
       userLatitude,
       userLongitude,
+      mappedProvider,
     } = this.state;
 
     const userLocation = UserLocation(
@@ -77,6 +80,7 @@ export default class Service extends Component {
               <ServiceProvider
                 provider={provider}
                 userLocation={userLocation}
+                mappedProvider={mappedProvider}
               />
               <Accordion>
                 {services.map((service, i) =>
@@ -84,6 +88,7 @@ export default class Service extends Component {
                       expanded={i === 0}
                       key={`service_${i}`}
                       service={service}
+                      mappedProvider={mappedProvider}
                     />)}
               </Accordion>
               <MapContainer

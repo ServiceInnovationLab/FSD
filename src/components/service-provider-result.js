@@ -13,50 +13,45 @@ import ServiceClassification from './service-classification';
 export default class ServiceProviderResult extends Component {
   static propTypes = {
     index: PropTypes.number,
-    provider: PropTypes.object.isRequired,
     userLocation: PropTypes.object,
+    mappedProvider: PropTypes.object,
   };
 
   render() {
     const {
       index,
-      provider,
-      provider: {
-        FSD_ID: fsdId,
-        PROVIDER_CLASSIFICATION: classification,
-        ORGANISATION_PURPOSE: purpose,
-      },
       userLocation,
+      mappedProvider,
     } = this.props;
 
     return (
       <Card result-index={index} className="service">
         <CardContent>
-          {process.env.REACT_APP_DISPLAY_INDEX && (<div>{index+1}</div>) }
-          {process.env.REACT_APP_DISPLAY_INDEX && (<div>{provider.rank}</div>) }
           <ServiceHeader
-            provider={provider}
             userLocation={userLocation}
+            mappedProvider={mappedProvider}
           />
 
-          {purpose && <blockquote className="service__purpose service__purpose--truncatable">{purpose}</blockquote>}
+          {mappedProvider.purpose && <blockquote className="service__purpose service__purpose--truncatable">{mappedProvider.purpose}</blockquote>}
 
           <footer className="service__footer">
-            {classification && <ServiceClassification classification={classification} />}
+            {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification} />}
           </footer>
         </CardContent>
+        <div>
+        </div>
         <CardActions>
-          <SaveContact
-            name={provider.name}
-            phoneNumber={provider.phone}
-            address={provider.address}
-            email={provider.email}
-            />
-          <Button>
-            <Link to={`/service/${fsdId}`}>
+          <Button color="primary" variant="contained">
+            <Link to={`/service/${mappedProvider.fsdId}`}>
               More details
             </Link>
           </Button>
+          <SaveContact
+            name={mappedProvider.name}
+            phoneNumber={mappedProvider.phone}
+            address={mappedProvider.address}
+            email={mappedProvider.email}
+            />
         </CardActions>
       </Card>
     );

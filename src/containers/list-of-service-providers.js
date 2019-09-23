@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ServiceProviderResult from '../components/service-provider-result';
 import uniqueServices from '../utilities/uniqueServices';
+import providerDetails from '../utilities/providerDetails';
 
 export default class ListOfServiceProviders extends Component {
   static propTypes = {
@@ -24,8 +25,8 @@ export default class ListOfServiceProviders extends Component {
                 <ServiceProviderResult
                   key={provider.FSD_ID}
                   index={index}
-                  provider={provider}
                   userLocation={userLocation}
+                  mappedProvider={providerDetails(provider)}
                 />
               ))}
         </div>

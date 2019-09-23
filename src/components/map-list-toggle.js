@@ -23,11 +23,11 @@ export default class MapListToggle extends Component {
         onChange={toggleShowMap}
         exclusive
       >
-        <ToggleButton value={true}>
-          Map
-        </ToggleButton>
         <ToggleButton value={false}>
           List
+        </ToggleButton>
+        <ToggleButton value={true}>
+          Map
         </ToggleButton>
       </ToggleButtonGroup>
     )
