@@ -7,43 +7,35 @@ import ServiceClassification from './service-classification';
 
 export default class ServiceProviders extends Component {
   static propTypes = {
-    provider: PropTypes.object.isRequired,
-    userLocation: PropTypes.object
+    userLocation: PropTypes.object,
+    mappedProvider: PropTypes.object.isRequired,
   };
 
   render() {
     const {
-      provider,
-      provider: {
-        PROVIDER_CLASSIFICATION: classification,
-        ORGANISATION_PURPOSE: purpose,
-        PROVIDER_NAME: name,
-        PHYSICAL_ADDRESS: address,
-        PUBLISHED_CONTACT_EMAIL_1: email,
-        PUBLISHED_PHONE_1: phone,
-      },
+      mappedProvider,
       userLocation,
     } = this.props;
 
     return (
       <section className="service">
         <ServiceHeader
-          provider={provider}
+          mappedProvider={mappedProvider}
           userLocation={userLocation}
         />
 
-        {purpose && <blockquote className="service__purpose">
-            {purpose}
+        {mappedProvider.purpose && <blockquote className="service__purpose">
+            {mappedProvider.purpose}
           </blockquote>}
 
         <footer className="service__footer">
-          {classification && <ServiceClassification classification={classification} />}
+          {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification} />}
         </footer>
         <SaveContact
-          name={name}
-          phoneNumber={phone}
-          address={address}
-          email={email}
+          name={mappedProvider.name}
+          phoneNumber={mappedProvider.phone}
+          address={mappedProvider.address}
+          email={mappedProvider.email}
           />
       </section>
     );

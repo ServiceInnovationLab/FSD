@@ -43,7 +43,7 @@ const loadResults = async searchVars => {
     }
 
     // The results will be returned in rank descending order - the
-    // server supplies them in rank ascendig order by default.
+    // server supplies them in rank ascending order by default.
     return response.data.result.records.sort(x => -x.rank);
 };
 
