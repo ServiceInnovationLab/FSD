@@ -32,7 +32,7 @@ export default class SearchCriteria extends Component {
           searchCriteria ?
           ( <p>{searchCriteria} {resultsDisplayed(numOfResultsDisplayed)}</p> )
           :
-          <p>"Make a search or choose a category above."</p>
+          <p>Make a search or choose a category above.</p>
         }
       </section>);
   }
