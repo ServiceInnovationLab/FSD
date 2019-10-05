@@ -1,7 +1,7 @@
 const providerDetails = provider => {
   if (provider === null || typeof provider === undefined) {
     return {};
-  } else {
+  } 
     return {
       address: provider.PHYSICAL_ADDRESS,
       availability: provider.PROVIDER_CONTACT_AVAILABILITY,
@@ -13,7 +13,7 @@ const providerDetails = provider => {
       purpose: provider.ORGANISATION_PURPOSE,
       website: provider.PROVIDER_WEBSITE_1,
     };
-  }
+  
 };
 
 export default providerDetails;
