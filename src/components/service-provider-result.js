@@ -17,31 +17,26 @@ export default class ServiceProviderResult extends Component {
   };
 
   render() {
-    const {
-      index,
-      userLocation,
-      mappedProvider,
-    } = this.props;
+    const { index, userLocation, mappedProvider } = this.props;
 
     return (
       <Card result-index={index} className="service">
         <CardContent>
-          <ServiceHeader
-            userLocation={userLocation}
-            mappedProvider={mappedProvider}
-          />
+          <ServiceHeader userLocation={userLocation} mappedProvider={mappedProvider} />
 
-          {mappedProvider.purpose && <blockquote className="service__purpose service__purpose--truncatable">{mappedProvider.purpose}</blockquote>}
+          {mappedProvider.purpose && (
+            <blockquote className="service__purpose service__purpose--truncatable">{mappedProvider.purpose}</blockquote>
+          )}
 
           <footer className="service__footer">
             {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification} />}
           </footer>
         </CardContent>
-        <div>
-        </div>
+        <div></div>
         <CardActions className="justify-content-around">
-          <Link to={`/service/${mappedProvider.fsdId}`}
-                className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-contained MuiButton-containedPrimary"
+          <Link
+            to={`/service/${mappedProvider.fsdId}`}
+            className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-contained MuiButton-containedPrimary"
           >
             More details
           </Link>
@@ -50,7 +45,7 @@ export default class ServiceProviderResult extends Component {
             phoneNumber={mappedProvider.phone}
             address={mappedProvider.address}
             email={mappedProvider.email}
-            />
+          />
         </CardActions>
       </Card>
     );

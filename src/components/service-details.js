@@ -17,38 +17,38 @@ export default class Service extends Component {
         SERVICE_NAME: serviceName,
         SERVICE_REFERRALS: serviceReferrals,
         SERVICE_DETAIL: serviceDetail,
-      }
+      },
     } = this.props;
 
     return (
-    <AccordionItem expanded={expanded}>
-      <AccordionItemTitle>
-        <h3 className=" u-position-relative u-margin-bottom-s">
-          {serviceName}
-          <div className="accordion__arrow" role="presentation" />
-        </h3>
-      </AccordionItemTitle>
-      <AccordionItemBody>
-        {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
-        <ul>
-          {deliveryMethods && (
-            <li>
-              <b>Delivery Methods:</b> {deliveryMethods}
-            </li>
-          )}
-          {costDescription && (
-            <li>
-              <b>Cost:</b> {costType}. {costDescription}
-            </li>
-          )}
-          {serviceReferrals && (
-          <li>
-            <b>Referrals:</b> {serviceReferrals}
-          </li>
-          )}
-        </ul>
-      </AccordionItemBody>
-    </AccordionItem>
+      <AccordionItem expanded={expanded}>
+        <AccordionItemTitle>
+          <h3 className=" u-position-relative u-margin-bottom-s">
+            {serviceName}
+            <div className="accordion__arrow" role="presentation" />
+          </h3>
+        </AccordionItemTitle>
+        <AccordionItemBody>
+          {serviceName !== serviceDetail && <p>{serviceDetail}</p>}
+          <ul>
+            {deliveryMethods && (
+              <li>
+                <b>Delivery Methods:</b> {deliveryMethods}
+              </li>
+            )}
+            {costDescription && (
+              <li>
+                <b>Cost:</b> {costType}. {costDescription}
+              </li>
+            )}
+            {serviceReferrals && (
+              <li>
+                <b>Referrals:</b> {serviceReferrals}
+              </li>
+            )}
+          </ul>
+        </AccordionItemBody>
+      </AccordionItem>
     );
   }
 }

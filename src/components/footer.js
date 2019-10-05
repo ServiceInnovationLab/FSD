@@ -13,13 +13,18 @@ export default class Footer extends Component {
             </a>
           </div>
           <p>
-            <a href="https://www.digital.govt.nz/blog/labplus-reusable-component-family-services-directory/">About this site</a>
-            {' '}|{' '}
-            <a href="mailto:updates@familyservices.govt.nz?subject=Feedback%20on%20Mobile%20Site">Send us your feedback</a>
-            {' '}|{' '}
-            <a href="https://www.familyservices.govt.nz/directory/providerapplication.htm">Apply to list on the Family Services Directory</a>
-            {' '}|{' '}
-            Data sourced from <a href="https://data.govt.nz">data.govt.nz</a>
+            <a href="https://www.digital.govt.nz/blog/labplus-reusable-component-family-services-directory/">
+              About this site
+            </a>{' '}
+            |{' '}
+            <a href="mailto:updates@familyservices.govt.nz?subject=Feedback%20on%20Mobile%20Site">
+              Send us your feedback
+            </a>{' '}
+            |{' '}
+            <a href="https://www.familyservices.govt.nz/directory/providerapplication.htm">
+              Apply to list on the Family Services Directory
+            </a>{' '}
+            | Data sourced from <a href="https://data.govt.nz">data.govt.nz</a>
           </p>
           <p>
             Another alpha from the{' '}

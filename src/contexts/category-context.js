@@ -24,15 +24,15 @@ class CategoryProvider extends Component {
   setCategory = categoryName => {
     this.setState({
       selectedCategory: categoryName,
-      categoriesExpanded: false
+      categoriesExpanded: false,
     });
   };
 
   toggleCategories = () => {
     this.setState({
-      categoriesExpanded: !this.state.categoriesExpanded
+      categoriesExpanded: !this.state.categoriesExpanded,
     });
-  }
+  };
 
   render() {
     const { categories, selectedCategory, categoriesExpanded } = this.state;

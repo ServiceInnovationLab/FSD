@@ -1,5 +1,5 @@
-const providerDetails = (provider) => {
-  if(provider === null || typeof(provider) === undefined) {
+const providerDetails = provider => {
+  if (provider === null || typeof provider === undefined) {
     return {};
   } else {
     return {

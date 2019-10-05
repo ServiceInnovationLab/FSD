@@ -26,9 +26,9 @@ const getLocationSuggestions = async searchString => {
   if (searchString.length === 0) return [];
 
   const queryParams = {
-    q: searchString, 
+    q: searchString,
     strict: 2,
-    region: 0
+    region: 0,
   };
 
   const response = await addressFinderQuery('api/nz/location', queryParams);

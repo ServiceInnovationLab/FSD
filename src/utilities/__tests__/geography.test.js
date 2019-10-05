@@ -34,7 +34,7 @@ describe('geography.js', () => {
         {
           latitude: dataPointClone.LATITUDE,
           longitude: dataPointClone.LONGITUDE,
-        },
+        }
       );
 
       expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject([dataPointClone]);
@@ -51,7 +51,7 @@ describe('geography.js', () => {
         {
           latitude: dataPointClone.LATITUDE,
           longitude: dataPointClone.LONGITUDE,
-        },
+        }
       );
 
       expect(findNearMe([dataPointClone], addressLatLng, radius)).toMatchObject([]);
@@ -72,7 +72,7 @@ describe('geography.js', () => {
       expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);
     });
 
-    it("accepts addresses when they are blank (Bug 185)", () => {
+    it('accepts addresses when they are blank (Bug 185)', () => {
       dataPointClone.PHYSICAL_ADDRESS = '';
 
       expect(checkLatLng([dataPointClone])).toMatchObject([dataPointClone]);

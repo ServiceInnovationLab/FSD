@@ -10,26 +10,14 @@ export default class MapListToggle extends Component {
     toggleShowMap: PropTypes.func.isRequired,
   };
 
-
   render() {
-    const {
-      showMap,
-      toggleShowMap
-    } = this.props;
+    const { showMap, toggleShowMap } = this.props;
 
     return (
-      <ToggleButtonGroup
-        value={showMap}
-        onChange={toggleShowMap}
-        exclusive
-      >
-        <ToggleButton value={false}>
-          List
-        </ToggleButton>
-        <ToggleButton value={true}>
-          Map
-        </ToggleButton>
+      <ToggleButtonGroup value={showMap} onChange={toggleShowMap} exclusive>
+        <ToggleButton value={false}>List</ToggleButton>
+        <ToggleButton value={true}>Map</ToggleButton>
       </ToggleButtonGroup>
-    )
+    );
   }
 }

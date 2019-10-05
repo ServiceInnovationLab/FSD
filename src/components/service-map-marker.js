@@ -11,12 +11,12 @@ export default class ServiceMapMarker extends Component {
     PROVIDER_NAME: PropTypes.string,
     SERVICE_NAME: PropTypes.string,
     ORGANISATION_PURPOSE: PropTypes.string,
-    PHYSICAL_ADDRESS: PropTypes.string
+    PHYSICAL_ADDRESS: PropTypes.string,
   };
 
   render() {
     const { record } = this.props;
-    const { FSD_ID, LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS} = record;
+    const { FSD_ID, LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS } = record;
 
     const position = { lat: Number(LATITUDE), lng: Number(LONGITUDE) };
 
@@ -26,16 +26,10 @@ export default class ServiceMapMarker extends Component {
           <Marker position={position}>
             <Popup>
               <span>
-              <h4>
-                <Link to={{pathname: `/service/${FSD_ID}`}}>
-                  {PROVIDER_NAME}
-                </Link>
-              </h4>
-              {SERVICE_NAME &&
-                <h5>
-                  {SERVICE_NAME}
-                </h5>
-                }
+                <h4>
+                  <Link to={{ pathname: `/service/${FSD_ID}` }}>{PROVIDER_NAME}</Link>
+                </h4>
+                {SERVICE_NAME && <h5>{SERVICE_NAME}</h5>}
                 <p>{ORGANISATION_PURPOSE}</p>
                 <address>{PHYSICAL_ADDRESS}</address>
               </span>
@@ -45,4 +39,4 @@ export default class ServiceMapMarker extends Component {
       </div>
     );
   }
-};
+}

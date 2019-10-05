@@ -53,7 +53,7 @@ export default class SearchForm extends Component {
             </div>
             <div className="search__section">
               <label className="small-label">Search for</label>
-              <Field name="keyword"  aria-label="Enter topic or organisation">
+              <Field name="keyword" aria-label="Enter topic or organisation">
                 {props => (
                   <div>
                     <TextField
@@ -75,10 +75,12 @@ export default class SearchForm extends Component {
             </div>
             <div className="search__section d-flex justify-content-between">
               <Button
-                color="primary" variant="contained"
+                color="primary"
+                variant="contained"
                 type="submit"
                 onClick={() => handleSubmit(form)}
-                aria-label="Search">
+                aria-label="Search"
+              >
                 <SearchIcon />
                 Search
               </Button>
