@@ -2,13 +2,10 @@ const getHashRouterQueryParams = require('../../src/utilities/hashRoutedUrls').g
 
 // Get an object representing the URL query parameters from the current browser URL
 const getCurrentUrlQueryParameters = async () => {
-  return getHashRouterQueryParams(
-    await driver.getCurrentUrl()
-  );
+  return getHashRouterQueryParams(await driver.getCurrentUrl());
 };
 
 module.exports = function() {
-
   const URL = require('url').URL;
 
   this.Then(/^the URL "(\w+)" is "([^"]+)"$/, async (attribute, value) => {

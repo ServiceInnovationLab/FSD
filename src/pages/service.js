@@ -26,16 +26,11 @@ export default class Service extends Component {
 
   componentDidMount = async () => {
     scrollToElement('#top');
-    const {
-      address: userAddress,
-      latitude: userLatitude,
-      longitude: userLongitude,
-    } = queryString.parse(this.props.location.search);
+    const { address: userAddress, latitude: userLatitude, longitude: userLongitude } = queryString.parse(
+      this.props.location.search
+    );
 
-    const {
-      provider,
-      services
-    } = await loadService(this.props.match.params.id)
+    const { provider, services } = await loadService(this.props.match.params.id);
 
     this.setState({
       provider: provider,
@@ -52,19 +47,9 @@ export default class Service extends Component {
       history: { goBack },
     } = this.props;
 
-    const {
-      provider,
-      services,
-      userAddress,
-      userLatitude,
-      userLongitude,
-      mappedProvider,
-    } = this.state;
+    const { provider, services, userAddress, userLatitude, userLongitude, mappedProvider } = this.state;
 
-    const userLocation = UserLocation(
-        userAddress,
-        userLatitude,
-        userLongitude);
+    const userLocation = UserLocation(userAddress, userLatitude, userLongitude);
 
     return (
       <Page className="service__page">
@@ -76,20 +61,18 @@ export default class Service extends Component {
             <span className="icon-prefix__label">Go back</span>
           </button>
           <span id="top"></span>
-          {(provider && services) && <Fragment>
-              <ServiceProvider
-                provider={provider}
-                userLocation={userLocation}
-                mappedProvider={mappedProvider}
-              />
+          {provider && services && (
+            <Fragment>
+              <ServiceProvider provider={provider} userLocation={userLocation} mappedProvider={mappedProvider} />
               <Accordion>
-                {services.map((service, i) =>
-                    <ServiceDetails
-                      expanded={i === 0}
-                      key={`service_${i}`}
-                      service={service}
-                      mappedProvider={mappedProvider}
-                    />)}
+                {services.map((service, i) => (
+                  <ServiceDetails
+                    expanded={i === 0}
+                    key={`service_${i}`}
+                    service={service}
+                    mappedProvider={mappedProvider}
+                  />
+                ))}
               </Accordion>
               <MapContainer
                 serviceProviders={[provider]}
@@ -97,7 +80,8 @@ export default class Service extends Component {
                 userLatitude={userLatitude}
                 userLongitude={userLongitude}
               />
-            </Fragment>}
+            </Fragment>
+          )}
         </section>
       </Page>
     );

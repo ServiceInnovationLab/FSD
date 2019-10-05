@@ -12,27 +12,23 @@ export default class ListOfServiceProviders extends Component {
   };
 
   render() {
-    const {
-      serviceProviders,
-      userLocation,
-    } = this.props;
+    const { serviceProviders, userLocation } = this.props;
 
     if (serviceProviders.length > 0) {
       return (
         <div>
-            {uniqueServices(serviceProviders, 'PROVIDER_NAME')
-              .map((provider, index) => (
-                <ServiceProviderResult
-                  key={provider.FSD_ID}
-                  index={index}
-                  userLocation={userLocation}
-                  mappedProvider={providerDetails(provider)}
-                />
-              ))}
+          {uniqueServices(serviceProviders, 'PROVIDER_NAME').map((provider, index) => (
+            <ServiceProviderResult
+              key={provider.FSD_ID}
+              index={index}
+              userLocation={userLocation}
+              mappedProvider={providerDetails(provider)}
+            />
+          ))}
         </div>
       );
     } else {
-      return (null)
+      return null;
     }
   }
 }

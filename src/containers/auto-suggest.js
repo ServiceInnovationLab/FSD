@@ -11,11 +11,7 @@ const renderSuggestion = suggestion => <div>{suggestion.a}</div>;
 //
 // These key definitions are available at
 // https://www.w3.org/TR/uievents-key/#named-key-attribute-value
-const CLEAR_ADDRESS_KEYS = [
-  'Backspace',
-  'Clear',
-  'Delete',
-];
+const CLEAR_ADDRESS_KEYS = ['Backspace', 'Clear', 'Delete'];
 
 // Represents the parts of a region or street address we are interested in for
 // this app - specifically the properties which get included in the URL query
@@ -48,11 +44,11 @@ export default class AutoSuggest extends React.Component {
     this.state = {
       suggestions: [],
     };
-  };
+  }
 
   clearAddress() {
     this.props.updateSearchParams(SearchLocation.None);
-  };
+  }
 
   onChange(event, { newValue }) {
     if (newValue === '') {
@@ -60,13 +56,13 @@ export default class AutoSuggest extends React.Component {
     }
 
     this.props.autoSuggestOnChange(newValue);
-  };
+  }
 
   onKeyDown(event) {
-    if(CLEAR_ADDRESS_KEYS.includes(event.key)){
+    if (CLEAR_ADDRESS_KEYS.includes(event.key)) {
       this.clearAddress();
     }
-  };
+  }
 
   onSuggestionSelected = async (event, { suggestion }) => {
     const { updateSearchParams } = this.props;
@@ -100,11 +96,15 @@ export default class AutoSuggest extends React.Component {
       onKeyDown: this.onKeyDown.bind(this),
       name: 'address-autosuggest',
       id: 'searchBox',
-      className: "MuiInputBase-input"
+      className: 'MuiInputBase-input',
     };
     return (
       <div className="form-section">
-        <div><label htmlFor='#searchBox' className='react-autosuggest__label'>Near</label></div>
+        <div>
+          <label htmlFor="#searchBox" className="react-autosuggest__label">
+            Near
+          </label>
+        </div>
         <div className="react-autosuggest__parent MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
           <Autosuggest
             suggestions={suggestions}

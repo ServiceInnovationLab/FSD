@@ -5,14 +5,14 @@ import { RESOURCE_ID, API_PATH, requestBuilder, SERVICE_FIELDS, isValidQuery, re
 
 const loadCategories = () => {
   const sql = encodeURI(
-    `SELECT "LEVEL_1_CATEGORY" as name, COUNT(*) as num FROM "${RESOURCE_ID}" GROUP BY name ORDER BY name`,
+    `SELECT "LEVEL_1_CATEGORY" as name, COUNT(*) as num FROM "${RESOURCE_ID}" GROUP BY name ORDER BY name`
   );
   const url = `${API_PATH}datastore_search_sql?sql=${sql}`;
 
   return axios
     .get(url)
     .then(response => {
-      const {records} = response.data.result;
+      const { records } = response.data.result;
       return records.filter(record => record.name);
     })
     .catch(error => {
@@ -22,34 +22,32 @@ const loadCategories = () => {
 };
 
 const loadResults = async searchVars => {
-  const { latitude, longitude, radius = '25', limit = 500} = searchVars;
+  const { latitude, longitude, radius = '25', limit = 500 } = searchVars;
 
   // return an empty list if the query isn't valid
   if (!isValidQuery(searchVars)) return [];
 
-  const offset = await determineLastPageOffset({...searchVars, limit});
+  const offset = await determineLastPageOffset({ ...searchVars, limit });
 
-  const response = await axios
-    .get(requestBuilder({...searchVars, offset: offset, limit: limit}))
-    .catch(error => {
-      console.error(error);
-      return [];
-    });
+  const response = await axios.get(requestBuilder({ ...searchVars, offset: offset, limit: limit })).catch(error => {
+    console.error(error);
+    return [];
+  });
 
-    if (latitude && longitude) {
-      const radiusInMetres = Number(radius) * 1000;
-      // The results will be returned in distance order
-      return findNearMe(response.data.result.records, { latitude, longitude }, radiusInMetres);
-    }
+  if (latitude && longitude) {
+    const radiusInMetres = Number(radius) * 1000;
+    // The results will be returned in distance order
+    return findNearMe(response.data.result.records, { latitude, longitude }, radiusInMetres);
+  }
 
-    // The results will be returned in rank descending order - the
-    // server supplies them in rank ascending order by default.
-    return response.data.result.records.sort(x => -x.rank);
+  // The results will be returned in rank descending order - the
+  // server supplies them in rank ascending order by default.
+  return response.data.result.records.sort(x => -x.rank);
 };
 
 const loadService = serviceId => {
   const url = encodeURI(
-    `${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${SERVICE_FIELDS}&q=${serviceId}&distinct=true`,
+    `${API_PATH}datastore_search?resource_id=${RESOURCE_ID}&fields=${SERVICE_FIELDS}&q=${serviceId}&distinct=true`
   );
 
   return axios
@@ -93,12 +91,11 @@ const selectAppropriateResults = (id, providers) => {
 const determineLastPageOffset = async searchVars => {
   const { limit = 0 } = searchVars;
 
-  const resultCountResponse = await axios.get(requestResultCount({...searchVars, limit: 0}))
-    .catch(error => {
-      console.error(error);
-      return 0;
-    });
+  const resultCountResponse = await axios.get(requestResultCount({ ...searchVars, limit: 0 })).catch(error => {
+    console.error(error);
+    return 0;
+  });
 
   const resultCount = resultCountResponse.data.result.total;
   return resultCount - limit;
-}
+};

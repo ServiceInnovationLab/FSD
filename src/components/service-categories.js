@@ -22,37 +22,43 @@ export default class ServiceCategories extends Component {
           const { categories, selectedCategory, categoriesExpanded, toggleCategories } = categoryContext;
           return (
             <section className="category__container">
-                <label className='small-label'>Service category</label>
-                <div>
-                  <ExpansionPanel
-                    expanded={ categoriesExpanded } onClick={ toggleCategories }
-                    className='category-expansion-panel' elevation={0}>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                      <div className={ selectedCategory ? 'category__selected' : 'text-grey' }>
-                        { selectedCategory && !categoriesExpanded ? selectedCategory : 'Select a category' }
-                      </div>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                      <div className="category__list">
-                        {categories &&
-                          categories.map((category, index) => {
-                            let classList = ['category__button'];
-                            if (selectedCategory === category.name) classList.push('selected');
-                            return (
-                              <div className="category__item" key={'category-' + index}>
-                                <ButtonBase className={classList.join(' ')} onClick={e => {
+              <label className="small-label">Service category</label>
+              <div>
+                <ExpansionPanel
+                  expanded={categoriesExpanded}
+                  onClick={toggleCategories}
+                  className="category-expansion-panel"
+                  elevation={0}
+                >
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <div className={selectedCategory ? 'category__selected' : 'text-grey'}>
+                      {selectedCategory && !categoriesExpanded ? selectedCategory : 'Select a category'}
+                    </div>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <div className="category__list">
+                      {categories &&
+                        categories.map((category, index) => {
+                          let classList = ['category__button'];
+                          if (selectedCategory === category.name) classList.push('selected');
+                          return (
+                            <div className="category__item" key={'category-' + index}>
+                              <ButtonBase
+                                className={classList.join(' ')}
+                                onClick={e => {
                                   e.preventDefault();
                                   doSetCategory(category.name);
-                                }}>
-                                  {category.name}
-                                </ButtonBase>
-                              </div>
-                            );
-                          })}
-                      </div>
-                    </ExpansionPanelDetails>
-                  </ExpansionPanel>
-                </div>
+                                }}
+                              >
+                                {category.name}
+                              </ButtonBase>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </div>
             </section>
           );
         }}

@@ -31,7 +31,7 @@ export default class Index extends Component {
     address: '',
     region: '',
     keyword: '',
-    radius: DEFAULT_SEARCH_RADIUS
+    radius: DEFAULT_SEARCH_RADIUS,
   };
 
   componentDidMount() {
@@ -106,28 +106,28 @@ export default class Index extends Component {
       keyword = '',
       radius = DEFAULT_SEARCH_RADIUS,
       latitude: userLatitude,
-      longitude: userLongitude
+      longitude: userLongitude,
     } = searchVars;
 
     setCategory(category);
     this.setState({ region, address, keyword, radius });
 
     loadResults(searchVars).then(res => {
-      const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
-      const paged_results = unique_Results.slice(0, serviceProvidersPerPage)
+      const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1');
+      const paged_results = unique_Results.slice(0, serviceProvidersPerPage);
       this.setState({
         serviceProviders: paged_results,
         userLatitude,
         userLongitude,
         numOfResults: unique_Results.length,
-        numOfResultsDisplayed: paged_results.length
+        numOfResultsDisplayed: paged_results.length,
       });
     });
   }
 
   toggleShowMap() {
     this.setState({
-      showMap: !this.state.showMap
+      showMap: !this.state.showMap,
     });
   }
 
@@ -139,9 +139,9 @@ export default class Index extends Component {
 
   handleRadiusChange(radius) {
     this.setState({
-      radius: radius
+      radius: radius,
     });
-    this.updateSearchParams({radius: radius});
+    this.updateSearchParams({ radius: radius });
   }
 
   render() {
@@ -155,18 +155,19 @@ export default class Index extends Component {
       numOfResults,
       numOfResultsDisplayed,
       userLatitude,
-      userLongitude
+      userLongitude,
     } = this.state;
 
-    const { history, location, categoryContext: {selectedCategory} } = this.props;
+    const {
+      history,
+      location,
+      categoryContext: { selectedCategory },
+    } = this.props;
 
     const searchVars = queryString.parse(location.search);
     const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
 
-    const userLocation = UserLocation(
-        address || region,
-        userLatitude,
-        userLongitude);
+    const userLocation = UserLocation(address || region, userLatitude, userLongitude);
 
     return (
       <Page>
@@ -195,33 +196,15 @@ export default class Index extends Component {
             showLocation={userLatitude !== undefined}
           />
           <div className="d-flex justify-content-between align-end">
-            {
-              address ? (
-                <DistanceSelector
-                handleRadiusChange={this.handleRadiusChange}
-                currentRadius={ radius }
-                />
-              ) : null
-            }
-            {
-              showExtraButtons ? (
-                <MapListToggle showMap={showMap} toggleShowMap={this.toggleShowMap} />
-              ) : null
-            }
+            {address ? <DistanceSelector handleRadiusChange={this.handleRadiusChange} currentRadius={radius} /> : null}
+            {showExtraButtons ? <MapListToggle showMap={showMap} toggleShowMap={this.toggleShowMap} /> : null}
           </div>
         </section>
         <section>
           {showMap ? (
-            <MapContainer
-              serviceProviders={serviceProviders}
-              userLocation={userLocation}
-            />
+            <MapContainer serviceProviders={serviceProviders} userLocation={userLocation} />
           ) : (
-            <ListOfServiceProviders
-              serviceProviders={serviceProviders}
-              history={history}
-              userLocation={userLocation}
-            />
+            <ListOfServiceProviders serviceProviders={serviceProviders} history={history} userLocation={userLocation} />
           )}
         </section>
         <section className="white-bg-section" id="share">

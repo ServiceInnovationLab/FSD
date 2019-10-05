@@ -37,13 +37,7 @@ module.exports = function() {
 
   // expect more than one category button
   this.Then(/^I see some category selectors$/, async () => {
-    driver.wait(
-      until.elementLocated(
-        by.xpath(
-          `//*[contains(@class, 'category-expansion-panel')]`
-          ),
-        1000))
-      .click();
+    driver.wait(until.elementLocated(by.xpath(`//*[contains(@class, 'category-expansion-panel')]`), 1000)).click();
     const categories = await getInputElement('css', '.category__button');
     expect(categories.length).to.be.above(1);
   });
@@ -58,13 +52,7 @@ module.exports = function() {
   });
 
   this.Then(/^the "([^"]*)" category is selected$/, async expected_category => {
-    const category = await driver.wait(
-      until.elementLocated(
-        by.css(
-          '.category__selected'
-        )
-      ),
-      1000);
+    const category = await driver.wait(until.elementLocated(by.css('.category__selected')), 1000);
 
     expect(await category.getText()).to.eq(expected_category);
   });
@@ -79,23 +67,17 @@ module.exports = function() {
     expect(distance_options.length).to.equal(4);
   });
 
-    // expect more the search radius selector widget
-    this.Then(/^I do not see the radius selector$/, async () => {
-      // wait for the page to load. Waiting on the category buttons since we
-      // expect the radius selector NOT to exist.
-      driver.wait(
-        until.elementLocated(
-          by.xpath(
-            `//*[contains(@class, 'category-expansion-panel')]`
-            ),
-          1000))
-        .click();
-      await getInputElement('css', '.category__button');
+  // expect more the search radius selector widget
+  this.Then(/^I do not see the radius selector$/, async () => {
+    // wait for the page to load. Waiting on the category buttons since we
+    // expect the radius selector NOT to exist.
+    driver.wait(until.elementLocated(by.xpath(`//*[contains(@class, 'category-expansion-panel')]`), 1000)).click();
+    await getInputElement('css', '.category__button');
 
-      // expect there to be 0 radius buttons
-      const distance_options = await driver.findElements(by.css('input[name="radius"]'));
-      expect(distance_options.length).to.equal(0);
-    });
+    // expect there to be 0 radius buttons
+    const distance_options = await driver.findElements(by.css('input[name="radius"]'));
+    expect(distance_options.length).to.equal(0);
+  });
 
   // expect more the search radius selector widget
   this.Then(/^The radius selector is set to "(\d+)" km radius$/, async kilometres => {
@@ -122,19 +104,15 @@ module.exports = function() {
 
     const input_elements = await driver.findElements(by.css(`input[name=${input_name}]`));
     const value = await input_elements[0].getAttribute('value');
-    expect(value).to.be.empty
+    expect(value).to.be.empty;
   });
 
   this.Then(/^the "([^"]*)" input shows "([^"]*)"$/, async (input_name, expected_value) => {
     await driver.wait(
-      until.elementsLocated(
-        by.xpath(
-          `//input[@name='${input_name}'][@value='${expected_value}']`
-        )
-      ),
-      10000);
+      until.elementsLocated(by.xpath(`//input[@name='${input_name}'][@value='${expected_value}']`)),
+      10000
+    );
   });
-
 
   this.Given(/^I click on the search button$/, async () => {
     // wait for the page to load
@@ -142,7 +120,6 @@ module.exports = function() {
     const element = await driver.findElement(by.xpath(`//button[@aria-label='Search']`));
     element.click();
   });
-
 
   this.Given(/^I click on "([^"]*)"$/, async text => {
     // wait for the page to load
@@ -163,7 +140,10 @@ module.exports = function() {
   });
 
   this.Given(/^the search summary says "([^"]*)"$/, async text => {
-    await driver.wait(until.elementsLocated(by.xpath(`//section[@class='search__criteria']//*[text()[contains(.,'${text}')]]`)), 10000);
+    await driver.wait(
+      until.elementsLocated(by.xpath(`//section[@class='search__criteria']//*[text()[contains(.,'${text}')]]`)),
+      10000
+    );
   });
 
   this.Then(/^I see a list of service providers$/, async () => {
@@ -210,27 +190,23 @@ module.exports = function() {
   this.Then(/^The first suggestion is "([^"]*)"$/, async address_text => {
     await driver.wait(
       until.elementsLocated(
-        by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`),
+        by.xpath(`//*[@id='react-autowhatever-1--item-0']//div[contains(string(), '${address_text}')]`)
       ),
-      10000,
+      10000
     );
   });
 
   this.Then(/^The first result is "([^"]*)"$/, async resultTitle => {
     await driver.wait(
-      until.elementsLocated(
-        by.xpath(`//*[@class='service__name'][1]//a[contains(string(), '${resultTitle}')]`),
-      ),
-      10000,
+      until.elementsLocated(by.xpath(`//*[@class='service__name'][1]//a[contains(string(), '${resultTitle}')]`)),
+      10000
     );
   });
 
   this.Then(/^a result is "([^"]*)"$/, async resultTitle => {
     await driver.wait(
-      until.elementsLocated(
-        by.xpath(`//*[@class='service__name'][contains(string(), '${resultTitle}')]`),
-      ),
-      10000,
+      until.elementsLocated(by.xpath(`//*[@class='service__name'][contains(string(), '${resultTitle}')]`)),
+      10000
     );
   });
 };

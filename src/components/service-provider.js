@@ -12,21 +12,13 @@ export default class ServiceProviders extends Component {
   };
 
   render() {
-    const {
-      mappedProvider,
-      userLocation,
-    } = this.props;
+    const { mappedProvider, userLocation } = this.props;
 
     return (
       <section className="service">
-        <ServiceHeader
-          mappedProvider={mappedProvider}
-          userLocation={userLocation}
-        />
+        <ServiceHeader mappedProvider={mappedProvider} userLocation={userLocation} />
 
-        {mappedProvider.purpose && <blockquote className="service__purpose">
-            {mappedProvider.purpose}
-          </blockquote>}
+        {mappedProvider.purpose && <blockquote className="service__purpose">{mappedProvider.purpose}</blockquote>}
 
         <footer className="service__footer">
           {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification} />}
@@ -36,7 +28,7 @@ export default class ServiceProviders extends Component {
           phoneNumber={mappedProvider.phone}
           address={mappedProvider.address}
           email={mappedProvider.email}
-          />
+        />
       </section>
     );
   }

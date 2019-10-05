@@ -16,9 +16,7 @@ const SERVICE_FIELDS =
 const requestBuilder = searchVars => {
   const { keyword } = searchVars;
 
-  return keywordIsValid(keyword)
-    ? keywordRequest(searchVars)
-    : rankedRequest(searchVars)
+  return keywordIsValid(keyword) ? keywordRequest(searchVars) : rankedRequest(searchVars);
 };
 
 // Get the number of results available for a query.
@@ -27,25 +25,30 @@ const requestBuilder = searchVars => {
 // the result count. Useful for getting the last page of results by setting
 // limit and offset in a subsequent query while reducing the amount of data
 // transferred.
-const requestResultCount = searchVars => requestBuilder({...searchVars, limit: 0});
+const requestResultCount = searchVars => requestBuilder({ ...searchVars, limit: 0 });
 
 // false if not enough information is present to make a meaningful search
 const isValidQuery = searchVars => {
   const { keyword, category, address, region, latitude, longitude } = searchVars;
 
-  return Boolean(
-    category
-    || keywordIsValid(keyword)
-    || (latitude && longitude)
-    || address
-    || region);
+  return Boolean(category || keywordIsValid(keyword) || (latitude && longitude) || address || region);
 };
 
 const keywordIsValid = keyword => {
   return keyword && keyword.length > 2;
-}
+};
 
-export { RESOURCE_ID, API_PATH, categories, STATICFIELDS, requestBuilder, requestResultCount, isValidQuery, SERVICE_FIELDS, GH_PAGES_SUFFIX };
+export {
+  RESOURCE_ID,
+  API_PATH,
+  categories,
+  STATICFIELDS,
+  requestBuilder,
+  requestResultCount,
+  isValidQuery,
+  SERVICE_FIELDS,
+  GH_PAGES_SUFFIX,
+};
 
 // Make a request which must include all keywords and will score better if it matches other terms
 const keywordRequest = searchVars => {
@@ -56,14 +59,14 @@ const keywordRequest = searchVars => {
   const keywordQuery = tokenize(keyword).join(' & ');
 
   // allow a rank boost for terms in other fields by joining them with the OR operator
-  const additionalTerms = [category, address, region].join(' ')
+  const additionalTerms = [category, address, region].join(' ');
   const additionalQuery = tokenize(additionalTerms).join(' | ');
 
-  const query = additionalQuery
-    ? `(${keywordQuery}) & (${additionalQuery})`
-    : keywordQuery;
+  const query = additionalQuery ? `(${keywordQuery}) & (${additionalQuery})` : keywordQuery;
 
-  return `${API_PATH}datastore_search?distinct=true&plain=false&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(query)}${categoryFilters}&offset=${Math.max(0, offset)}&limit=${limit}`;
+  return `${API_PATH}datastore_search?distinct=true&plain=false&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(
+    query
+  )}${categoryFilters}&offset=${Math.max(0, offset)}&limit=${limit}`;
 };
 
 // Make a request and rank results on similarity to any search terms
@@ -76,10 +79,12 @@ const rankedRequest = searchVars => {
   const categoryFilters = categories(category);
 
   // note plain=false to enable the advanced query mode, otherwise all terms will be ANDed together not ORed
-  return `${API_PATH}datastore_search?distinct=true&plain=false&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(query)}${categoryFilters}&offset=${Math.max(0, offset)}&limit=${limit}`;
+  return `${API_PATH}datastore_search?distinct=true&plain=false&resource_id=${RESOURCE_ID}&fields=${STATICFIELDS}&q=${encodeURIComponent(
+    query
+  )}${categoryFilters}&offset=${Math.max(0, offset)}&limit=${limit}`;
 };
 
 // Break a string into tokens (words)
 const tokenize = terms => {
   return terms.match(/([\w']+)/g) || [];
-}
+};
