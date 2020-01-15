@@ -24,7 +24,6 @@
     "geolib": "^3.2.1",
     "jest-enzyme": "^7.1.2",
     "leaflet": "^1.6.0",
-    "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
     "query-string": "6",
     "react": "^16.12.0",
@@ -35,8 +34,7 @@
     "react-leaflet": "^2.6.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
-    "scroll-to-element": "^2.0.3",
-    "scss-lint": "^0.0.0"
+    "scroll-to-element": "^2.0.3"
   },
   "scripts": {
     "deploy": "gh-pages -d build",
@@ -58,6 +56,7 @@
   "devDependencies": {
     "chromedriver": "^79.0.0",
     "gh-pages": "^2.1.1",
+    "node-sass": "^4.13.0",
     "selenium-cucumber-js": "^1.7.0"
   }
 }
