@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import ServiceProviderResult from '../components/service-provider-result';
@@ -20,19 +20,19 @@ export default class ListOfServiceProviders extends Component {
     if (serviceProviders.length > 0) {
       return (
         <div>
-            {uniqueServices(serviceProviders, 'PROVIDER_NAME')
-              .map((provider, index) => (
-                <ServiceProviderResult
-                  key={provider.FSD_ID}
-                  index={index}
-                  userLocation={userLocation}
-                  mappedProvider={providerDetails(provider)}
-                />
-              ))}
+          {uniqueServices(serviceProviders, 'PROVIDER_NAME')
+            .map((provider, index) => (
+              <ServiceProviderResult
+                key={provider.FSD_ID}
+                index={index}
+                userLocation={userLocation}
+                mappedProvider={providerDetails(provider)}
+              />
+            ))}
         </div>
       );
     } else {
-      return (null)
+      return null
     }
   }
 }

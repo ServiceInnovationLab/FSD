@@ -1,6 +1,6 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
-import { getSuggestions, getAddressMetadata, getLocationMetadata } from '../utilities/addressfinder';
+import {getSuggestions, getAddressMetadata, getLocationMetadata} from '../utilities/addressfinder';
 
 const getSuggestionValue = suggestion => suggestion.a;
 
@@ -25,7 +25,6 @@ const CLEAR_ADDRESS_KEYS = [
 // update the search params in the URL any existing values are removed.
 export class SearchLocation {
   static nullLocation = new SearchLocation();
-
   latitude = '';
   longitude = '';
   region = '';
@@ -54,7 +53,7 @@ export default class AutoSuggest extends React.Component {
     this.props.updateSearchParams(SearchLocation.None);
   };
 
-  onChange(event, { newValue }) {
+  onChange(event, {newValue}) {
     if (newValue === '') {
       this.clearAddress();
     }
@@ -63,25 +62,24 @@ export default class AutoSuggest extends React.Component {
   };
 
   onKeyDown(event) {
-    if(CLEAR_ADDRESS_KEYS.includes(event.key)){
+    if (CLEAR_ADDRESS_KEYS.includes(event.key)) {
       this.clearAddress();
     }
   };
 
-  onSuggestionSelected = async (event, { suggestion }) => {
-    const { updateSearchParams } = this.props;
-
+  onSuggestionSelected = async (event, {suggestion}) => {
+    const {updateSearchParams} = this.props;
     if (suggestion.type === 'location') {
       const result = await getLocationMetadata(suggestion.pxid);
-      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, region: result.a }));
+      updateSearchParams(new SearchLocation({latitude: result.y, longitude: result.x, region: result.a}));
     } else {
       const result = await getAddressMetadata(suggestion.pxid);
-      updateSearchParams(new SearchLocation({ latitude: result.y, longitude: result.x, address: result.a }));
+      updateSearchParams(new SearchLocation({latitude: result.y, longitude: result.x, address: result.a}));
     }
   };
 
-  onSuggestionsFetchRequested = ({ value }) => {
-    getSuggestions(value).then(suggestions => this.setState({ suggestions }));
+  onSuggestionsFetchRequested = ({value}) => {
+    getSuggestions(value).then(suggestions => this.setState({suggestions}));
   };
 
   onSuggestionsClearRequested = () => {
@@ -91,8 +89,8 @@ export default class AutoSuggest extends React.Component {
   };
 
   render() {
-    const { suggestions } = this.state;
-    const { address } = this.props;
+    const {suggestions} = this.state;
+    const {address} = this.props;
     const inputProps = {
       placeholder: 'Start typing an address',
       value: address,
@@ -105,7 +103,8 @@ export default class AutoSuggest extends React.Component {
     return (
       <div className="form-section">
         <div><label htmlFor='#searchBox' className='react-autosuggest__label'>Near</label></div>
-        <div className="react-autosuggest__parent MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
+        <div
+          className="react-autosuggest__parent MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

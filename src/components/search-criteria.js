@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 export default class SearchCriteria extends Component {
   render() {
@@ -30,17 +30,17 @@ export default class SearchCriteria extends Component {
       <section className="search__criteria">
         {
           searchCriteria ?
-          ( <p>{searchCriteria} {resultsDisplayed(numOfResultsDisplayed)}</p> )
-          :
-          <p>Make a search or choose a category above.</p>
+            (<p>{searchCriteria} {resultsDisplayed(numOfResultsDisplayed)}</p>)
+            :
+            <p>Make a search or choose a category above.</p>
         }
       </section>);
   }
 }
 
-function resultsDisplayed(numOfResultsDisplayed){
-  if(numOfResultsDisplayed){
-    return(<span>({numOfResultsDisplayed} results)</span>)
+function resultsDisplayed(numOfResultsDisplayed) {
+  if (numOfResultsDisplayed) {
+    return (<span>({numOfResultsDisplayed} results)</span>)
   }
   return null
 }
@@ -48,15 +48,14 @@ function resultsDisplayed(numOfResultsDisplayed){
 function createSearchCriteria(keyword, address, region, category, showLocation) {
   const search = ['Searching'];
   if (keyword) search.push(
-      <span key={`k:${keyword}`}>{' '} for: <b>{keyword}</b>{' '}</span>,
-    );
+    <span key={`k:${keyword}`}>{' '} for: <b>{keyword}</b>{' '}</span>,
+  );
   if (showLocation) search.push(
-      <span key={`a:${address || region}`}>{' '} near: <b>{address || region}</b></span>,
-    );
+    <span key={`a:${address || region}`}>{' '} near: <b>{address || region}</b></span>,
+  );
   if (category) search.push(
-      <span key={`c:${category}`}>{' '} in: <b>{category}</b></span>,
-    );
+    <span key={`c:${category}`}>{' '} in: <b>{category}</b></span>,
+  );
   if (search.length < 2) return null;
-
   return search;
 }

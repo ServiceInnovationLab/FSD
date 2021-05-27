@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import Header from '../components/header';
@@ -10,13 +10,12 @@ export default class Page extends Component {
   };
 
   render() {
-    const { className, children } = this.props;
-
+    const {className, children} = this.props;
     return (
       <section className={className}>
-        <Header />
+        <Header/>
         <main role="main">{children}</main>
-        <Footer />
+        <Footer/>
       </section>
     );
   }

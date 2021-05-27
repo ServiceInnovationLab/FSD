@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 export default class SearchContainer extends Component {
@@ -7,8 +7,7 @@ export default class SearchContainer extends Component {
   };
 
   render() {
-    const { children } = this.props;
-
+    const {children} = this.props;
     return <section className="search__container">{children}</section>;
   }
 }

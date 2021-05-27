@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faLink, faClock, faPhone, faMapMarkerAlt, faAt } from '@fortawesome/free-solid-svg-icons';
+import {Link} from 'react-router-dom';
+import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
+import {faLink, faClock, faPhone, faMapMarkerAlt, faAt} from '@fortawesome/free-solid-svg-icons';
 import queryString from 'query-string';
 
-import { stripSpaces } from '../utilities/string';
+import {stripSpaces} from '../utilities/string';
 
 export default class ServiceHeader extends Component {
   static propTypes = {
@@ -24,7 +24,7 @@ export default class ServiceHeader extends Component {
     // service detail page in the URL query string, although other query string
     // values will not.
     const userCoordinates = userLocation
-      ? queryString.stringify({ address: userLocation.address, latitude: userLocation.lat, longitude: userLocation.lng })
+      ? queryString.stringify({address: userLocation.address, latitude: userLocation.lat, longitude: userLocation.lng})
       : null;
 
     // The url to use for directions to the provider.
@@ -42,15 +42,15 @@ export default class ServiceHeader extends Component {
           <Link to={{
             pathname: `/service/${mappedProvider.fsdId}`,
             search: userCoordinates
-            }}>
-              {mappedProvider.name}
+          }}>
+            {mappedProvider.name}
           </Link>
         </h2>
         <address className="service__address service__section">
           {mappedProvider.address && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
-                <Icon icon={faMapMarkerAlt} />
+                <Icon icon={faMapMarkerAlt}/>
               </div>
               <div className="icon-prefix__label">
                 {mappedProvider.address} - <a href={directionsUrl}>Directions</a>
@@ -60,7 +60,7 @@ export default class ServiceHeader extends Component {
           {mappedProvider.website && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
-                <Icon icon={faLink} />
+                <Icon icon={faLink}/>
               </div>
               <a className="icon-prefix__label" href={mappedProvider.website} target="_blank" rel="noopener noreferrer">
                 {mappedProvider.website}
@@ -70,7 +70,7 @@ export default class ServiceHeader extends Component {
           {mappedProvider.availability && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
-                <Icon icon={faClock} />
+                <Icon icon={faClock}/>
               </div>
               <div className="icon-prefix__label">{mappedProvider.availability}</div>
             </div>
@@ -78,9 +78,10 @@ export default class ServiceHeader extends Component {
           {mappedProvider.email && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
-                <Icon icon={faAt} />
+                <Icon icon={faAt}/>
               </div>
-              <a className="icon-prefix__label" href={`mailto:${mappedProvider.email}`} target="_blank" rel="noopener noreferrer">
+              <a className="icon-prefix__label" href={`mailto:${mappedProvider.email}`} target="_blank"
+                 rel="noopener noreferrer">
                 {mappedProvider.email}
               </a>
             </div>
@@ -88,7 +89,7 @@ export default class ServiceHeader extends Component {
           {mappedProvider.phone && (
             <div className="icon-prefix__container">
               <div className="icon-prefix__icon">
-                <Icon icon={faPhone} />
+                <Icon icon={faPhone}/>
               </div>
               <a
                 className="icon-prefix__label"

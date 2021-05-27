@@ -30,6 +30,9 @@ yarn-error.log*
 .env
 # - VS Code
 /.vscode
+node_modules
+# - Intellij Idea
+.idea
 
 # Operating system
 # - Mac OS

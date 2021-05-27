@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
+import {faFolderOpen} from '@fortawesome/free-solid-svg-icons';
 
 export default class ServiceClassification extends Component {
   static propTypes = {
@@ -9,12 +9,12 @@ export default class ServiceClassification extends Component {
   };
 
   render() {
-    const { classification } = this.props;
+    const {classification} = this.props;
 
     return (
       <div className="icon-prefix__container">
         <div className="icon-prefix__icon">
-          <Icon icon={faFolderOpen} />
+          <Icon icon={faFolderOpen}/>
         </div>
         <div className="icon-prefix__label">
           <a href={`https://www.familyservices.govt.nz/directory-help/classifications.html`}>

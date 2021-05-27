@@ -26,14 +26,14 @@ const getLocationSuggestions = async searchString => {
   if (searchString.length === 0) return [];
 
   const queryParams = {
-    q: searchString, 
+    q: searchString,
     strict: 2,
     region: 0
   };
 
   const response = await addressFinderQuery('api/nz/location', queryParams);
   // add the property type: location to each result so we can tell what type of suggestion it is
-  return response.completions.map(c => ({ ...c, type: 'location' }));
+  return response.completions.map(c => ({...c, type: 'location'}));
 };
 
 // Get suggestions from the addressFinder Address API (street addresses)
@@ -48,7 +48,7 @@ const getAddressSuggestions = async searchString => {
 
   const response = await addressFinderQuery('api/nz/address', queryParams);
   // add the property type: address to each result so we can tell what type of suggestion it is
-  return response.completions.map(c => ({ ...c, type: 'address' }));
+  return response.completions.map(c => ({...c, type: 'address'}));
 };
 
 // Get the full record for an address specified by its primary key (pxid)
@@ -71,7 +71,7 @@ const getLocationMetadata = pxid => {
   return addressFinderQuery('api/nz/location/info', queryParams);
 };
 
-export { getSuggestions, getAddressSuggestions, getAddressMetadata, getLocationSuggestions, getLocationMetadata };
+export {getSuggestions, getAddressSuggestions, getAddressMetadata, getLocationSuggestions, getLocationMetadata};
 
 // Submits a query to an addressfinder API endpoint
 //
