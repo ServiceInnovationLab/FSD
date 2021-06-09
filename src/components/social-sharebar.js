@@ -1,17 +1,16 @@
 import React from 'react';
-import { stringify } from 'querystring';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
+import {stringify} from 'querystring';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {faFacebookSquare, faTwitterSquare} from '@fortawesome/free-brands-svg-icons';
 
 class Sharebar extends React.Component {
   render() {
-    const { url = window.location.href, subject = document.title, description = document.title } = this.props;
-
+    const {url = window.location.href, subject = document.title, description = document.title} = this.props;
     const socialLinks = [
       createSocialLink({
         name: 'email',
-        url: `mailto:?${stringify({ subject, body: url })}`,
+        url: `mailto:?${stringify({subject, body: url})}`,
         fa_icon: faEnvelope,
       }),
 
@@ -47,10 +46,10 @@ class Sharebar extends React.Component {
   }
 }
 
-function createSocialLink({ name, url, fa_icon }) {
+function createSocialLink({name, url, fa_icon}) {
   return (
     <a href={url} title={`Share via ${name}`}>
-      <FontAwesomeIcon icon={fa_icon} />
+      <FontAwesomeIcon icon={fa_icon}/>
       {name}
     </a>
   );

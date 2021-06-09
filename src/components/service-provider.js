@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import SaveContact from './save-contact';
@@ -25,18 +25,18 @@ export default class ServiceProviders extends Component {
         />
 
         {mappedProvider.purpose && <blockquote className="service__purpose">
-            {mappedProvider.purpose}
-          </blockquote>}
+          {mappedProvider.purpose}
+        </blockquote>}
 
         <footer className="service__footer">
-          {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification} />}
+          {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification}/>}
         </footer>
         <SaveContact
           name={mappedProvider.name}
           phoneNumber={mappedProvider.phone}
           address={mappedProvider.address}
           email={mappedProvider.email}
-          />
+        />
       </section>
     );
   }

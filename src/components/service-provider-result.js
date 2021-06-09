@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,11 +30,10 @@ export default class ServiceProviderResult extends Component {
             userLocation={userLocation}
             mappedProvider={mappedProvider}
           />
-
-          {mappedProvider.purpose && <blockquote className="service__purpose service__purpose--truncatable">{mappedProvider.purpose}</blockquote>}
-
+          {mappedProvider.purpose &&
+          <blockquote className="service__purpose service__purpose--truncatable">{mappedProvider.purpose}</blockquote>}
           <footer className="service__footer">
-            {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification} />}
+            {mappedProvider.classification && <ServiceClassification classification={mappedProvider.classification}/>}
           </footer>
         </CardContent>
         <div>
@@ -50,7 +49,7 @@ export default class ServiceProviderResult extends Component {
             phoneNumber={mappedProvider.phone}
             address={mappedProvider.address}
             email={mappedProvider.email}
-            />
+          />
         </CardActions>
       </Card>
     );

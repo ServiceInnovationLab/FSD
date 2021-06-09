@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -9,7 +9,6 @@ export default class MapListToggle extends Component {
     showMap: PropTypes.bool.isRequired,
     toggleShowMap: PropTypes.func.isRequired,
   };
-
 
   render() {
     const {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -16,15 +16,12 @@ export default class DistanceSelector extends Component {
     handleRadiusChange: PropTypes.func.isRequired
   };
 
-  handleChange = function(e) {
+  handleChange = function (e) {
     this.props.handleRadiusChange(e.currentTarget.value)
   }
 
   render() {
-    const {
-      currentRadius
-    } = this.props;
-
+    const {currentRadius} = this.props;
     return (
       <div>
         <label className="small-label d-block">Distance (km)</label>
@@ -34,9 +31,9 @@ export default class DistanceSelector extends Component {
           exclusive>
           {
             radiusOptions.map(option => {
-              return(
+              return (
                 <ToggleButton value={option}
-                key={'button-' + option}
+                              key={'button-' + option}
                 >
                   {option}
                 </ToggleButton>

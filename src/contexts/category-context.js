@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { loadCategories } from '../utilities/api';
+import {loadCategories} from '../utilities/api';
 
 const CategoryContext = React.createContext();
 
@@ -17,7 +17,7 @@ class CategoryProvider extends Component {
 
   doLoadCategories = () => {
     loadCategories().then(categories => {
-      this.setState({ categories });
+      this.setState({categories});
     });
   };
 
@@ -35,9 +35,8 @@ class CategoryProvider extends Component {
   }
 
   render() {
-    const { categories, selectedCategory, categoriesExpanded } = this.state;
-    const { children } = this.props;
-
+    const {categories, selectedCategory, categoriesExpanded} = this.state;
+    const {children} = this.props;
     return (
       <CategoryContext.Provider
         value={{
@@ -54,4 +53,4 @@ class CategoryProvider extends Component {
   }
 }
 
-export { CategoryContext, CategoryProvider };
+export {CategoryContext, CategoryProvider};

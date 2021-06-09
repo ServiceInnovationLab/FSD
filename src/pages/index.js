@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import queryString from 'query-string';
 
 import Page from '../containers/page';
 import SearchContainer from '../containers/search-container';
 import ListOfServiceProviders from '../containers/list-of-service-providers';
 import MapContainer from '../containers/map-container';
-import { loadResults } from '../utilities/api';
+import {loadResults} from '../utilities/api';
 import Sharebar from '../components/social-sharebar';
 import SearchForm from '../components/search-form';
 import DistanceSelector from '../components/distance-selector';
@@ -35,33 +35,33 @@ export default class Index extends Component {
   };
 
   componentDidMount() {
-    const { search } = this.props.location;
+    const {search} = this.props.location;
     this.doLoadResults(search);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.search !== this.props.location.search) {
-      const { search } = this.props.location;
+      const {search} = this.props.location;
       this.doLoadResults(search);
     }
   }
 
   doSetCategory = categoryName => {
     const {
-      categoryContext: { selectedCategory, setCategory },
+      categoryContext: {selectedCategory, setCategory},
     } = this.props;
     if (selectedCategory === categoryName) {
       setCategory();
-      this.updateSearchParams({ category: '' });
-    } else this.updateSearchParams({ category: categoryName });
+      this.updateSearchParams({category: ''});
+    } else this.updateSearchParams({category: categoryName});
   };
 
   doResetSearch = form => {
     const {
-      history: { push, location },
+      history: {push, location},
     } = this.props;
     const {
-      categoryContext: { setCategory },
+      categoryContext: {setCategory},
     } = this.props;
 
     form.reset();
@@ -77,7 +77,7 @@ export default class Index extends Component {
   /* Accepts a new query parameter and combines it with existing parameters from the URL query string */
   updateSearchParams(newQuery) {
     const {
-      history: { push, location },
+      history: {push, location},
     } = this.props;
 
     const searchVars = queryString.parse(location.search);
@@ -96,7 +96,7 @@ export default class Index extends Component {
 
   doLoadResults(locationQuery, serviceProvidersPerPage = 50) {
     const {
-      categoryContext: { setCategory },
+      categoryContext: {setCategory},
     } = this.props;
     const searchVars = queryString.parse(locationQuery);
     const {
@@ -110,7 +110,7 @@ export default class Index extends Component {
     } = searchVars;
 
     setCategory(category);
-    this.setState({ region, address, keyword, radius });
+    this.setState({region, address, keyword, radius});
 
     loadResults(searchVars).then(res => {
       const unique_Results = uniqueServices(res, 'PUBLISHED_PHONE_1')
@@ -158,15 +158,15 @@ export default class Index extends Component {
       userLongitude
     } = this.state;
 
-    const { history, location, categoryContext: {selectedCategory} } = this.props;
+    const {history, location, categoryContext: {selectedCategory}} = this.props;
 
     const searchVars = queryString.parse(location.search);
     const showExtraButtons = Boolean((serviceProviders && serviceProviders[0]) || Object.keys(searchVars)[0]);
 
     const userLocation = UserLocation(
-        address || region,
-        userLatitude,
-        userLongitude);
+      address || region,
+      userLatitude,
+      userLongitude);
 
     return (
       <Page>
@@ -180,7 +180,7 @@ export default class Index extends Component {
               address={address}
               region={region}
               showExtraButtons={showExtraButtons}
-              initialValues={{ keyword }}
+              initialValues={{keyword}}
             />
           </SearchContainer>
         </section>
@@ -198,14 +198,14 @@ export default class Index extends Component {
             {
               address ? (
                 <DistanceSelector
-                handleRadiusChange={this.handleRadiusChange}
-                currentRadius={ radius }
+                  handleRadiusChange={this.handleRadiusChange}
+                  currentRadius={radius}
                 />
               ) : null
             }
             {
               showExtraButtons ? (
-                <MapListToggle showMap={showMap} toggleShowMap={this.toggleShowMap} />
+                <MapListToggle showMap={showMap} toggleShowMap={this.toggleShowMap}/>
               ) : null
             }
           </div>
@@ -225,7 +225,7 @@ export default class Index extends Component {
           )}
         </section>
         <section className="white-bg-section" id="share">
-          <Sharebar />
+          <Sharebar/>
         </section>
       </Page>
     );

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Marker, Popup } from 'react-leaflet';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Marker, Popup} from 'react-leaflet';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class ServiceMapMarker extends Component {
@@ -15,10 +15,10 @@ export default class ServiceMapMarker extends Component {
   };
 
   render() {
-    const { record } = this.props;
-    const { FSD_ID, LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS} = record;
+    const {record} = this.props;
+    const {FSD_ID, LATITUDE, LONGITUDE, PROVIDER_NAME, SERVICE_NAME, ORGANISATION_PURPOSE, PHYSICAL_ADDRESS} = record;
 
-    const position = { lat: Number(LATITUDE), lng: Number(LONGITUDE) };
+    const position = {lat: Number(LATITUDE), lng: Number(LONGITUDE)};
 
     return (
       <div>
@@ -31,7 +31,7 @@ export default class ServiceMapMarker extends Component {
                   {PROVIDER_NAME}
                 </Link>
               </h4>
-              {SERVICE_NAME &&
+                {SERVICE_NAME &&
                 <h5>
                   {SERVICE_NAME}
                 </h5>

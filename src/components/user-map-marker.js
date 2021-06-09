@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Marker, Popup } from 'react-leaflet';
+import {Marker, Popup} from 'react-leaflet';
 import L from 'leaflet';
 
 
@@ -20,15 +20,15 @@ class UserMapMarker extends Component {
   });
 
   render() {
-    const { userLocation } = this.props;
+    const {userLocation} = this.props;
 
     // Don't render if userLocation isn't valid
-    if(!userLocation){
+    if (!userLocation) {
       return null;
     }
 
     return (
-      <Marker 
+      <Marker
         position={userLocation}
         icon={UserMapMarker.homeIcon}
       >
