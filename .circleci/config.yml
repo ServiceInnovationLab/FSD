@@ -67,19 +67,17 @@ jobs:
       - run: npm run deploy
 
 workflows:
-  version: 2
+  version: 3
   test-and-build:
     jobs:
       - test:
           filters:
             branches:
-              ignore:
-                - gh-pages
+              only: master
       - build:
           filters:
             branches:
-              ignore:
-                - gh-pages
+              only: master
       - deploy:
           requires:
             - test
