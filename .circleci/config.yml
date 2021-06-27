@@ -67,7 +67,7 @@ jobs:
       - run: npm run deploy
 
 workflows:
-  version: 3
+  version: 2
   test-and-build:
     jobs:
       - test:
