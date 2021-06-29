@@ -12,7 +12,7 @@
 /features/reports/
 
 # production
-#/build
+/build
 
 # misc
 .env.local
